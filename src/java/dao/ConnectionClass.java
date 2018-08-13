@@ -24,7 +24,7 @@ public class ConnectionClass {
    public ConnectionClass()
    {
       driver = "com.mysql.jdbc.Driver";
-      url="jdbc:mysql://localhost:3306/tutorias";
+      url="jdbc:mysql://localhost:3306/tutoriasUnsis";
       uss="root";
       contra="admin";
    }
@@ -35,7 +35,7 @@ public class ConnectionClass {
      PreparedStatement pst;
      ResultSet rs;
      int nivel =0;
-     String sql= "select nivel from login where usuario='"+us+"'and contra='"+pass+ "';";
+     String sql= "select nivel from usuarios where user='"+us+"'and pass='"+pass+ "';";
       System.out.println(""+sql);
      try {
         Class.forName(this.driver);

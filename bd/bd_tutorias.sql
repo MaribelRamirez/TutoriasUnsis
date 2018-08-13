@@ -1,7 +1,6 @@
-drop database bd_tutorias;
 
-create database bd_tutorias;
-use  bd_tutorias;
+create database tutoriasUnsis;
+use  tutoriasUnsis;
 
 create table licenciaturas(
 idLicenciatura int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -28,7 +27,7 @@ licenciatura int REFERENCES licenciaturas (idLicenciatura) ON DELETE CASCADE ON 
 create table usuarios(
 user varchar(10) primary key,
 pass varchar(50) not null,
-tipo int
+nivel int(1)
 );
 
 create table usuarioProfesor(
@@ -61,5 +60,3 @@ reporte text
 
 
 Show tables;
-
-drop table profesores;
