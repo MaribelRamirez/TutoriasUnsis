@@ -9,14 +9,14 @@ package model;
  *
  * @author Marifer
  */
-public class profesores {
+public class Profesor {
  private int  idProfesor;
 private String nombre;
 private String apellidoP;
 private String apellidoM;
 private int licenciatura;
 
-   public profesores(int idProfesor, String nombre, String apellidoP, String apellidoM) {
+   public Profesor(int idProfesor, String nombre, String apellidoP, String apellidoM) {
       this.idProfesor = idProfesor;
       this.nombre = nombre;
       this.apellidoP = apellidoP;

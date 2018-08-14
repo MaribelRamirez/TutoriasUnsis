@@ -20,7 +20,7 @@ public class ConnectionClass {
    String url;
    String uss;
    String contra;
-   
+   private Connection conn;
    public ConnectionClass()
    {
       driver = "com.mysql.jdbc.Driver";
@@ -29,9 +29,10 @@ public class ConnectionClass {
       contra="admin";
    }
 /*funcion para loguear*/
+   
    public int loguear(String us, String pass)
   {
-  Connection conn;
+  
      PreparedStatement pst;
      ResultSet rs;
      int nivel =0;
@@ -57,4 +58,9 @@ public class ConnectionClass {
             return nivel;
   
   }
+    public void desconectar() throws SQLException {
+        if (conn != null && !conn.isClosed()) {
+            conn.close();
+        }
+    }
 }
