@@ -57,10 +57,7 @@ public class ProfesorDAO {
 
         List<Profesor> listaProfesores = new ArrayList<Profesor>();
         String sql = "SELECT * FROM profesores";
-        System.out.print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"+sql);
         connection =  con.conectar();
-                System.out.print("paso"+sql);
-
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
 

@@ -64,8 +64,7 @@ public class ConnectionClass {
     }
 
     public Connection conectar() throws SQLException {
-                System.out.print("LLEGUE");
-
+               
         if (conn == null || conn.isClosed()) {
 	 try {
 	     Class.forName(this.driver);
