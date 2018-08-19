@@ -83,6 +83,7 @@
                         <input name="txtUsuario" id="text1" type="text" value="" placeholder="username" required>
                      </div>
                      <div class="field-group">
+                        
                         <input id="password-field" type="password" class="form-control" name="password" value="" placeholder="Password">
                         <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                      </div>

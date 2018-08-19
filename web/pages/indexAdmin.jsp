@@ -222,22 +222,15 @@ screenfull.toggle($('#container')[0]);
 
 
                   <div class="blank-page">
-                     <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                      <%
-                     System.out.print("Mensaje 1");
                      ProfesorDAO obj_Read_Values = new ProfesorDAO();
-                      System.out.print("Mensaje 2");
                      List<Profesor> list = obj_Read_Values.listarProfesores();
-                      System.out.print("Mensaje 3");
                      Iterator<Profesor> it_list = list.iterator();
-
                      %>
 
                      <table border="1">
-                        <%   int i=0;
-                        while (i==0) {
-                            i++;
-                            
+                        <%   
+                        while (it_list.hasNext()) {
                                 Profesor ob = new Profesor();
                                 ob = it_list.next();
                         %>  
@@ -246,7 +239,6 @@ screenfull.toggle($('#container')[0]);
                            <td><%=ob.getApellidoP()%></td>
                            <td><%=ob.getApellidoM()%></td>
                            <td>
-
                         </tr>
                         <%
                             }
@@ -254,9 +246,6 @@ screenfull.toggle($('#container')[0]);
                      </table>
                   </div>
                </div>
-
-               <!--//faq-->
-               <!---->
 
             </div>
             <div class="clearfix"> </div>
