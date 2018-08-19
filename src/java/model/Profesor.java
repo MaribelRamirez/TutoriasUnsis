@@ -10,56 +10,61 @@ package model;
  * @author Marifer
  */
 public class Profesor {
- private int  idProfesor;
-private String nombre;
-private String apellidoP;
-private String apellidoM;
-private int licenciatura;
 
-   public Profesor(int idProfesor, String nombre, String apellidoP, String apellidoM) {
-      this.idProfesor = idProfesor;
-      this.nombre = nombre;
-      this.apellidoP = apellidoP;
-      this.apellidoM = apellidoM;
-   }
+    private int idProfesor;
+    private String nombre;
+    private String apellidoP;
+    private String apellidoM;
+    private int licenciatura;
 
-   public int getIdProfesor() {
-      return idProfesor;
-   }
+    public Profesor() {
+    }
 
-   public void setIdProfesor(int idProfesor) {
-      this.idProfesor = idProfesor;
-   }
+    public Profesor(int idProfesor, String nombre, String apellidoP, String apellidoM, int licenciatura) {
+        this.idProfesor = idProfesor;
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.licenciatura = licenciatura;
+    }
 
-   public String getNombre() {
-      return nombre;
-   }
+    public int getIdProfesor() {
+        return idProfesor;
+    }
 
-   public void setNombre(String nombre) {
-      this.nombre = nombre;
-   }
+    public void setIdProfesor(int idProfesor) {
+        this.idProfesor = idProfesor;
+    }
 
-   public String getApellidoP() {
-      return apellidoP;
-   }
+    public String getNombre() {
+        return nombre;
+    }
 
-   public void setApellidoP(String apellidoP) {
-      this.apellidoP = apellidoP;
-   }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-   public String getApellidoM() {
-      return apellidoM;
-   }
+    public String getApellidoP() {
+        return apellidoP;
+    }
 
-   public void setApellidoM(String apellidoM) {
-      this.apellidoM = apellidoM;
-   }
+    public void setApellidoP(String apellidoP) {
+        this.apellidoP = apellidoP;
+    }
 
-   public int getLicenciatura() {
-      return licenciatura;
-   }
+    public String getApellidoM() {
+        return apellidoM;
+    }
 
-   public void setLicenciatura(int licenciatura) {
-      this.licenciatura = licenciatura;
-   }
+    public void setApellidoM(String apellidoM) {
+        this.apellidoM = apellidoM;
+    }
+
+    public int getLicenciatura() {
+        return licenciatura;
+    }
+
+    public void setLicenciatura(int licenciatura) {
+        this.licenciatura = licenciatura;
+    }
 }
