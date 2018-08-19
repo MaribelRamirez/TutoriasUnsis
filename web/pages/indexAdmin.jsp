@@ -16,6 +16,7 @@
 <html>
    <head>
       <title>Tutorias universitarias</title>
+     
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="keywords" content="Minimal Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -35,23 +36,35 @@
       <link href="../resources/css/custom.css" rel="stylesheet">
       <script src="../resources/js/custom.js"></script>
       <script src="../resources/js/screenfull.js"></script>
+      
+      <script src="../resources/tablas/js/jquery-3.3.1.js"></script>  
+<script src="../resources/tablas/js/jquery.dataTables.min.js"></script>
+<script src="../resources/tablas/js/dataTables.bootstrap.min.js"></script> 
+
+ <link href="../resources/tablas/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+      <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
+
+  
       <script>
-$(function () {
-$('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+         $(function () {
+            $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
 
-if (!screenfull.enabled) {
-return false;
-}
-
-
-
-$('#toggle').click(function () {
-screenfull.toggle($('#container')[0]);
-});
+            if (!screenfull.enabled) {
+               return false;
+            }
 
 
 
-});
+            $('#toggle').click(function () {
+               screenfull.toggle($('#container')[0]);
+            });
+
+
+
+         });
+         $(document).ready(function () {
+            $('#example').DataTable();
+         });
       </script>
 
 
@@ -67,7 +80,7 @@ screenfull.toggle($('#container')[0]);
              usuario = sesion.getAttribute("user").toString();
              nivel = sesion.getAttribute("nivel").toString();
              out.print("<a href='login.jsp?cerrar=true'><h5>cerrar Sesion" + usuario + "</h5>");
-             
+
           } else {
              out.print("<script>location.replace('login.jsp');</script>");
           }
@@ -91,8 +104,8 @@ screenfull.toggle($('#container')[0]);
                   </section>
                   <form class=" navbar-left-right">
                      <input type="text"  value="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {
-                       this.value = 'Search...';
-                    }">
+                              this.value = 'Search...';
+                           }">
                      <input type="submit" value="" class="fa fa-search">
                   </form>
                   <div class="clearfix"> </div>
@@ -223,26 +236,113 @@ screenfull.toggle($('#container')[0]);
 
                   <div class="blank-page">
                      <%
-                     ProfesorDAO obj_Read_Values = new ProfesorDAO();
-                     List<Profesor> list = obj_Read_Values.listarProfesores();
-                     Iterator<Profesor> it_list = list.iterator();
+                       ProfesorDAO obj_Read_Values = new ProfesorDAO();
+                       List<Profesor> list = obj_Read_Values.listarProfesores();
+                       Iterator<Profesor> it_list = list.iterator();
                      %>
 
-                     <table border="1">
-                        <%   
-                        while (it_list.hasNext()) {
-                                Profesor ob = new Profesor();
-                                ob = it_list.next();
-                        %>  
-                        <tr>
-                           <td><%=ob.getNombre()%></td>
-                           <td><%=ob.getApellidoP()%></td>
-                           <td><%=ob.getApellidoM()%></td>
-                           <td>
-                        </tr>
+
+                     <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                           <tr>
+                              <th>Name</th>
+                              <th>Apellido Paterno</th>
+                              <th>Apellido Materno</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <%
+                              while (it_list.hasNext()) {
+                                  Profesor ob = new Profesor();
+                                  ob = it_list.next();
+                           %>  
+                           <tr>
+                              <td><%=ob.getNombre()%></td>
+                              <td><%=ob.getApellidoP()%></td>
+                              <td><%=ob.getApellidoM()%></td>
+                              
+                           </tr>
+                        
                         <%
-                            }
-                        %>
+                          }
+                        %>     
+                        
+                           <tr>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr>
+                         <tr>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr>
+                        <tr>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr> 
+                        <tr>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr>
+                        <tr>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr> 
+                        <tr>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr>
+                         <tr>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr>
+                        <tr>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr> 
+                        <tr>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr>
+                         <tr>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr>
+                        <tr>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr> 
+                        <tr>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr>
+                         <tr>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr>
+                        <tr>
+                              <td>andrea</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr> 
+                        <tr>
+                              <td>rosa</td>
+                              <td>jkhjkhjk</td>
+                              <td>jkhjkhjk</td>
+                        </tr>
+                        </tbody>
                      </table>
                   </div>
                </div>
