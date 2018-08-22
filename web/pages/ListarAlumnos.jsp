@@ -5,10 +5,10 @@
 --%>
 
 
-<%@page import="model.Profesor"%>
+<%@page import="dao.AlumnoDAO"%>
+<%@page import="model.Alumno"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.ProfesorDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 
@@ -243,7 +243,7 @@ tbody td {
                   <h2>
                      <a href="indexAdmin.jsp">Home</a>
                      <i class="fa fa-angle-right"></i>
-                     <span>Maestros</span><br>
+                     <span>Alumnos</span><br>
                   </h2>
                </div>
                <div class="blank">
@@ -251,29 +251,37 @@ tbody td {
 
                   <div class="blank-page">
                      <%
-                       ProfesorDAO obj_Read_Values = new ProfesorDAO();
-                       List<Profesor> list = obj_Read_Values.listarProfesores();
-                       Iterator<Profesor> it_list = list.iterator();
+                       AlumnoDAO obj_Read_Values = new AlumnoDAO();
+                       List<Alumno> list = obj_Read_Values.listarAlumnos();
+                       Iterator<Alumno> it_list = list.iterator();
                      %>
                      <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                            <tr>
+                              <th>Matricula</th>
                               <th>Name</th>
                               <th>Apellido Paterno</th>
                               <th>Apellido Materno</th>
+                              <th>grupo</th>
+                             <th>idLicenciatura</th>
+
+
                               
                            </tr>
                         </thead>
                         <tbody>
                            <%
                              while (it_list.hasNext()) {
-                                Profesor ob = new Profesor();
+                                Alumno ob = new Alumno();
                                 ob = it_list.next();
                            %>  
                            <tr>
-                              <td><%=ob.getNombre()%></td>
-                              <td><%=ob.getApellidoP()%></td>
-                              <td><%=ob.getApellidoM()%></td>
+                              <td><%=ob.getMatricula() %></td>
+                              <td><%=ob.getNombre() %></td>
+                              <td><%=ob.getApellidoP() %></td>
+                              <td><%=ob.getApellidoM() %></td>
+                              <td><%=ob.getGrupo() %></td>
+                              <td><%=ob.getIdLicenciatura() %></td>
                              
                            </tr>
                            <%

@@ -75,7 +75,7 @@ public class ProfesorDAO {
     }
 
     // obtener por id
-    public Profesor obtenerProfsorId(int idProfesor) throws SQLException {
+    public Profesor obtenerProfsorById(int idProfesor) throws SQLException {
         Profesor profesor = null;
 
         String sql = "SELECT * FROM profesores WHERE idProfesor= ? ";
