@@ -57,19 +57,21 @@ public class AlumnoDAO {
     public List<Alumno> listarAlumnos() throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "SELECT * FROM alumnos ";
+        String sql = "SELECT matricula, alumnos.nombre ,apellidoP,apellidoM,grupo, alumnos.idLicenciatura,licenciaturas.nombre FROM alumnos inner join licenciaturas on alumnos.idLicenciatura=licenciaturas.idLicenciatura ";
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
 
         while (resulSet.next()) {
 	 String matricula = resulSet.getString("matricula");
-	 String nombre = resulSet.getString("nombre");
+	 String nombre = resulSet.getString("alumnos.nombre");
 	 String apellidoP = resulSet.getString("apellidoP");
 	 String apellidoM = resulSet.getString("apellidoM");
 	 int grupo = resulSet.getInt("grupo");
-	 int idLicenciatura = resulSet.getInt("idLicenciatura");
-	 Alumno alumno = new Alumno(matricula, nombre, apellidoP, apellidoM, grupo, idLicenciatura);
+	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
+	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
+	 Alumno alumno;
+	 alumno = new Alumno(matricula, nombre, apellidoP, apellidoM, grupo,idLicenciatura,Licenciatura);
 	 listaAlumnos.add(alumno);
         }
         con.desconectar();
@@ -87,7 +89,7 @@ public class AlumnoDAO {
         ResultSet res = statement.executeQuery();
         if (res.next()) {
 	 alumno = new Alumno(res.getString("matricula"), res.getString("nombre"),
-	         res.getString("apellidoP"), res.getString("apellidoM"), res.getInt("grupo"), res.getInt("idLicenciatura"));
+	         res.getString("apellidoP"), res.getString("apellidoM"), res.getInt("grupo"), res.getInt("idLicenciatura"),res.getString("licenciaturas.nombre"));
         }
         res.close();
         con.desconectar();

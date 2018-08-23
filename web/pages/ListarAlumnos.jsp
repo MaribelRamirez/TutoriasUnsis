@@ -263,7 +263,7 @@ tbody td {
                               <th>Apellido Paterno</th>
                               <th>Apellido Materno</th>
                               <th>grupo</th>
-                             <th>idLicenciatura</th>
+                             <th>Licenciatura</th>
 
 
                               
@@ -281,7 +281,7 @@ tbody td {
                               <td><%=ob.getApellidoP() %></td>
                               <td><%=ob.getApellidoM() %></td>
                               <td><%=ob.getGrupo() %></td>
-                              <td><%=ob.getIdLicenciatura() %></td>
+                              <td><%=ob.getLicenciatura() %></td>
                              
                            </tr>
                            <%
