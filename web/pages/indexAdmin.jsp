@@ -225,7 +225,7 @@ tbody td {
                            <a href="ListarAlumnos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Alumnos</a>
                         </li>
                         <li>
-                           <a href="XX.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Actualizar listas</a>
+                           <a href="loadAlumnos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Actualizar listas</a>
                         </li>
                         <li>
                            <a href="XX.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Generar constancias</a>

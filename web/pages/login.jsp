@@ -24,9 +24,9 @@
             window.scrollTo(0, 1);
          }
       </script>
-      <link rel="stylesheet" href="../resources/login/css/style.css" type="text/css" media="all">
+      <link rel="stylesheet" href="resources/login/css/style.css" type="text/css" media="all">
       <link href="//fonts.googleapis.com/css?family=Mukta+Mahee:200,300,400,500,600,700,800" rel="stylesheet">
-      <link rel="stylesheet" href="../resources/login/css/font-awesome.css" type="text/css" media="all">
+      <link rel="stylesheet" href="resources/login/css/font-awesome.css" type="text/css" media="all">
    </head>
 
    <body><br><br><br><br>
@@ -77,7 +77,7 @@
                <h2>Tutorias Unsis</h2>
             </div>
             <div class="content-bottom">
-               <form action="login.jsp" method="POST">
+               <form action="login" method="POST">
                   <div class="field_w3ls">
                      <div class="field-group">
                         <input name="txtUsuario" id="text1" type="text" value="" placeholder="username" required>
@@ -101,7 +101,7 @@
 
       </div>
       <!--//copyright-->
-      <script src="../resources/login/js/jquery-2.2.3.min.js"></script>
+      <script src="resources/login/js/jquery-2.2.3.min.js"></script>
       <!-- script for show password -->
       <script>
          $(".toggle-password").click(function () {
