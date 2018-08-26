@@ -122,14 +122,7 @@ public class obtenerExel extends HttpServlet {
                                 cell = cellIterator.next();
                                 alumno.setNombre(cell.getStringCellValue());
                                 System.out.print(cell.getStringCellValue()+"  ");
-                                //apellidoP
-                                cell = cellIterator.next();
-                                alumno.setApellidoP(cell.getStringCellValue());
-                                System.out.print(cell.getStringCellValue()+"  ");
-                                //apellidoM
-                                cell = cellIterator.next();
-                                alumno.setApellidoM(cell.getStringCellValue());
-                                System.out.print(cell.getStringCellValue()+"  ");
+                                
                                 //Grupo
                                 cell = cellIterator.next();
                                 alumno.setGrupo((int) cell.getNumericCellValue());

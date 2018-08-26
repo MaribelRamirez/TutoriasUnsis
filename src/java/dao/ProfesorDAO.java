@@ -34,16 +34,16 @@ public class ProfesorDAO {
 
     // insertar artículo
     public boolean insertar(Profesor profesor) throws SQLException {
-        String sql = "INSERT INTO profesores (idProfesor, nombre, apellidoP, apellidoM, licenciatura)"
+        String sql = "INSERT INTO profesores (idProfesor,estatus,nombre,grado,licenciatura)"
 	     + " VALUES (?, ?,?,?,?)";
         //System.out.println(profesor.getDescripcion());
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, null);
-        statement.setString(2, profesor.getNombre());
-        statement.setString(3, profesor.getApellidoP());
-        statement.setString(4, profesor.getApellidoM());
+        statement.setString(2, profesor.getEstatus());
+        statement.setString(3, profesor.getNombre());
+        statement.setString(4, profesor.getGrado());
         statement.setInt(5, profesor.getLicenciatura());
 
         boolean rowInserted = statement.executeUpdate() > 0;
@@ -63,11 +63,11 @@ public class ProfesorDAO {
 
         while (resulSet.next()) {
 	 int idProfesor = resulSet.getInt("idProfesor");
+	 String estatus = resulSet.getString("estatus");
 	 String nombre = resulSet.getString("nombre");
-	 String apellidoP = resulSet.getString("apellidoP");
-	 String apellidoM = resulSet.getString("apellidoM");
-	 int licenciatura = resulSet.getInt("licenciatura");
-	 Profesor profesor = new Profesor(idProfesor, nombre, apellidoP, apellidoM, licenciatura);
+	 String grado = resulSet.getString("grado");
+	 String licenciatura = resulSet.getString("licenciatura");
+	 Profesor profesor = new Profesor(idProfesor, estatus, nombre, grado, licenciatura);
 	 listaProfesores.add(profesor);
         }
         con.desconectar();

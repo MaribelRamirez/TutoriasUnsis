@@ -260,8 +260,6 @@ tbody td {
                            <tr>
                               <th>Matricula</th>
                               <th>Name</th>
-                              <th>Apellido Paterno</th>
-                              <th>Apellido Materno</th>
                               <th>grupo</th>
                              <th>Licenciatura</th>
 
@@ -278,8 +276,6 @@ tbody td {
                            <tr>
                               <td><%=ob.getMatricula() %></td>
                               <td><%=ob.getNombre() %></td>
-                              <td><%=ob.getApellidoP() %></td>
-                              <td><%=ob.getApellidoM() %></td>
                               <td><%=ob.getGrupo() %></td>
                               <td><%=ob.getLicenciatura() %></td>
                              

@@ -13,18 +13,19 @@ public class Profesor {
 
     private int idProfesor;
     private String nombre;
-    private String apellidoP;
-    private String apellidoM;
+    private String estatus;
+    private String grado;
     private int licenciatura;
-
+    private int idLicenciatura; 
     public Profesor() {
     }
 
-    public Profesor(int idProfesor, String nombre, String apellidoP, String apellidoM, int licenciatura) {
+    public Profesor(int idProfesor, String nombre,String estatus,String grado,int idLicenciatura, int licenciatura) {
         this.idProfesor = idProfesor;
         this.nombre = nombre;
-        this.apellidoP = apellidoP;
-        this.apellidoM = apellidoM;
+        this.idLicenciatura=idLicenciatura;
+        this.grado=grado;
+        this.estatus=estatus;
         this.licenciatura = licenciatura;
     }
 
@@ -44,21 +45,31 @@ public class Profesor {
         this.nombre = nombre;
     }
 
-    public String getApellidoP() {
-        return apellidoP;
+    public String getEstatus() {
+        return estatus;
     }
 
-    public void setApellidoP(String apellidoP) {
-        this.apellidoP = apellidoP;
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
     }
 
-    public String getApellidoM() {
-        return apellidoM;
+    public String getGrado() {
+        return grado;
     }
 
-    public void setApellidoM(String apellidoM) {
-        this.apellidoM = apellidoM;
+    public void setGrado(String grado) {
+        this.grado = grado;
     }
+
+    public int getIdLicenciatura() {
+        return idLicenciatura;
+    }
+
+    public void setIdLicenciatura(int idLicenciatura) {
+        this.idLicenciatura = idLicenciatura;
+    }
+
+    
 
     public int getLicenciatura() {
         return licenciatura;

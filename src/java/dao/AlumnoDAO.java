@@ -34,7 +34,7 @@ public class AlumnoDAO {
 
     // insertar artículo
     public boolean insertar(Alumno alumno) throws SQLException {
-        String sql = "INSERT INTO alumnos (matricula,nombre,apellidoP,apellidoM,grupo,idLicenciatura)"
+        String sql = "INSERT INTO alumnos (matricula,nombre,grupo,idLicenciatura)"
 	     + " VALUES (?, ?, ?, ?, ?, ?)";
         //System.out.println(profesor.getDescripcion());
         con.conectar();
@@ -42,8 +42,6 @@ public class AlumnoDAO {
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, alumno.getMatricula());
         statement.setString(2, alumno.getNombre());
-        statement.setString(3, alumno.getApellidoP());
-        statement.setString(4, alumno.getApellidoM());
         statement.setInt(5, alumno.getGrupo());
         statement.setInt(6, alumno.getIdLicenciatura());
         System.err.println("consulta"+sql); 
@@ -57,7 +55,7 @@ public class AlumnoDAO {
     public List<Alumno> listarAlumnos() throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "SELECT matricula, alumnos.nombre ,apellidoP,apellidoM,grupo, alumnos.idLicenciatura,licenciaturas.nombre FROM alumnos inner join licenciaturas on alumnos.idLicenciatura=licenciaturas.idLicenciatura ";
+        String sql = "SELECT matricula, alumnos.nombre ,grupo, alumnos.idLicenciatura,licenciaturas.nombre FROM alumnos inner join licenciaturas on alumnos.idLicenciatura=licenciaturas.idLicenciatura ";
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
@@ -65,13 +63,11 @@ public class AlumnoDAO {
         while (resulSet.next()) {
 	 String matricula = resulSet.getString("matricula");
 	 String nombre = resulSet.getString("alumnos.nombre");
-	 String apellidoP = resulSet.getString("apellidoP");
-	 String apellidoM = resulSet.getString("apellidoM");
 	 int grupo = resulSet.getInt("grupo");
 	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
 	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
 	 Alumno alumno;
-	 alumno = new Alumno(matricula, nombre, apellidoP, apellidoM, grupo,idLicenciatura,Licenciatura);
+	 alumno = new Alumno(matricula, nombre,grupo,idLicenciatura,Licenciatura);
 	 listaAlumnos.add(alumno);
         }
         con.desconectar();
@@ -88,8 +84,7 @@ public class AlumnoDAO {
         statement.setString(1, matricula);
         ResultSet res = statement.executeQuery();
         if (res.next()) {
-	 alumno = new Alumno(res.getString("matricula"), res.getString("nombre"),
-	         res.getString("apellidoP"), res.getString("apellidoM"), res.getInt("grupo"), res.getInt("idLicenciatura"),res.getString("licenciaturas.nombre"));
+	 alumno = new Alumno(res.getString("matricula"), res.getString("nombre"), res.getInt("grupo"), res.getInt("idLicenciatura"),res.getString("licenciaturas.nombre"));
         }
         res.close();
         con.desconectar();
@@ -100,15 +95,13 @@ public class AlumnoDAO {
     // actualizar
     public boolean actualizar(Alumno alumno) throws SQLException {
         boolean rowActualizar = false;
-        String sql = "UPDATE alumnos SET matricula=?,nombre=?,apellidoP=?,apellidoM=?,grupo=? ,licenciatura=? WHERE matricula=?";
+        String sql = "UPDATE alumnos SET matricula=?,nombre=?,grupo=? ,licenciatura=? WHERE matricula=?";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
 
         statement.setString(1, alumno.getMatricula());
         statement.setString(2, alumno.getNombre());
-        statement.setString(3, alumno.getApellidoP());
-        statement.setString(4, alumno.getApellidoM());
         statement.setInt(5, alumno.getGrupo());
         statement.setInt(5, alumno.getIdLicenciatura());
 
