@@ -15,12 +15,12 @@ public class Profesor {
     private String nombre;
     private String estatus;
     private String grado;
-    private int licenciatura;
+    private String licenciatura;
     private int idLicenciatura; 
     public Profesor() {
     }
 
-    public Profesor(int idProfesor, String nombre,String estatus,String grado,int idLicenciatura, int licenciatura) {
+    public Profesor(int idProfesor, String nombre,String estatus,String grado,int idLicenciatura, String licenciatura) {
         this.idProfesor = idProfesor;
         this.nombre = nombre;
         this.idLicenciatura=idLicenciatura;
@@ -71,11 +71,11 @@ public class Profesor {
 
     
 
-    public int getLicenciatura() {
+    public String getLicenciatura() {
         return licenciatura;
     }
 
-    public void setLicenciatura(int licenciatura) {
+    public void setLicenciatura(String licenciatura) {
         this.licenciatura = licenciatura;
     }
 }

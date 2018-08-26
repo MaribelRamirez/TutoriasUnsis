@@ -9,18 +9,16 @@ nombre varchar(20) not null
 
 create table alumnos(
 matricula varchar(10) primary key,
-nombre varchar(20) not null,
-apellidoP varchar(20) not null,
-apellidoM varchar(20) not null,
+nombre varchar(100) not null,
 grupo int,
 idLicenciatura int REFERENCES licenciaturas (idLicenciatura) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table profesores(
 idProfesor int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-nombre varchar(20) not null,
-apellidoP varchar(20) not null,
-apellidoM varchar(20) not null,
+nombre varchar(100) not null,
+grado varchar(10) not null,
+estatus varchar(10) not null,
 licenciatura int REFERENCES licenciaturas (idLicenciatura) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -58,5 +56,10 @@ noTutoria int,
 reporte text
 );
 
-
+create table archivos(
+idArchivo int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+nombre varchar (100) not null,
+categoria varchar (19) not null,
+archivo blob not null
+);
 Show tables;

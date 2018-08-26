@@ -44,7 +44,7 @@ public class ProfesorDAO {
         statement.setString(2, profesor.getEstatus());
         statement.setString(3, profesor.getNombre());
         statement.setString(4, profesor.getGrado());
-        statement.setInt(5, profesor.getLicenciatura());
+        statement.setInt(5, profesor.getIdLicenciatura());
 
         boolean rowInserted = statement.executeUpdate() > 0;
         statement.close();
@@ -67,7 +67,8 @@ public class ProfesorDAO {
 	 String nombre = resulSet.getString("nombre");
 	 String grado = resulSet.getString("grado");
 	 String licenciatura = resulSet.getString("licenciatura");
-	 Profesor profesor = new Profesor(idProfesor, estatus, nombre, grado, licenciatura);
+         int idLicenciatura = 0;
+	 Profesor profesor = new Profesor(idProfesor,  nombre, estatus, grado, idLicenciatura, licenciatura);
 	 listaProfesores.add(profesor);
         }
         con.desconectar();
@@ -87,7 +88,8 @@ public class ProfesorDAO {
         ResultSet res = statement.executeQuery();
         if (res.next()) {
 	 profesor = new Profesor(res.getInt("idProfesor"), res.getString("nombre"),
-	         res.getString("apellidoP"), res.getString("apellidoM"), res.getInt("licenciatura"));
+	         res.getString("estatus"), res.getString("grado"), 
+                 res.getInt("licenciatura"),res.getString("licenciatura"));
         }
         res.close();
         con.desconectar();
@@ -104,10 +106,10 @@ public class ProfesorDAO {
         PreparedStatement statement = connection.prepareStatement(sql);
 
         statement.setString(1, null);
-        statement.setString(2, profesor.getNombre());
-        statement.setString(3, profesor.getApellidoP());
-        statement.setString(4, profesor.getApellidoM());
-        statement.setInt(5, profesor.getLicenciatura());
+//        statement.setString(2, profesor.getNombre());
+//        statement.setString(3, profesor.getApellidoP());
+//        statement.setString(4, profesor.getApellidoM());
+//        statement.setInt(5, profesor.getLicenciatura());
 
         rowActualizar = statement.executeUpdate() > 0;
         statement.close();

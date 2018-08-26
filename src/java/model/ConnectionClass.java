@@ -27,7 +27,7 @@ public class ConnectionClass {
         driver = "com.mysql.jdbc.Driver";
         url = "jdbc:mysql://localhost:3306/tutoriasUnsis";
         user = "root";
-        pass = "admin";
+        pass = "root";
     }
     /*funcion para loguear*/
 

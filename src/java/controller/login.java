@@ -100,12 +100,12 @@ public class login extends HttpServlet {
 
                      sesion.setAttribute("user", usuario);
                      sesion.setAttribute("nivel", "2");
-                     response.sendRedirect("indexProfesor.jsp");
+                     response.sendRedirect("pages/indexProfesor.jsp");
                      break;
                  case 3:
                      sesion.setAttribute("user", usuario);
                      sesion.setAttribute("nivel", "3");
-                     response.sendRedirect("indexAlumno.jsp");
+                     response.sendRedirect("pages/indexAlumno.jsp");
                      break;
                  default:
 //                     out.write("El usuario no existe, o la contraseña es invalida");
