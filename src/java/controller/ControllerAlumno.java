@@ -81,7 +81,7 @@ public class ControllerAlumno extends HttpServlet {
 
             try {
                 forward = edit;
-                Alumno alm = alumnodao.obtenerAlumnoByMatricula(Integer.parseInt(request.getParameter("id")));
+                Alumno alm = alumnodao.obtenerAlumnoByMatricula(request.getParameter("id"));
                 request.setAttribute("alm", alm);
                 RequestDispatcher view = request.getRequestDispatcher(forward);
                 view.forward(request, response);
@@ -99,7 +99,7 @@ public class ControllerAlumno extends HttpServlet {
             response.sendRedirect("pages/ListarAlumnos.jsp");
         } else if (action.equalsIgnoreCase("add")) {
 
-            int matricula = Integer.parseInt(request.getParameter("matricula"));
+            String matricula =request.getParameter("matricula");
             System.out.println("esta es la matricula" + matricula);
             String nombre = request.getParameter("nombre");
             int grupo = Integer.parseInt(request.getParameter("grupo"));
@@ -117,7 +117,7 @@ public class ControllerAlumno extends HttpServlet {
             }
         } else if (action.equalsIgnoreCase("edit")) {
 
-            int matricula = Integer.parseInt(request.getParameter("matricula"));
+            String matricula =request.getParameter("matricula");
             System.out.println("esta es la matricula que llega a edit" + matricula);
             String nombreGrp = request.getParameter("nombreAlum");
             int grupo = Integer.parseInt(request.getParameter("grupo"));
