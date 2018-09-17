@@ -34,62 +34,76 @@ public class ProfesorDAO {
 
     // insertar artículo
     public boolean insertar(Profesor profesor) throws SQLException {
-        String sql = "INSERT INTO profesores (idProfesor,estatus,nombre,grado,licenciatura)"
-	     + " VALUES (?, ?,?,?,?)";
+       try {  String sql = "INSERT INTO profesores (idProfesor,curp,nombre,grado,estatus,licenciatura)"
+                + " VALUES (?, ?,?,?,?,?)";
         //System.out.println(profesor.getDescripcion());
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, null);
-        statement.setString(2, profesor.getEstatus());
+        statement.setString(2, profesor.getCurp());
         statement.setString(3, profesor.getNombre());
         statement.setString(4, profesor.getGrado());
-        statement.setInt(5, profesor.getIdLicenciatura());
+        statement.setString(5, profesor.getEstatus());
+        statement.setInt(6, profesor.getIdLicenciatura());
 
-        boolean rowInserted = statement.executeUpdate() > 0;
+       statement.executeUpdate();
         statement.close();
         con.desconectar();
-        return rowInserted;
+       } catch (Exception e) {
+             System.out.print("error al insertar:"+e);
+        }
+        return false;
     }
 
     // listar todos los productos
     public List<Profesor> listarProfesores() throws SQLException {
 
         List<Profesor> listaProfesores = new ArrayList<Profesor>();
-        String sql = "SELECT * FROM profesores";
-        connection =  con.conectar();
+        String sql = "SELECT idProfesor,curp, profesores.nombre ,grado,estatus,profesores.licenciatura,licenciaturas.nombre FROM profesores inner join licenciaturas on profesores.licenciatura=licenciaturas.idLicenciatura ";
+
+        connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
 
         while (resulSet.next()) {
-	 int idProfesor = resulSet.getInt("idProfesor");
-	 String estatus = resulSet.getString("estatus");
-	 String nombre = resulSet.getString("nombre");
-	 String grado = resulSet.getString("grado");
-	 String licenciatura = resulSet.getString("licenciatura");
-         int idLicenciatura = 0;
-	 Profesor profesor = new Profesor(idProfesor,  nombre, estatus, grado, idLicenciatura, licenciatura);
-	 listaProfesores.add(profesor);
+            int idProfesor = resulSet.getInt("idProfesor");
+            String estatus = resulSet.getString("estatus");
+            String nombre = resulSet.getString("nombre");
+            String grado = resulSet.getString("grado");
+            String licenciatura = resulSet.getString("licenciaturas.nombre");
+            String curp = resulSet.getString("curp");
+            int idLicenciatura = 0;
+            Profesor profesor = new Profesor(idProfesor, nombre, estatus, grado, idLicenciatura, licenciatura, curp);
+            listaProfesores.add(profesor);
         }
         con.desconectar();
         return listaProfesores;
     }
 
     // obtener por id
-    public Profesor obtenerProfsorById(int idProfesor) throws SQLException {
+    public Profesor obtenerProfesorById(int idprf) throws SQLException {
         Profesor profesor = null;
 
-        String sql = "SELECT * FROM profesores WHERE idProfesor= ? ";
+        String sql = "SELECT profesores.idProfesor,profesores.curp,profesores.nombre,profesores.grado,profesores.estatus,"
+                + "profesores.licenciatura,licenciaturas.nombre"
+                + " FROM profesores inner join licenciaturas on profesores.licenciatura=licenciaturas.idLicenciatura WHERE profesores.idProfesor= ? ";
         con.conectar();
         connection = con.getJdbcConnection();
+        System.out.println("este es el sql de profesor"+sql);
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, idProfesor);
+        statement.setInt(1, idprf);
 
         ResultSet res = statement.executeQuery();
         if (res.next()) {
-	 profesor = new Profesor(res.getInt("idProfesor"), res.getString("nombre"),
-	         res.getString("estatus"), res.getString("grado"), 
-                 res.getInt("licenciatura"),res.getString("licenciatura"));
+            profesor = new Profesor(
+                    res.getInt("profesores.idProfesor"), 
+                    res.getString("profesores.nombre"),
+                    res.getString("profesores.estatus"), 
+                    res.getString("profesores.grado"),
+                     res.getInt("profesores.licenciatura"),
+                    res.getString("licenciaturas.nombre"),
+                    res.getString("profesores.curp"));
         }
         res.close();
         con.desconectar();
@@ -98,39 +112,37 @@ public class ProfesorDAO {
     }
 
     // actualizar
-    public boolean actualizar(Profesor profesor) throws SQLException {
-        boolean rowActualizar = false;
-        String sql = "UPDATE profesor SET idProfesor=?,nombre=?,apellidoP=?,apellidoM=?, licenciatura=? WHERE idProfesor=?";
-        con.conectar();
-        connection = con.getJdbcConnection();
-        PreparedStatement statement = connection.prepareStatement(sql);
+   public void updateProfesor(Profesor profesor) {
+        try {
 
-        statement.setString(1, null);
-//        statement.setString(2, profesor.getNombre());
-//        statement.setString(3, profesor.getApellidoP());
-//        statement.setString(4, profesor.getApellidoM());
-//        statement.setInt(5, profesor.getLicenciatura());
+            String sql = "update profesores set idProfesor=?,curp=?,nombre=?,grado=?,estatus=?,licenciatura=?" 
+                    + " where idProfesor=?";
+            con.conectar();
+            connection = con.getJdbcConnection();
+            System.out.println("esta es la sql de actualizar profesores" + sql);
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, profesor.getIdProfesor());
+                statement.setString(2, profesor.getCurp());
+                statement.setString(3, profesor.getNombre());
+                statement.setString(4, profesor.getGrado());
+                statement.setString(5, profesor.getEstatus());
+                statement.setInt(6, profesor.getIdLicenciatura());
+                statement.setInt(7, profesor.getIdProfesor());
+                statement.executeUpdate();
+            }
+            con.desconectar();
 
-        rowActualizar = statement.executeUpdate() > 0;
-        statement.close();
-        con.desconectar();
-        return rowActualizar;
-    }
-
-    //eliminar
-    public boolean eliminar(Profesor profesor) throws SQLException {
-        boolean rowEliminar = false;
+        } catch (SQLException e) {
+            System.out.print("error al actualizar:" + e);
+        }}
+   
+public void eliminar(int idprf) throws SQLException {
         String sql = "DELETE FROM profesores WHERE idProfesor=?";
         con.conectar();
         connection = con.getJdbcConnection();
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, profesor.getIdProfesor());
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, idprf);
+        preparedStatement.executeUpdate();
 
-        rowEliminar = statement.executeUpdate() > 0;
-        statement.close();
-        con.desconectar();
-
-        return rowEliminar;
     }
-
 }

@@ -116,7 +116,7 @@ public class obtenerExel extends HttpServlet {
 //				}
                                 //Matricula
                                 cell = cellIterator.next();
-                                alumno.setMatricula(cell.getStringCellValue());
+                                alumno.setMatricula((int) cell.getNumericCellValue());
                                 System.out.print(cell.getStringCellValue()+"  ");
                                 //NOmbre
                                 cell = cellIterator.next();
@@ -125,7 +125,7 @@ public class obtenerExel extends HttpServlet {
                                 
                                 //Grupo
                                 cell = cellIterator.next();
-                                alumno.setGrupo((int) cell.getNumericCellValue());
+                                alumno.setGrupo( cell.getStringCellValue());
 //                                System.out.print(cell.getNumericCellValue()+"  ");
                                 //IdLicenciatura
                                 cell = cellIterator.next();

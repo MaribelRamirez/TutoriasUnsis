@@ -6,18 +6,23 @@ create table licenciaturas(
 idLicenciatura int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 nombre varchar(20) not null
 );
-
+create table grupos(
+idGrupo int UNSIGNED AUTO_INCREMENT PRIMARY KEY,	
+nombre varchar(10)
+);
 create table alumnos(
-matricula varchar(10) primary key,
+matricula int (10) primary key,
 nombre varchar(100) not null,
-grupo int,
+idGrupo  int REFERENCES grupos (idGrupo) ON DELETE CASCADE ON UPDATE CASCADE,
 idLicenciatura int REFERENCES licenciaturas (idLicenciatura) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+
 create table profesores(
-curp varchar(20) not null primary key,
+idProfesor int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+curp varchar(21)not null,
 nombre varchar(100) not null,
-grado varchar(10) not null,
+grado varchar(20) not null,
 estatus varchar(10) not null,
 licenciatura int REFERENCES licenciaturas (idLicenciatura) ON DELETE CASCADE ON UPDATE CASCADE
 );

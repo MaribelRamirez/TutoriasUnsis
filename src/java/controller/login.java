@@ -94,7 +94,7 @@ public class login extends HttpServlet {
         HttpSession sesion = request.getSession();
         switch (nivel) {
                  case 1:
-                             System.err.println("estoy en login" +nivel);
+                             System.out.println("estoy en login" +nivel);
 
                      sesion.setAttribute("user", usuario);
                      sesion.setAttribute("nivel", "1");
