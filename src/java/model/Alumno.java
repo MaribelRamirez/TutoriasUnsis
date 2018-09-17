@@ -12,7 +12,7 @@ import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
  * @author Marifer
  */
 public class Alumno {
-    private int matricula;
+    private String matricula;
     private String nombre;
     private int idGrupo;
     private String Grupo;
@@ -22,9 +22,7 @@ public class Alumno {
       public Alumno() {
     }
 
-
-    public Alumno(int matricula, String nombre, int idGrupo, String Grupo, int idLicenciatura, String Licenciatura, int tipo) {
-
+    public Alumno(String matricula, String nombre, int idGrupo,String Grupo, int idLicenciatura, String Licenciatura,int tipo) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.idGrupo = idGrupo;
@@ -70,11 +68,11 @@ public class Alumno {
     }
 
   
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 

@@ -11,7 +11,7 @@ idGrupo int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 nombre varchar(10)
 );
 create table alumnos(
-matricula int (10) primary key,
+matricula varchar (10) primary key,
 nombre varchar(100) not null,
 idGrupo  int REFERENCES grupos (idGrupo) ON DELETE CASCADE ON UPDATE CASCADE,
 idLicenciatura int REFERENCES licenciaturas (idLicenciatura) ON DELETE CASCADE ON UPDATE CASCADE

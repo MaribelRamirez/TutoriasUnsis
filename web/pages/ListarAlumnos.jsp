@@ -272,8 +272,9 @@
                                     <th>Name</th>
                                     <th>grupo</th>
                                     <th>Licenciatura</th>
-                                    <th>Eliminar</th>
                                     <th>Editar</th>
+                                    <th>Eliminar</th>
+                                    
 
 
                                 </tr>

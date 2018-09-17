@@ -138,8 +138,9 @@
                                     <th>Grado</th>
                                  <th>Status</th>
                                  <th>Licenciatura</th>
+                                 <th>Editar</th>
                                  <th>Eliminar</th>
-                                  <th>Editar</th>
+                                  
                                    
                                 </tr>
                             </thead>

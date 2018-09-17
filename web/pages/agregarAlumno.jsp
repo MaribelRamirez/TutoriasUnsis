@@ -264,7 +264,7 @@
                                     <input type="hidden" name = "action" value="add">
                                     <div class="form-group">
                                         <label for="matricula">Matricula</label>
-                                        <input  required class="form-control" id="matricula" name="matricula" placeholder="Introduce la matricula del alumno">
+                                        <input  required class="form-control" type="number" id="matricula" name="matricula" placeholder="Introduce la matricula del alumno">
 
                                     </div>
                                     <div class="form-group">
