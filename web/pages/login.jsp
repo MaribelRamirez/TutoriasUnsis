@@ -38,32 +38,7 @@
               String contra = request.getParameter("password");
 
               HttpSession sesion = request.getSession();
-              System.out.println("antes del case");
-              switch (op.loguear(nombre, contra)) {
-                 case 1:
-
-                     sesion.setAttribute("user", nombre);
-                     sesion.setAttribute("nivel", "1");
-                     response.sendRedirect("indexAdmin.jsp");
-                     op.desconectar();
-                     break;
-                 case 2:
-
-                     sesion.setAttribute("user", nombre);
-                     sesion.setAttribute("nivel", "2");
-                     response.sendRedirect("indexProfesor.jsp");
-                     op.desconectar();
-                     break;
-                 case 3:
-                     sesion.setAttribute("user", nombre);
-                     sesion.setAttribute("nivel", "3");
-                     response.sendRedirect("indexAlumno.jsp");
-                     op.desconectar();
-                     break;
-                 default:
-                     out.write("El usuario no existe, o la contraseña es invalida");
-                     break;
-              }
+              
           }
 
           if (request.getParameter("cerrar") != null) {

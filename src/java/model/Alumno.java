@@ -17,18 +17,20 @@ public class Alumno {
     private int grupo;
     private int idLicenciatura;
     private String Licenciatura;
+    private int tipo;
       public Alumno() {
     }
 
-    public Alumno(String matricula, String nombre, int grupo, int idLicenciatura, String Licenciatura) {
+    public Alumno(String matricula, String nombre, int grupo, int idLicenciatura, String Licenciatura, int tipo) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.grupo = grupo;
         this.idLicenciatura = idLicenciatura;
-        this.Licenciatura=Licenciatura;
-        
+        this.Licenciatura = Licenciatura;
+        this.tipo = tipo;
     }
 
+   
 //    public Alumno(String matricula, String nombre, String apellidoP, String apellidoM, int grupo,int idLicenciatura, String Licenciatura) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //    }
@@ -72,6 +74,14 @@ public class Alumno {
 
     public void setIdLicenciatura(int idLicenciatura) {
         this.idLicenciatura = idLicenciatura;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
     
     

@@ -101,6 +101,7 @@
                                         <th>Codigo</th>
                                         <th>Nombre</th>
                                         <th>Pdf</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
 <!--                                <tfoot>
@@ -129,7 +130,11 @@
                                                     }
                                                 %>
                                         </td>
-                                        
+                                        <td>
+                                            <a id="mostrar" href="../ControllerPdf?action=insert&id=<%=pdfvo.getCodigopdf()%>"> <img src="../resources/images/nuevo.png" title="Nuevo registro"/></a>-
+                                            <a href="../ControllerPdf?action=edit&id=<%=pdfvo.getCodigopdf()%>"> <img src="../resources/images/editar.png" title="Modificar"/></a>-
+                                            <a href="../ControllerPdf?action=delete&id=<%=pdfvo.getCodigopdf()%>"> <img src="../resources/images/delete.png" title="Eliminar"/></a>
+                                        </td>
                                     </tr>
                                     <%}
                     }%>

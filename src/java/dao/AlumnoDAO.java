@@ -51,7 +51,7 @@ public class AlumnoDAO {
         return rowInserted;
     }
 
-    // listar todos los productos
+    // listar todos los alumnos
     public List<Alumno> listarAlumnos() throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
@@ -67,13 +67,40 @@ public class AlumnoDAO {
 	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
 	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
 	 Alumno alumno;
-	 alumno = new Alumno(matricula, nombre,grupo,idLicenciatura,Licenciatura);
+	 alumno = new Alumno(matricula, nombre,grupo,idLicenciatura,Licenciatura,0);
 	 listaAlumnos.add(alumno);
         }
         con.desconectar();
         return listaAlumnos;
     }
 
+     // listar todos los alumnos
+    public List<Alumno> listarAlumnosTutorados(String curp) throws SQLException {
+
+        List<Alumno> listaAlumnos = new ArrayList<Alumno>();
+        String sql = "select alumnos.matricula , alumnos.nombre, grupo , alumnos.idLicenciatura, " +
+            "tipo , licenciaturas.nombre from tutores , alumnos inner join licenciaturas " +
+            " on alumnos.idLicenciatura=licenciaturas.idLicenciatura where tutores.matricula=alumnos.matricula " +
+            " and tutores.curp='"+curp+"';";
+        System.out.println("consulta"+sql);
+        connection = con.conectar();
+        Statement statement = connection.createStatement();
+        ResultSet resulSet = statement.executeQuery(sql);
+
+        while (resulSet.next()) {
+	 String matricula = resulSet.getString("alumnos.matricula");
+	 String nombre = resulSet.getString("alumnos.nombre");
+	 int grupo = resulSet.getInt("grupo");
+	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
+	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
+         int tipo = resulSet.getInt("tipo");
+	 Alumno alumno;
+	 alumno = new Alumno(matricula, nombre,grupo,idLicenciatura,Licenciatura,tipo);
+	 listaAlumnos.add(alumno);
+        }
+        con.desconectar();
+        return listaAlumnos;
+    }
     public Alumno obtenerAlumnoByMatricula(String matricula) throws SQLException {
         Alumno alumno = null;
 
@@ -84,7 +111,7 @@ public class AlumnoDAO {
         statement.setString(1, matricula);
         ResultSet res = statement.executeQuery();
         if (res.next()) {
-	 alumno = new Alumno(res.getString("matricula"), res.getString("nombre"), res.getInt("grupo"), res.getInt("idLicenciatura"),res.getString("licenciaturas.nombre"));
+	 alumno = new Alumno(res.getString("matricula"), res.getString("nombre"), res.getInt("grupo"), res.getInt("idLicenciatura"),res.getString("licenciaturas.nombre"),0);
         }
         res.close();
         con.desconectar();

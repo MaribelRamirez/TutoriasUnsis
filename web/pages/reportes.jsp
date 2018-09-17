@@ -3,7 +3,9 @@
     Created on : 09-ago-2018, 21:23:41
     Author     : Marifer
 --%>
-
+<%@page import="VO.PdfVO"%>
+<%@page import="dao.PdfDAO"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <!DOCTYPE HTML>
@@ -16,6 +18,8 @@
             Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
       <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
       <link href="../resources/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+     <!-- tabla de pdf -->
+        <link href="../resources/css/stylePDF.css" rel='stylesheet' type='text/css' />
       <!-- Custom Theme files -->
       <link href="../resources/css/style.css" rel='stylesheet' type='text/css' />
       <link href="../resources/css/font-awesome.css" rel="stylesheet"> 
@@ -84,9 +88,56 @@ screenfull.toggle($('#container')[0]);
 
 
                   <div class="blank-page">
+                        <%
+                            PdfDAO emp = new PdfDAO();
+                            PdfVO pdfvo = new PdfVO();
+                            ArrayList<PdfVO> listar = emp.Listar_PdfVOReportes();
+                        %>
 
-                     <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                  </div>
+                        <div class="datagrid">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Nombre</th>
+                                        <th>Pdf</th>
+                                    </tr>
+                                </thead>
+<!--                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">
+                                            <div id="paging"><ul><li><a href="#"><span>Previous</span></a></li><li><a href="#" class="active"><span>1</span></a></li><li><a href="#"><span>2</span></a></li><li><a href="#"><span>3</span></a></li><li><a href="#"><span>4</span></a></li><li><a href="#"><span>5</span></a></li><li><a href="#"><span>Next</span></a></li></ul>
+                                            </div>
+                                    </tr>
+                                </tfoot>-->
+                                <tbody>
+                                    <%if (listar.size() > 0) {
+                                            for (PdfVO listar2 : listar) {
+                                                pdfvo = listar2;
+                                    %>
+                                    <tr>
+                                        <td><%=pdfvo.getCodigopdf()%></td>
+                                        <td><%=pdfvo.getNombrepdf()%></td>
+                                        <td>
+                                            <%
+                                                if (pdfvo.getArchivopdf2() != null) {
+                                            %>
+                                            <a href="../pdf?id=<%=pdfvo.getCodigopdf()%>" target="_blank"><img src="../resources/images/mpdf.png" title="pdf"/></a>
+                                                <%
+                                                    } else {
+                                                        out.print("Vacio");
+                                                    }
+                                                %>
+                                        </td>
+                                        
+                                    </tr>
+                                    <%}
+                    }%>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    </div>
                </div>
 
                <!--//faq-->

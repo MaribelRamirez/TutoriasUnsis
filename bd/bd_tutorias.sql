@@ -1,4 +1,4 @@
-
+drop database tutoriasunsis;
 create database tutoriasUnsis;
 use  tutoriasUnsis;
 
@@ -15,7 +15,7 @@ idLicenciatura int REFERENCES licenciaturas (idLicenciatura) ON DELETE CASCADE O
 );
 
 create table profesores(
-idProfesor int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+curp varchar(20) not null primary key,
 nombre varchar(100) not null,
 grado varchar(10) not null,
 estatus varchar(10) not null,
@@ -25,25 +25,16 @@ licenciatura int REFERENCES licenciaturas (idLicenciatura) ON DELETE CASCADE ON 
 create table usuarios(
 user varchar(10) primary key,
 pass varchar(50) not null,
-nivel int(1)
+nivel int(1),
+curp varchar(20)  REFERENCES profesores (profesores) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-create table usuarioProfesor(
-idUserProfesor int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-idUser varchar(10)REFERENCES usuarios (user) ON DELETE CASCADE ON UPDATE CASCADE,
-idProfesor int REFERENCES profesores (profesores) ON DELETE CASCADE ON UPDATE CASCADE
-);
 
-create table usuarioAlumno(
-idUserProfesor int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-idUser varchar(10)REFERENCES usuarios (user) ON DELETE CASCADE ON UPDATE CASCADE,
-matricula varchar(10) REFERENCES alumnos (matricula) ON DELETE CASCADE ON UPDATE CASCADE
-);
 
 create table tutores(
 idTutorado int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 matricula varchar(10) REFERENCES alumnos (matricula) ON DELETE CASCADE ON UPDATE CASCADE,
-idProfesor int REFERENCES profesores (profesores) ON DELETE CASCADE ON UPDATE CASCADE,
+curp  varchar(20) REFERENCES profesores (profesores) ON DELETE CASCADE ON UPDATE CASCADE,
 preriodo varchar (10),
 tipo int 
 );
