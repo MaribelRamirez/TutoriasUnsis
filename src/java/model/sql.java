@@ -18,9 +18,9 @@ public class sql {
         int id = 1;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Conectar db = new Conectar();
+        ConnectionClass db = new ConnectionClass();
         try{    
-                ps = db.getConnection().prepareStatement(sql);
+                ps = db.conectar().prepareStatement(sql);
                 rs = ps.executeQuery();
                 while(rs.next()){
                     id = rs.getInt(1)+1;

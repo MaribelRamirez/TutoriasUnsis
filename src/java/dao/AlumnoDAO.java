@@ -55,7 +55,7 @@ public class AlumnoDAO {
         return false;
     }
 
-    // listar todos los productos
+    // listar todos los alumnos
     public List<Alumno> listarAlumnos() throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
@@ -72,7 +72,7 @@ public class AlumnoDAO {
             int idLicenciatura = resulSet.getInt("alumnos.idLicenciatura");
             String Licenciatura = resulSet.getString("licenciaturas.nombre");
             Alumno alumno;
-            alumno = new Alumno(matricula, nombre, idgrupo, grupo, idLicenciatura, Licenciatura);
+            alumno = new Alumno(matricula, nombre, idgrupo, grupo, idLicenciatura, Licenciatura,0);
             listaAlumnos.add(alumno);
         }
         con.desconectar();
@@ -92,12 +92,14 @@ public class AlumnoDAO {
         statement.setString(1, matricula);
         ResultSet res = statement.executeQuery();
         if (res.next()) {
+
             alumno = new Alumno(res.getString("matricula"), 
                     res.getString("alumnos.nombre"),
                     res.getInt("alumnos.idGrupo"),
                     res.getString("grupos.nombre"),
                     res.getInt("alumnos.idLicenciatura"),
-                    res.getString("licenciaturas.nombre"));
+                    res.getString("licenciaturas.nombre"),0);
+
         }
         res.close();
         con.desconectar();
@@ -154,6 +156,7 @@ public class AlumnoDAO {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, matricula);
         preparedStatement.executeUpdate();
+
         con.desconectar();
     }
 

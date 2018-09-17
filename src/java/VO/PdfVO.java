@@ -70,4 +70,8 @@ public class PdfVO {
         this.archivopdf2 = archivopdf2;
     }
 
+    public void setCategoria(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

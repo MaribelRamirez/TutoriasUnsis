@@ -36,13 +36,13 @@ public class ConnectionClass {
         throw new UnsupportedOperationException("Not supported yet."); /**To change body of generated methods, choose Tools | Templates.*/
     }
 
-    public int loguear(String us, String pass) {
-
+    public usuario loguear(String us, String pass) {
+        usuario user= new usuario();
         PreparedStatement pst;
         ResultSet rs;
         int nivel = 0;
-        String sql = "select nivel from usuarios where user='" + us + "'and pass='" + pass + "';";
-        System.out.println("mmm" + sql);
+        String sql = "select nivel, curp from usuarios where user='" + us + "'and pass='" + pass + "';";
+        System.out.println("" + sql);
         try {
             System.out.println("dentro de try");
 	 Class.forName(this.driver);
@@ -56,14 +56,16 @@ public class ConnectionClass {
 	 pst = conn.prepareStatement(sql);
 	 rs = pst.executeQuery();
 	 while (rs.next()) {
-	     nivel = rs.getInt(1);
-	     System.out.println("" + nivel);
+	     user.setNivel(rs.getInt(1));
+             user.setCurp(rs.getString(2));
+             user.setPassw(pass);
+             user.setUsuario(us);
 	 }
 	 conn.close();
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("nnnnn"+ e);
         }
-        return nivel;
+        return user;
 
     }
 

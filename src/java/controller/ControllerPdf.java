@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import model.sql;
 
 @WebServlet(name = "ControllerPdf", urlPatterns = {"/ControllerPdf"})
 @MultipartConfig(maxFileSize = 16177215)    // upload file's size up to 16MB
@@ -21,6 +22,7 @@ public class ControllerPdf extends HttpServlet {
 
     public static final String lIST_STUDENT = "/Pagina1.jsp";
     public static final String INSERT_OR_EDIT = "/Pagina2.jsp";
+    
 
     String estado = null;
     PdfDAO pdfdao;
@@ -73,33 +75,39 @@ public class ControllerPdf extends HttpServlet {
 
         PdfVO pdfvo = new PdfVO();
         sql auto = new sql();
-        int nuevoid = auto.auto_increm("SELECT MAX(codigopdf) FROM pdf;");
-        
+        int nuevoid = auto.auto_increm("SELECT MAX(idArchivo) FROM archivos;");
         try{
             String name = request.getParameter("txtname");
             pdfvo.setNombrepdf(name);
+            pdfvo.setCategoria("2");
+            System.err.println("este es el nombre;"+pdfvo.getNombrepdf() +"   id:"+pdfvo.getCategoria());
         }catch(Exception ex){
             System.out.println("nombre: "+ex.getMessage());
         }
-
         InputStream inputStream = null;
         try {
             Part filePart = request.getPart("fichero");
             if (filePart.getSize() > 0) {
-                System.out.println(filePart.getName());
-                System.out.println(filePart.getSize());
-                System.out.println(filePart.getContentType());
+                System.out.println("nombre_"+filePart.getName());
+                System.out.println("tamaño-"+filePart.getSize());
+                System.out.println("tipo-"+filePart.getContentType());
                 inputStream = filePart.getInputStream();
+                System.out.println("despues de filepart");
             }
         } catch (Exception ex) {
             System.out.println("fichero: "+ex.getMessage());
         }
-
         try {
-            
+   
+            System.err.println("Estoy en try");
+
             if (estado.equalsIgnoreCase("insert")) {
+                  System.err.println("Estoy en if");
+
                 pdfvo.setCodigopdf(nuevoid);
+                System.err.println("Estoy en if insert");
                 if (inputStream != null) {
+                    System.err.println("Estoy en if null");
                     pdfvo.setArchivopdf(inputStream);
                 }
                 pdfdao.Agregar_PdfVO(pdfvo);
@@ -116,7 +124,7 @@ public class ControllerPdf extends HttpServlet {
             System.out.println("textos: "+ex.getMessage());
         }
 
-        RequestDispatcher view = request.getRequestDispatcher("/Pagina1.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("/Pagina2.jsp");
         view.forward(request, response);
     }
 

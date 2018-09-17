@@ -5,7 +5,7 @@
  */
 package controller;
 
-import Conexion.Conectar;
+import model.ConnectionClass;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,9 +36,9 @@ public class pdf extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("application/doc");
+        response.setContentType("application/pdf");
 
-        Conectar con = new Conectar();
+        ConnectionClass con = new ConnectionClass();
         PreparedStatement ps = null;
         ResultSet rs = null;
         byte[] b = null;
@@ -46,7 +46,7 @@ public class pdf extends HttpServlet {
         try {
 
             int id = Integer.parseInt(request.getParameter("id"));
-            ps = con.getConnection().prepareStatement("SELECT archivopdf FROM pdf WHERE codigopdf = ?;");
+            ps = con.conectar().prepareStatement("SELECT archivo FROM archivos WHERE idArchivo = ?;");
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {

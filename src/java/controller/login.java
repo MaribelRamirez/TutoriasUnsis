@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.ConnectionClass;
+import model.usuario;
 
 /**
  *
@@ -75,11 +76,15 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        System.out.println("llegue a login");
         String usuario = request.getParameter("txtUsuario");
         String contraseña = request.getParameter("password");
         ConnectionClass conn = new ConnectionClass();
-        int nivel = conn.loguear(usuario, contraseña);
+        
+        usuario user = conn.loguear(usuario, contraseña);
+        int nivel = user.getNivel();
+        String curp = user.getCurp();
+        System.out.println("esto recivo "+ nivel +" "+curp);
         try {
             conn.desconectar();
         } catch (SQLException ex) {
@@ -93,6 +98,7 @@ public class login extends HttpServlet {
 
                      sesion.setAttribute("user", usuario);
                      sesion.setAttribute("nivel", "1");
+                     sesion.setAttribute("curp", curp);
                      response.sendRedirect("pages/indexAdmin.jsp");
 //                     request.getRequestDispatcher("indexAdmin.jsp").forward(request, response);
                      break;
@@ -100,6 +106,7 @@ public class login extends HttpServlet {
 
                      sesion.setAttribute("user", usuario);
                      sesion.setAttribute("nivel", "2");
+                     sesion.setAttribute("curp", curp);
                      response.sendRedirect("pages/indexProfesor.jsp");
                      break;
                  case 3:

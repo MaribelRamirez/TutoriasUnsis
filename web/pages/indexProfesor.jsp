@@ -4,6 +4,10 @@
     Author     : Marifer
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="model.Alumno"%>
+<%@page import="dao.AlumnoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 
@@ -57,10 +61,12 @@ screenfull.toggle($('#container')[0]);
           HttpSession sesion = request.getSession();
           String usuario;
           String nivel;
+          String curp="";
 
           if (sesion.getAttribute("user") != null && sesion.getAttribute("nivel") != null) {
              usuario = sesion.getAttribute("user").toString();
              nivel = sesion.getAttribute("nivel").toString();
+             curp = sesion.getAttribute("curp").toString();
              out.print("<a href='login.jsp?cerrar=true'><h5>cerrar Sesion" + usuario + "</h5>");
           } else {
              out.print("<script>location.replace('login.jsp');</script>");
@@ -83,10 +89,49 @@ screenfull.toggle($('#container')[0]);
                <div class="blank">
 
 
-                  <div class="blank-page">
+                   <div class="blank-page">
+                        <%
+                            AlumnoDAO obj_Read_Values = new AlumnoDAO();
+                            System.out.println("llego a jsp");
+                            List<Alumno> list = obj_Read_Values.listarAlumnosTutorados(curp);
+                            System.out.println("despues de optener datos");
+                            Iterator<Alumno> it_list = list.iterator();
+                        %>
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Matricula</th>
+                                    <th>Nombre</th>
+                                    <th>Grupo</th>
+                                    <th>Licenciatura</th>
+                                    <th>Tutoria</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    String tipo ;
+                                    while (it_list.hasNext()) {
+                                        Alumno ob = new Alumno();
+                                        ob = it_list.next();
+                                %>  
+                                <tr>
+                                    <td><%=ob.getMatricula() %></td>  
+                                    <td><%=ob.getNombre()%></td>  
+                                    <td><%=ob.getGrupo() %></td>  
+                                    <td><%=ob.getLicenciatura()%></td>  
+                                    <%
+                                    if(ob.getTipo()==1)tipo="Individual";else tipo="Grupal";
+                                %>
+                                    <td><%=tipo%></td>  
+                                </tr>
+                                <%
+                                    }
+                                %>     
 
-                     <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                  </div>
+
+                            </tbody>
+                        </table>
+                    </div>
                </div>
 
                <!--//faq-->
