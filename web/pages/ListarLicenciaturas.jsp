@@ -268,8 +268,9 @@
                                 
                                 <tr>
                                     <th>Name</th>
-                                    <th>Eliminar</th>
                                     <th>Editar</th>
+                                    <th>Eliminar</th>
+                                    
                                 </tr>
                                 </thead>
                                 
