@@ -4,14 +4,9 @@
     Author     : Marifer
 --%>
 
-
-<%@page import="dao.AlumnoDAO"%>
-<%@page import="model.Alumno"%>
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -22,25 +17,25 @@
         <meta name="keywords" content="Minimal Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
               Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-        <link href="../resources/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+        <link href="resources/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
         <!-- Custom Theme files -->
-        <link href="../resources/css/style.css" rel='stylesheet' type='text/css' />
-        <link href="../resources/css/font-awesome.css" rel="stylesheet"> 
-        <script src="../resources/js/jquery.min.js"></script>
-        <script src="../resources/js/bootstrap.min.js"></script>
+        <link href="resources/css/style.css" rel='stylesheet' type='text/css' />
+        <link href="resources/css/font-awesome.css" rel="stylesheet"> 
+        <script src="resources/js/jquery.min.js"></script>
+        <script src="resources/js/bootstrap.min.js"></script>
         <!-- Mainly scripts -->
-        <script src="../resources/js/jquery.metisMenu.js"></script>
-        <script src="../resources/js/jquery.slimscroll.min.js"></script>
+        <script src="resources/js/jquery.metisMenu.js"></script>
+        <script src="resources/js/jquery.slimscroll.min.js"></script>
         <!-- Custom and plugin javascript -->
-        <link href="../resources/css/custom.css" rel="stylesheet">
-        <script src="../resources/js/custom.js"></script>
-        <script src="../resources/js/screenfull.js"></script>
+        <link href="resources/css/custom.css" rel="stylesheet">
+        <script src="resources/js/custom.js"></script>
+        <script src="resources/js/screenfull.js"></script>
 
-        <script src="../resources/tablas/js/jquery-3.3.1.js"></script>  
-        <script src="../resources/tablas/js/jquery.dataTables.min.js"></script>
-        <script src="../resources/tablas/js/dataTables.bootstrap.min.js"></script> 
+        <script src="resources/tablas/js/jquery-3.3.1.js"></script>  
+        <script src="resources/tablas/js/jquery.dataTables.min.js"></script>
+        <script src="resources/tablas/js/dataTables.bootstrap.min.js"></script> 
 
-        <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
+        <link href="resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
 
         <script>
@@ -216,26 +211,26 @@
 
                     <div class="navbar-default sidebar" role="navigation">
                         <div class="sidebar-nav navbar-collapse">
-                            <img src="../resources/images/escudo.png" width="90" height="90"> <br><br>
+                            <img src="resources/images/escudo.png" width="90" height="90"> <br><br>
                             <ul class="nav" id="side-menu">
 
                                 <li>
-                                    <a href="indexAdmin.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Maestros</a>
+                                    <a href="pages/indexAdmin.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Maestros</a>
                                 </li>
                                 <li>
-                                    <a href="ListarAlumnos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Alumnos</a>
-                                </li>
-                                   <li>
-                                    <a href="ListarLicenciaturas.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Licenciaturas</a>
+                                    <a href="pages/ListarAlumnos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Alumnos</a>
                                 </li>
                                 <li>
-                                    <a href="ListarGrupos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Grupos</a>
+                                    <a href="pages/ListarLicenciaturas.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Licenciaturas</a>
                                 </li>
                                 <li>
-                                    <a href="loadAlumnos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Actualizar listas</a>
+                                    <a href="pages/ListarGrupos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Grupos</a>
                                 </li>
                                 <li>
-                                    <a href="XX.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Generar constancias</a>
+                                    <a href="pages/loadAlumnos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Actualizar listas</a>
+                                </li>
+                                <li>
+                                    <a href="pages/XX.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Generar constancias</a>
                                 </li>
                                 </li>
                             </ul>
@@ -250,85 +245,42 @@
                         <h2>
                             <a href="indexAdmin.jsp">Home</a>
                             <i class="fa fa-angle-right"></i>
-                            <span>Alumnos</span><br>
+                            <span>Agregar licenciatura</span><br>
                         </h2>
                     </div>
                     <div class="blank">
 
                         <div class="blank-page">
-                            <%
-                                AlumnoDAO obj_Read_Values = new AlumnoDAO();
-                                List<Alumno> list = obj_Read_Values.listarAlumnos();
-                                Iterator<Alumno> it_list = list.iterator();
-                            %>
-                            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                <a href="agregarAlumno.jsp">
-                             <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo alumno</a>
-                                <thead>
-                                
-                                <tr>
-             
-                                    <th>Matricula</th>
-                                    <th>Name</th>
-                                    <th>grupo</th>
-                                    <th>Licenciatura</th>
-                                    <th>Eliminar</th>
-                                    <th>Editar</th>
+                            <div class="grid-form1">
+                                <h3 id="forms-example" class="">Datos de la licenciatura</h3>
 
+                                <form id="formulario" action="ControllerLicenciatura" method="post" onsubmit="return confirm('Realmente desea ACTUALIZAR los datos')">
+                                  <input type="hidden" name = "action" value="edit">
+                                    <input type="hidden" name = "id"  value="<c:out value="${lic.getIdLicenciatura()}"/>"/> 
+                                    <div class="form-group">
+                                        <label for="nomLicc">Nombre de la licenciatura</label>
 
-                                </tr>
-                                </thead>
-                                
-                                <tbody>
-                                    <%
-                                        while (it_list.hasNext()) {
-                                            Alumno ob = new Alumno();
-                                            ob = it_list.next();
-                                    %>  
-                                    <tr>
-                                        <td><%=ob.getMatricula()%></td>
-                                        <td><%=ob.getNombre()%></td>
-                                        <td><%=ob.getGrupo() %></td>
-                                        <td><%=ob.getLicenciatura()%></td>
-                                        <td>
-                                            <form id="formulario" action="../ControllerAlumno" method="post">
-                                                <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
-                                                <input type="hidden" name = "action" id="action" value="update">
-                                       <button type="submit"  class="btn btn-link">Actualizar</button>
-                                            </form>
-                                            
-                                        </td>
-                                        <td >
-                                           <form id="formulario" action="../ControllerAlumno" method="post">
-                                               <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
-                                                  <input type="hidden" name = "action" id="action" value="delete">
-                                       <button type="submit"  class="btn btn-link">Eliminar</button>
-                                            </form>
-                                        </td>
-
-
-                                    </tr>
-                                    <%
-                                        }
-                                    %>     
-
-
-                                </tbody>
-                            </table>
+                                        <input  required class="form-control" id="nombreLic" name="nombreLic"  value="<c:out value="${lic.getNombre()}"/>"/>
+                                    </div>
+                                    <button type="submit" class="bl btn btn-danger">Guardar</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-
                 </div>
-                <div class="clearfix"> </div>
             </div>
-            <div class="copy">
-                <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-            </div>
-            <!---->
-            <!--scrolling js-->
-            <script src="js/jquery.nicescroll.js"></script>
-            <script src="js/scripts.js"></script>
-            <!--//scrolling js-->
-    </body>
+
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <div class="copy">
+        <p><img src="resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+    </div>
+    <!---->
+    <!--scrolling js-->
+    <script src="js/jquery.nicescroll.js"></script>
+    <script src="js/scripts.js"></script>
+    <!--//scrolling js-->
+</body>
 </html>
 

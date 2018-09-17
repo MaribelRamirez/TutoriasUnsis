@@ -1,4 +1,4 @@
-/*
+/**
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -25,14 +25,15 @@ public class ConnectionClass {
 
     public ConnectionClass() {
         driver = "com.mysql.jdbc.Driver";
-        url = "jdbc:mysql://localhost:3306/tutoriasUnsis";
+        url = "jdbc:mysql://localhost:3306/tutoriasunsis?autoReconnect=true&useSSL=false";
+       // url = "jdbc:mysql://localhost:3306/tutoriasUnsis";
         user = "root";
         pass = "root";
     }
-    /*funcion para loguear*/
+    /**funcion para loguear*/
 
     public ConnectionClass(String url, String user, String pass) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); /**To change body of generated methods, choose Tools | Templates.*/
     }
 
     public int loguear(String us, String pass) {
@@ -41,15 +42,17 @@ public class ConnectionClass {
         ResultSet rs;
         int nivel = 0;
         String sql = "select nivel from usuarios where user='" + us + "'and pass='" + pass + "';";
-        System.out.println("" + sql);
+        System.out.println("mmm" + sql);
         try {
+            System.out.println("dentro de try");
 	 Class.forName(this.driver);
-
+         System.out.println("this.driver");
 	 conn = DriverManager.getConnection(
 	         this.url,
 	         this.user,
 	         this.pass
 	 );
+         
 	 pst = conn.prepareStatement(sql);
 	 rs = pst.executeQuery();
 	 while (rs.next()) {
@@ -58,6 +61,7 @@ public class ConnectionClass {
 	 }
 	 conn.close();
         } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("nnnnn"+ e);
         }
         return nivel;
 

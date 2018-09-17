@@ -34,97 +34,128 @@ public class AlumnoDAO {
 
     // insertar artículo
     public boolean insertar(Alumno alumno) throws SQLException {
-        String sql = "INSERT INTO alumnos (matricula,nombre,grupo,idLicenciatura)"
-	     + " VALUES (?, ?, ?, ?, ?, ?)";
-        //System.out.println(profesor.getDescripcion());
-        con.conectar();
-        connection = con.getJdbcConnection();
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, alumno.getMatricula());
-        statement.setString(2, alumno.getNombre());
-        statement.setInt(5, alumno.getGrupo());
-        statement.setInt(6, alumno.getIdLicenciatura());
-        System.err.println("consulta"+sql); 
-       boolean rowInserted = statement.executeUpdate() > 0;
-        statement.close();
-        con.desconectar();
-        return rowInserted;
+        try {
+            String sql = "INSERT INTO alumnos (matricula,nombre,idGrupo,idLicenciatura)"
+                    + " VALUES (?,?,?,?)";
+            con.conectar();
+            connection = con.getJdbcConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, alumno.getMatricula());
+            statement.setString(2, alumno.getNombre());
+            statement.setInt(3, alumno.getIdGrupo());
+            statement.setInt(4, alumno.getIdLicenciatura());
+
+            statement.executeUpdate();
+            statement.close();
+            con.desconectar();
+        } catch (Exception e) {
+            System.out.print("error al insertar:" + e);
+        }
+        return false;
     }
 
     // listar todos los productos
     public List<Alumno> listarAlumnos() throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "SELECT matricula, alumnos.nombre ,grupo, alumnos.idLicenciatura,licenciaturas.nombre FROM alumnos inner join licenciaturas on alumnos.idLicenciatura=licenciaturas.idLicenciatura ";
+        String sql = "SELECT matricula, alumnos.nombre ,alumnos.idGrupo, alumnos.idLicenciatura,licenciaturas.nombre, grupos.nombre FROM alumnos inner join licenciaturas inner join grupos on grupos.idGrupo=alumnos.idGrupo and alumnos.idLicenciatura=licenciaturas.idLicenciatura";
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
 
         while (resulSet.next()) {
-	 String matricula = resulSet.getString("matricula");
-	 String nombre = resulSet.getString("alumnos.nombre");
-	 int grupo = resulSet.getInt("grupo");
-	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
-	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
-	 Alumno alumno;
-	 alumno = new Alumno(matricula, nombre,grupo,idLicenciatura,Licenciatura);
-	 listaAlumnos.add(alumno);
+            int matricula = resulSet.getInt("matricula");
+            String nombre = resulSet.getString("alumnos.nombre");
+            int idgrupo = resulSet.getInt("alumnos.idGrupo");
+            String grupo = resulSet.getString("grupos.nombre");
+            int idLicenciatura = resulSet.getInt("alumnos.idLicenciatura");
+            String Licenciatura = resulSet.getString("licenciaturas.nombre");
+            Alumno alumno;
+            alumno = new Alumno(matricula, nombre, idgrupo, grupo, idLicenciatura, Licenciatura);
+            listaAlumnos.add(alumno);
         }
         con.desconectar();
         return listaAlumnos;
     }
 
-    public Alumno obtenerAlumnoByMatricula(String matricula) throws SQLException {
+    public Alumno obtenerAlumnoByMatricula(int matricula) throws SQLException {
         Alumno alumno = null;
 
-        String sql = "SELECT * FROM alumnos WHERE matricula= ? ";
+        String sql = "SELECT matricula, alumnos.nombre ,alumnos.idGrupo, "
+                + "alumnos.idLicenciatura,licenciaturas.nombre, grupos.nombre FROM"
+                + " alumnos inner join licenciaturas inner join grupos on grupos.idGrupo=alumnos.idGrupo and "
+                + "alumnos.idLicenciatura=licenciaturas.idLicenciatura WHERE matricula= ? ";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, matricula);
+        statement.setInt(1, matricula);
         ResultSet res = statement.executeQuery();
         if (res.next()) {
-	 alumno = new Alumno(res.getString("matricula"), res.getString("nombre"), res.getInt("grupo"), res.getInt("idLicenciatura"),res.getString("licenciaturas.nombre"));
+            alumno = new Alumno(res.getInt("matricula"), 
+                    res.getString("alumnos.nombre"),
+                    res.getInt("alumnos.idGrupo"),
+                    res.getString("grupos.nombre"),
+                    res.getInt("alumnos.idLicenciatura"),
+                    res.getString("licenciaturas.nombre"));
         }
         res.close();
         con.desconectar();
-
+ 
         return alumno;
     }
 
     // actualizar
-    public boolean actualizar(Alumno alumno) throws SQLException {
-        boolean rowActualizar = false;
-        String sql = "UPDATE alumnos SET matricula=?,nombre=?,grupo=? ,licenciatura=? WHERE matricula=?";
-        con.conectar();
-        connection = con.getJdbcConnection();
-        PreparedStatement statement = connection.prepareStatement(sql);
+    public void updateAlumno(Alumno alumno) {
+        try {
 
-        statement.setString(1, alumno.getMatricula());
-        statement.setString(2, alumno.getNombre());
-        statement.setInt(5, alumno.getGrupo());
-        statement.setInt(5, alumno.getIdLicenciatura());
+            String sql = "update alumnos set idLicenciatura=?,matricula=?,nombre=?,idGrupo=?,idLicenciatura=?" + 
+                    " where idLicenciatura=?";
+            con.conectar();
+            connection = con.getJdbcConnection();
+            System.out.println("esta es la sql de actualizar alumnos" + sql);
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                       statement.setInt(4, alumno.getIdLicenciatura());
+                statement.setInt(1, alumno.getMatricula());
+                statement.setString(2, alumno.getNombre());
+                statement.setInt(3, alumno.getIdGrupo());
+                statement.setInt(4, alumno.getIdLicenciatura());
+             statement.setInt(5, alumno.getIdLicenciatura());
+             statement.setInt(6, alumno.getIdLicenciatura());
+                statement.executeUpdate();
+            }
+            con.desconectar();
 
-        rowActualizar = statement.executeUpdate() > 0;
-        statement.close();
-        con.desconectar();
-        return rowActualizar;
+        } catch (SQLException e) {
+            System.out.print("error al actualizar:" + e);
+        }
     }
 
     //eliminar
-    public boolean eliminar(Alumno alumno) throws SQLException {
-        boolean rowEliminar = false;
+    /**
+     * public boolean eliminar(Alumno alumno) throws SQLException { boolean
+     * rowEliminar = false; String sql = "DELETE FROM alumnos WHERE
+     * matricula=?"; con.conectar(); connection = con.getJdbcConnection();
+     * PreparedStatement statement = connection.prepareStatement(sql);
+     * statement.setString(1, alumno.getMatricula());
+     *
+     * rowEliminar = statement.executeUpdate() > 0; statement.close();
+     * con.desconectar();
+     *
+     * return rowEliminar;
+     *
+     * @param matricula
+     * @param userId}
+     */
+    public void eliminar(String matricula) throws SQLException {
+
         String sql = "DELETE FROM alumnos WHERE matricula=?";
         con.conectar();
         connection = con.getJdbcConnection();
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, alumno.getMatricula());
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, matricula);
+        preparedStatement.executeUpdate();
 
-        rowEliminar = statement.executeUpdate() > 0;
-        statement.close();
-        con.desconectar();
-
-        return rowEliminar;
     }
 
 }

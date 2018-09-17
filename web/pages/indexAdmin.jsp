@@ -129,11 +129,18 @@
                             Iterator<Profesor> it_list = list.iterator();
                         %>
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
+                         <a href="agregarProfesor.jsp">
+                                <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo maestro</a>
+                               
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Apellido Paterno</th>
-                                    <th>Apellido Materno</th>                           
+                                    <th>Nombre</th></th> 
+                                    <th>Grado</th>
+                                 <th>Status</th>
+                                 <th>Licenciatura</th>
+                                 <th>Eliminar</th>
+                                  <th>Editar</th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
@@ -142,13 +149,31 @@
                                         Profesor ob = new Profesor();
                                         ob = it_list.next();
                                 %>  
-                                <tr>
-                                    <td><%=ob.getNombre()%></td>                            
-                                </tr>
+                                 <tr>
+                              <td><%=ob.getNombre() %></td>
+                              <td><%=ob.getGrado() %></td>
+                              <td><%=ob.getEstatus() %></td>
+                              <td><%=ob.getLicenciatura() %></td>
+                               <td>
+                                            <form id="formulario" action="../ControllerProfesor" method="post">
+                                                <input type="hidden" name = "idprf" id="idprf" value="<%=ob.getIdProfesor()%>">
+                                                <input type="hidden" name = "action" id="action" value="update">
+                                       <button type="submit"  class="btn btn-link">Actualizar</button>
+                                            </form>
+                                            
+                                        </td>
+                                        <td >
+                                           <form id="formulario" action="../ControllerProfesor" method="post">
+                                               <input type="hidden" name = "idprf" id="idprf" value="<%=ob.getIdProfesor()%>">
+                                                  <input type="hidden" name = "action" id="action" value="delete">
+                                       <button type="submit"  class="btn btn-link">Eliminar</button>
+                                            </form>
+                                        </td>
+                           
+                           </tr>
                                 <%
-                                    }
-                                %>     
-
+                             }
+                           %>  
 
                             </tbody>
                         </table>

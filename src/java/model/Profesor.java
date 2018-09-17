@@ -17,16 +17,26 @@ public class Profesor {
     private String grado;
     private String licenciatura;
     private int idLicenciatura; 
+    private String curp;
     public Profesor() {
     }
 
-    public Profesor(int idProfesor, String nombre,String estatus,String grado,int idLicenciatura, String licenciatura) {
+    public Profesor(int idProfesor, String nombre,String estatus,String grado,int idLicenciatura, String licenciatura,String curp) {
         this.idProfesor = idProfesor;
         this.nombre = nombre;
         this.idLicenciatura=idLicenciatura;
         this.grado=grado;
         this.estatus=estatus;
         this.licenciatura = licenciatura;
+        this.curp=curp;
+    }
+
+    public String getCurp() {
+        return curp;
+    }
+
+    public void setCurp(String curp) {
+        this.curp = curp;
     }
 
     public int getIdProfesor() {

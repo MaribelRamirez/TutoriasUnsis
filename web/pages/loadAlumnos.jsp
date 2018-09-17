@@ -74,7 +74,7 @@
                     <h2>
                         <a href="index.html">Home</a>
                         <i class="fa fa-angle-right"></i>
-                        <span>Actualiizar listas</span><br>
+                        <span>Actualizar listas</span><br>
                     </h2>
                 </div>
                 <!--//banner-->
