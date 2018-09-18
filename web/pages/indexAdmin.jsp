@@ -104,7 +104,7 @@
                 out.print("<a href='login.jsp?cerrar=true'><h5>cerrar Sesion" + usuario + "</h5>");
 
             } else {
-                out.print("<script>location.replace('login.jsp');</script>");
+                out.print("<script>location.replace('../login.jsp');</script>");
             }
         %>
         <jsp:include page="headAdmin.jsp" flush="true" />

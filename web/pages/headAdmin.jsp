@@ -128,7 +128,7 @@
                                     <a href="XX.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Generar constancias</a>
                                 </li>
                                 <li>
-                                    <a href="cargarArchivos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Cargar arvhivos</a>
+                                    <a href="cargarArchivos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Cargar archivos</a>
                                 </li>
                             </ul>
                         </div>
