@@ -70,7 +70,7 @@
                 out.print("<script>location.replace('login.jsp');</script>");
             }
         %>
-        <jsp:include page="headProfesor.jsp" flush="true" />
+        <jsp:include page="headAdmin.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
 
@@ -91,7 +91,7 @@
                         <%
                             PdfDAO emp = new PdfDAO();
                             PdfVO pdfvo = new PdfVO();
-                            ArrayList<PdfVO> listar = emp.Listar_PdfVOMaterial();
+                            ArrayList<PdfVO> listar = emp.Listar_PdfVO();
                         %>
 
                         <div class="datagrid">

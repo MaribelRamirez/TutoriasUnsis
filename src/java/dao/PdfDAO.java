@@ -40,6 +40,36 @@ public class PdfDAO {
         }
         return list;
     }
+    public ArrayList<PdfVO> Listar_PdfVO() {
+        ArrayList<PdfVO> list = new ArrayList<PdfVO>();
+        ConnectionClass conec = new ConnectionClass();
+        String sql = "SELECT * FROM archivos;";
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            ps = conec.conectar().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                PdfVO vo = new PdfVO();
+                vo.setCodigopdf(rs.getInt(1));
+                vo.setNombrepdf(rs.getString(2));
+                vo.setArchivopdf2(rs.getBytes(3));
+                list.add(vo);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            try {
+                ps.close();
+                rs.close();
+                conec.desconectar();
+            } catch (Exception ex) {
+            }
+        }
+        return list;
+    }
     public ArrayList<PdfVO> Listar_PdfVOMaterial() {
         ArrayList<PdfVO> list = new ArrayList<PdfVO>();
         ConnectionClass conec = new ConnectionClass();
@@ -77,6 +107,7 @@ public class PdfDAO {
         ConnectionClass conec = new ConnectionClass();
         String sql = "INSERT INTO archivos (idArchivo, nombre, categoria, archivo) VALUES(?, ?, ?,? );";
         System.err.println("Estoy agregaar datos " + vo.getNombrepdf()+vo.getCategoria()+vo.getCodigopdf());
+        System.out.println("consulta"+sql);
         PreparedStatement ps = null;
         try {
             ps = conec.conectar().prepareStatement(sql);

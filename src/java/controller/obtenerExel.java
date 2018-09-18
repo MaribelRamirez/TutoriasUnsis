@@ -116,7 +116,7 @@ public class obtenerExel extends HttpServlet {
 //				}
                                 //Matricula
                                 cell = cellIterator.next();
-                                alumno.setMatricula((int) cell.getNumericCellValue());
+                                alumno.setMatricula( cell.getStringCellValue());
                                 System.out.print(cell.getStringCellValue()+"  ");
                                 //NOmbre
                                 cell = cellIterator.next();
