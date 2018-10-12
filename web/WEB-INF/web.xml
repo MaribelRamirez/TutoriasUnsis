@@ -17,6 +17,18 @@
         <servlet-class>controller.ControllerLicenciatura</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ControllerConstancias</servlet-name>
+        <servlet-class>controller.ControllerConstancias</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControllerReporteAsignacionTutorias</servlet-name>
+        <servlet-class>controller.ControllerReporteAsignacionTutorias</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControllerReportesTutorias</servlet-name>
+        <servlet-class>controller.ControllerReportesTutorias</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ControllerPeriodo</servlet-name>
         <servlet-class>controller.ControllerPeriodo</servlet-class>
     </servlet>
@@ -40,13 +52,17 @@
         <servlet-name>ControllerLicenciatura</servlet-name>
         <url-pattern>/ControllerLicenciatura</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
-        <servlet-name>ControllerPeriodo</servlet-name>
-        <url-pattern>/ControllerPeriodo</url-pattern>
+    <servlet-mapping>
+        <servlet-name>ControllerConstancias</servlet-name>
+        <url-pattern>/ControllerConstancias</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ControllerTutores</servlet-name>
-        <url-pattern>/ControllerTutores</url-pattern>
+        <servlet-name>ControllerReporteAsignacionTutorias</servlet-name>
+        <url-pattern>/ControllerReporteAsignacionTutorias</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerReportesTutorias</servlet-name>
+        <url-pattern>/ControllerReportesTutorias</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -88,4 +104,13 @@
         <servlet-name>pdf</servlet-name>
         <url-pattern>/pdf</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerPeriodo</servlet-name>
+        <url-pattern>/ControllerPeriodo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerTutores</servlet-name>
+        <url-pattern>/ControllerTutores</url-pattern>
+    </servlet-mapping>
 </web-app>
+>>>>>>> origin/master
