@@ -1,4 +1,6 @@
- <div id="wrapper">
+
+         <!--Include-->
+          <div id="wrapper">
 
             <nav class="navbar-default navbar-static-top" role="navigation">
                 <div class="navbar-header">
@@ -106,38 +108,37 @@
 
                     <div class="navbar-default sidebar" role="navigation">
                         <div class="sidebar-nav navbar-collapse">
-                            <img src="../resources/images/escudo.png" width="90" height="90"> <br><br>
+                            <img src="resources/images/escudo.png" width="90" height="90"> <br><br>
                             <ul class="nav" id="side-menu">
 
                                 <li>
-                                    <a href="indexAdmin.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Maestros</a>
+                                    <a href="pages/indexAdmin.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Maestros</a>
                                 </li>
                                 <li>
-                                    <a href="ListarAlumnos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Alumnos</a>
+                                    <a href="pages/ListarAlumnos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Alumnos</a>
                                 </li>
                                  <li>
-                                    <a href="ListarLicenciaturas.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Licenciaturas</a>
+                                    <a href="pages/ListarLicenciaturas.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Licenciaturas</a>
                                 </li>
                                 <li>
-                                    <a href="ListarGrupos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Grupos</a>
+                                    <a href="pages/ListarGrupos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Grupos</a>
                                 </li>
                                 <li>
-                                    <a href="loadAlumnos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Actualizar listas</a>
+                                    <a href="pages/loadAlumnos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Actualizar listas</a>
                                 </li>
                                 <li>
                                     <a href="XX.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Generar constancias</a>
                                 </li>
                                 <li>
-                                    <a href="cargarArchivos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Cargar archivos</a>
+                                    <a href="pages/cargarArchivos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Cargar archivos</a>
                                 </li>
                                 <li>
-                                    <a href="agregarTutoresG.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Crear tutorias grupales</a>
+                                    <a href="pages/agregarTutoresG.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Crear tutorias grupales</a>
                                 </li>
                                 <li>
-                                    <a href="ListarPeriodos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Periodos</a>
+                                    <a href="pages/ListarPeriodos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Periodos</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
             </nav>
-       

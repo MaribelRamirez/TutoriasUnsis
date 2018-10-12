@@ -36,17 +36,22 @@ public class GrupoDAO {
     public List<Grupo> listarGrupos() throws SQLException {
 
         List<Grupo> listaGrupos = new ArrayList<Grupo>();
-        String sql = "SELECT *FROM grupos";
+        String sql = "select idGrupo, grupo, grupos.idPeriodo , grupos.idLicenciatura, periodo.periodo, nombre " +
+                    "from grupos , periodo, licenciaturas " +
+                    "where grupos.idPeriodo= periodo.idPeriodo and grupos.idLicenciatura=licenciaturas.idLicenciatura;";
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
 
         while (resulSet.next()) {
             int id = resulSet.getInt("idGrupo");
-            String nombre = resulSet.getString("nombre");
-
+            String gru = resulSet.getString("grupo");
+            int idPerido = resulSet.getInt("grupos.idPeriodo");
+            int idLicenciatura = resulSet.getInt("grupos.idLicenciatura");
+            String periodo = resulSet.getString("periodo.periodo");
+            String lic = resulSet.getString("nombre");
             Grupo grupo;
-            grupo = new Grupo(id, nombre);
+            grupo = new Grupo(id, gru, idPerido, idLicenciatura,periodo,lic);
             listaGrupos.add(grupo);
         }
         con.desconectar();
@@ -67,14 +72,16 @@ public class GrupoDAO {
     public boolean insertar(Grupo grupo) throws SQLException {
 
         try {
-            String sql = "INSERT INTO grupos (idGrupo,nombre)"
-                    + " VALUES (?,?)";
+            String sql = "INSERT INTO grupos (idGrupo,grupo, idPeriodo, idLicenciatura)"
+                    + " VALUES (?,?,?,?)";
             //System.out.println(profesor.getDescripcion());
             con.conectar();
             connection = con.getJdbcConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, null);
-            statement.setString(2, grupo.getNombre());
+            statement.setString(2, grupo.getGrupo());
+            statement.setInt(3,grupo.getIdPeriodo());
+            statement.setInt(4,grupo.getIdLicenciatura());
 
             statement.executeUpdate();
             statement.close();
@@ -89,14 +96,18 @@ public class GrupoDAO {
       public Grupo obtenerGrupoById(int idGrp) throws SQLException {
         Grupo grupo = null;
 
-        String sql = "SELECT * FROM grupos WHERE idGrupo= ? ";
+        String sql = "select idGrupo, grupo, grupos.idPeriodo , grupos.idLicenciatura, periodo.periodo, nombre " +
+                    "from grupos , periodo, licenciaturas " +
+                    "where grupos.idPeriodo= periodo.idPeriodo and grupos.idLicenciatura=licenciaturas.idLicenciatura and idGrupo= ? ";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1,idGrp );
         try (ResultSet res = statement.executeQuery()) {
             if (res.next()) {
-                grupo = new Grupo(res.getInt("idGrupo"), res.getString("nombre"));
+                grupo = new Grupo(res.getInt("idGrupo"), res.getString("grupo"),
+                        res.getInt("grupos.idPeriodo"), res.getInt("grupos.idLicenciatura"),
+                        res.getString("periodo.periodo"), res.getString("nombre"));
                 
             }
         }
@@ -105,14 +116,16 @@ public class GrupoDAO {
     }
       public void updateGrp(Grupo grupo) {
         try {
-            String sql = "update grupos set idGrupo=?, nombre=?"
+            String sql = "update grupos set idGrupo=?, grupo=?, idPeriodo=?, idLicenciatura=? "
                     + "where idGrupo=?";
             con.conectar();
             connection = con.getJdbcConnection();
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, grupo.getIdGrupo());
-                statement.setString(2, grupo.getNombre());
-                   statement.setInt(3, grupo.getIdGrupo());
+                statement.setString(2, grupo.getGrupo());
+                statement.setInt(3,grupo.getIdPeriodo());
+                statement.setInt(4,grupo.getIdLicenciatura());
+                 statement.setInt(5, grupo.getIdGrupo());
                 statement.executeUpdate();
             }
             con.desconectar();

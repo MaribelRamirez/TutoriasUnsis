@@ -5,10 +5,10 @@
 --%>
 
 
-<%@page import="model.Grupo"%>
-<%@page import="dao.GrupoDAO"%>
 <%@page import="java.util.Iterator"%>
+<%@page import="model.Licenciatura"%>
 <%@page import="java.util.List"%>
+<%@page import="dao.LicenciaturaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 
@@ -108,7 +108,7 @@
             }
         %>
 
-        <jsp:include page="headAdmin.jsp" flush="true" />
+       <jsp:include page="headAdmin.jsp" flush="true" />
             <div id="page-wrapper" class="gray-bg dashbard-1">
                 <div class="content-main">
 
@@ -117,81 +117,59 @@
                         <h2>
                             <a href="indexAdmin.jsp">Home</a>
                             <i class="fa fa-angle-right"></i>
-                            <span>Grupos</span><br>
+                            <span>Agregar periodo</span><br>
                         </h2>
                     </div>
                     <div class="blank">
 
                         <div class="blank-page">
-                            <%
-                                GrupoDAO obj_Read_Values = new GrupoDAO();
-                                List<Grupo> list = obj_Read_Values.listarGrupos();
-                                Iterator<Grupo> it_list = list.iterator();
-                            %>
-                            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                <a href="agregarGrupo.jsp">
-                                    <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo grupo</a>
-                                <thead>
+                            <div class="grid-form1">
+                                <h3 id="forms-example" class="">Datos del periodo</h3>
 
-                                    <tr>
+                                <form id="formulario" action="../ControllerPeriodo" method="post" onsubmit="return confirm('Realmente desea guardar los datos')">
+<input type="hidden" name = "action" value="add">
+                                    <div class="form-group">
+                                        <label for="nomGrup">Periodo</label>
 
-                                        <th>Grupo</th>
-                                        <th>Periodo</th>
-                                        <th>Licenciatura</th>
-                                        <th>Editar</th>
-                                        <th>Eliminar</th>
-                                        
-                                    </tr>
-                                </thead>
+                                        <input  required class="form-control" id="periodo" name="periodo" placeholder="Introduce el nombre del grupo">
+                                    </div>
 
-                                <tbody>
-                                    <%
-                                        while (it_list.hasNext()) {
-                                            Grupo ob = new Grupo();
-                                            ob = it_list.next();
-                                    %>  
-                                    <tr>
-                                        <td><%=ob.getGrupo()%></td>
-                                        <td><%=ob.getPeriodo()%></td>
-                                        <td><%=ob.getLicenciatura()%></td>
-                                        <td>
-                                            <form id="formulario" action="../ControllerGrupo" method="post">
-                                                <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo() %>">
-                                                <input type="hidden" name = "action" id="action" value="update">
-                                       <button type="submit"  class="btn btn-link">Actualizar</button>
-                                            </form>
-                                            
-                                        </td>
-                                        <td >
-                                           <form id="formulario" action="../ControllerGrupo" method="post">
-                                               <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
-                                                  <input type="hidden" name = "action" id="action" value="delete">
-                                       <button type="submit"  class="btn btn-link">Eliminar</button>
-                                            </form>
-                                        </td>
+                                    <div class="form-group">
+                                        <label for="nomGrup">Fecha inicio</label>
 
-                                    </tr>
-                                    <%
-                                        }
-                                    %>     
+                                        <input  required class="form-control" id="fechaI" name="fechaI" placeholder="Introduce la fecha inicio">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nomGrup">Fecha fin</label>
+
+                                        <input  required class="form-control" id="fechaF" name="fechaF" placeholder="Introduce ls fecha fin">
+                                    </div>
+
+                                  
+                
 
 
-                                </tbody>
-                            </table>
+
+
+                                    <button type="submit" class="bl btn btn-danger">Guardar</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-
                 </div>
-                <div class="clearfix"> </div>
             </div>
-            <div class="copy">
-                <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-            </div>
-            <!---->
-            <!--scrolling js-->
-            <script src="js/jquery.nicescroll.js"></script>
-            <script src="js/scripts.js"></script>
-            <!--//scrolling js-->
-    </body>
+
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <div class="copy">
+        <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+    </div>
+    <!---->
+    <!--scrolling js-->
+    <script src="js/jquery.nicescroll.js"></script>
+    <script src="js/scripts.js"></script>
+    <!--//scrolling js-->
+</body>
 </html>
 

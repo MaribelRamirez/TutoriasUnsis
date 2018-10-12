@@ -157,7 +157,7 @@ public class PdfDAO {
     /*Metodo Modificar*/
     public void Modificar_PdfVO2(PdfVO vo) {
         ConnectionClass conec = new ConnectionClass();
-        String sql = "UPDATE pdf SET nombrepdf = ? WHERE codigopdf = ?;";
+        String sql = "UPDATE archivos SET nombrepdf = ? WHERE codigopdf = ?;";
         PreparedStatement ps = null;
         try {
             ps = conec.conectar().prepareStatement(sql);
@@ -180,7 +180,7 @@ public class PdfDAO {
     /*Metodo Eliminar*/
     public void Eliminar_PdfVO(int id) {
         ConnectionClass conec = new ConnectionClass();
-        String sql = "DELETE FROM pdf WHERE codigopdf = ?;";
+        String sql = "DELETE FROM archivos WHERE idArchivo = ?;";
         PreparedStatement ps = null;
         try {
             ps = conec.conectar().prepareStatement(sql);

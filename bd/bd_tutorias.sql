@@ -6,9 +6,14 @@ create table licenciaturas(
 idLicenciatura int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 nombre varchar(20) not null
 );
-create table grupos(
-idGrupo int UNSIGNED AUTO_INCREMENT PRIMARY KEY,	
-nombre varchar(10)
+
+drop table grupos;
+-- agregue periodo y licenciatura en el grupo y se cambio en id incremental por el grupo en si
+create table grupos(	
+idGrupo int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+grupo varchar(10),	
+idPeriodo int  REFERENCES periodo (idPeriodo) ON DELETE CASCADE ON UPDATE CASCADE,
+idLicenciatura int REFERENCES licenciaturas (idLicenciatura) ON DELETE CASCADE ON UPDATE CASCADE
 );
 create table alumnos(
 matricula varchar (10) primary key,
@@ -58,4 +63,13 @@ nombre varchar (100) not null,
 categoria varchar (19) not null,
 archivo blob not null
 );
+-- agregue la tablas periodo
+create table periodo(
+idPeriodo int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+periodo varchar (7) not null,
+fechaInicio date,
+fechaFin Date
+);
+
+
 Show tables;

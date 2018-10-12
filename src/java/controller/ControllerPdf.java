@@ -19,9 +19,9 @@ import model.sql;
 @MultipartConfig(maxFileSize = 16177215)    // upload file's size up to 16MB
 
 public class ControllerPdf extends HttpServlet {
-
-    public static final String lIST_STUDENT = "/Pagina1.jsp";
-    public static final String INSERT_OR_EDIT = "/Pagina2.jsp";
+   
+    public static final String lIST_STUDENT = "/pages/cargarArchivos.jsp";
+    public static final String INSERT_OR_EDIT = "/pages/altaPdf.jsp";
     
 
     String estado = null;
@@ -42,11 +42,12 @@ public class ControllerPdf extends HttpServlet {
 
         String forward = "";
         String action = request.getParameter("action");
-
+        System.out.println("llegue al servlet en el get");
         if (action.equalsIgnoreCase("delete")) {
-            forward = lIST_STUDENT;
             int studentId = Integer.parseInt(request.getParameter("id"));
             pdfdao.Eliminar_PdfVO(studentId);
+            
+            response.sendRedirect("pages/cargarArchivos.jsp");
         }
         if (action.equalsIgnoreCase("edit")) {
             forward = INSERT_OR_EDIT;
@@ -61,10 +62,10 @@ public class ControllerPdf extends HttpServlet {
             request.setAttribute("row2", boo);
             estado = "edit";
         } else if (action.equalsIgnoreCase("insert")) {
+            System.err.println("estoy en el insert");
             forward = INSERT_OR_EDIT;
             estado = "insert";
         }
-
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
@@ -72,14 +73,16 @@ public class ControllerPdf extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        System.out.println("llegue al servlet en el post");
         PdfVO pdfvo = new PdfVO();
         sql auto = new sql();
         int nuevoid = auto.auto_increm("SELECT MAX(idArchivo) FROM archivos;");
         try{
             String name = request.getParameter("txtname");
+            String tipo = request.getParameter("tipo");
             pdfvo.setNombrepdf(name);
-            pdfvo.setCategoria("2");
+            pdfvo.setCategoria(tipo);
             System.err.println("este es el nombre;"+pdfvo.getNombrepdf() +"   id:"+pdfvo.getCategoria());
         }catch(Exception ex){
             System.out.println("nombre: "+ex.getMessage());
@@ -123,9 +126,9 @@ public class ControllerPdf extends HttpServlet {
         } catch (Exception ex) {
             System.out.println("textos: "+ex.getMessage());
         }
-
-        RequestDispatcher view = request.getRequestDispatcher("/Pagina2.jsp");
-        view.forward(request, response);
+            response.sendRedirect("pages/cargarArchivos.jsp");
+//        RequestDispatcher view = request.getRequestDispatcher("/pages/cargarArchivos.jsp");
+//        view.forward(request, response);
     }
 
     @Override

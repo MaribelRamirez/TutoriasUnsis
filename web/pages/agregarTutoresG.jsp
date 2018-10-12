@@ -5,12 +5,16 @@
 --%>
 
 
+<%@page import="model.Profesor"%>
+<%@page import="dao.GrupoDAO"%>
+<%@page import="model.Grupo"%>
 <%@page import="model.Periodo"%>
 <%@page import="dao.PeriodoDAO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="model.Licenciatura"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.LicenciaturaDAO"%>
+<%@page import="dao.ProfesorDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 
@@ -119,43 +123,19 @@
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
                         <i class="fa fa-angle-right"></i>
-                        <span>Agregar grupo</span><br>
+                        <span>Crear tutorias grupales</span><br>
                     </h2>
                 </div>
                 <div class="blank">
 
                     <div class="blank-page">
                         <div class="grid-form1">
-                            <h3 id="forms-example" class="">Datos del grupo</h3>
+                            <h3 id="forms-example" class="">Datos de la tutoria</h3>
 
-                            <form id="formulario" action="../ControllerGrupo" method="post" onsubmit="return confirm('Realmente desea guardar los datos')">
+                            <form id="formulario"  action="../ControllerTutores" method="post" onsubmit="return confirm('Realmente desea guardar los datos')">
                                 <input type="hidden" name = "action" value="add">
-                                <div class="form-group">
-                                    <label for="nomGrup">Nombre del grupo</label>
-
-                                    <input  required class="form-control" id="grupo" name="grupo" placeholder="Introduce el nombre del grupo">
-                                </div>
-
-                                <%
-                                    LicenciaturaDAO obj_Read_Values = new LicenciaturaDAO();
-                                    List<Licenciatura> list = obj_Read_Values.listarLicenciaturas();
-                                    Iterator<Licenciatura> it_list = list.iterator();
-
-                                %>
-                                <div class = "form-group">
-                                    <label>Licenciatura</label>	      
-                                    <select class="form-control " id="lic" name="lic">
-                                        <%                                        while (it_list.hasNext()) {
-                                                Licenciatura ob = new Licenciatura();
-                                                ob = it_list.next();
-                                        %>
-                                        <option value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>\n\
-                                        <% }
-
-                                        %>   
-                                    </select>
-                                </div>
-
+                                <input type="hidden" name = "tipo" value="grupal">
+                                
                                 <%  PeriodoDAO obj_Read_ValuesP = new PeriodoDAO();
                                     List<Periodo> listP = obj_Read_ValuesP.listarPeriodos();
                                     Iterator<Periodo> it_listP = listP.iterator();
@@ -174,8 +154,75 @@
                                         %>   
                                     </select>
                                 </div>
+                                    
+                                    
+                                    
+                                    
+                                  <%
+                                    LicenciaturaDAO obj_Read_Values = new LicenciaturaDAO();
+                                    List<Licenciatura> list = obj_Read_Values.listarLicenciaturas();
+                                    Iterator<Licenciatura> it_list = list.iterator();
 
+                                %>
+                                <div class = "form-group">
+                                    <label>Licenciatura</label>	      
+                                    <select class="form-control " id="lic" name="lic">
+                                        <%                                        while (it_list.hasNext()) {
+                                                Licenciatura ob = new Licenciatura();
+                                                ob = it_list.next();
+                                        %>
+                                        <option value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>\n\
+                                        <% }
 
+                                        %>   
+                                    </select>
+                                </div>
+                                    
+                                    
+                                    
+                                <%
+                                        GrupoDAO obj_Read_grp = new GrupoDAO();
+                                        List<Grupo> listGrup = obj_Read_grp.listarGrupos();
+                                        Iterator<Grupo> list_Grup = listGrup.iterator();
+
+                                    %>
+                                    <div class = "form-group">
+                                        <label>Grupos</label>	      
+                                        <select class="form-control " id="grupo" name="grupo" >
+                                            <%                                        while (list_Grup.hasNext()) {
+                                                    Grupo ob = new Grupo();
+                                                    ob = list_Grup.next();
+                                            %>
+                                            <option value="<%= ob.getIdGrupo()%>"> <%=ob.getGrupo()%></option>\n\
+                                            <% }
+
+                                            %>   
+                                        </select>
+                                    </div>
+                                
+                                <%
+                                        ProfesorDAO obj_Read_Pro = new ProfesorDAO();
+                                        List<Profesor> listPro = obj_Read_Pro.listarProfesores();
+                                        Iterator<Profesor> list_Pro = listPro.iterator();
+
+                                    %>
+                                    <div class = "form-group">
+                                        <label>Profesor</label>	      
+                                        <select class="form-control " id="profesor" name="profesor" >
+                                            <%                                        while (list_Pro.hasNext()) {
+                                                    Profesor ob = new Profesor();
+                                                    ob = list_Pro.next();
+                                            %>
+                                            <option value="<%= ob.getCurp()%>"> <%=ob.getNombre()%></option>\n\
+                                            <% }
+
+                                            %>   
+                                        </select>
+                                    </div>
+                                
+                                
+                                
+                               
 
                                 <button type="submit" class="bl btn btn-danger">Guardar</button>
                             </form>
