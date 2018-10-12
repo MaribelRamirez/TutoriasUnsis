@@ -59,7 +59,7 @@ public class AlumnoDAO {
     public List<Alumno> listarAlumnos() throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "SELECT matricula, alumnos.nombre ,alumnos.idGrupo, alumnos.idLicenciatura,licenciaturas.nombre, grupos.nombre FROM alumnos inner join licenciaturas inner join grupos on grupos.idGrupo=alumnos.idGrupo and alumnos.idLicenciatura=licenciaturas.idLicenciatura";
+        String sql = "SELECT matricula, alumnos.nombre ,alumnos.idGrupo, alumnos.idLicenciatura,licenciaturas.nombre, grupos.grupo FROM alumnos inner join licenciaturas inner join grupos on grupos.idGrupo=alumnos.idGrupo and alumnos.idLicenciatura=licenciaturas.idLicenciatura";
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
@@ -68,7 +68,7 @@ public class AlumnoDAO {
             String matricula = resulSet.getString("matricula");
             String nombre = resulSet.getString("alumnos.nombre");
             int idgrupo = resulSet.getInt("alumnos.idGrupo");
-            String grupo = resulSet.getString("grupos.nombre");
+            String grupo = resulSet.getString("grupos.grupo");
             int idLicenciatura = resulSet.getInt("alumnos.idLicenciatura");
             String Licenciatura = resulSet.getString("licenciaturas.nombre");
             Alumno alumno;
