@@ -39,7 +39,6 @@
         <script src="../resources/tablas/js/jquery-3.3.1.js"></script>  
         <script src="../resources/tablas/js/jquery.dataTables.min.js"></script>
         <script src="../resources/tablas/js/dataTables.bootstrap.min.js"></script> 
-
         <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
 
@@ -182,8 +181,10 @@
                 </div>
 
             </div>
+                           
             <div class="clearfix"> </div>
         </div>
+                           
         <div class="copy">
             <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
         </div>

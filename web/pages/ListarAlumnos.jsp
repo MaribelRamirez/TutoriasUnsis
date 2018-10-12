@@ -136,7 +136,7 @@
                                 <tr>
              
                                     <th>Matricula</th>
-                                    <th>Name</th>
+                                    <th>Nombre</th>
                                     <th>grupo</th>
                                     <th>Licenciatura</th>
                                     <th>Editar</th>

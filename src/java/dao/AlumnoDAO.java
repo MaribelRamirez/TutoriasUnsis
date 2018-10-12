@@ -105,6 +105,136 @@ public class AlumnoDAO {
         con.desconectar();
         return listaAlumnos;
     }
+    public List<Alumno> listarAlumnosTutoradosByCarrera(String curp, String carrera) throws SQLException {
+
+        List<Alumno> listaAlumnos = new ArrayList<Alumno>();
+        String sql = "select alumnos.matricula , alumnos.nombre, grupos.nombre , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+            " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
+            " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo and licenciaturas.nombre='"+carrera+"' and tutores.curp='"+curp+"';"; 
+        System.out.println("consulta"+sql);
+        connection = con.conectar();
+        Statement statement = connection.createStatement();
+        ResultSet resulSet = statement.executeQuery(sql);
+
+        while (resulSet.next()) {
+	 String  matricula = resulSet.getString("alumnos.matricula");
+	 String nombre = resulSet.getString("alumnos.nombre");
+	 String grupo = resulSet.getString("grupos.nombre");
+	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
+	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
+         int tipo = resulSet.getInt("tipo");
+	 Alumno alumno;
+	 alumno = new Alumno(matricula, nombre, 0, grupo,idLicenciatura,Licenciatura,tipo);
+	 listaAlumnos.add(alumno);
+        }
+        con.desconectar();
+        return listaAlumnos;
+    }
+    public List<Alumno> listarAlumnosTutoradosIndividual(String curp) throws SQLException {
+
+        List<Alumno> listaAlumnos = new ArrayList<Alumno>();
+        String sql = "select alumnos.matricula , alumnos.nombre, grupos.nombre , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+            " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
+            " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
+            " and tutores.curp='"+curp+"' and tutores.tipo=1;";
+        System.out.println("consulta"+sql);
+        connection = con.conectar();
+        Statement statement = connection.createStatement();
+        ResultSet resulSet = statement.executeQuery(sql);
+
+        while (resulSet.next()) {
+	 String  matricula = resulSet.getString("alumnos.matricula");
+	 String nombre = resulSet.getString("alumnos.nombre");
+	 String grupo = resulSet.getString("grupos.nombre");
+	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
+	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
+         int tipo = resulSet.getInt("tipo");
+	 Alumno alumno;
+	 alumno = new Alumno(matricula, nombre, 0, grupo,idLicenciatura,Licenciatura,tipo);
+	 listaAlumnos.add(alumno);
+        }
+        con.desconectar();
+        return listaAlumnos;
+    }
+       public List<Alumno> listarAlumnosTutoradosIndividualByCarrera(String curp,String carrera) throws SQLException {
+
+        List<Alumno> listaAlumnos = new ArrayList<Alumno>();
+        String sql = "select alumnos.matricula , alumnos.nombre, grupos.nombre , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+            " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
+            " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
+            " and tutores.curp='"+curp+"' and tutores.tipo=1 and licenciaturas.nombre='"+carrera+"';";
+        System.out.println("consulta"+sql);
+        connection = con.conectar();
+        Statement statement = connection.createStatement();
+        ResultSet resulSet = statement.executeQuery(sql);
+
+        while (resulSet.next()) {
+	 String  matricula = resulSet.getString("alumnos.matricula");
+	 String nombre = resulSet.getString("alumnos.nombre");
+	 String grupo = resulSet.getString("grupos.nombre");
+	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
+	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
+         int tipo = resulSet.getInt("tipo");
+	 Alumno alumno;
+	 alumno = new Alumno(matricula, nombre, 0, grupo,idLicenciatura,Licenciatura,tipo);
+	 listaAlumnos.add(alumno);
+        }
+        con.desconectar();
+        return listaAlumnos;
+    }
+       public List<Alumno> listarAlumnosTutoradosGrupalByCarrera(String curp,String carrera) throws SQLException {
+
+        List<Alumno> listaAlumnos = new ArrayList<Alumno>();
+        String sql = "select alumnos.matricula , alumnos.nombre, grupos.nombre , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+            " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
+            " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
+            " and tutores.curp='"+curp+"' and tutores.tipo=2 and licenciaturas.nombre='"+carrera+"';";
+        System.out.println("consulta"+sql);
+        connection = con.conectar();
+        Statement statement = connection.createStatement();
+        ResultSet resulSet = statement.executeQuery(sql);
+
+        while (resulSet.next()) {
+	 String  matricula = resulSet.getString("alumnos.matricula");
+	 String nombre = resulSet.getString("alumnos.nombre");
+	 String grupo = resulSet.getString("grupos.nombre");
+	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
+	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
+         int tipo = resulSet.getInt("tipo");
+	 Alumno alumno;
+	 alumno = new Alumno(matricula, nombre, 0, grupo,idLicenciatura,Licenciatura,tipo);
+	 listaAlumnos.add(alumno);
+        }
+        con.desconectar();
+        return listaAlumnos;
+    }
+      
+    public List<Alumno> listarAlumnosTutoradosGrupal(String curp) throws SQLException {
+
+        List<Alumno> listaAlumnos = new ArrayList<Alumno>();
+        String sql = "select alumnos.matricula , alumnos.nombre, grupos.nombre , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+            " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
+            " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
+            " and tutores.curp='"+curp+"' and tutores.tipo=2;";
+        System.out.println("consulta"+sql);
+        connection = con.conectar();
+        Statement statement = connection.createStatement();
+        ResultSet resulSet = statement.executeQuery(sql);
+
+        while (resulSet.next()) {
+	 String  matricula = resulSet.getString("alumnos.matricula");
+	 String nombre = resulSet.getString("alumnos.nombre");
+	 String grupo = resulSet.getString("grupos.nombre");
+	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
+	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
+         int tipo = resulSet.getInt("tipo");
+	 Alumno alumno;
+	 alumno = new Alumno(matricula, nombre, 0, grupo,idLicenciatura,Licenciatura,tipo);
+	 listaAlumnos.add(alumno);
+        }
+        con.desconectar();
+        return listaAlumnos;
+    }
     public Alumno obtenerAlumnoByMatricula(String matricula) throws SQLException {
         Alumno alumno = null;
 

@@ -16,6 +16,18 @@
         <servlet-name>ControllerLicenciatura</servlet-name>
         <servlet-class>controller.ControllerLicenciatura</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControllerConstancias</servlet-name>
+        <servlet-class>controller.ControllerConstancias</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControllerReporteAsignacionTutorias</servlet-name>
+        <servlet-class>controller.ControllerReporteAsignacionTutorias</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControllerReportesTutorias</servlet-name>
+        <servlet-class>controller.ControllerReportesTutorias</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllerAlumno</servlet-name>
         <url-pattern>/ControllerAlumno</url-pattern>
@@ -31,6 +43,18 @@
     <servlet-mapping>
         <servlet-name>ControllerLicenciatura</servlet-name>
         <url-pattern>/ControllerLicenciatura</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerConstancias</servlet-name>
+        <url-pattern>/ControllerConstancias</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerReporteAsignacionTutorias</servlet-name>
+        <url-pattern>/ControllerReporteAsignacionTutorias</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerReportesTutorias</servlet-name>
+        <url-pattern>/ControllerReportesTutorias</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
