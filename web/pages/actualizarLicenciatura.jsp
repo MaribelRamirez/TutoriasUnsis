@@ -103,7 +103,7 @@
             }
         %>
 
-        <jsp:include page="headAdmin.jsp" flush="true" />
+        <jsp:include page="headAdminUpdate.jsp" flush="true" />
             <div id="page-wrapper" class="gray-bg dashbard-1">
                 <div class="content-main">
 

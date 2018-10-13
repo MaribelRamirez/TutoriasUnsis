@@ -4,18 +4,10 @@
     Author     : Marifer
 --%>
 
-
-<%@page import="model.Licenciatura"%>
-<%@page import="model.Licenciatura"%>
-<%@page import="dao.LicenciaturaDAO"%>
-<%@page import="dao.LicenciaturaDAO"%>
-<%@page import="java.util.Iterator"%>
-<%@page import="model.Grupo"%>
-<%@page import="java.util.List"%>
-<%@page import="dao.GrupoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -44,7 +36,7 @@
         <script src="resources/tablas/js/jquery.dataTables.min.js"></script>
         <script src="resources/tablas/js/dataTables.bootstrap.min.js"></script> 
 
-        <link href="resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
+        <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
 
         <script>
@@ -112,12 +104,7 @@
             }
         %>
 
-       
-        
-         <jsp:include page="headAdminUpdate.jsp" flush="true" />
-         
-          <!--include-->
-        
+       <jsp:include page="headAdminUpdate.jsp" flush="true" />
             <div id="page-wrapper" class="gray-bg dashbard-1">
                 <div class="content-main">
 
@@ -126,66 +113,32 @@
                         <h2>
                             <a href="indexAdmin.jsp">Home</a>
                             <i class="fa fa-angle-right"></i>
-                            <span>Agregar alumno</span><br>
+                            <span>Actualizar periodo</span><br>
                         </h2>
                     </div>
                     <div class="blank">
 
                         <div class="blank-page">
                             <div class="grid-form1">
-                                <h3 id="forms-example" class="">Datos del alumno</h3>
-                                <form id="formulario" action="ControllerAlumno" method="post" onsubmit="return confirm('Realmente desea ACTUALIZAR los datos')">
-                                    <input type="hidden" name = "action" value="edit">
-                                    <input type="hidden" name = "matricula"  value="<c:out value="${alm.getMatricula()}"/>"/> 
+                                <h3 id="forms-example" class="">Datos del periodo</h3>
+
+                                  <form id="formulario" action="ControllerPeriodo" method="post" onsubmit="return confirm('Realmente desea ACTUALIZAR los datos')">
+                                  <input type="hidden" name = "action" value="edit">
+                                    <input type="hidden" name = "id"  value="<c:out value="${pdo.getIdPeriodo()}"/>"/> 
                                     <div class="form-group">
-                                        <label for="nomLicc">Nombre del alumno</label>
+                                        <label for="nomGrpp">Periodo</label>
 
-                                        <input  required class="form-control" id="nombreAlum" name="nombreAlum"  value="<c:out value="${alm.getNombre()}"/>"/>
+                                        <input  required class="form-control" id="periodo" name="periodo"  value="<c:out value="${pdo.getPeriodo()}"/>"/>
                                     </div>
-                                    <%
-                                        GrupoDAO obj_Read_grp = new GrupoDAO();
-                                        List<Grupo> listGrup = obj_Read_grp.listarGrupos();
-                                        Iterator<Grupo> list_Grup = listGrup.iterator();
+                                    <div class="form-group">
+                                        <label for="nomGrpp">Fecha Inicio</label>
 
-                                    %>
-                                    <div class = "form-group">
-                                        <label>Grupo</label>	      
-                                        <select class="form-control " id="grupo" name="grupo"  >
-
-                                            <option  value="<c:out value="${alm.getIdGrupo()}"/>"> ${alm.getGrupo()}</option>\n\
-                                            <%                                                while (list_Grup.hasNext()) {
-                                                    Grupo ob = new Grupo();
-                                                    ob = list_Grup.next();
-                                            %>
-
-                                            <option  value="<%= ob.getIdGrupo()%>"> <%=ob.getNombre()%></option>\n\
-                                            <% }
-
-                                            %>   
-                                        </select>
+                                        <input  required class="form-control" id="fechaI" name="fechaI"  value="<c:out value="${pdo.getFechaInicio()}"/>"/>
                                     </div>
-                                    <%                         LicenciaturaDAO obj_Read_Lic = new LicenciaturaDAO();
-                                        List<Licenciatura> listLic = obj_Read_Lic.listarLicenciaturas();
-                                        Iterator<Licenciatura> list_Lic = listLic.iterator();
+                                    <div class="form-group">
+                                        <label for="nomGrpp">Fecha Fin</label>
 
-                                    %>
-                                    <div class = "form-group">
-                                        <label>Licenciatura</label>	      
-                                        <select class="form-control " id="lic" name="lic" >
-                                            <option value="<c:out value="${alm.getIdLicenciatura()}"/>"> ${alm.getLicenciatura()}</option>\n\
-
-                                            <%                                        while (list_Lic.hasNext()) {
-                                                    Licenciatura ob = new Licenciatura();
-                                                    ob = list_Lic.next();
-                                                    int x=ob.getIdLicenciatura();
-                                                   
-                                            %>
-
-                                            <option value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>\n\
-                                            <% }
-
-                                            %>   
-                                        </select>
+                                        <input  required class="form-control" id="fechaF" name="fechaF"  value="<c:out value="${pdo.getFechaFin()}"/>"/>
                                     </div>
                                     <button type="submit" class="bl btn btn-danger">Guardar</button>
                                 </form>

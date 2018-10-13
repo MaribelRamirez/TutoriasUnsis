@@ -59,7 +59,7 @@ public class AlumnoDAO {
     public List<Alumno> listarAlumnos() throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "SELECT matricula, alumnos.nombre ,alumnos.idGrupo, alumnos.idLicenciatura,licenciaturas.nombre, grupos.nombre FROM alumnos inner join licenciaturas inner join grupos on grupos.idGrupo=alumnos.idGrupo and alumnos.idLicenciatura=licenciaturas.idLicenciatura";
+        String sql = "SELECT matricula, alumnos.nombre ,alumnos.idGrupo, alumnos.idLicenciatura,licenciaturas.nombre, grupos.grupo FROM alumnos inner join licenciaturas inner join grupos on grupos.idGrupo=alumnos.idGrupo and alumnos.idLicenciatura=licenciaturas.idLicenciatura";
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
@@ -68,7 +68,33 @@ public class AlumnoDAO {
             String matricula = resulSet.getString("matricula");
             String nombre = resulSet.getString("alumnos.nombre");
             int idgrupo = resulSet.getInt("alumnos.idGrupo");
-            String grupo = resulSet.getString("grupos.nombre");
+            String grupo = resulSet.getString("grupos.grupo");
+            int idLicenciatura = resulSet.getInt("alumnos.idLicenciatura");
+            String Licenciatura = resulSet.getString("licenciaturas.nombre");
+            Alumno alumno;
+            alumno = new Alumno(matricula, nombre, idgrupo, grupo, idLicenciatura, Licenciatura,0);
+            listaAlumnos.add(alumno);
+        }
+        con.desconectar();
+        return listaAlumnos;
+    }
+    
+    
+    public List<Alumno> listarAlumnosByGrupo(int idGpo) throws SQLException {
+
+        List<Alumno> listaAlumnos = new ArrayList<Alumno>();
+        String sql = "SELECT matricula, alumnos.nombre ,alumnos.idGrupo, alumnos.idLicenciatura,licenciaturas.nombre, grupos.grupo " +
+                     " FROM alumnos inner join licenciaturas inner join grupos on grupos.idGrupo=alumnos.idGrupo " +
+                     " and alumnos.idLicenciatura=licenciaturas.idLicenciatura where grupos.idGrupo ="+idGpo+";";
+        connection = con.conectar();
+        Statement statement = connection.createStatement();
+        ResultSet resulSet = statement.executeQuery(sql);
+
+        while (resulSet.next()) {
+            String matricula = resulSet.getString("matricula");
+            String nombre = resulSet.getString("alumnos.nombre");
+            int idgrupo = resulSet.getInt("alumnos.idGrupo");
+            String grupo = resulSet.getString("grupos.grupo");
             int idLicenciatura = resulSet.getInt("alumnos.idLicenciatura");
             String Licenciatura = resulSet.getString("licenciaturas.nombre");
             Alumno alumno;
@@ -82,7 +108,7 @@ public class AlumnoDAO {
     public List<Alumno> listarAlumnosTutorados(String curp) throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "select alumnos.matricula , alumnos.nombre, grupos.nombre , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+        String sql = "select alumnos.matricula , alumnos.nombre, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
             " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
             " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
             " and tutores.curp='"+curp+"';";
@@ -94,7 +120,7 @@ public class AlumnoDAO {
         while (resulSet.next()) {
 	 String  matricula = resulSet.getString("alumnos.matricula");
 	 String nombre = resulSet.getString("alumnos.nombre");
-	 String grupo = resulSet.getString("grupos.nombre");
+	 String grupo = resulSet.getString("grupos.grupo");
 	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
 	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
          int tipo = resulSet.getInt("tipo");
@@ -239,7 +265,7 @@ public class AlumnoDAO {
         Alumno alumno = null;
 
         String sql = "SELECT matricula, alumnos.nombre ,alumnos.idGrupo, "
-                + "alumnos.idLicenciatura,licenciaturas.nombre, grupos.nombre FROM"
+                + "alumnos.idLicenciatura,licenciaturas.nombre, grupos.grupo FROM"
                 + " alumnos inner join licenciaturas inner join grupos on grupos.idGrupo=alumnos.idGrupo and "
                 + "alumnos.idLicenciatura=licenciaturas.idLicenciatura WHERE matricula= ? ";
         con.conectar();
@@ -252,7 +278,7 @@ public class AlumnoDAO {
             alumno = new Alumno(res.getString("matricula"), 
                     res.getString("alumnos.nombre"),
                     res.getInt("alumnos.idGrupo"),
-                    res.getString("grupos.nombre"),
+                    res.getString("grupos.grupo"),
                     res.getInt("alumnos.idLicenciatura"),
                     res.getString("licenciaturas.nombre"),0);
 

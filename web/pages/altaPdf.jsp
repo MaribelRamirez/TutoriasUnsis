@@ -1,15 +1,10 @@
 <%-- 
-    Document   : indexProf
-    Created on : 29-jul-2018, 15:00:57
-    Author     : Marifer
+    Document   : altaPdf
+    Created on : 19/09/2018, 12:33:54 PM
+    Author     : Mine
 --%>
 
-<%@page import="model.Periodo"%>
-<%@page import="dao.PeriodoDAO"%>
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.List"%>
-<%@page import="dao.LicenciaturaDAO"%>
-<%@page import="model.Licenciatura"%>
+<%@page import="VO.PdfVO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -96,6 +91,8 @@
     </head>
     <body>
         <%
+            System.err.println("estoy en el alta pdf 1");
+
             HttpSession sesion = request.getSession();
             String usuario;
             String nivel;
@@ -110,7 +107,7 @@
             }
         %>
 
-        <jsp:include page="headAdminUpdate.jsp" flush="true" />
+        <jsp:include page="headAdmin.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
 
@@ -119,83 +116,70 @@
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
                         <i class="fa fa-angle-right"></i>
-                        <span>Agregar grupo</span><br>
+                        <span>Agregar archivo</span><br>
                     </h2>
                 </div>
                 <div class="blank">
+                    <%
+                        Integer dato = 0;
+                        try {
+                            PdfVO pdf = (PdfVO) request.getAttribute("row");
+                            dato = pdf.getCodigopdf();
+                        } catch (Exception ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                        boolean icono = false;
+                        try {
+                            icono = (Boolean) request.getAttribute("row2");
+                        } catch (Exception ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                    %>
+                    <div class="grid-form1">
+                        <form name="formpdf" action="ControllerPdf" method="post" enctype="multipart/form-data" onsubmit="return confirm('Realmente desea guardar los datos')">
+                            <div class="form-group">
+                                <label for="nomGrup">Nombre del archivo:</label>
 
-                    <div class="blank-page">
-                        <div class="grid-form1">
-                            <h3 id="forms-example" class="">Datos del grupo</h3>
+                                <input  required class="form-control" id="grupo" name="txtname" placeholder="Introduce el nombre del grupo" value="<c:out value="${row.nombrepdf}" />">
+                            </div>
+                            <div class="form-group">
+                                <label for="nomGrup">Tipo de archivo:</label>
 
-                            <form id="formulario" action="ControllerGrupo" method="post" onsubmit="return confirm('Realmente desea ACTUALIZAR los datos')">
-                                <input type="hidden" name = "action" value="edit">
-                                <input type="hidden" name = "id"  value="<c:out value="${grp.getIdGrupo()}"/>"/> 
-                                <div class="form-group">
-                                    <label for="nomGrpp">Nombre del grupo</label>
-
-                                    <input  required class="form-control" id="grupo" name="grupo"  value="<c:out value="${grp.getGrupo()}"/>"/>
-                                </div>
-                                
-                                
-                                
-                                
-                                   <%
-                                PeriodoDAO obj_Read_Values = new PeriodoDAO();
-                                List<Periodo> list = obj_Read_Values.listarPeriodos();
-                                Iterator<Periodo> it_list = list.iterator();
-                        
-                            %>
-                                <div class = "form-group">
-                                <label>Periodo</label>	      
-                                <select class="form-control " id="per" name="per">
-                                    <option  value="<c:out value="${grp.getIdPeriodo()}"/>"> ${grp. getPeriodo()}</option>\n\
-                                    <%
-                                        while (it_list.hasNext()) {
-                                            Periodo ob = new Periodo();
-                                            ob = it_list.next();
-                                    %>
-                                    <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo() %></option>\n\
-                                    <% }
-                                        
-                                    %>   
+                                <select class="form-control " id="tipo" name="tipo">
+                                    
+                                    <option value="1"> Reportes</option>
+                                    <option value="2">Material de apooyo</option>
                                 </select>
                             </div>
-                                
-                                
-                                
+
+                            <div class="form-group">
+                                <label for="id">Seleccionar PDF: *</label>
                                 <%
-                                    LicenciaturaDAO obj_Read_ValuesL = new LicenciaturaDAO();
-                                    List<Licenciatura> listL = obj_Read_ValuesL.listarLicenciaturas();
-                                    Iterator<Licenciatura> it_listL = listL.iterator();
-
+                                    if (icono) {
                                 %>
-                                <div class = "form-group">
-                                    <label>Licenciatura</label>	      
-                                    <select class="form-control " id="lic" name="lic">
-                                        <option  value="<c:out value="${grp.getIdLicenciatura()}"/>"> ${grp. getLicenciatura()}</option>\n\
-                                        <%                                        while (it_listL.hasNext()) {
-                                                Licenciatura ob = new Licenciatura();
-                                                ob = it_listL.next();
-                                        %>
-                                        <option value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>\n\
-                                        <% }
+                                <a href="pdf?id=<%out.print(dato); %>" target="_blank"> Ver Pdf</a>
+                                <%
+                                    } else {
+                                        out.print("No hay Pdf");
+                                    }
+                                %>
+                            </div>
+                            <div class="form-group">
+                                <input type="file" name="fichero" value="" class="btn"/>
+                            </div>
+                            <div class="form-group">           
+                                <input type="submit" value="Enviar Archivo" name="submit" id="btn" class="btn"/>
+                            </div>
 
-                                        %>   
-                                    </select>
-                                </div>
-                                    
-                                    
-                                <button type="submit" class="bl btn btn-danger">Guardar</button>
-                            </form>
-                        </div>
-                    </div>
+                    
+                    </form>
                 </div>
             </div>
         </div>
-
     </div>
-    <div class="clearfix"> </div>
+
+</div>
+<div class="clearfix"> </div>
 </div>
 <div class="copy">
     <p><img src="resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
@@ -207,4 +191,5 @@
 <!--//scrolling js-->
 </body>
 </html>
+
 

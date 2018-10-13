@@ -231,7 +231,7 @@ public class ControllerConstancias extends HttpServlet {
                                     + ", a los siguientes alumnos:", text1));
                         } else {
                             par2.add(new Phrase(" impartió Tutorías Académicas Grupales, en el periodo "
-                                    + ", al grupo " + grupo.getNombre() + " conformado por los siguientes alumnos: ", text1));
+                                    + ", al grupo " + grupo.getGrupo() + " conformado por los siguientes alumnos: ", text1));
                         }
 
                         par2.setAlignment(Element.ALIGN_JUSTIFIED);

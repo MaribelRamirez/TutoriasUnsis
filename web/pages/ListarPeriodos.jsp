@@ -7,10 +7,10 @@
 
 <%@page import="model.Periodo"%>
 <%@page import="dao.PeriodoDAO"%>
+<%@page import="model.Grupo"%>
+<%@page import="dao.GrupoDAO"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="model.Licenciatura"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.LicenciaturaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 
@@ -111,91 +111,82 @@
         %>
 
         <jsp:include page="headAdmin.jsp" flush="true" />
-        <div id="page-wrapper" class="gray-bg dashbard-1">
-            <div class="content-main">
+            <div id="page-wrapper" class="gray-bg dashbard-1">
+                <div class="content-main">
 
-                <!--banner-->	
-                <div class="banner">
-                    <h2>
-                        <a href="indexAdmin.jsp">Home</a>
-                        <i class="fa fa-angle-right"></i>
-                        <span>Agregar grupo</span><br>
-                    </h2>
-                </div>
-                <div class="blank">
+                    <!--banner-->	
+                    <div class="banner">
+                        <h2>
+                            <a href="indexAdmin.jsp">Home</a>
+                            <i class="fa fa-angle-right"></i>
+                            <span>Periodos</span><br>
+                        </h2>
+                    </div>
+                    <div class="blank">
 
-                    <div class="blank-page">
-                        <div class="grid-form1">
-                            <h3 id="forms-example" class="">Datos del grupo</h3>
+                        <div class="blank-page">
+                            <%
+                                PeriodoDAO obj_Read_Values = new PeriodoDAO();
+                                List<Periodo> list = obj_Read_Values.listarPeriodos();
+                                Iterator<Periodo> it_list = list.iterator();
+                            %>
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                <a href="agregarPeriodo.jsp">
+                                    <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo periodo</a>
+                                <thead>
 
-                            <form id="formulario" action="../ControllerGrupo" method="post" onsubmit="return confirm('Realmente desea guardar los datos')">
-                                <input type="hidden" name = "action" value="add">
-                                <div class="form-group">
-                                    <label for="nomGrup">Nombre del grupo</label>
+                                    <tr>
 
-                                    <input  required class="form-control" id="grupo" name="grupo" placeholder="Introduce el nombre del grupo">
-                                </div>
+                                        <th>Periodo</th>
+                                        <th>Fecha inicio</th>
+                                        <th>fecha fin</th>
+                                        <th>Editar</th>
+                                        
+                                    </tr>
+                                </thead>
 
-                                <%
-                                    LicenciaturaDAO obj_Read_Values = new LicenciaturaDAO();
-                                    List<Licenciatura> list = obj_Read_Values.listarLicenciaturas();
-                                    Iterator<Licenciatura> it_list = list.iterator();
-
-                                %>
-                                <div class = "form-group">
-                                    <label>Licenciatura</label>	      
-                                    <select class="form-control " id="lic" name="lic">
-                                        <%                                        while (it_list.hasNext()) {
-                                                Licenciatura ob = new Licenciatura();
-                                                ob = it_list.next();
-                                        %>
-                                        <option value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>\n\
-                                        <% }
-
-                                        %>   
-                                    </select>
-                                </div>
-
-                                <%  PeriodoDAO obj_Read_ValuesP = new PeriodoDAO();
-                                    List<Periodo> listP = obj_Read_ValuesP.listarPeriodos();
-                                    Iterator<Periodo> it_listP = listP.iterator();
-
-                                %>
-                                <div class = "form-group">
-                                    <label>Periodo</label>	      
-                                    <select class="form-control " id="per" name="per">
-                                        <%                                        while (it_listP.hasNext()) {
-                                                Periodo ob = new Periodo();
-                                                ob = it_listP.next();
-                                        %>
-                                        <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>\n\
-                                        <% }
-
-                                        %>   
-                                    </select>
-                                </div>
+                                <tbody>
+                                    <%
+                                        while (it_list.hasNext()) {
+                                            Periodo ob = new Periodo();
+                                            ob = it_list.next();
+                                    %>  
+                                    <tr>
+                                        <td><%=ob.getPeriodo()%></td>
+                                        <td><%=ob.getFechaInicio()%></td>
+                                        <td><%=ob.getFechaFin()%></td>
+                                        <td>
+                                            <form id="formulario" action="../ControllerPeriodo" method="post">
+                                                <input type="hidden" name = "id" id="id" value="<%=ob.getIdPeriodo() %>">
+                                                <input type="hidden" name = "action" id="action" value="update">
+                                       <button type="submit"  class="btn btn-link">Actualizar</button>
+                                            </form>
+                                            
+                                        </td>
 
 
+                                    </tr>
+                                    <%
+                                        }
+                                    %>     
 
-                                <button type="submit" class="bl btn btn-danger">Guardar</button>
-                            </form>
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-    </div>
-    <div class="clearfix"> </div>
-</div>
-<div class="copy">
-    <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-</div>
-<!---->
-<!--scrolling js-->
-<script src="js/jquery.nicescroll.js"></script>
-<script src="js/scripts.js"></script>
-<!--//scrolling js-->
-</body>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="copy">
+                <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+            </div>
+            <!---->
+            <!--scrolling js-->
+            <script src="js/jquery.nicescroll.js"></script>
+            <script src="js/scripts.js"></script>
+            <!--//scrolling js-->
+    </body>
 </html>
 

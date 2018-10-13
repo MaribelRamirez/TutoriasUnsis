@@ -331,7 +331,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
 
                                 cell = rowGeneral1.createCell(1);
                                 cell.setCellStyle(styleColumn);
-                                cell.setCellValue(ob_grupo.getNombre());
+                                cell.setCellValue(ob_grupo.getGrupo());
 
                                 cell = rowGeneral1.createCell(2);
                                 cell.setCellStyle(styleColumn);

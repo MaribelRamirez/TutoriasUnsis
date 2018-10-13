@@ -28,6 +28,14 @@
         <servlet-name>ControllerReportesTutorias</servlet-name>
         <servlet-class>controller.ControllerReportesTutorias</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControllerPeriodo</servlet-name>
+        <servlet-class>controller.ControllerPeriodo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControllerTutores</servlet-name>
+        <servlet-class>controller.ControllerTutores</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllerAlumno</servlet-name>
         <url-pattern>/ControllerAlumno</url-pattern>
@@ -95,5 +103,13 @@
     <servlet-mapping>
         <servlet-name>pdf</servlet-name>
         <url-pattern>/pdf</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerPeriodo</servlet-name>
+        <url-pattern>/ControllerPeriodo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerTutores</servlet-name>
+        <url-pattern>/ControllerTutores</url-pattern>
     </servlet-mapping>
 </web-app>

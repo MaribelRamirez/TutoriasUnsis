@@ -26,9 +26,10 @@ import model.Licenciatura;
  */
 @WebServlet(name = "ControllerGrupo", urlPatterns = {"/ControllerGrupo"})
 public class ControllerGrupo extends HttpServlet {
-private static final String edit = "pages/actualizarGrupo.jsp";
+
+    private static final String edit = "pages/actualizarGrupo.jsp";
     String forward = "";
-   
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -80,52 +81,54 @@ private static final String edit = "pages/actualizarGrupo.jsp";
 
         Grupo grupo = new Grupo();
         String action = request.getParameter("action");
-         if (action.equalsIgnoreCase("update")) {
-         
-                 try {
+        if (action.equalsIgnoreCase("update")) {
+
+            try {
                 forward = edit;
                 Grupo grp = grupodao.obtenerGrupoById(Integer.parseInt(request.getParameter("id")));
-                
+
                 request.setAttribute("grp", grp);
                 RequestDispatcher view = request.getRequestDispatcher(forward);
                 view.forward(request, response);
             } catch (NumberFormatException | SQLException e) {
                 System.out.println("Error en servlet: " + e);
             }
-         }
-         else if (action.equalsIgnoreCase("delete")) {
-          int id = Integer.parseInt(request.getParameter("id"));
+        } else if (action.equalsIgnoreCase("delete")) {
+            int id = Integer.parseInt(request.getParameter("id"));
             try {
                 grupodao.eliminar(id);
-                 response.sendRedirect("pages/ListarGrupos.jsp");
+                response.sendRedirect("pages/ListarGrupos.jsp");
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerGrupo.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-         }
-         else if (action.equalsIgnoreCase("add")) {
-          String nomGrup = request.getParameter("nomGrup");
-        grupo.setNombre(nomGrup);
+            }
+        } else if (action.equalsIgnoreCase("add")) {
+            String nomGrup = request.getParameter("grupo");
+            grupo.setGrupo(nomGrup);
+            int periodo = Integer.parseInt(request.getParameter("per"));
+            grupo.setIdPeriodo(periodo);
+            int lic = Integer.parseInt(request.getParameter("lic"));
+            grupo.setIdLicenciatura(lic);
+            try {
+                grupodao.insertar(grupo);
+                response.sendRedirect("pages/ListarGrupos.jsp");
+            } catch (SQLException ex) {
+                Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (action.equalsIgnoreCase("edit")) {
 
-        try {
-            grupodao.insertar(grupo);
-            response.sendRedirect("pages/ListarGrupos.jsp");
-        } catch (SQLException ex) {
-            Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         }
-           else if (action.equalsIgnoreCase("edit")) {
-           
-           int id = Integer.parseInt(request.getParameter("id"));
-            String nombreGrp = request.getParameter("nombreGrp");
+            int id = Integer.parseInt(request.getParameter("id"));
+            String grup = request.getParameter("grupo");
+            int periodo = Integer.parseInt(request.getParameter("per"));
+            int lic = Integer.parseInt(request.getParameter("lic"));
             grupo.setIdGrupo(id);
-            grupo.setNombre(nombreGrp);
+            grupo.setGrupo(grup);
+            grupo.setIdLicenciatura(lic);
+            grupo.setIdPeriodo(periodo);
             grupodao.updateGrp(grupo);
             response.sendRedirect("pages/ListarGrupos.jsp");
-       
-           }
-       
-        
-        
+
+        }
+
     }
 
     /**
