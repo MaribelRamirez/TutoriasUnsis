@@ -4,6 +4,11 @@
     Author     : Marifer
 --%>
 
+<%@page import="model.sql"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.GrupoDAO"%>
+<%@page import="model.Grupo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <!DOCTYPE HTML>
@@ -83,28 +88,51 @@
 
 
                     <div class="blank-page">
+                        <h3 id="forms-example" class="">Datos del grupo</h3>
 
-                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                        <%
+                            sql auto = new sql();
+                            int perA = auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo") - 1;
+                            GrupoDAO obj_Read_grp = new GrupoDAO();
+                            List<Grupo> listGrup = obj_Read_grp.listarGruposActuales(perA);
+                            Iterator<Grupo> list_Grup = listGrup.iterator();
+
+                        %>
+
+
+                        <div class="container" role="main">
+
+                            <form method="post" action="../obtenerExel"  >
+                                <div class = "form-group">
+                                    <label>Selecciona el grupo al cual cargar alumnos</label>	      
+                                    <select class="form-control " id="grupo" name="grupo" >
+                                        <%                                        while (list_Grup.hasNext()) {
+                                                Grupo ob = new Grupo();
+                                                ob = list_Grup.next();
+                                        %>
+                                        <option value="<%= ob.getIdGrupo()%>"> <%=ob.getGrupo()%></option>\n\
+                                        <% }
+
+                                        %>   
+                                    </select>
+                                </div>
+
+
+                                <div class="box__input">
+                                    <input type="file" name="archivosubido" id="file" class="box__file" data-multiple-caption="{count} files selected" multiple />
+                                    <label for="file"><strong>Seleccione un archivo</strong><span class="box__dragndrop"> o arrastre y suelte aqu&iacute;</span>.</label>
+                                    <button type="submit" >Subir</button>
+                                </div>
+
+
+                            </form>
+
+
+                        </div>
+
+                        <!--//faq-->
+                        <!---->
                     </div>
-                    <div class="container" role="main">
-
-                        <form method="post" action="../obtenerExel"  >
-
-
-                            <div class="box__input">
-                                <input type="file" name="files[]" id="file" class="box__file" data-multiple-caption="{count} files selected" multiple />
-                                <label for="file"><strong>Seleccione un archivo</strong><span class="box__dragndrop"> o arrastre y suelte aqu&iacute;</span>.</label>
-                                <button type="submit" >Subir</button>
-                            </div>
-
-
-                        </form>
-
-
-                    </div>
-
-                    <!--//faq-->
-                    <!---->
 
                 </div>
                 <div class="clearfix"> </div>

@@ -4,18 +4,20 @@
     Author     : Marifer
 --%>
 
+
 <%@page import="dao.ProfesorDAO"%>
 <%@page import="model.Profesor"%>
-<%@page import="model.Periodo"%>
-<%@page import="dao.PeriodoDAO"%>
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.List"%>
-<%@page import="dao.LicenciaturaDAO"%>
 <%@page import="model.Licenciatura"%>
+<%@page import="model.Licenciatura"%>
+<%@page import="dao.LicenciaturaDAO"%>
+<%@page import="dao.LicenciaturaDAO"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="model.Grupo"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.GrupoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -44,7 +46,7 @@
         <script src="resources/tablas/js/jquery.dataTables.min.js"></script>
         <script src="resources/tablas/js/dataTables.bootstrap.min.js"></script> 
 
-        <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
+        <link href="resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
 
         <script>
@@ -112,52 +114,51 @@
             }
         %>
 
-        <jsp:include page="headAdminUpdate.jsp" flush="true" />
-        <div id="page-wrapper" class="gray-bg dashbard-1">
-            <div class="content-main">
+       
+        
+         <jsp:include page="headAdminUpdate.jsp" flush="true" />
+         
+          <!--include-->
+        
+            <div id="page-wrapper" class="gray-bg dashbard-1">
+                <div class="content-main">
 
-                <!--banner-->	
-                <div class="banner">
-                    <h2>
-                        <a href="indexAdmin.jsp">Home</a>
-                        <i class="fa fa-angle-right"></i>
-                        <span>Agregar grupo</span><br>
-                    </h2>
-                </div>
-                <div class="blank">
+                    <!--banner-->	
+                    <div class="banner">
+                        <h2>
+                            <a href="indexAdmin.jsp">Home</a>
+                            <i class="fa fa-angle-right"></i>
+                            <span>Agregar alumno</span><br>
+                        </h2>
+                    </div>
+                    <div class="blank">
 
-                    <div class="blank-page">
-                        <div class="grid-form1">
-                            <h3 id="forms-example" class="">Datos de la tutoria</h3>
+                        <div class="blank-page">
+                            <div class="grid-form1">
+                                <h3 id="forms-example" class="">Datos del alumno</h3>
+                                <form id="formulario" action="ControllerTutores" method="post" onsubmit="return confirm('Realmente desea guardar los datos')">
+                                    <input type="hidden" name = "action" value="add">
+                                    <input type="hidden" name = "tipo" value="individual">
+                                    
+                                    <input type="hidden" name = "matricula"  value="<c:out value="${alm.getMatricula()}"/>"/> 
+                                    <div class="form-group">
+                                        <label for="nomLicc">Nombre del alumno</label>
 
-                            <form id="formulario"  action="../ControllerTutores" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')">
-                                <input type="hidden" name = "action" value="add">
-                                <input type="hidden" name = "tipo" value="grupal">
-                                <input type="hidden" name = "grupo"  value="<c:out value="${grp.getIdGrupo()}"/>"/> 
-                                <input type="hidden" name = "per"  value="<c:out value="${grp.getIdPeriodo()}"/>"/> 
-                                <div class="form-group">
-                                    <label for="nomGrpp">Nombre del grupo</label>
+                                        <input  required class="form-control" id="nombreAlum" name="nombreAlum"  value="<c:out value="${alm.getNombre()}"/>"/>
+                                    </div>
+                                    
+                                    <div class = "form-group">
+                                        <label>Grupo</label>
+                                        <input  required class="form-control" id="grupo" name="grupo"  value="<c:out value="${alm.getGrupo()}"/>"/>
+                                        
+                                    </div>
 
-                                    <input  required class="form-control" id="grupo" name="grupo"  value="<c:out value="${grp.getGrupo()}"/>"/>
-                                </div>
-
-
-                                <div class = "form-group">
-                                    <label>Periodo</label>	 
-                                    <input  required class="form-control" id="periodo" name="periodo"  value="<c:out value="${grp. getPeriodo()}"/>"/>       
-                                </div>
-
-
-
-
-                                <div class = "form-group">
-                                    <label>Licenciatura</label>	
-                                    <input  required class="form-control" id="lic" name="lic"  value="<c:out value="${grp. getLicenciatura()}"/>"/>       
-
-                                </div>
-
-
-                                <%                                        
+                                    <div class = "form-group">
+                                        <label>Licenciatura</label>
+                                        <input  required class="form-control" id="lic" name="lic"  value="<c:out value="${alm.getLicenciatura()}"/>"/>
+                                        
+                                    </div>
+                                        <%                                        
                                     ProfesorDAO obj_Read_Pro = new ProfesorDAO();
                                     List<Profesor> listPro = obj_Read_Pro.listarProfesores();
                                     Iterator<Profesor> list_Pro = listPro.iterator();
@@ -176,33 +177,25 @@
                                         %>   
                                     </select>
                                 </div>
-
-
-                                <button type="submit" class="bl btn btn-danger">Guardar</button>
-                            </form>
+                                    <button type="submit" class="bl btn btn-danger">Guardar</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
+        </div>
+        <div class="clearfix"> </div>
     </div>
-    <div class="clearfix"> </div>
-</div>
-<div class="copy">
-    <p><img src="resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-</div>
-<!---->
-<!--scrolling js-->
-<script src="js/jquery.nicescroll.js"></script>
-<script src="js/scripts.js"></script>
-<!--//scrolling js-->
+    <div class="copy">
+        <p><img src="resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+    </div>
+    <!---->
+    <!--scrolling js-->
+    <script src="js/jquery.nicescroll.js"></script>
+    <script src="js/scripts.js"></script>
+    <!--//scrolling js-->
 </body>
 </html>
-
-
-
-
-
-
 

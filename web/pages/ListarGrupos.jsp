@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="model.sql"%>
 <%@page import="model.Grupo"%>
 <%@page import="dao.GrupoDAO"%>
 <%@page import="java.util.Iterator"%>
@@ -106,6 +107,10 @@
             } else {
                 out.print("<script>location.replace('login.jsp');</script>");
             }
+            
+
+            sql auto = new sql();
+            int perA= auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo")-1;
         %>
 
         <jsp:include page="headAdmin.jsp" flush="true" />
@@ -140,6 +145,7 @@
                                         <th>Licenciatura</th>
                                         <th>Editar</th>
                                         <th>Eliminar</th>
+                                        <th>Agregar Tutor</th>
                                         
                                     </tr>
                                 </thead>
@@ -169,9 +175,18 @@
                                        <button type="submit"  class="btn btn-link">Eliminar</button>
                                             </form>
                                         </td>
+                                         <td >
+                                             <% if(perA==ob.getIdPeriodo()){%>  
+                                           <form id="formulario" action="../ControllerTutores" method="post">
+                                               <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
+                                                  <input type="hidden" name = "action" id="action" value="addTG">
+                                       <button type="submit"  class="btn btn-link">Agregar Tutor</button>
+                                            </form>
+                                        </td>
 
                                     </tr>
                                     <%
+                                        }
                                         }
                                     %>     
 

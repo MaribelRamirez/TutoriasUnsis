@@ -292,6 +292,7 @@ public class AlumnoDAO {
                 + "alumnos.idLicenciatura,licenciaturas.nombre, grupos.grupo FROM"
                 + " alumnos inner join licenciaturas inner join grupos on grupos.idGrupo=alumnos.idGrupo and "
                 + "alumnos.idLicenciatura=licenciaturas.idLicenciatura WHERE matricula= ? ";
+        
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -305,6 +306,7 @@ public class AlumnoDAO {
                     res.getString("grupos.grupo"),
                     res.getInt("alumnos.idLicenciatura"),
                     res.getString("licenciaturas.nombre"),0);
+            System.err.println("si hay alumno");
 
         }
         res.close();
