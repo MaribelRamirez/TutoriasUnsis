@@ -36,7 +36,7 @@ public class pdf extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("application/pdf");
+        response.setContentType("application/docx");
 
         ConnectionClass con = new ConnectionClass();
         PreparedStatement ps = null;

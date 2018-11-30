@@ -6,6 +6,7 @@
 package controller;
 
 import dao.AlumnoDAO;
+import dao.GrupoDAO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Alumno;
-
+import model.Grupo;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -46,8 +47,7 @@ public class obtenerExel extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,76 +77,99 @@ public class obtenerExel extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        String nombreArchivo = "alumnos2018.xlsx";
-		String rutaArchivo = "C:\\Users\\Marifer\\Documents\\NetBeansProjects\\TutoriasUnsis\\bd\\" + nombreArchivo;
-		String hoja = "Hoja1";
-                System.err.println("antes del try");
-                
-                Alumno alumno = new Alumno();
-                AlumnoDAO alumnoDAO = new AlumnoDAO();
-                
-		try  {
-                        System.err.println("en el try");
-                        FileInputStream file = new FileInputStream(new File(rutaArchivo));
-                        System.err.println("Antes de leer el archivo");
-			// leer archivo excel
-			XSSFWorkbook worbook = new XSSFWorkbook(file);
-                        System.err.println("despues de leer el archivo");
-			//obtener la hoja que se va leer
-			XSSFSheet sheet = worbook.getSheetAt(0);
-                        System.err.println("despues de obtener la hoja");
-			//obtener todas las filas de la hoja excel
-                        
-			Iterator<Row> rowIterator = sheet.iterator();
+        String archivoRecivido = request.getParameter("archivosubido");
+        int grup = Integer.parseInt(request.getParameter("grupo"));
+        System.err.println("este dato recibe " + archivoRecivido);
 
-			Row row;
-                        //Quitamos la cabecera
-                        row = rowIterator.next();
-			// se recorre cada fila hasta el final
-			while (rowIterator.hasNext()) {
-				row = rowIterator.next();
-				//se obtiene las celdas por fila
-				Iterator<Cell> cellIterator = row.cellIterator();
-				Cell cell;
-				//se recorre cada celda
+        String rutaArchivo = "C:\\alumnos\\" + archivoRecivido;
+        String hoja = "Hoja1";
+        System.err.println("antes del try");
+        
+        
+        Alumno alumno = new Alumno();
+        Alumno alumno2 = new Alumno();
+        AlumnoDAO alumnoDAO = new AlumnoDAO();
+        Grupo grupo = new Grupo();
+        GrupoDAO grupodao = new GrupoDAO();
+        try {
+            grupo = grupodao.obtenerGrupoById(grup);
+        } catch (SQLException ex) {
+            Logger.getLogger(obtenerExel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            System.err.println("en el try");
+            FileInputStream file = new FileInputStream(new File(rutaArchivo));
+            System.err.println("Antes de leer el archivo");
+            // leer archivo excel
+            XSSFWorkbook worbook = new XSSFWorkbook(file);
+            System.err.println("despues de leer el archivo");
+            //obtener la hoja que se va leer
+            XSSFSheet sheet = worbook.getSheetAt(0);
+            System.err.println("despues de obtener la hoja");
+            //obtener todas las filas de la hoja excel
+
+            Iterator<Row> rowIterator = sheet.iterator();
+            //Obtener licenciatura
+
+            Row row;
+            //Quitamos la cabecera
+            row = rowIterator.next();
+            // se recorre cada fila hasta el final
+            while (rowIterator.hasNext()) {
+                row = rowIterator.next();
+                //se obtiene las celdas por fila
+                Iterator<Cell> cellIterator = row.cellIterator();
+                Cell cell;
+                //se recorre cada celda
 //				while (cellIterator.hasNext()) {
 //					// se obtiene la celda en espec�fico y se la imprime
 //					cell = cellIterator.next();
 //					System.out.print(cell.getStringCellValue()+"  ");
 //				}
-                                //Matricula
-                                cell = cellIterator.next();
-                                alumno.setMatricula( cell.getStringCellValue());
-                                System.out.print(cell.getStringCellValue()+"  ");
-                                //NOmbre
-                                cell = cellIterator.next();
-                                alumno.setNombre(cell.getStringCellValue());
-                                System.out.print(cell.getStringCellValue()+"  ");
-                                
-                                //Grupo
-                                cell = cellIterator.next();
-                                alumno.setGrupo( cell.getStringCellValue());
-//                                System.out.print(cell.getNumericCellValue()+"  ");
-                                //IdLicenciatura
-                                cell = cellIterator.next();
-                                alumno.setIdLicenciatura((int)cell.getNumericCellValue());
-//                                System.out.print(cell.getNumericCellValue()+"  ");
-                                
-                                
-                                alumnoDAO.insertar(alumno);
-                                
-                                
-                                
-				System.out.println();
-			}
-		} catch (IOException e) {
-			e.getMessage();
-                        System.err.println("Error"+e);
-		} catch (SQLException ex) {
+
+
+
+                
+                //Matricula
+                if (cellIterator.hasNext()){
+                cell = cellIterator.next();
+                alumno.setMatricula(cell.getStringCellValue());
+                System.out.print(cell.getStringCellValue() + "  ");
+                }
+                //NOmbre
+                if (cellIterator.hasNext()){
+                cell = cellIterator.next();
+                alumno.setNombre(cell.getStringCellValue());
+                System.out.print(cell.getStringCellValue() + "  ");
+//                }
+                //Grupo
+                alumno.setIdGrupo(grupo.getIdGrupo());
+                System.out.print(grupo.getIdGrupo() + "  ");
+                
+                //IdLicenciatura
+                alumno.setIdLicenciatura(grupo.getIdLicenciatura());
+                System.out.print(grupo.getIdLicenciatura() + "  ");
+                System.err.println("esta es la matricula " +alumno.getMatricula() );
+//                alumno2 = alumnoDAO.obtenerAlumnoByMatricula(alumno.getMatricula());
+                if (alumnoDAO.obtenerAlumnoByMatricula(alumno.getMatricula())==null){
+                    alumnoDAO.insertar(alumno);
+                }else {
+                    alumnoDAO.updateAlumno(alumno);
+                    System.err.println("Estoy en el else en alguna parte del planeta");
+                }
+//                System.err.println("Esto regresa alumno 2" +alumno2.getMatricula() );
+                }
+                
+
+            }
+        } catch (IOException e) {
+            e.getMessage();
+            System.err.println("Error" + e);
+        } catch (SQLException ex) {
             Logger.getLogger(obtenerExel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
     }
 
     /**

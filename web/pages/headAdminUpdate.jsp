@@ -117,6 +117,11 @@
                                 <li>
                                     <a href="pages/ListarAlumnos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Alumnos</a>
                                 </li>
+                                <li>
+                            <a href="pages/ListarTutorados.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-file-o nav_icon"></i>Tutorados
+                            </a>
+                        </li>
                                  <li>
                                     <a href="pages/ListarLicenciaturas.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Licenciaturas</a>
                                 </li>
@@ -127,17 +132,19 @@
                                     <a href="pages/loadAlumnos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Actualizar listas</a>
                                 </li>
                                 <li>
-                                    <a href="XX.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Generar constancias</a>
-                                </li>
-                                <li>
-                                    <a href="pages/cargarArchivos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Cargar archivos</a>
-                                </li>
-                                <li>
-                                    <a href="pages/agregarTutoresG.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Crear tutorias grupales</a>
-                                </li>
-                                <li>
-                                    <a href="pages/ListarPeriodos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Periodos</a>
-                                </li>
+                            <a href="generarReportes.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-clipboard nav_icon">  </i>Generar documentos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="cargarArchivos.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-file-o nav_icon">  </i>Cargar archivos
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="ListarPeriodos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Periodos</a>
+                        </li>
                             </ul>
                         </div>
                     </div>

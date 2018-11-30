@@ -5,6 +5,9 @@
 --%>
 
 
+<%@page import="model.sql"%>
+<%@page import="model.Tutor"%>
+<%@page import="dao.TutorDAO"%>
 <%@page import="dao.AlumnoDAO"%>
 <%@page import="model.Alumno"%>
 <%@page import="java.util.Iterator"%>
@@ -117,31 +120,33 @@
                         <h2>
                             <a href="indexAdmin.jsp">Home</a>
                             <i class="fa fa-angle-right"></i>
-                            <span>Alumnos</span><br>
+                            <span>Tutores</span><br>
                         </h2>
                     </div>
                     <div class="blank">
 
                         <div class="blank-page">
                             <%
-                                AlumnoDAO obj_Read_Values = new AlumnoDAO();
-                                List<Alumno> list = obj_Read_Values.listarAlumnos();
-                                Iterator<Alumno> it_list = list.iterator();
+                                sql auto = new sql();
+                                 int perA= auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo")-1;
+                                TutorDAO obj_Read_Values = new TutorDAO();
+                                List<Tutor> list = obj_Read_Values.listarTutorados(perA);
+                                Iterator<Tutor> it_list = list.iterator();
                             %>
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                <a href="agregarAlumno.jsp">
-                             <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo alumno</a>
+                                
+                            
                                 <thead>
                                 
                                 <tr>
              
                                     <th>Matricula</th>
-                                    <th>Nombre</th>
-                                    <th>grupo</th>
+                                    <th>Alumno</th>
+                                    <th>Grupo</th>
                                     <th>Licenciatura</th>
-                                    <th>Editar</th>
-                                    <th>Eliminar</th>
-                                    <th>Listar tutores</th>
+                                    <th>Curp</th>
+                                    <th>Tutor</th>
+                                    <th>Tipo de tutoria</th>
                                     
 
 
@@ -151,45 +156,53 @@
                                 <tbody>
                                     <%
                                         while (it_list.hasNext()) {
-                                            Alumno ob = new Alumno();
+                                            Tutor ob = new Tutor();
                                             ob = it_list.next();
                                     %>  
                                     <tr>
                                         <td><%=ob.getMatricula()%></td>
-                                        <td><%=ob.getNombre()%></td>
-                                        <td><%=ob.getGrupo() %></td>
-                                        <td><%=ob.getLicenciatura()%></td>
-                                        <td>
-                                            <form id="formulario" action="../ControllerAlumno" method="post">
-                                                <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
-                                                <input type="hidden" name = "action" id="action" value="update">
-                                       <button type="submit"  class="btn btn-link">Actualizar</button>
-                                            </form>
-                                            
-                                        </td>
-                                        <td >
-                                           <form id="formulario" action="../ControllerAlumno" method="post">
-                                               <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
-                                                  <input type="hidden" name = "action" id="action" value="delete">
-                                       <button type="submit"  class="btn btn-link">Eliminar</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form id="formulario" action="../ControllerTutores" method="post">
-                                                <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
-                                                <input type="hidden" name = "action" id="action" value="addTI">
-                                       <button type="submit"  class="btn btn-link">Agregar tutor</button>
-                                            </form>
-                                            
-                                        </td>
+                                        <td><%=ob.getAlumno()%></td>
+                                        <td><%=ob.getGrupo()%></td>
+                                        <td><%=ob.getLic()%></td>
+                                        <td><%=ob.getCurp() %></td>
+                                        <td><%=ob.getProfesor()%></td>
+                                        <% if(ob.getTipo()==1){ %>
+                                        <td>Individual</td>
+                                        <% }else{ %>
+                                        <td>Grupal</td>
+                                        <% } %>
 
 
                                     </tr>
                                     <%
                                         }
+
+
+                                        List<Tutor> listST = obj_Read_Values.listarAlumnosSinTutor(perA);
+                                        Iterator<Tutor> it_listST = listST.iterator();
+                                         while (it_listST.hasNext()) {
+                                            Tutor ob = new Tutor();
+                                            ob = it_listST.next();
                                     %>     
+                                    <tr>
+                                        <td><%=ob.getMatricula()%></td>
+                                        <td><%=ob.getAlumno()%></td>
+                                        <td><%=ob.getGrupo()%></td>
+                                        <td><%=ob.getLic()%></td>
+                                        <td></td>
+                                        <td>
+                                            <form id="formulario" action="../ControllerTutores" method="post">
+                                                <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
+                                                <input type="hidden" name = "action" id="action" value="addTI">
+                                                <button type="submit"  class="btn btn-link">Agregar tutor</button>
+                                            </form>
+                                        </td>
+                                        <td></td>
+                                        
 
 
+                                    </tr>
+                                    <% } %>
                                 </tbody>
                             </table>
                         </div>

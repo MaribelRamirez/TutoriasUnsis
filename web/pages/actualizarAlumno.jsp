@@ -158,7 +158,7 @@
                                                     ob = list_Grup.next();
                                             %>
 
-                                            <option  value="<%= ob.getIdGrupo()%>"> <%=ob.getNombre()%></option>\n\
+                                            <option  value="<%= ob.getIdGrupo()%>"> <%=ob.getGrupo()%></option>\n\
                                             <% }
 
                                             %>   

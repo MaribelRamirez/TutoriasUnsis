@@ -120,6 +120,11 @@
                             </a>
                         </li>
                         <li>
+                            <a href="ListarTutorados.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-file-o nav_icon"></i>Tutorados
+                            </a>
+                        </li>
+                        <li>
                             <a href="ListarLicenciaturas.jsp" class=" hvr-bounce-to-right">
                                 <i class="fa fa-file-o nav_icon"></i>Licenciaturas</a>
                         </li>
@@ -145,12 +150,11 @@
                                 <i class="fa fa-file-o nav_icon">  </i>Cargar archivos
                             </a>
                         </li>
-                        <li>
-                            <a href="agregarTutoresG.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Crear tutorias grupales</a>
-                        </li>
+                        
                         <li>
                             <a href="ListarPeriodos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Periodos</a>
                         </li>
+                        
 
 
                     </ul>

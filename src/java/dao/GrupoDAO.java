@@ -31,7 +31,10 @@ public class GrupoDAO {
         this.con = con;
         this.connection = connection;
     }
-public Grupo obtenerGrupobyProf(String curp) throws SQLException {
+    
+    
+    
+    public Grupo obtenerGrupobyProf(String curp) throws SQLException {
         Grupo grupo = null;
 
         String sql ="select grupos.nombre, grupos.idGrupo from tutores inner join alumnos inner join grupos on tutores.matricula=alumnos.matricula and alumnos.idGrupo=grupos.idGrupo where tutores.tipo=2 and tutores.curp= ? ";
@@ -74,6 +77,53 @@ public Grupo obtenerGrupobyProf(String curp) throws SQLException {
             String lic = resulSet.getString("nombre");
             Grupo grupo;
             grupo = new Grupo(id, gru, idPerido, idLicenciatura,periodo,lic);
+            listaGrupos.add(grupo);
+        }
+        con.desconectar();
+        return listaGrupos;
+    }
+        public List<Grupo> listarGruposByLic(int lic , int per) throws SQLException {
+
+        List<Grupo> listaGrupos = new ArrayList<Grupo>();
+        String sql = "select idGrupo, grupo, grupos.idPeriodo , grupos.idLicenciatura, periodo.periodo, nombre "
+                + "from grupos , periodo, licenciaturas where grupos.idPeriodo= periodo.idPeriodo "
+                + "and grupos.idLicenciatura=licenciaturas.idLicenciatura and grupos.idLicenciatura="+lic+" and grupos.idPeriodo="+per+";";
+        connection = con.conectar();
+        Statement statement = connection.createStatement();
+        ResultSet resulSet = statement.executeQuery(sql);
+
+        while (resulSet.next()) {
+            int id = resulSet.getInt("idGrupo");
+            String gru = resulSet.getString("grupo");
+            int idPerido = resulSet.getInt("grupos.idPeriodo");
+            int idLicenciatura = resulSet.getInt("grupos.idLicenciatura");
+            String periodo = resulSet.getString("periodo.periodo");
+            String li = resulSet.getString("nombre");
+            Grupo grupo;
+            grupo = new Grupo(id, gru, idPerido, idLicenciatura,periodo,li);
+            listaGrupos.add(grupo);
+        }
+        con.desconectar();
+        return listaGrupos;
+    }
+    
+    public List<Grupo> listarGruposActuales(int per) throws SQLException {
+
+        List<Grupo> listaGrupos = new ArrayList<Grupo>();
+        String sql = "select * from grupos where idPeriodo="+per+";";
+        connection = con.conectar();
+        Statement statement = connection.createStatement();
+        ResultSet resulSet = statement.executeQuery(sql);
+
+        while (resulSet.next()) {
+            int id = resulSet.getInt("idGrupo");
+            String gru = resulSet.getString("grupo");
+            int idPerido = resulSet.getInt("idPeriodo");
+            int idLicenciatura = resulSet.getInt("idLicenciatura");
+            String periodo = "";
+            String li = "";
+            Grupo grupo;
+            grupo = new Grupo(id, gru, idPerido, idLicenciatura,periodo,li);
             listaGrupos.add(grupo);
         }
         con.desconectar();
@@ -139,7 +189,7 @@ public Grupo obtenerGrupobyProf(String curp) throws SQLException {
     }
       public Grupo obtenerGrupoById(int idGrp) throws SQLException {
         Grupo grupo = null;
-
+          System.err.println("llegue aqui jejeje");
         String sql = "select idGrupo, grupo, grupos.idPeriodo , grupos.idLicenciatura, periodo.periodo, nombre " +
                     "from grupos , periodo, licenciaturas " +
                     "where grupos.idPeriodo= periodo.idPeriodo and grupos.idLicenciatura=licenciaturas.idLicenciatura and idGrupo= ? ";

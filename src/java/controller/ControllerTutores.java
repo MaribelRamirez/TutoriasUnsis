@@ -6,6 +6,7 @@
 package controller;
 
 import dao.AlumnoDAO;
+import dao.GrupoDAO;
 import dao.TutorDAO;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -13,13 +14,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Alumno;
+import model.Grupo;
 import model.Tutor;
+import model.sql;
 
 /**
  *
@@ -42,10 +46,14 @@ public class ControllerTutores extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     public TutorDAO tutordao;
+    public GrupoDAO grupodao;
+    public AlumnoDAO alumnodao;
 
     public ControllerTutores() {
         super();
         tutordao = new TutorDAO();
+        grupodao = new GrupoDAO();
+        alumnodao = new AlumnoDAO();
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -68,7 +76,6 @@ public class ControllerTutores extends HttpServlet {
 
     }
 
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -76,40 +83,43 @@ public class ControllerTutores extends HttpServlet {
         System.err.println("llego al post");
         Tutor tutor = new Tutor();
         String action = request.getParameter("action");
-        
-       
-        
-        
-        
-        if (action.equalsIgnoreCase("update")) {
 
-//            try {
-//                forward = edit;
-//                Periodo pdo = periododao.obtenerPeriodoById(Integer.parseInt(request.getParameter("id")));
-//
-//                request.setAttribute("pdo", pdo);
-//                RequestDispatcher view = request.getRequestDispatcher(forward);
-//                view.forward(request, response);
-//            } catch (NumberFormatException | SQLException e) {
-//                System.out.println("Error en servlet: " + e);
-//            }
-        } else if (action.equalsIgnoreCase("delete")) {
-//          int id = Integer.parseInt(request.getParameter("id"));
-//            try {
-//                periododao.;
-//                 response.sendRedirect("pages/ListarGrupos.jsp");
-//            } catch (SQLException ex) {
-//                Logger.getLogger(ControllerPeriodo.class.getName()).log(Level.SEVERE, null, ex);
-//            } 
+        if (action.equalsIgnoreCase("addTG")) {
+
+            try {
+                forward = edit1;
+                System.err.println("Este es el id" + request.getParameter("id"));
+                Grupo grp = grupodao.obtenerGrupoById(Integer.parseInt(request.getParameter("id")));
+
+                System.err.println("termine el bloque try");
+                request.setAttribute("grp", grp);
+                RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            } catch (NumberFormatException | SQLException e) {
+                System.out.println("Error en servlet: " + e);
+            }
+        } else if (action.equalsIgnoreCase("addTI")) {
+
+            try {
+                forward = edit2;
+                Alumno alm = alumnodao.obtenerAlumnoByMatricula(request.getParameter("id"));
+                request.setAttribute("alm", alm);
+                RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            } catch (NumberFormatException | SQLException e) {
+                System.out.println("Error en servlet: " + e);
+            }
+
         } else if (action.equalsIgnoreCase("add")) {
-            
+
             System.err.println("llego al add");
             String tipo = request.getParameter("tipo");
-            if(tipo.equalsIgnoreCase("grupal")){
+            if (tipo.equalsIgnoreCase("grupal")) {
+
                 System.err.println("llego al grupal");
                 int idGrupo = Integer.parseInt(request.getParameter("grupo"));
                 String curp = request.getParameter("profesor");
-                System.err.println("este es el curp "+curp);
+                System.err.println("este es el curp " + curp);
                 int idPeriodo = Integer.parseInt(request.getParameter("per"));
                 AlumnoDAO alumnoDao = new AlumnoDAO();
                 List<Alumno> listaAlumnos;
@@ -123,33 +133,44 @@ public class ControllerTutores extends HttpServlet {
                         tutor.setCurp(curp);
                         tutor.setPeriodo(idPeriodo);
                         tutor.setTipo(2);
-                        tutordao.insertar(tutor);
-                     }
-                    
+                        if (0 != tutordao.comprobarRegistro(idPeriodo, ob.getMatricula())) {
+                            tutordao.update(tutor);
+                        } else {
+                            tutordao.insertar(tutor);
+                        }
+
+                    }
+                    response.sendRedirect("pages/ListarGrupos.jsp");
+
                 } catch (SQLException ex) {
                     Logger.getLogger(ControllerTutores.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                 
-                
-                
-                
-                
-            }else if(tipo=="individual"){
-            
-            }
-            
-            
-            
-            
-     
 
-//            try {
-//                periododao.insertar(periodo);
-//                response.sendRedirect("pages/ListarPeriodos.jsp");
-//            } catch (SQLException ex) {
-//                Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
-//            }
+            } else if ("individual".equals(tipo)) {
+                System.err.println("llego al individual");
+                String matricula = request.getParameter("matricula");
+                String curp = request.getParameter("profesor");
+                System.err.println("este es el curp " + curp);
+                sql auto = new sql();
+                int idPeriodo = auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo") - 1;
+
+                tutor.setMatricula(matricula);
+                tutor.setCurp(curp);
+                tutor.setPeriodo(idPeriodo);
+                tutor.setTipo(1);
+                try {
+                    if (0 != tutordao.comprobarRegistro(idPeriodo, matricula)) {
+                        tutordao.update(tutor);
+                    } else {
+                        tutordao.insertar(tutor);
+                    }
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControllerTutores.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                response.sendRedirect("pages/ListarTutorados.jsp");
+            }
+
         } else if (action.equalsIgnoreCase("edit")) {
 
 //            int id = Integer.parseInt(request.getParameter("id"));
@@ -180,7 +201,6 @@ public class ControllerTutores extends HttpServlet {
 //            
 //            periododao.updatePeriodo(periodo);
 //            response.sendRedirect("pages/ListarPeriodos.jsp");
-
         }
 
     }
@@ -194,7 +214,5 @@ public class ControllerTutores extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    
-   
+
 }

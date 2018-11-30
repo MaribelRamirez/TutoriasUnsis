@@ -40,12 +40,12 @@ curp varchar(20)  REFERENCES profesores (profesores) ON DELETE CASCADE ON UPDATE
 );
 
 
-
+Drop table tutores;
 create table tutores(
 idTutorado int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 matricula varchar(10) REFERENCES alumnos (matricula) ON DELETE CASCADE ON UPDATE CASCADE,
 curp  varchar(20) REFERENCES profesores (profesores) ON DELETE CASCADE ON UPDATE CASCADE,
-preriodo varchar (10),
+idPeriodo int  REFERENCES periodo (idPeriodo) ON DELETE CASCADE ON UPDATE CASCADE,
 tipo int 
 );
 
