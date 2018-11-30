@@ -59,6 +59,7 @@
                     autoclose: true
                 }).datepicker("setDate", new Date());
             });
+            
 
 
         </script>
@@ -82,6 +83,8 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
+            
+            
         </script>
 
         <style>
@@ -190,11 +193,7 @@
                                 </li>
                             </ul>
                         </nav>
-
-
-
-
-                    </div>
+       </div>
                 </div>
 
             </div>
@@ -208,6 +207,8 @@
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
         <!--//scrolling js-->
+        
+        
     </body>
 </html>
 

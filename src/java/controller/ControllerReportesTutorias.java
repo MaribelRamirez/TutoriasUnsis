@@ -27,9 +27,13 @@ import model.Profesor;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -98,36 +102,92 @@ public class ControllerReportesTutorias extends HttpServlet {
             //indicando el tamaño de la hoja
             sheet.getPrintSetup().setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);
 
-            
             //poner negrita a la cabecera
-		CellStyle style = book.createCellStyle();
-        Font font = book.createFont();
-        font.setBold(true);
-        style.setFont(font);
-        
+            CellStyle style = book.createCellStyle();
+
+            Font font = book.createFont();
+            font.setBold(true);
+
+            style.setFont(font);
+
+            style.setBorderBottom(BorderStyle.MEDIUM);
+            style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+            style.setBorderLeft(BorderStyle.MEDIUM);
+            style.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+            style.setBorderRight(BorderStyle.MEDIUM);
+            style.setRightBorderColor(IndexedColors.BLACK.getIndex());
+            style.setBorderTop(BorderStyle.MEDIUM);
+            style.setTopBorderColor(IndexedColors.BLACK.getIndex());
+            style.setAlignment(HorizontalAlignment.CENTER);
+             style.setFillForegroundColor(IndexedColors.AQUA.getIndex()); 
+             style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
             int j = 0;
             int cont = 1;
 
+            Row rowx = sheet.createRow(j);
+            Cell cellx = rowx.createCell(0);
+            cellx.setCellValue("");
+            
+            j++;
             
             Row row1 = sheet.createRow(j);
-            
-            Cell cell= row1.createCell(0);//se crea las celdas para la cabecera, junto con la posición
-	   cell.setCellStyle(style); // se añade el style crea anteriormente 
-	cell.setCellValue("N/P");//se añade el contenido
-        
-            row1.createCell(1).setCellValue("PROFESOR");
-            row1.createCell(2).setCellValue("LIC");
-            row1.createCell(3).setCellValue("ENTREGÓ REPORTE");
-            row1.createCell(4).setCellValue("ENTREGADO A TIEMPO");
-            row1.createCell(5).setCellValue("FECHA DE ENTREGA");
-            row1.createCell(6).setCellValue("FALTANTES");
-            row1.createCell(7).setCellValue("TIPO DE TUTORIA");
-            row1.createCell(8).setCellValue("N°. SESIONES");
-            row1.createCell(9).setCellValue("N°. CANALIZACIONES");
-            row1.createCell(10).setCellValue("ALUMNOS ASIGNADOS");
-            row1.createCell(11).setCellValue("ALUMNOS REPORTADOS");
-            row1.createCell(12).setCellValue("ALUMNOS CON ASISTENCIA");
-            row1.createCell(13).setCellValue("OBSERVACIONES");
+
+            Cell cell = row1.createCell(0);//se crea las celdas para la cabecera, junto con la posición
+            cell.setCellStyle(style); // se añade el style crea anteriormente 
+            cell.setCellValue("N/P");//se añade el contenido
+
+            cell = row1.createCell(1);
+            cell.setCellStyle(style);
+            cell.setCellValue("PROFESOR");
+
+            cell = row1.createCell(2);
+            cell.setCellStyle(style);
+            cell.setCellValue("LIC");
+
+            cell = row1.createCell(3);
+            cell.setCellStyle(style);
+            cell.setCellValue("ENTREGÓ REPORTE");
+
+            cell = row1.createCell(4);
+            cell.setCellStyle(style);
+            cell.setCellValue("ENTREGADO A TIEMPO");
+
+            cell = row1.createCell(5);
+            cell.setCellStyle(style);
+            cell.setCellValue("FECHA DE ENTREGA");
+
+            cell = row1.createCell(6);
+            cell.setCellStyle(style);
+            cell.setCellValue("FALTANTES");
+
+            cell = row1.createCell(7);
+            cell.setCellStyle(style);
+            cell.setCellValue("TIPO DE TUTORIA");
+
+            cell = row1.createCell(8);
+            cell.setCellStyle(style);
+            cell.setCellValue("N°. SESIONES");
+
+            cell = row1.createCell(9);
+            cell.setCellStyle(style);
+            cell.setCellValue("N°. CANALIZACIONES");
+
+            cell = row1.createCell(10);
+            cell.setCellStyle(style);
+            cell.setCellValue("ALUMNOS ASIGNADOS");
+
+            cell = row1.createCell(11);
+            cell.setCellStyle(style);
+            cell.setCellValue("ALUMNOS REPORTADOS");
+
+            cell = row1.createCell(12);
+            cell.setCellStyle(style);
+            cell.setCellValue("ALUMNOS CON ASISTENCIA");
+
+            cell = row1.createCell(13);
+            cell.setCellStyle(style);
+            cell.setCellValue("OBSERVACIONES");
+
             j++;
             while (it_list_lic.hasNext()) {
 
@@ -144,18 +204,23 @@ public class ControllerReportesTutorias extends HttpServlet {
                     obj_prof = it_prof.next();
 
                     Row row2 = sheet.createRow(j);
+                    cell = row2.createCell(0);
+                    cell.setCellValue("" + cont);
 
-                    row2.createCell(0).setCellValue("" + cont);
-                    row2.createCell(1).setCellValue("" + obj_prof.getNombre());
-                    row2.createCell(2).setCellValue("" + obj_prof.getLicenciatura());
+                    cell = row2.createCell(1);
+                    cell.setCellValue("" + obj_prof.getNombre());
+
+                    cell = row2.createCell(2);
+                    cell.setCellValue("" + obj_prof.getLicenciatura());
 
                     AlumnoDAO obj_alum_read = new AlumnoDAO();
                     List<Alumno> list_alum = obj_alum_read.listarAlumnosTutorados(obj_prof.getCurp());
 
-                    row2.createCell(10).setCellValue("" + list_alum.size());
+                    cell = row2.createCell(10);
+                    cell.setCellValue("" + list_alum.size());
+
                     j++;
                     cont++;
-
                 }
 
             }
@@ -165,7 +230,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                         = new FileOutputStream("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\" + "Registro de Reportes de Tutorías" + ".xlsx")) {
                     for (int k = 0; k < j; k++) {
                         sheet.autoSizeColumn((short) k);
-
+                      
                     }
 
                     book.write(elFichero);
