@@ -108,54 +108,57 @@
             }
         %>
 
-       <jsp:include page="headAdmin.jsp" flush="true" />
-            <div id="page-wrapper" class="gray-bg dashbard-1">
-                <div class="content-main">
+        <jsp:include page="headAdmin.jsp" flush="true" />
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="content-main">
 
-                    <!--banner-->	
-                    <div class="banner">
-                        <h2>
-                            <a href="indexAdmin.jsp">Home</a>
-                            <i class="fa fa-angle-right"></i>
-                            <span>Agregar licenciatura</span><br>
-                        </h2>
-                    </div>
+                <!--banner-->	
+                <div class="banner">
+                    <h2>
+                        <a href="indexAdmin.jsp">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                        <span>Agregar licenciatura</span><br>
+                    </h2>
+                </div>
+                <form id="formulario" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')">
+                    <input type="hidden" name = "action" value="add">
                     <div class="blank">
 
-                        <div class="blank-page">
-                            <div class="grid-form1">
+                        <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <h3 id="forms-example" class="">Datos de la licenciatura</h3>
 
-                                <form id="formulario" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')">
-<input type="hidden" name = "action" value="add">
-                                    <div class="form-group">
-                                        <label for="nomLicc">Nombre de la licenciatura</label>
 
-                                        <input  required class="form-control" id="nombreLic" name="nombreLic" placeholder="Introduce el nombre de la licenciatura">
-                                    </div>
+                                <div class="form-group">
+                                    <label for="nomLicc">Nombre de la licenciatura</label>
 
+                                    <input  required class="form-control" id="nombreLic" name="nombreLic" placeholder="Introduce el nombre de la licenciatura">
+                                </div>
 
 
 
-                                    <button type="submit" class="bl btn btn-danger">Guardar</button>
-                                </form>
+
+
                             </div>
+                            <button type="submit" class="bl btn btn-danger pull-right">Guardar</button>
+
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
-
         </div>
-        <div class="clearfix"> </div>
+
     </div>
-    <div class="copy">
-        <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-    </div>
-    <!---->
-    <!--scrolling js-->
-    <script src="js/jquery.nicescroll.js"></script>
-    <script src="js/scripts.js"></script>
-    <!--//scrolling js-->
+    <div class="clearfix"> </div>
+</div>
+<div class="copy">
+    <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+</div>
+<!---->
+<!--scrolling js-->
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/scripts.js"></script>
+<!--//scrolling js-->
 </body>
 </html>
 

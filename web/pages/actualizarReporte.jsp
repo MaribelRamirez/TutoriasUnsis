@@ -163,8 +163,8 @@
                     </h2>
                 </div>
                 <form id="formulario"  action="ControllerReportesTutorias" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')" >
-<input type="hidden" name = "action" value="edit">
-<input type="hidden" name = "idRep" id="idRep" value="<c:out value="${rep.getIdReporte()}"/>"/>
+                    <input type="hidden" name = "action" value="edit">
+                    <input type="hidden" name = "idRep" id="idRep" value="<c:out value="${rep.getIdReporte()}"/>"/>
                     <div class="blank">
 
                         <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -202,8 +202,8 @@
                                     <label>Periodo</label>	    
 
                                     <select class="form-control " id="idPeriodo" name="idPeriodo">
-                                          <option selected="selected" value="<c:out value="${rep.getIdPeriodo()}"/>"> ${rep.getPeriodo()}</option>
-                                      
+                                        <option selected="selected" value="<c:out value="${rep.getIdPeriodo()}"/>"> ${rep.getPeriodo()}</option>
+
                                         <%                                        while (it_list.hasNext()) {
                                                 Periodo ob = new Periodo();
                                                 ob = it_list.next();
@@ -224,8 +224,8 @@
 
                                 <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                     <label for="nombre">Tipo de tutoria</label>
-  <input type="hidden" class="form-control" id="tipoTutoria" name="tipoTutoria" value="<c:out value="${rep.getTipoTutoria()}"/>"/>
-                                
+                                    <input type="hidden" class="form-control" id="tipoTutoria" name="tipoTutoria" value="<c:out value="${rep.getTipoTutoria()}"/>"/>
+
                                     <input type="text" disabled="true" required class="form-control" value="<c:out value="${rep.getTipoTutoria()}"/>"/>
                                 </div>
 

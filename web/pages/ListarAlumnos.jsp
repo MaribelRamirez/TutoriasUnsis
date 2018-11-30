@@ -62,8 +62,8 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
-            
-           
+
+
         </script>
 
         <style>
@@ -91,7 +91,7 @@
             }
 
         </style>
-        
+
     </head>
     <body>
         <%
@@ -110,34 +110,34 @@
         %>
 
         <jsp:include page="headAdmin.jsp" flush="true" />
-      
-            <div id="page-wrapper" class="gray-bg dashbard-1">
-                <div class="content-main">
 
-                    <!--banner-->	
-                    <div class="banner">
-                        <h2>
-                            <a href="indexAdmin.jsp">Home</a>
-                            <i class="fa fa-angle-right"></i>
-                            <span>Alumnos</span><br>
-                        </h2>
-                    </div>
-                    <div class="blank">
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="content-main">
 
-                        <div class="blank-page">
-                            <%
-                                AlumnoDAO obj_Read_Values = new AlumnoDAO();
-                                List<Alumno> list = obj_Read_Values.listarAlumnos();
-                                Iterator<Alumno> it_list = list.iterator();
-                               
-                            %>
-                            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                <a href="agregarAlumno.jsp">
-                             <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo alumno</a>
-                                <thead>
-                                
+                <!--banner-->	
+                <div class="banner">
+                    <h2>
+                        <a href="indexAdmin.jsp">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                        <span>Alumnos</span><br>
+                    </h2>
+                </div>
+                <div class="blank">
+
+                    <div class="blank-page">
+                        <%
+                            AlumnoDAO obj_Read_Values = new AlumnoDAO();
+                            List<Alumno> list = obj_Read_Values.listarAlumnos();
+                            Iterator<Alumno> it_list = list.iterator();
+
+                        %>
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <a href="agregarAlumno.jsp">
+                                <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo alumno</a>
+                            <thead>
+
                                 <tr>
-             
+
                                     <th>Matricula</th>
                                     <th>Nombre</th>
                                     <th>grupo</th>
@@ -145,70 +145,69 @@
                                     <th>Editar</th>
                                     <th>Eliminar</th>
                                     <th>Listar tutores</th>
-                                    
+
 
 
                                 </tr>
-                                </thead>
-                                
-                                <tbody>
-                                    <%
-                                        while (it_list.hasNext()) {
-                                            Alumno ob = new Alumno();
-                                            ob = it_list.next();
-                                    %>  
-                                    <tr>
-                                        <td><%=ob.getMatricula()%></td>
-                                        <td><%=ob.getNombre()%></td>
-                                        <td><%=ob.getGrupo() %></td>
-                                        <td><%=ob.getLicenciatura()%></td>
-                                        <td>
-                                            <form id="formulario" action="../ControllerAlumno" method="post" onsubmit="return  confirm('¿Realmente desea actualizars los datos?')">
-                                                <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
-                                                <input type="hidden" name = "action" id="action" value="update">
-                                       <button type="submit"  class="btn btn-link">Actualizar</button>
-                                            </form>
-                                            
-                                        </td>
-                                        <td >
-                                           <form id="formulario" action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea eliminar al alumno?')">
-                                               <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
-                                                  <input type="hidden" name = "action" id="action" value="delete">
-                                       <button type="submit"  class="btn btn-link">Eliminar</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form id="formulario" action="../ControllerTutores" method="post">
-                                                <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
-                                                <input type="hidden" name = "action" id="action" value="addTI">
-                                       <button type="submit"  class="btn btn-link">Agregar tutor</button>
-                                            </form>
-                                            
-                                        </td>
+                            </thead>
+
+                            <tbody>
+                                <%                                        while (it_list.hasNext()) {
+                                        Alumno ob = new Alumno();
+                                        ob = it_list.next();
+                                %>  
+                                <tr>
+                                    <td><%=ob.getMatricula()%></td>
+                                    <td><%=ob.getNombre()%></td>
+                                    <td><%=ob.getGrupo()%></td>
+                                    <td><%=ob.getLicenciatura()%></td>
+                                    <td>
+                                        <form id="formulario" action="../ControllerAlumno" method="post" onsubmit="return  confirm('¿Realmente desea actualizars los datos?')">
+                                            <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
+                                            <input type="hidden" name = "action" id="action" value="update">
+                                            <button type="submit"  class="btn btn-link">Actualizar</button>
+                                        </form>
+
+                                    </td>
+                                    <td >
+                                        <form id="formulario" action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea eliminar al alumno?')">
+                                            <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
+                                            <input type="hidden" name = "action" id="action" value="delete">
+                                            <button type="submit"  class="btn btn-link">Eliminar</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form id="formulario" action="../ControllerTutores" method="post">
+                                            <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
+                                            <input type="hidden" name = "action" id="action" value="addTI">
+                                            <button type="submit"  class="btn btn-link">Agregar tutor</button>
+                                        </form>
+
+                                    </td>
 
 
-                                    </tr>
-                                    <%
-                                        }
-                                    %>     
+                                </tr>
+                                <%
+                                    }
+                                %>     
 
 
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
-
                 </div>
-                <div class="clearfix"> </div>
+
             </div>
-            <div class="copy">
-                <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-            </div>
-            <!---->
-            <!--scrolling js-->
-            <script src="js/jquery.nicescroll.js"></script>
-            <script src="js/scripts.js"></script>
-            <!--//scrolling js-->
+            <div class="clearfix"> </div>
+        </div>
+        <div class="copy">
+            <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+        </div>
+        <!---->
+        <!--scrolling js-->
+        <script src="js/jquery.nicescroll.js"></script>
+        <script src="js/scripts.js"></script>
+        <!--//scrolling js-->
     </body>
 </html>
 

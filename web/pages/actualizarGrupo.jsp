@@ -119,53 +119,52 @@
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
                         <i class="fa fa-angle-right"></i>
-                        <span>Agregar grupo</span><br>
+                        <span>Actualizar grupo</span><br>
                     </h2>
                 </div>
-                <div class="blank">
+                <form id="formulario" action="ControllerGrupo" method="post" onsubmit="return confirm('Realmente desea ACTUALIZAR los datos')">
+                    <input type="hidden" name = "action" value="edit">
+                    <input type="hidden" name = "id"  value="<c:out value="${grp.getIdGrupo()}"/>"/> 
 
-                    <div class="blank-page">
-                        <div class="grid-form1">
-                            <h3 id="forms-example" class="">Datos del grupo</h3>
+                    <div class="blank">
 
-                            <form id="formulario" action="ControllerGrupo" method="post" onsubmit="return confirm('Realmente desea ACTUALIZAR los datos')">
-                                <input type="hidden" name = "action" value="edit">
-                                <input type="hidden" name = "id"  value="<c:out value="${grp.getIdGrupo()}"/>"/> 
+                        <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h3 id="forms-example" class="">Datos del grupo</h3>
+
                                 <div class="form-group">
                                     <label for="nomGrpp">Nombre del grupo</label>
 
                                     <input  required class="form-control" id="grupo" name="grupo"  value="<c:out value="${grp.getGrupo()}"/>"/>
                                 </div>
-                                
-                                
-                                
-                                
-                                   <%
-                                PeriodoDAO obj_Read_Values = new PeriodoDAO();
-                                List<Periodo> list = obj_Read_Values.listarPeriodos();
-                                Iterator<Periodo> it_list = list.iterator();
-                        
-                            %>
-                                <div class = "form-group">
-                                <label>Periodo</label>	      
-                                <select class="form-control " id="per" name="per">
-                                    <option  value="<c:out value="${grp.getIdPeriodo()}"/>"> ${grp. getPeriodo()}</option>\n\
-                                    <%
-                                        while (it_list.hasNext()) {
-                                            Periodo ob = new Periodo();
-                                            ob = it_list.next();
-                                    %>
-                                    <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo() %></option>\n\
-                                    <% }
-                                        
-                                    %>   
-                                </select>
-                            </div>
-                                
-                                
-                                
+
+
+
+
                                 <%
-                                    LicenciaturaDAO obj_Read_ValuesL = new LicenciaturaDAO();
+                                    PeriodoDAO obj_Read_Values = new PeriodoDAO();
+                                    List<Periodo> list = obj_Read_Values.listarPeriodos();
+                                    Iterator<Periodo> it_list = list.iterator();
+
+                                %>
+                                <div class = "form-group">
+                                    <label>Periodo</label>	      
+                                    <select class="form-control " id="per" name="per">
+                                        <option  value="<c:out value="${grp.getIdPeriodo()}"/>"> ${grp. getPeriodo()}</option>\n\
+                                        <%                                        while (it_list.hasNext()) {
+                                                Periodo ob = new Periodo();
+                                                ob = it_list.next();
+                                        %>
+                                        <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>\n\
+                                        <% }
+
+                                        %>   
+                                    </select>
+                                </div>
+
+
+
+                                <%                                    LicenciaturaDAO obj_Read_ValuesL = new LicenciaturaDAO();
                                     List<Licenciatura> listL = obj_Read_ValuesL.listarLicenciaturas();
                                     Iterator<Licenciatura> it_listL = listL.iterator();
 
@@ -184,13 +183,14 @@
                                         %>   
                                     </select>
                                 </div>
-                                    
-                                    
-                                <button type="submit" class="bl btn btn-danger">Guardar</button>
-                            </form>
+
+
+                            </div>
+                            <button type="submit" class="bl btn btn-danger pull-right">Guardar</button>
+
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 

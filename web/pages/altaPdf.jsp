@@ -146,7 +146,7 @@
                                 <label for="nomGrup">Tipo de archivo:</label>
 
                                 <select class="form-control " id="tipo" name="tipo">
-                                    
+
                                     <option value="1"> Reportes</option>
                                     <option value="2">Material de apooyo</option>
                                 </select>
@@ -171,15 +171,15 @@
                                 <input type="submit" value="Enviar Archivo" name="submit" id="btn" class="btn"/>
                             </div>
 
-                    
-                    </form>
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
-<div class="clearfix"> </div>
+    </div>
+    <div class="clearfix"> </div>
 </div>
 <div class="copy">
     <p><img src="resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          

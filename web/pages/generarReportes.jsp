@@ -151,9 +151,9 @@
                                 </li>
                                 <li class="active">
                                     <button type="button"  class=" fa fa-file-o btn btn-link" data-toggle="modal"  data-target="#exampleModal">Reportes de Tutorias</button>
-                               
-                                    
-                                   <form id="formulario" action="../ControllerReportesTutorias" method="post">
+
+
+                                    <form id="formulario" action="../ControllerReportesTutorias" method="post">
                                         <input type="hidden" name = "action" value="reporte">
                                         <!-- Modal --> <div class="modal" id="exampleModal" tabindex="-1" role="dialog"
                                                             arialabelledby="exampleModalLabel" aria-hidden="true">   
@@ -169,7 +169,7 @@
 
                                                         <%
                                                             PeriodoDAO obj_Read_Values = new PeriodoDAO();
-                                                            List<Periodo> list= obj_Read_Values.listarPeriodos();
+                                                            List<Periodo> list = obj_Read_Values.listarPeriodos();
                                                             Iterator<Periodo> it_list = list.iterator();
 
                                                         %>
@@ -178,14 +178,13 @@
                                                             <label>Periodos</label>	    
 
                                                             <select class="form-control " id="IdPeriodo" name="IdPeriodo">
-                                                                 <option value="todos">Todos</option>
-                                                                <%                                       
-                                                                    while (it_list.hasNext()) {
+                                                                <option value="todos">Todos</option>
+                                                                <%                                                                    while (it_list.hasNext()) {
                                                                         Periodo ob = new Periodo();
                                                                         ob = it_list.next();
                                                                 %>
                                                                 <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
-                                                               
+
                                                                 <% }
 
                                                                 %>   
@@ -194,30 +193,27 @@
 
 
                                                     </div>     
-                                                    <div class="modal-footer">    
-                                                        <div class="col-lg-6">
+                                                    <div class="modal-footer"> 
 
 
-                                                            <button type="submit" class="btn btn-primary">Aceptar</button> 
-                                                            
-                                                        </div>
+                                                        <button type="submit" class="btn btn-primary">Aceptar</button> 
 
-                                                        <div class="col-lg-6">
 
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>   
-                                                        </div>
+
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>   
+
 
 
                                                     </div>   
                                                 </div>   
                                             </div>
                                         </div> 
-                                    
-                                </form>
+
+                                    </form>
 
                                 </li>
-                               
-                                           
+
+
                                 <li class="active">
                                     <form id="formulario" action="../ControllerReporteAsignacionTutorias" method="post">
 

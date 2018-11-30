@@ -109,96 +109,100 @@
             }
         %>
 
-       <jsp:include page="headAdmin.jsp" flush="true" />
-            <div id="page-wrapper" class="gray-bg dashbard-1">
-                <div class="content-main">
+        <jsp:include page="headAdmin.jsp" flush="true" />
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="content-main">
 
-                    <!--banner-->	
-                    <div class="banner">
-                        <h2>
-                            <a href="indexAdmin.jsp">Home</a>
-                            <i class="fa fa-angle-right"></i>
-                            <span>Agregar profesor</span><br>
-                        </h2>
-                    </div>
+                <!--banner-->	
+                <div class="banner">
+                    <h2>
+                        <a href="indexAdmin.jsp">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                        <span>Agregar profesor</span><br>
+                    </h2>
+                </div>
+                <form id="formulario"  action="../ControllerProfesor" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')">
+                    <input type="hidden" name = "action" value="add">
                     <div class="blank">
 
-                        <div class="blank-page">
-                            	<div class="grid-form1">
- 		<h3 id="forms-example" class="">Datos del profesor</h3>
-                     
- <form id="formulario"  action="../ControllerProfesor" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')">
-  <input type="hidden" name = "action" value="add">
-  <div class="form-group">
-    <label for="curp">Curp</label>
-    <input  required class="form-control" id="curp" name="curp" placeholder="Introduce la curp del profesor">
+                        <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h3 id="forms-example" class="">Datos del profesor</h3>
 
-  </div>
-                    <div class="form-group">
-    <label for="nombre">Nombre completo</label>
-    <input  required class="form-control" id="nombre" name="nombre" placeholder="Introduce el nombre del profesor">
 
-  </div>
-       <div class = "form-group">
-                                <label>Grado academico</label>	      
-                                <select class="form-control " id="grado_acad" name="grado_acad">
-                                    
-                                    <option value="Licenciatura"> Licenciatura</option>
-                                    <option value="Maestria">Maestria</option>
-                                    <option value="Doctorado">Doctorado</option>
-                                    <option value="Doctorado">Pos doctorado</option>
-                                </select>
+                                <div class="form-group">
+                                    <label for="curp">Curp</label>
+                                    <input  required class="form-control" id="curp" name="curp" placeholder="Introduce la curp del profesor">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="nombre">Nombre completo</label>
+                                    <input  required class="form-control" id="nombre" name="nombre" placeholder="Introduce el nombre del profesor">
+
+                                </div>
+                                <div class = "form-group">
+                                    <label>Grado academico</label>	      
+                                    <select class="form-control " id="grado_acad" name="grado_acad">
+
+                                        <option value="Licenciatura"> Licenciatura</option>
+                                        <option value="Maestria">Maestria</option>
+                                        <option value="Doctorado">Doctorado</option>
+                                        <option value="Doctorado">Pos doctorado</option>
+                                    </select>
+                                </div>
+                                <div class = "form-group">
+                                    <label>Status</label>	      
+                                    <select class="form-control " id="status" name="status">
+
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                        <option value="Licencia">Licencia</option>
+                                        <option value="Sabatico">Sabatico</option>
+                                    </select>
+                                </div>
+                                <%
+                                    LicenciaturaDAO obj_Read_Values = new LicenciaturaDAO();
+                                    List<Licenciatura> list = obj_Read_Values.listarLicenciaturas();
+                                    Iterator<Licenciatura> it_list = list.iterator();
+
+                                %>
+                                <div class = "form-group">
+                                    <label>Licenciatura</label>	      
+                                    <select class="form-control " id="lic" name="lic">
+                                        <%                                        while (it_list.hasNext()) {
+                                                Licenciatura ob = new Licenciatura();
+                                                ob = it_list.next();
+                                        %>
+                                        <option value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>\n\
+                                        <% }
+
+                                        %>   
+                                    </select>
+                                </div>
+
+
+
                             </div>
-                   <div class = "form-group">
-                                <label>Status</label>	      
-                                <select class="form-control " id="status" name="status">
-                                    
-                                    <option value="Activo">Activo</option>
-                                    <option value="Inactivo">Inactivo</option>
-                                    <option value="Licencia">Licencia</option>
-                                    <option value="Sabatico">Sabatico</option>
-                                </select>
-                            </div>
-                    <%
-                               LicenciaturaDAO obj_Read_Values = new LicenciaturaDAO();
-                                List<Licenciatura> list = obj_Read_Values.listarLicenciaturas();
-                                Iterator<Licenciatura> it_list = list.iterator();
-                        
-                            %>
-                <div class = "form-group">
-                                <label>Licenciatura</label>	      
-                                <select class="form-control " id="lic" name="lic">
-                                    <%
-                                        while (it_list.hasNext()) {
-                                            Licenciatura ob = new Licenciatura();
-                                            ob = it_list.next();
-                                    %>
-                                    <option value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre() %></option>\n\
-                                    <% }
-                                        
-                                    %>   
-                                </select>
-                            </div>
-  
-  <button type="submit" class="bl btn btn-danger">Guardar</button>
-</form>
-</div>
-                        </div>
+                            <button type="submit" class="bl btn btn-danger pull-right">Guardar</button>
+
                         </div>
                     </div>
-                </div>
-                
-                </div>
-                <div class="clearfix"> </div>
+
+                </form>
             </div>
-            <div class="copy">
-                <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-            </div>
-            <!---->
-            <!--scrolling js-->
-            <script src="js/jquery.nicescroll.js"></script>
-            <script src="js/scripts.js"></script>
-            <!--//scrolling js-->
-    </body>
+        </div>
+
+    </div>
+    <div class="clearfix"> </div>
+</div>
+<div class="copy">
+    <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+</div>
+<!---->
+<!--scrolling js-->
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/scripts.js"></script>
+<!--//scrolling js-->
+</body>
 </html>
 

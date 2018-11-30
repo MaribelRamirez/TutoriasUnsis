@@ -109,84 +109,84 @@
         %>
 
         <jsp:include page="headAdmin.jsp" flush="true" />
-            <div id="page-wrapper" class="gray-bg dashbard-1">
-                <div class="content-main">
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="content-main">
 
-                    <!--banner-->	
-                    <div class="banner">
-                        <h2>
-                            <a href="indexAdmin.jsp">Home</a>
-                            <i class="fa fa-angle-right"></i>
-                            <span>Licenciaturas</span><br>
-                        </h2>
-                    </div>
-                    <div class="blank">
+                <!--banner-->	
+                <div class="banner">
+                    <h2>
+                        <a href="indexAdmin.jsp">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                        <span>Licenciaturas</span><br>
+                    </h2>
+                </div>
+                <div class="blank">
 
-                        <div class="blank-page">
-                            <%
-                                LicenciaturaDAO obj_Read_Values = new LicenciaturaDAO();
-                                List<Licenciatura> list = obj_Read_Values.listarLicenciaturas();
-                                Iterator<Licenciatura> it_list = list.iterator();
-                            %>
-                            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                <a href="agregarLicenciatura.jsp">
-                                 <img src="../resources/images/add.png" title="Agregar"/> Agregar nueva licenciatura</a>
-                                <thead>
-                                
+                    <div class="blank-page">
+                        <%
+                            LicenciaturaDAO obj_Read_Values = new LicenciaturaDAO();
+                            List<Licenciatura> list = obj_Read_Values.listarLicenciaturas();
+                            Iterator<Licenciatura> it_list = list.iterator();
+                        %>
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <a href="agregarLicenciatura.jsp">
+                                <img src="../resources/images/add.png" title="Agregar"/> Agregar nueva licenciatura</a>
+                            <thead>
+
                                 <tr>
                                     <th>Name</th>
                                     <th>Editar</th>
                                     <th>Eliminar</th>
-                                    
+
                                 </tr>
-                                </thead>
-                                
-                                <tbody>
-                                    <%
-                                        while (it_list.hasNext()) {
-                                            Licenciatura ob = new Licenciatura();
-                                            ob = it_list.next();
-                                    %>  
-                                    <tr>
-                                        <td><%=ob.getNombre()%></td>
-                                        <td>
-                                            <form id="formulario" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')">
-                                                <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
-                                                <input type="hidden" name = "action" id="action" value="update">
-                                       <button type="submit"  class="btn btn-link">Actualizar</button>
-                                            </form>
-                                            
-                                        </td>
-                                        <td >
-                                           <form id="formulario" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea eliminar la licenciatura?')">
-                                               <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
-                                                  <input type="hidden" name = "action" id="action" value="delete">
-                                       <button type="submit"  class="btn btn-link">Eliminar</button>
-                                            </form>
-                                        </td>
+                            </thead>
 
-                                    </tr>
-                                    <%
-                                        }
-                                    %>     
+                            <tbody>
+                                <%
+                                    while (it_list.hasNext()) {
+                                        Licenciatura ob = new Licenciatura();
+                                        ob = it_list.next();
+                                %>  
+                                <tr>
+                                    <td><%=ob.getNombre()%></td>
+                                    <td>
+                                        <form id="formulario" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')">
+                                            <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
+                                            <input type="hidden" name = "action" id="action" value="update">
+                                            <button type="submit"  class="btn btn-link">Actualizar</button>
+                                        </form>
+
+                                    </td>
+                                    <td >
+                                        <form id="formulario" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea eliminar la licenciatura?')">
+                                            <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
+                                            <input type="hidden" name = "action" id="action" value="delete">
+                                            <button type="submit"  class="btn btn-link">Eliminar</button>
+                                        </form>
+                                    </td>
+
+                                </tr>
+                                <%
+                                    }
+                                %>     
 
 
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
-
                 </div>
-                <div class="clearfix"> </div>
+
             </div>
-            <div class="copy">
-                <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-            </div>
-            <!---->
-            <!--scrolling js-->
-            <script src="js/jquery.nicescroll.js"></script>
-            <script src="js/scripts.js"></script>
-            <!--//scrolling js-->
+            <div class="clearfix"> </div>
+        </div>
+        <div class="copy">
+            <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+        </div>
+        <!---->
+        <!--scrolling js-->
+        <script src="js/jquery.nicescroll.js"></script>
+        <script src="js/scripts.js"></script>
+        <!--//scrolling js-->
     </body>
 </html>
 

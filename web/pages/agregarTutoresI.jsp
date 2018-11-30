@@ -114,51 +114,52 @@
             }
         %>
 
-       
-        
-         <jsp:include page="headAdminUpdate.jsp" flush="true" />
-         
-          <!--include-->
-        
-            <div id="page-wrapper" class="gray-bg dashbard-1">
-                <div class="content-main">
 
-                    <!--banner-->	
-                    <div class="banner">
-                        <h2>
-                            <a href="indexAdmin.jsp">Home</a>
-                            <i class="fa fa-angle-right"></i>
-                            <span>Agregar alumno</span><br>
-                        </h2>
-                    </div>
+
+        <jsp:include page="headAdminUpdate.jsp" flush="true" />
+
+        <!--include-->
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="content-main">
+
+                <!--banner-->	
+                <div class="banner">
+                    <h2>
+                        <a href="indexAdmin.jsp">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                        <span>Agregar alumno</span><br>
+                    </h2>
+                </div>
+                <form id="formulario" action="ControllerTutores" method="post" onsubmit="return confirm('Realmente desea guardar los datos')">
+                    <input type="hidden" name = "action" value="add">
+                    <input type="hidden" name = "tipo" value="individual">
+
+                    <input type="hidden" name = "matricula"  value="<c:out value="${alm.getMatricula()}"/>"/> 
+
                     <div class="blank">
 
-                        <div class="blank-page">
-                            <div class="grid-form1">
+                        <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <h3 id="forms-example" class="">Datos del alumno</h3>
-                                <form id="formulario" action="ControllerTutores" method="post" onsubmit="return confirm('Realmente desea guardar los datos')">
-                                    <input type="hidden" name = "action" value="add">
-                                    <input type="hidden" name = "tipo" value="individual">
-                                    
-                                    <input type="hidden" name = "matricula"  value="<c:out value="${alm.getMatricula()}"/>"/> 
-                                    <div class="form-group">
-                                        <label for="nomLicc">Nombre del alumno</label>
+                                <div class="form-group">
+                                    <label for="nomLicc">Nombre del alumno</label>
 
-                                        <input  required class="form-control" id="nombreAlum" name="nombreAlum"  value="<c:out value="${alm.getNombre()}"/>"/>
-                                    </div>
-                                    
-                                    <div class = "form-group">
-                                        <label>Grupo</label>
-                                        <input  required class="form-control" id="grupo" name="grupo"  value="<c:out value="${alm.getGrupo()}"/>"/>
-                                        
-                                    </div>
+                                    <input  required class="form-control" id="nombreAlum" name="nombreAlum"  value="<c:out value="${alm.getNombre()}"/>"/>
+                                </div>
 
-                                    <div class = "form-group">
-                                        <label>Licenciatura</label>
-                                        <input  required class="form-control" id="lic" name="lic"  value="<c:out value="${alm.getLicenciatura()}"/>"/>
-                                        
-                                    </div>
-                                        <%                                        
+                                <div class = "form-group">
+                                    <label>Grupo</label>
+                                    <input  required class="form-control" id="grupo" name="grupo"  value="<c:out value="${alm.getGrupo()}"/>"/>
+
+                                </div>
+
+                                <div class = "form-group">
+                                    <label>Licenciatura</label>
+                                    <input  required class="form-control" id="lic" name="lic"  value="<c:out value="${alm.getLicenciatura()}"/>"/>
+
+                                </div>
+                                <%
                                     ProfesorDAO obj_Read_Pro = new ProfesorDAO();
                                     List<Profesor> listPro = obj_Read_Pro.listarProfesores();
                                     Iterator<Profesor> list_Pro = listPro.iterator();
@@ -177,25 +178,27 @@
                                         %>   
                                     </select>
                                 </div>
-                                    <button type="submit" class="bl btn btn-danger">Guardar</button>
-                                </form>
+
                             </div>
+                            <button type="submit" class="bl btn btn-danger pull-right">Guardar</button>
+
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
-
         </div>
-        <div class="clearfix"> </div>
+
     </div>
-    <div class="copy">
-        <p><img src="resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-    </div>
-    <!---->
-    <!--scrolling js-->
-    <script src="js/jquery.nicescroll.js"></script>
-    <script src="js/scripts.js"></script>
-    <!--//scrolling js-->
+    <div class="clearfix"> </div>
+</div>
+<div class="copy">
+    <p><img src="resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+</div>
+<!---->
+<!--scrolling js-->
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/scripts.js"></script>
+<!--//scrolling js-->
 </body>
 </html>
 

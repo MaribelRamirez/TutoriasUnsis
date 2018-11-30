@@ -18,7 +18,7 @@
               Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <link href="../resources/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-        
+
         <!-- tabla de pdf -->
         <link href="../resources/css/stylePDF.css" rel='stylesheet' type='text/css' />
         <!-- Custom Theme files -->
@@ -50,10 +50,40 @@
 
 
 
+
+            });
+            $(document).ready(function () {
+                $('#example').DataTable();
             });
         </script>
 
+        <style>
 
+            body  {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                color: black;
+            }
+            table {
+                font-family: initial ;
+            }
+
+            th{
+
+                background-color: #A4E7A5;
+            }
+
+            tbody tr:hover {
+                background-color: #FFFF99;
+                cursor: default;
+
+            }
+            tbody td {
+                border-bottom: 1px solid #ddd;
+            }
+            textarea {
+                resize: none;
+            }
+        </style>
 
     </head>
     <body>
@@ -104,13 +134,13 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-<!--                                <tfoot>
-                                    <tr>
-                                        <td colspan="4">
-                                            <div id="paging"><ul><li><a href="#"><span>Previous</span></a></li><li><a href="#" class="active"><span>1</span></a></li><li><a href="#"><span>2</span></a></li><li><a href="#"><span>3</span></a></li><li><a href="#"><span>4</span></a></li><li><a href="#"><span>5</span></a></li><li><a href="#"><span>Next</span></a></li></ul>
-                                            </div>
-                                    </tr>
-                                </tfoot>-->
+                                <!--                                <tfoot>
+                                                                    <tr>
+                                                                        <td colspan="4">
+                                                                            <div id="paging"><ul><li><a href="#"><span>Previous</span></a></li><li><a href="#" class="active"><span>1</span></a></li><li><a href="#"><span>2</span></a></li><li><a href="#"><span>3</span></a></li><li><a href="#"><span>4</span></a></li><li><a href="#"><span>5</span></a></li><li><a href="#"><span>Next</span></a></li></ul>
+                                                                            </div>
+                                                                    </tr>
+                                                                </tfoot>-->
                                 <tbody>
                                     <%if (listar.size() > 0) {
                                             for (PdfVO listar2 : listar) {
@@ -136,7 +166,7 @@
                                         </td>
                                     </tr>
                                     <%}
-                    }%>
+                                        }%>
                                 </tbody>
                             </table>
                         </div>
