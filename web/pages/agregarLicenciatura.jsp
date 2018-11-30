@@ -126,7 +126,7 @@
                             <div class="grid-form1">
                                 <h3 id="forms-example" class="">Datos de la licenciatura</h3>
 
-                                <form id="formulario" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('Realmente desea guardar los datos')">
+                                <form id="formulario" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')">
 <input type="hidden" name = "action" value="add">
                                     <div class="form-group">
                                         <label for="nomLicc">Nombre de la licenciatura</label>

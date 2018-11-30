@@ -18,10 +18,11 @@ public class Profesor {
     private String licenciatura;
     private int idLicenciatura; 
     private String curp;
+    private int tipoTutoria;
     public Profesor() {
     }
 
-    public Profesor(int idProfesor, String nombre,String estatus,String grado,int idLicenciatura, String licenciatura,String curp) {
+    public Profesor(int idProfesor, String nombre,String estatus,String grado,int idLicenciatura, String licenciatura,String curp,int tipoTutoria) {
         this.idProfesor = idProfesor;
         this.nombre = nombre;
         this.idLicenciatura=idLicenciatura;
@@ -29,6 +30,15 @@ public class Profesor {
         this.estatus=estatus;
         this.licenciatura = licenciatura;
         this.curp=curp;
+        this.tipoTutoria=tipoTutoria;
+    }
+
+    public int getTipoTutoria() {
+        return tipoTutoria;
+    }
+
+    public void setTipoTutoria(int tipoTutoria) {
+        this.tipoTutoria = tipoTutoria;
     }
 
     public String getCurp() {

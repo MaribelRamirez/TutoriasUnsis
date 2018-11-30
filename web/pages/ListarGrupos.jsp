@@ -155,7 +155,7 @@
                                         <td><%=ob.getPeriodo()%></td>
                                         <td><%=ob.getLicenciatura()%></td>
                                         <td>
-                                            <form id="formulario" action="../ControllerGrupo" method="post">
+                                            <form id="formulario" action="../ControllerGrupo" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')">
                                                 <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo() %>">
                                                 <input type="hidden" name = "action" id="action" value="update">
                                        <button type="submit"  class="btn btn-link">Actualizar</button>
@@ -163,7 +163,7 @@
                                             
                                         </td>
                                         <td >
-                                           <form id="formulario" action="../ControllerGrupo" method="post">
+                                           <form id="formulario" action="../ControllerGrupo" method="post" onsubmit="return confirm('¿Realmente desea eliminar el grupo?')">
                                                <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
                                                   <input type="hidden" name = "action" id="action" value="delete">
                                        <button type="submit"  class="btn btn-link">Eliminar</button>

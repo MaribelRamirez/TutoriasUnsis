@@ -152,7 +152,9 @@
                             <a href="ListarPeriodos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Periodos</a>
                         </li>
 
-
+<li>
+                            <a href="ListarReportes.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Reportes tutorias</a>
+                        </li>
                     </ul>
                 </div>
             </div>

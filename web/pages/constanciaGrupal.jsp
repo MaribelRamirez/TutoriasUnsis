@@ -172,7 +172,8 @@
       <div class="form-group">
         <div id="filterDate2">
           
-          <!-- Datepicker as text field -->         
+          <!-- Datepicker as text field -->  
+          <label for="nombre">Elegir fecha para generar la constancia</label>
           <div class="input-group date" data-date-format="dd-mm-yyyy">
               <input  required readonly="readonly" type="text" class="form-control" name="datepicker" id="datepicker" >
             <div class="input-group-addon" >

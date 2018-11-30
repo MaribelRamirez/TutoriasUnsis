@@ -1,14 +1,12 @@
 <%-- 
-    Document   : indexProf
-    Created on : 29-jul-2018, 15:00:57
+    Document   : ListarReportes
+    Created on : 17-nov-2018, 21:52:54
     Author     : Marifer
 --%>
-
-
-<%@page import="model.Periodo"%>
-<%@page import="dao.PeriodoDAO"%>
-<%@page import="model.Grupo"%>
-<%@page import="dao.GrupoDAO"%>
+<%@page import="model.Profesor"%>
+<%@page import="dao.ProfesorDAO"%>
+<%@page import="model.Reporte"%>
+<%@page import="dao.ReporteDAO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -119,51 +117,119 @@
                         <h2>
                             <a href="indexAdmin.jsp">Home</a>
                             <i class="fa fa-angle-right"></i>
-                            <span>Periodos</span><br>
+                            <span>Reportes</span><br>
                         </h2>
                     </div>
                     <div class="blank">
 
                         <div class="blank-page">
-                            <%
-                                PeriodoDAO obj_Read_Values = new PeriodoDAO();
-                                List<Periodo> list = obj_Read_Values.listarPeriodos();
-                                Iterator<Periodo> it_list = list.iterator();
-                            %>
+                                <a data-toggle="modal" data-target="#exampleModal">
+                                    <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo reporte</a>
+                                
+                                    <form id="formulario" action="../ControllerReportesTutorias" method="post">
+                                        <input type="hidden" name = "action" value="cargar">
+                                        <!-- Modal --> <div class="modal" id="exampleModal" tabindex="-1" role="dialog"
+                                                            arialabelledby="exampleModalLabel" aria-hidden="true">   
+                                            <div class="modal-dialog" role="document">     
+                                                <div class="modal-content">      
+                                                    <div class="modal-header">     
+                                                        <h5 class="modal-title" id="exampleModalLabel">Selecciona el nombre del profesor del que 
+                                                            deseas guardar los datos de sus tutorias</h5>      
+
+                                                    </div>      
+                                                    <div class="modal-body">     
+
+
+                                                        <%
+                                                            ProfesorDAO obj_Read_Values2 = new ProfesorDAO();
+                                                            List<Profesor> list2= obj_Read_Values2.listarProfesoresActivos();
+                                                            Iterator<Profesor> it_list2 = list2.iterator();
+
+                                                        %>
+
+                                                        <div class = "form-group">
+                                                            <label>Profesores</label>	    
+
+                                                            <select class="form-control " id="prof" name="prof">
+                                                                <%                                        while (it_list2.hasNext()) {
+                                                                        Profesor ob = new Profesor();
+                                                                        ob = it_list2.next();
+                                                                %>
+                                                                <option value="<%= ob.getCurp()%>"> <%=ob.getNombre()%></option>\n\
+                                                                <% }
+
+                                                                %>   
+                                                            </select>
+                                                        </div>
+
+
+                                                    </div>     
+                                                    <div class="modal-footer">    
+                                                        <div class="col-lg-6">
+
+
+                                                            <button type="submit" class="btn btn-primary">Aceptar</button> 
+                                                            
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>   
+                                                        </div>
+
+
+                                                    </div>   
+                                                </div>   
+                                            </div>
+                                        </div> 
+                                    
+                                </form>
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                <a href="agregarPeriodo.jsp">
-                                    <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo periodo</a>
+                                
+                               
+                                    
                                 <thead>
 
                                     <tr>
 
-                                        <th>Periodo</th>
-                                        <th>Fecha inicio</th>
-                                        <th>fecha fin</th>
+                                        <th>Profesor</th>
+                                        <th>periodo</th>
                                         <th>Editar</th>
+                                        <th>Eliminar</th>
                                         
                                     </tr>
                                 </thead>
 
                                 <tbody>
+                                     <%
+                                ReporteDAO obj_Read_Values = new ReporteDAO();
+                                List<Reporte> list = obj_Read_Values.listarReportes();
+                                Iterator<Reporte> it_list = list.iterator();
+                            %>
+                               
                                     <%
                                         while (it_list.hasNext()) {
-                                            Periodo ob = new Periodo();
+                                            Reporte ob = new Reporte();
                                             ob = it_list.next();
                                     %>  
                                     <tr>
+                                        <td><%=ob.getProfesor()%></td>
                                         <td><%=ob.getPeriodo()%></td>
-                                        <td><%=ob.getFechaInicio()%></td>
-                                        <td><%=ob.getFechaFin()%></td>
                                         <td>
-                                            <form id="formulario" action="../ControllerPeriodo" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')">
-                                                <input type="hidden" name = "id" id="id" value="<%=ob.getIdPeriodo() %>">
+                                            <form id="formulario" action="../ControllerReportesTutorias" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')">
+                                                <input type="hidden" name = "id" id="id" value="<%=ob.getIdReporte() %>">
                                                 <input type="hidden" name = "action" id="action" value="update">
                                        <button type="submit"  class="btn btn-link">Actualizar</button>
                                             </form>
                                             
                                         </td>
-
+                                        <td >
+                                           <form id="formulario" action="../ControllerReportesTutorias" method="post" onsubmit="return confirm('¿Realmente desea eliminar el grupo?')">
+                                               <input type="hidden" name = "id" id="id" value="<%=ob.getIdReporte()%>">
+                                                  <input type="hidden" name = "action" id="action" value="delete">
+                                       <button type="submit"  class="btn btn-link">Eliminar</button>
+                                            </form>
+                                        </td>
 
                                     </tr>
                                     <%

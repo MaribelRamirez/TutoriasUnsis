@@ -111,6 +111,25 @@ public class PeriodoDAO {
         con.desconectar();
         return periodo;
     }
+            public Periodo obtenerPeriodoActual() throws SQLException {
+        Periodo periodo = null;
+
+        String sql = "SELECT *FROM periodo where idPeriodo=(SELECT  max(idPeriodo) FROM periodo)";
+        con.conectar();
+        connection = con.getJdbcConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        try (ResultSet res = statement.executeQuery()) {
+            if (res.next()) {
+                periodo = new Periodo(res.getInt("idPeriodo"),
+                        res.getString("periodo"),
+                        res.getDate("fechaInicio"),
+                        res.getDate("fechaFin"));
+                
+            }
+        }
+        con.desconectar();
+        return periodo;
+    }
       public void updatePeriodo(Periodo periodo) {
         try {
             String sql = "update periodo set  periodo=? , fechaInicio=?, fechaFin=?"

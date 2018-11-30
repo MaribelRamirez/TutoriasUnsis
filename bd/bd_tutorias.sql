@@ -1,13 +1,31 @@
-drop database tutoriasunsis;
+drop database if exists tutoriasunsis;
 create database tutoriasUnsis;
-use  tutoriasUnsis;
+use  tutoriasunsis;
+drop table reportes;
+create table reportes(
+idReporte int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+idPeriodo int not null REFERENCES periodo (idPeriodo) ON DELETE CASCADE ON UPDATE CASCADE,
+curp  varchar(21) not null REFERENCES profesores (curp) ON DELETE CASCADE ON UPDATE CASCADE,
+licenciatura int not null REFERENCES licenciaturas (idLicenciatura) ON DELETE CASCADE ON UPDATE CASCADE,
+entrego varchar(2) not null,
+aTiempo varchar(2) not null,
+fecha date not null,
+tipoTutoria varchar(10) not null,
+noSesiones int not null,
+noCanalizaciones int not null,
+alumnosAsignados int not null,
+alumnosReportados int not null,
+alumnosAsistencia int not null,
+observaciones varchar(250) not null,
+faltantes varchar(250) not null
+);
 
 create table licenciaturas(
 idLicenciatura int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 nombre varchar(20) not null
 );
 
-drop table grupos;
+-- drop table grupos;
 -- agregue periodo y licenciatura en el grupo y se cambio en id incremental por el grupo en si
 create table grupos(	
 idGrupo int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -36,16 +54,16 @@ create table usuarios(
 user varchar(10) primary key,
 pass varchar(50) not null,
 nivel int(1),
-curp varchar(20)  REFERENCES profesores (profesores) ON DELETE CASCADE ON UPDATE CASCADE
+curp varchar(21)  REFERENCES profesores (profesores) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
-
+-- Drop table tutores;
 create table tutores(
 idTutorado int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 matricula varchar(10) REFERENCES alumnos (matricula) ON DELETE CASCADE ON UPDATE CASCADE,
-curp  varchar(20) REFERENCES profesores (profesores) ON DELETE CASCADE ON UPDATE CASCADE,
-preriodo varchar (10),
+curp  varchar(21) REFERENCES profesores (curp) ON DELETE CASCADE ON UPDATE CASCADE,
+idPeriodo int  REFERENCES periodo (idPeriodo) ON DELETE CASCADE ON UPDATE CASCADE,
 tipo int 
 );
 
@@ -66,7 +84,7 @@ archivo blob not null
 -- agregue la tablas periodo
 create table periodo(
 idPeriodo int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-periodo varchar (7) not null,
+periodo varchar (20) not null,
 fechaInicio date,
 fechaFin Date
 );

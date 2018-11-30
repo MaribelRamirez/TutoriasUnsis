@@ -150,7 +150,7 @@
                                     <tr>
                                         <td><%=ob.getNombre()%></td>
                                         <td>
-                                            <form id="formulario" action="../ControllerLicenciatura" method="post">
+                                            <form id="formulario" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')">
                                                 <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
                                                 <input type="hidden" name = "action" id="action" value="update">
                                        <button type="submit"  class="btn btn-link">Actualizar</button>
@@ -158,7 +158,7 @@
                                             
                                         </td>
                                         <td >
-                                           <form id="formulario" action="../ControllerLicenciatura" method="post">
+                                           <form id="formulario" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea eliminar la licenciatura?')">
                                                <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
                                                   <input type="hidden" name = "action" id="action" value="delete">
                                        <button type="submit"  class="btn btn-link">Eliminar</button>

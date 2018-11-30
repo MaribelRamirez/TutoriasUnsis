@@ -78,7 +78,10 @@ public class ControllerGrupo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
+   response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        PrintWriter out=response.getWriter();
+        
         Grupo grupo = new Grupo();
         String action = request.getParameter("action");
         if (action.equalsIgnoreCase("update")) {
@@ -97,7 +100,9 @@ public class ControllerGrupo extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             try {
                 grupodao.eliminar(id);
-                response.sendRedirect("pages/ListarGrupos.jsp");
+                out.print("<html><head></head><body "
+                           + "onload=\"alert('Grupo eliminado de forma correcta');"
+                           + " window.location='pages/ListarGrupos.jsp'\"><body></html>");
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerGrupo.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -110,13 +115,15 @@ public class ControllerGrupo extends HttpServlet {
             grupo.setIdLicenciatura(lic);
             try {
                 grupodao.insertar(grupo);
-                response.sendRedirect("pages/ListarGrupos.jsp");
+                out.print("<html><head></head><body "
+                           + "onload=\"alert('Grupo insertado de forma correcta');"
+                           + " window.location='pages/ListarGrupos.jsp'\"><body></html>");
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (action.equalsIgnoreCase("edit")) {
-
-            int id = Integer.parseInt(request.getParameter("id"));
+            try {
+                   int id = Integer.parseInt(request.getParameter("id"));
             String grup = request.getParameter("grupo");
             int periodo = Integer.parseInt(request.getParameter("per"));
             int lic = Integer.parseInt(request.getParameter("lic"));
@@ -125,8 +132,21 @@ public class ControllerGrupo extends HttpServlet {
             grupo.setIdLicenciatura(lic);
             grupo.setIdPeriodo(periodo);
             grupodao.updateGrp(grupo);
-            response.sendRedirect("pages/ListarGrupos.jsp");
-
+            
+                out.print("<html><head></head><body "
+                           + "onload=\"alert('Grupo actualizado de forma correcta');"
+                           + " window.location='pages/ListarGrupos.jsp'\"><body></html>");
+                
+            } catch (Exception e) {
+            }
+            
+              
+            
+              
+                
+                
+            
+           
         }
 
     }

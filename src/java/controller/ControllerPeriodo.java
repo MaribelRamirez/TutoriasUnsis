@@ -85,7 +85,10 @@ public class ControllerPeriodo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
+   response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        PrintWriter out=response.getWriter();
+        
         Periodo periodo = new Periodo();
         String action = request.getParameter("action");
         
@@ -138,13 +141,17 @@ public class ControllerPeriodo extends HttpServlet {
 
             try {
                 periododao.insertar(periodo);
-                response.sendRedirect("pages/ListarPeriodos.jsp");
+                out.print("<html><head></head><body "
+                           + "onload=\"alert('Periodo agregado de forma correcta');"
+                           + " window.location='pages/ListarPeriodos.jsp'\"><body></html>");
+               
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (action.equalsIgnoreCase("edit")) {
 
-            int id = Integer.parseInt(request.getParameter("id"));
+            try {
+                int id = Integer.parseInt(request.getParameter("id"));
             String perio = request.getParameter("periodo");
             String fechaI = request.getParameter("fechaI");
             String fechaF = request.getParameter("fechaF");
@@ -171,8 +178,13 @@ public class ControllerPeriodo extends HttpServlet {
             periodo.setFechaFin(sqlFeF);
             
             periododao.updatePeriodo(periodo);
-            response.sendRedirect("pages/ListarPeriodos.jsp");
-
+            
+                 out.print("<html><head></head><body "
+                           + "onload=\"alert('Periodo actualizado de forma correcta');"
+                           + " window.location='pages/ListarPeriodos.jsp'\"><body></html>");
+            } catch (Exception e) {
+            }
+            
         }
 
     }

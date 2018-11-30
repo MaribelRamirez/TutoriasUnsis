@@ -24,6 +24,7 @@ import dao.GrupoDAO;
 import dao.ProfesorDAO;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
@@ -91,7 +92,7 @@ public class ControllerConstancias extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        String action = request.getParameter("action");
+          String action = request.getParameter("action");
        
         String calendario = request.getParameter("datepicker");
 
@@ -165,9 +166,9 @@ public class ControllerConstancias extends HttpServlet {
             int sizeList = Integer.parseInt(request.getParameter("sizeList"));
 
             response.setContentType("application/pdf");
-            OutputStream out = response.getOutputStream();
+            OutputStream outt = response.getOutputStream();
             Document documento = new Document(PageSize.A4, 70, 70, 70, 70);
-            PdfWriter.getInstance(documento, out);
+            PdfWriter.getInstance(documento, outt);
             documento.open();
             for (i = 1; i <= sizeList; i++) {
                 String profCurp = request.getParameter("prof".concat(Integer.toString(i)));

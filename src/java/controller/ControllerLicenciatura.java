@@ -78,6 +78,10 @@ public class ControllerLicenciatura extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+           response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        PrintWriter out=response.getWriter();
+        
         Licenciatura Lic = new Licenciatura();
         String action = request.getParameter("action");
         
@@ -98,7 +102,11 @@ public class ControllerLicenciatura extends HttpServlet {
             
             try {
                 licenciaturadao.eliminar(id);
-                response.sendRedirect("pages/ListarLicenciaturas.jsp");
+                
+                 out.print("<html><head></head><body "
+                           + "onload=\"alert('Licenciatura eliminada de forma correcta');"
+                           + " window.location='pages/ListarLicenciaturas.jsp'\"><body></html>");
+        
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -108,18 +116,28 @@ public class ControllerLicenciatura extends HttpServlet {
             Lic.setNombre(nomLic);
             try {
                 licenciaturadao.insertar(Lic);
-                response.sendRedirect("pages/ListarLicenciaturas.jsp");
+               
+                out.print("<html><head></head><body "
+                           + "onload=\"alert('Licenciatura agregada de forma correcta');"
+                           + " window.location='pages/ListarLicenciaturas.jsp'\"><body></html>");
+                
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else if (action.equalsIgnoreCase("edit")) {
-       int id = Integer.parseInt(request.getParameter("id"));
+            try {
+                int id = Integer.parseInt(request.getParameter("id"));
             String nomLic = request.getParameter("nombreLic");
             Lic.setIdLicenciatura(id);
             Lic.setNombre(nomLic);
             licenciaturadao.updateLic(Lic);
-            response.sendRedirect("pages/ListarLicenciaturas.jsp");
+            
+                out.print("<html><head></head><body "
+                           + "onload=\"alert('Licenciatura actualizada de forma correcta');"
+                           + " window.location='pages/ListarLicenciaturas.jsp'\"><body></html>");
+            } catch (Exception e) {
+            }
         }
             
     }

@@ -36,6 +36,14 @@
         <servlet-name>ControllerTutores</servlet-name>
         <servlet-class>controller.ControllerTutores</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControllerRegistroReportesTutorias</servlet-name>
+        <servlet-class>controller.ControllerRegistroReportesTutorias</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControllerConcentradoAsignaciones</servlet-name>
+        <servlet-class>controller.ControllerConcentradoAsignaciones</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllerAlumno</servlet-name>
         <url-pattern>/ControllerAlumno</url-pattern>
@@ -63,6 +71,14 @@
     <servlet-mapping>
         <servlet-name>ControllerReportesTutorias</servlet-name>
         <url-pattern>/ControllerReportesTutorias</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerRegistroReportesTutorias</servlet-name>
+        <url-pattern>/ControllerRegistroReportesTutorias</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerConcentradoAsignaciones</servlet-name>
+        <url-pattern>/ControllerConcentradoAsignaciones</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

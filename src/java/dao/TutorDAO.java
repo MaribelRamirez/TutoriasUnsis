@@ -33,31 +33,7 @@ public class TutorDAO {
         this.connection = connection;
     }
 
-//    // listar todos los productos
-//    public List<Grupo> listarGrupos() throws SQLException {
-//
-//        List<Grupo> listaGrupos = new ArrayList<Grupo>();
-//        String sql = "select idGrupo, grupo, grupos.idPeriodo , grupos.idLicenciatura, periodo.periodo, nombre " +
-//                    "from grupos , periodo, licenciaturas " +
-//                    "where grupos.idPeriodo= periodo.idPeriodo and grupos.idLicenciatura=licenciaturas.idLicenciatura;";
-//        connection = con.conectar();
-//        Statement statement = connection.createStatement();
-//        ResultSet resulSet = statement.executeQuery(sql);
-//
-//        while (resulSet.next()) {
-//            int id = resulSet.getInt("idGrupo");
-//            String gru = resulSet.getString("grupo");
-//            int idPerido = resulSet.getInt("grupos.idPeriodo");
-//            int idLicenciatura = resulSet.getInt("grupos.idLicenciatura");
-//            String periodo = resulSet.getString("periodo.periodo");
-//            String lic = resulSet.getString("nombre");
-//            Grupo grupo;
-//            grupo = new Grupo(id, gru, idPerido, idLicenciatura,periodo,lic);
-//            listaGrupos.add(grupo);
-//        }
-//        con.desconectar();
-//        return listaGrupos;
-//    }
+
 //
 //    public void eliminar(int id) throws SQLException {
 //

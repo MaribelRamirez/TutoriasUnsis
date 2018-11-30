@@ -76,7 +76,9 @@ public class ControllerProfesor extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
+   response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        PrintWriter out=response.getWriter();
         Profesor pro = new Profesor();
  String action = request.getParameter("action");
         if (action.equalsIgnoreCase("update")) {
@@ -96,10 +98,13 @@ public class ControllerProfesor extends HttpServlet {
       int idprf = Integer.parseInt(request.getParameter("idprf"));
             try {
                 profesordao.eliminar(idprf);
+                 out.print("<html><head></head><body "
+                           + "onload=\"alert('Profesor eliminado de forma correcta');"
+                           + " window.location='pages/indexAdmin.jsp'\"><body></html>");
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerProfesor.class.getName()).log(Level.SEVERE, null, ex);
             }
-            response.sendRedirect("pages/indexAdmin.jsp");
+            //response.sendRedirect("pages/indexAdmin.jsp");
 
         }
         
@@ -119,14 +124,16 @@ public class ControllerProfesor extends HttpServlet {
 
         try {
             profesordao.insertar(pro);
-            response.sendRedirect("pages/indexAdmin.jsp");
+             out.print("<html><head></head><body "
+                           + "onload=\"alert('Profesor agregado de forma correcta');"
+                           + " window.location='pages/indexAdmin.jsp'\"><body></html>");
         } catch (SQLException ex) {
             Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
         else if (action.equalsIgnoreCase("edit")) {
-        
-            int idprf = Integer.parseInt(request.getParameter("idprf"));
+            try {
+                int idprf = Integer.parseInt(request.getParameter("idprf"));
             String curp = request.getParameter("curp");
             String nombre = request.getParameter("nombre");
             String grado =request.getParameter("grado");
@@ -139,8 +146,15 @@ public class ControllerProfesor extends HttpServlet {
             pro.setEstatus(estatus);
             pro.setIdLicenciatura(lic);
             profesordao.updateProfesor(pro);
+            
+                out.print("<html><head></head><body "
+                           + "onload=\"alert('Profesor actualizado de forma correcta');"
+                           + " window.location='pages/indexAdmin.jsp'\"><body></html>");
+            } catch (Exception e) {
+            }
+            
 
-            response.sendRedirect("pages/indexAdmin.jsp");
+           
         
         
         }

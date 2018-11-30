@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Alumno;
 import model.ConnectionClass;
 
@@ -32,7 +34,30 @@ public class AlumnoDAO {
         this.connection = connection;
     }
 
-    // insertar artículo
+    public int countAlumnosTutorados(String curp) {
+       
+         int count=0;
+        try {
+            String sql = "select alumnos.matricula , alumnos.nombre, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+                    " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
+                    " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
+                    " and tutores.curp='"+curp+"';";
+            System.out.println("consulta"+sql);
+            connection = con.conectar();
+            Statement statement = connection.createStatement();
+            ResultSet resulSet = statement.executeQuery(sql);
+           
+            while (resulSet.next()) {
+                count ++;
+            }
+            con.desconectar();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+}
+    
     public boolean insertar(Alumno alumno) throws SQLException {
         try {
             String sql = "INSERT INTO alumnos (matricula,nombre,idGrupo,idLicenciatura)"
@@ -63,7 +88,6 @@ public class AlumnoDAO {
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
-
         while (resulSet.next()) {
             String matricula = resulSet.getString("matricula");
             String nombre = resulSet.getString("alumnos.nombre");
@@ -116,7 +140,6 @@ public class AlumnoDAO {
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
-
         while (resulSet.next()) {
 	 String  matricula = resulSet.getString("alumnos.matricula");
 	 String nombre = resulSet.getString("alumnos.nombre");
@@ -134,7 +157,7 @@ public class AlumnoDAO {
     public List<Alumno> listarAlumnosTutoradosByCarrera(String curp, String carrera) throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "select alumnos.matricula , alumnos.nombre, grupos.nombre , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+        String sql = "select alumnos.matricula , alumnos.nombre, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
             " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
             " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo and licenciaturas.nombre='"+carrera+"' and tutores.curp='"+curp+"';"; 
         System.out.println("consulta"+sql);
@@ -145,7 +168,7 @@ public class AlumnoDAO {
         while (resulSet.next()) {
 	 String  matricula = resulSet.getString("alumnos.matricula");
 	 String nombre = resulSet.getString("alumnos.nombre");
-	 String grupo = resulSet.getString("grupos.nombre");
+	 String grupo = resulSet.getString("grupos.grupo");
 	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
 	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
          int tipo = resulSet.getInt("tipo");
@@ -159,7 +182,7 @@ public class AlumnoDAO {
     public List<Alumno> listarAlumnosTutoradosIndividual(String curp) throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "select alumnos.matricula , alumnos.nombre, grupos.nombre , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+        String sql = "select alumnos.matricula , alumnos.nombre, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
             " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
             " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
             " and tutores.curp='"+curp+"' and tutores.tipo=1;";
@@ -171,7 +194,7 @@ public class AlumnoDAO {
         while (resulSet.next()) {
 	 String  matricula = resulSet.getString("alumnos.matricula");
 	 String nombre = resulSet.getString("alumnos.nombre");
-	 String grupo = resulSet.getString("grupos.nombre");
+	 String grupo = resulSet.getString("grupos.grupo");
 	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
 	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
          int tipo = resulSet.getInt("tipo");
@@ -185,10 +208,11 @@ public class AlumnoDAO {
        public List<Alumno> listarAlumnosTutoradosIndividualByCarrera(String curp,String carrera) throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "select alumnos.matricula , alumnos.nombre, grupos.nombre , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+        String sql = "select alumnos.matricula , alumnos.nombre, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
             " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
             " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
             " and tutores.curp='"+curp+"' and tutores.tipo=1 and licenciaturas.nombre='"+carrera+"';";
+        
         System.out.println("consulta"+sql);
         connection = con.conectar();
         Statement statement = connection.createStatement();
@@ -197,7 +221,7 @@ public class AlumnoDAO {
         while (resulSet.next()) {
 	 String  matricula = resulSet.getString("alumnos.matricula");
 	 String nombre = resulSet.getString("alumnos.nombre");
-	 String grupo = resulSet.getString("grupos.nombre");
+	 String grupo = resulSet.getString("grupos.grupo");
 	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
 	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
          int tipo = resulSet.getInt("tipo");
@@ -238,7 +262,7 @@ public class AlumnoDAO {
     public List<Alumno> listarAlumnosTutoradosGrupal(String curp) throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "select alumnos.matricula , alumnos.nombre, grupos.nombre , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+        String sql = "select alumnos.matricula , alumnos.nombre, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
             " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
             " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
             " and tutores.curp='"+curp+"' and tutores.tipo=2;";
@@ -250,7 +274,7 @@ public class AlumnoDAO {
         while (resulSet.next()) {
 	 String  matricula = resulSet.getString("alumnos.matricula");
 	 String nombre = resulSet.getString("alumnos.nombre");
-	 String grupo = resulSet.getString("grupos.nombre");
+	 String grupo = resulSet.getString("grupos.grupo");
 	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
 	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
          int tipo = resulSet.getInt("tipo");

@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.ConnectionClass;
 import model.Licenciatura;
 
@@ -32,6 +34,28 @@ public class LicenciaturaDAO {
         this.connection = connection;
     }
 
+     public int countLicenciaturas() {
+       
+         int count=0;
+        try {
+            String sql = "select *from licenciaturas;";
+            connection = con.conectar();
+            Statement statement = connection.createStatement();
+            ResultSet resulSet = statement.executeQuery(sql);
+           
+            while (resulSet.next()) {
+                count ++;
+            }
+            con.desconectar();
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+}
+    
     // listar todos los productos
     public List<Licenciatura> listarLicenciaturas() throws SQLException {
 

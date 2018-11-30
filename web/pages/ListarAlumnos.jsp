@@ -42,7 +42,6 @@
 
         <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
-
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -63,6 +62,8 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
+            
+           
         </script>
 
         <style>
@@ -90,7 +91,7 @@
             }
 
         </style>
-
+        
     </head>
     <body>
         <%
@@ -109,6 +110,7 @@
         %>
 
         <jsp:include page="headAdmin.jsp" flush="true" />
+      
             <div id="page-wrapper" class="gray-bg dashbard-1">
                 <div class="content-main">
 
@@ -127,6 +129,7 @@
                                 AlumnoDAO obj_Read_Values = new AlumnoDAO();
                                 List<Alumno> list = obj_Read_Values.listarAlumnos();
                                 Iterator<Alumno> it_list = list.iterator();
+                               
                             %>
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <a href="agregarAlumno.jsp">
@@ -159,7 +162,7 @@
                                         <td><%=ob.getGrupo() %></td>
                                         <td><%=ob.getLicenciatura()%></td>
                                         <td>
-                                            <form id="formulario" action="../ControllerAlumno" method="post">
+                                            <form id="formulario" action="../ControllerAlumno" method="post" onsubmit="return  confirm('¿Realmente desea actualizars los datos?')">
                                                 <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
                                                 <input type="hidden" name = "action" id="action" value="update">
                                        <button type="submit"  class="btn btn-link">Actualizar</button>
@@ -167,7 +170,7 @@
                                             
                                         </td>
                                         <td >
-                                           <form id="formulario" action="../ControllerAlumno" method="post">
+                                           <form id="formulario" action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea eliminar al alumno?')">
                                                <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
                                                   <input type="hidden" name = "action" id="action" value="delete">
                                        <button type="submit"  class="btn btn-link">Eliminar</button>

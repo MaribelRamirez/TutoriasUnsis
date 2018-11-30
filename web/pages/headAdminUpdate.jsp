@@ -91,7 +91,8 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret">Coria olgin<i class="caret"></i></span><img src="../resources/images/in1.jpg"></a>
+                                <a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown">
+                                    <span class=" name-caret">Coria olgin<i class="caret"></i></span><img src="resources/images/in1.jpg"></a>
                                 <ul class="dropdown-menu " role="menu">
                                     <li><a href="profile.html"><i class="fa fa-user"></i>Edit Profile</a></li>
                                     <li><a href="inbox.html"><i class="fa fa-envelope"></i>Inbox</a></li>
@@ -106,39 +107,58 @@
 
                     </div>
 
-                    <div class="navbar-default sidebar" role="navigation">
-                        <div class="sidebar-nav navbar-collapse">
-                            <img src="resources/images/escudo.png" width="90" height="90"> <br><br>
-                            <ul class="nav" id="side-menu">
+                     <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <img src="resources/images/escudo.png" width="90" height="90"> <br><br>
+                    <ul class="nav" id="side-menu">
 
-                                <li>
-                                    <a href="pages/indexAdmin.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Maestros</a>
-                                </li>
-                                <li>
-                                    <a href="pages/ListarAlumnos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Alumnos</a>
-                                </li>
-                                 <li>
-                                    <a href="pages/ListarLicenciaturas.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Licenciaturas</a>
-                                </li>
-                                <li>
-                                    <a href="pages/ListarGrupos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Grupos</a>
-                                </li>
-                                <li>
-                                    <a href="pages/loadAlumnos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Actualizar listas</a>
-                                </li>
-                                <li>
-                                    <a href="XX.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Generar constancias</a>
-                                </li>
-                                <li>
-                                    <a href="pages/cargarArchivos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Cargar archivos</a>
-                                </li>
-                                <li>
-                                    <a href="pages/agregarTutoresG.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Crear tutorias grupales</a>
-                                </li>
-                                <li>
-                                    <a href="pages/ListarPeriodos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Periodos</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                        <li>
+                            <a href="pages/indexAdmin.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-file-o nav_icon"></i>Maestros
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/ListarAlumnos.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-file-o nav_icon"></i>Alumnos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/ListarLicenciaturas.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-file-o nav_icon"></i>Licenciaturas</a>
+                        </li>
+
+                        <li>
+                            <a href="pages/ListarGrupos.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-file-o nav_icon"></i>Grupos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/loadAlumnos.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-file-o nav_icon"></i>Actualizar listas
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="pages/generarReportes.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-clipboard nav_icon">  </i>Generar documentos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/cargarArchivos.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-file-o nav_icon">  </i>Cargar archivos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/agregarTutoresG.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Crear tutorias grupales</a>
+                        </li>
+                        <li>
+                            <a href="pages/ListarPeriodos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Periodos</a>
+                        </li>
+
+<li>
+                            <a href="pages/ListarReportes.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Reportes tutorias</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             </nav>

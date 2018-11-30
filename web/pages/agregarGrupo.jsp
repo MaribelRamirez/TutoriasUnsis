@@ -128,7 +128,7 @@
                         <div class="grid-form1">
                             <h3 id="forms-example" class="">Datos del grupo</h3>
 
-                            <form id="formulario" action="../ControllerGrupo" method="post" onsubmit="return confirm('Realmente desea guardar los datos')">
+                            <form id="formulario" action="../ControllerGrupo" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')">
                                 <input type="hidden" name = "action" value="add">
                                 <div class="form-group">
                                     <label for="nomGrup">Nombre del grupo</label>

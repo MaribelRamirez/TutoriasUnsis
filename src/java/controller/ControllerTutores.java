@@ -8,6 +8,7 @@ package controller;
 import dao.AlumnoDAO;
 import dao.TutorDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
@@ -73,6 +74,11 @@ public class ControllerTutores extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+           response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        PrintWriter out=response.getWriter();
+        
         System.err.println("llego al post");
         Tutor tutor = new Tutor();
         String action = request.getParameter("action");

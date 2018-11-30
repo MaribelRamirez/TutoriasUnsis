@@ -34,7 +34,7 @@ public class GrupoDAO {
 public Grupo obtenerGrupobyProf(String curp) throws SQLException {
         Grupo grupo = null;
 
-        String sql ="select grupos.nombre, grupos.idGrupo from tutores inner join alumnos inner join grupos on tutores.matricula=alumnos.matricula and alumnos.idGrupo=grupos.idGrupo where tutores.tipo=2 and tutores.curp= ? ";
+        String sql ="select grupos.grupo, grupos.idGrupo from tutores inner join alumnos inner join grupos on tutores.matricula=alumnos.matricula and alumnos.idGrupo=grupos.idGrupo where tutores.tipo=2 and tutores.curp= ? ";
         
         con.conectar();
         connection = con.getJdbcConnection();
@@ -45,7 +45,7 @@ public Grupo obtenerGrupobyProf(String curp) throws SQLException {
         ResultSet res = statement.executeQuery();
         if (res.next()) {
             
-                     grupo = new Grupo(res.getInt("idGrupo"), res.getString("nombre"),0 ,0,"","");
+                     grupo = new Grupo(res.getInt("idGrupo"), res.getString("grupo"),0 ,0,"","");
                
                     
         }
@@ -83,7 +83,7 @@ public Grupo obtenerGrupobyProf(String curp) throws SQLException {
         public List<Grupo> listarGruposTutorados(String curp,String carrera) throws SQLException {
 
         List<Grupo> listaGrupos = new ArrayList<Grupo>();
-        String sql = "select  grupos.nombre , grupos.idGrupo from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo and tutores.curp='"+curp+"' and tutores.tipo=2 and licenciaturas.nombre='"+carrera+"' group by(grupos.nombre);";
+        String sql = "select  grupos.grupo , grupos.idGrupo from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo and tutores.curp='"+curp+"' and tutores.tipo=2 and licenciaturas.nombre='"+carrera+"' group by(grupos.grupo);";
          
         System.out.println("consulta"+sql);
         connection = con.conectar();

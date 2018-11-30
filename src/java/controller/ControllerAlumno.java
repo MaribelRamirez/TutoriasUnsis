@@ -5,8 +5,10 @@
  */
 package controller;
 
+
 import dao.AlumnoDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +23,7 @@ import model.Alumno;
 /**
  *
  * @author Marifer
- */
+ */         
 @WebServlet(name = "ControllerAlumno", urlPatterns = {"/ControllerAlumno"})
 public class ControllerAlumno extends HttpServlet {
 
@@ -43,9 +45,8 @@ public class ControllerAlumno extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
-
+  
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -74,6 +75,9 @@ public class ControllerAlumno extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
 
         Alumno alum = new Alumno();
         String action = request.getParameter("action");
@@ -93,13 +97,17 @@ public class ControllerAlumno extends HttpServlet {
             try {
                 alumnodao.eliminar(matricula);
 
+                out.print("<html><head></head><body "
+                        + "onload=\"alert('Alumno eliminado de forma correcta');"
+                        + " window.location='pages/ListarAlumnos.jsp'\"><body></html>");
+
+//response.sendRedirect("ListarAlumnos.jsp");
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerAlumno.class.getName()).log(Level.SEVERE, null, ex);
             }
-            response.sendRedirect("pages/ListarAlumnos.jsp");
+            
         } else if (action.equalsIgnoreCase("add")) {
-
-            String matricula =request.getParameter("matricula");
+            String matricula = request.getParameter("matricula");
             System.out.println("esta es la matricula" + matricula);
             String nombre = request.getParameter("nombre");
             int grupo = Integer.parseInt(request.getParameter("grupo"));
@@ -111,24 +119,32 @@ public class ControllerAlumno extends HttpServlet {
 
             try {
                 alumnodao.insertar(alum);
-                response.sendRedirect("pages/ListarAlumnos.jsp");
+               
+                out.print("<html><head></head><body "
+                        + "onload=\"alert('Alumno agregado de forma correcta');"
+                     + " window.location='pages/ListarAlumnos.jsp'\"><body></html>");
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (action.equalsIgnoreCase("edit")) {
 
-            String matricula =request.getParameter("matricula");
-            System.out.println("esta es la matricula que llega a edit" + matricula);
-            String nombreGrp = request.getParameter("nombreAlum");
-            int grupo = Integer.parseInt(request.getParameter("grupo"));
-            int lic = Integer.parseInt(request.getParameter("lic"));
-            alum.setMatricula(matricula);
-            alum.setNombre(nombreGrp);
-            alum.setIdGrupo(grupo);
-            alum.setIdLicenciatura(lic);
-            alumnodao.updateAlumno(alum);
+            try {
+                String matricula = request.getParameter("matricula");
+                System.out.println("esta es la matricula que llega a edit" + matricula);
+                String nombreGrp = request.getParameter("nombreAlum");
+                int grupo = Integer.parseInt(request.getParameter("grupo"));
+                int lic = Integer.parseInt(request.getParameter("lic"));
+                alum.setMatricula(matricula);
+                alum.setNombre(nombreGrp);
+                alum.setIdGrupo(grupo);
+                alum.setIdLicenciatura(lic);
+                alumnodao.updateAlumno(alum);
 
-            response.sendRedirect("pages/ListarAlumnos.jsp");
+                out.print("<html><head></head><body "
+                        + "onload=\"alert('Alumno actualizado de forma correcta');"
+                        + " window.location='pages/ListarAlumnos.jsp'\"><body></html>");
+            } catch (Exception e) {
+            }
 
         }
 

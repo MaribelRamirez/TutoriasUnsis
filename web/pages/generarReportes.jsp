@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="model.Periodo"%>
+<%@page import="dao.PeriodoDAO"%>
 <%@page import="model.Profesor"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
@@ -36,33 +38,7 @@
         <script src="../resources/js/custom.js"></script>
         <script src="../resources/js/screenfull.js"></script>
 
-        <script src="../resources/tablas/js/jquery-3.3.1.js"></script>  
-        <script src="../resources/tablas/js/jquery.dataTables.min.js"></script>
-        <script src="../resources/tablas/js/dataTables.bootstrap.min.js"></script> 
 
-        <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
-
-
-
-
-        <script src="../resources/calendario/js/bootstrap.min.js"></script>
-        <script src="../resources/calendario/js/jquery-1.8.3.js"></script>
-
-        <link href="../resources/calendario/css/bootstrap-datepicker3.min.css" rel='stylesheet' type='text/css'/>
-        <script src="../resources/calendario/js/bootstrap-datepicker.min.js"></script>
-        <!--link href="../resources/calendario/css/bootstrap.min.css" rel="stylesheet" rel='stylesheet' type='text/css'/-->
-        <script type='text/javascript'>
-            $(function () {
-                $('.input-group.date').datepicker({
-                    calendarWeeks: true,
-                    todayHighlight: true,
-                    autoclose: true
-                }).datepicker("setDate", new Date());
-            });
-            
-
-
-        </script>
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -83,8 +59,8 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
-            
-            
+
+
         </script>
 
         <style>
@@ -160,40 +136,103 @@
                             <ul class="nav tabs">
 
                                 <li class="active">
-                                    
+
                                     <form id="formulario" action="constanciaGrupal.jsp" method="post">
-                                    
-                                            <button type="submit"  class=" fa fa-file-o btn btn-link">  Constancia grupal</button>
-                                        </form>
+
+                                        <button type="submit"  class=" fa fa-file-o btn btn-link">  Constancia grupal</button>
+                                    </form>
                                 </li>
                                 <li class="active">
-                                    
+
                                     <form id="formulario" action="constanciaIndividual.jsp" method="post">
-                                    
-                                            <button type="submit"  class=" fa fa-file-o btn btn-link"> Constancia individual</button>
-                                        </form>
-                                </li>
-                                   <li class="active">
-                                        <form id="formulario" action="../ControllerReporteAsignacionTutorias" method="post">
-                                    
-                                            <button type="submit"  class=" fa fa-file-o btn btn-link">Asignacion de Tutorias</button>
-                                        </form>
+
+                                        <button type="submit"  class=" fa fa-file-o btn btn-link"> Constancia individual</button>
+                                    </form>
                                 </li>
                                 <li class="active">
-                                        <form id="formulario" action="../ControllerReportesTutorias" method="post">
+                                    <button type="button"  class=" fa fa-file-o btn btn-link" data-toggle="modal"  data-target="#exampleModal">Reportes de Tutorias</button>
+                               
                                     
-                                            <button type="submit"  class=" fa fa-file-o btn btn-link">Registro de reportes de tutorias</button>
-                                        </form>
+                                   <form id="formulario" action="../ControllerReportesTutorias" method="post">
+                                        <input type="hidden" name = "action" value="reporte">
+                                        <!-- Modal --> <div class="modal" id="exampleModal" tabindex="-1" role="dialog"
+                                                            arialabelledby="exampleModalLabel" aria-hidden="true">   
+                                            <div class="modal-dialog" role="document">     
+                                                <div class="modal-content">      
+                                                    <div class="modal-header">     
+                                                        <h5 class="modal-title" id="exampleModalLabel">Selecciona el periodo del que 
+                                                            deseas generar el reporte</h5>      
+
+                                                    </div>      
+                                                    <div class="modal-body">     
+
+
+                                                        <%
+                                                            PeriodoDAO obj_Read_Values = new PeriodoDAO();
+                                                            List<Periodo> list= obj_Read_Values.listarPeriodos();
+                                                            Iterator<Periodo> it_list = list.iterator();
+
+                                                        %>
+
+                                                        <div class = "form-group">
+                                                            <label>Periodos</label>	    
+
+                                                            <select class="form-control " id="IdPeriodo" name="IdPeriodo">
+                                                                 <option value="todos">Todos</option>
+                                                                <%                                       
+                                                                    while (it_list.hasNext()) {
+                                                                        Periodo ob = new Periodo();
+                                                                        ob = it_list.next();
+                                                                %>
+                                                                <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
+                                                               
+                                                                <% }
+
+                                                                %>   
+                                                            </select>
+                                                        </div>
+
+
+                                                    </div>     
+                                                    <div class="modal-footer">    
+                                                        <div class="col-lg-6">
+
+
+                                                            <button type="submit" class="btn btn-primary">Aceptar</button> 
+                                                            
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>   
+                                                        </div>
+
+
+                                                    </div>   
+                                                </div>   
+                                            </div>
+                                        </div> 
+                                    
+                                </form>
+
                                 </li>
-                                    <li class="active">
-                                        <form id="formulario" action="../ControllerAsignacionTutorias" method="post">
-                                    
-                                            <button type="submit"  class=" fa fa-file-o btn btn-link">Concentrado de asignaciones</button>
-                                        </form>
+                               
+                                           
+                                <li class="active">
+                                    <form id="formulario" action="../ControllerReporteAsignacionTutorias" method="post">
+
+                                        <button type="submit"  class=" fa fa-file-o btn btn-link">Asignación de tutorias</button>
+                                    </form>
+                                </li>
+                                <li class="active">
+                                    <form id="formulario" action="../ControllerConcentradoAsignaciones" method="post">
+
+                                        <button type="submit"  class=" fa fa-file-o btn btn-link">Concentrado de asignaciones</button>
+                                    </form>
                                 </li>
                             </ul>
                         </nav>
-       </div>
+                    </div>
                 </div>
 
             </div>
@@ -202,13 +241,15 @@
         <div class="copy">
             <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
         </div>
+
+
         <!---->
         <!--scrolling js-->
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
         <!--//scrolling js-->
-        
-        
+
+
     </body>
 </html>
 
