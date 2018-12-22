@@ -102,10 +102,10 @@ public class ProfesorDAO {
 
         return profesor;
     }
-    public List<Profesor> tutorGrupal() throws SQLException {
+    public List<Profesor> tutorGrupal(int periodo) throws SQLException {
 
         List<Profesor> listaProfesores = new ArrayList<Profesor>();
-       String sql = "select distinct profesores.idProfesor,profesores.estatus,profesores.nombre,profesores.grado,licenciaturas.nombre,profesores.curp from profesores,tutores,licenciaturas where profesores.curp=tutores.curp and licenciaturas.idLicenciatura=licenciatura and tutores.tipo=2";
+       String sql = "select distinct profesores.idProfesor,profesores.estatus,profesores.nombre,profesores.grado,licenciaturas.nombre,profesores.curp from profesores,tutores,licenciaturas where profesores.curp=tutores.curp and licenciaturas.idLicenciatura=licenciatura and tutores.tipo=2 and tutores.idPeriodo='"+periodo+"';";
 
         connection = con.conectar();
         Statement statement = connection.createStatement();
@@ -127,10 +127,10 @@ public class ProfesorDAO {
         return listaProfesores;
     }
     
-    public List<Profesor> tutorIndividual() throws SQLException {
+    public List<Profesor> tutorIndividual(int periodo) throws SQLException {
 
         List<Profesor> listaProfesores = new ArrayList<Profesor>();
-        String sql = "select distinct profesores.idProfesor,profesores.estatus,profesores.nombre,profesores.grado,licenciaturas.nombre,profesores.curp from profesores,tutores,licenciaturas where profesores.curp=tutores.curp and licenciaturas.idLicenciatura=licenciatura and tutores.tipo=1 ";
+        String sql = "select distinct profesores.idProfesor,profesores.estatus,profesores.nombre,profesores.grado,licenciaturas.nombre,profesores.curp from profesores,tutores,licenciaturas where profesores.curp=tutores.curp and licenciaturas.idLicenciatura=licenciatura and tutores.tipo=1 and tutores.idPeriodo='"+periodo+"';";
 
         connection = con.conectar();
         Statement statement = connection.createStatement();

@@ -153,8 +153,10 @@
 
 
                         <%
+                            PeriodoDAO obj_Read_periodo = new PeriodoDAO();
                             ProfesorDAO obj_Read_Values = new ProfesorDAO();
-                            List<Profesor> list = obj_Read_Values.tutorGrupal();
+                          ////int periodo = Integer.parseInt();
+                            List<Profesor> list = obj_Read_Values.tutorGrupal(obj_Read_periodo.obtenerPeriodoActual().getIdPeriodo());
                             Iterator<Profesor> it_list = list.iterator();
                             int cont = list.size();
 

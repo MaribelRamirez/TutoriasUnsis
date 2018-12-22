@@ -148,8 +148,9 @@
                     <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
                         <%
+                            PeriodoDAO obj_Read_periodo = new PeriodoDAO();
                             ProfesorDAO obj_Read_Values = new ProfesorDAO();
-                            List<Profesor> list = obj_Read_Values.tutorIndividual();
+                            List<Profesor> list = obj_Read_Values.tutorIndividual(obj_Read_periodo.obtenerPeriodoActual().getIdPeriodo());
                             Iterator<Profesor> it_list = list.iterator();
                             int cont = list.size();
 

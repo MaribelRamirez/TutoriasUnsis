@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
@@ -377,6 +378,7 @@ public class ControllerConstancias extends HttpServlet {
                             documento.add(par4);
                             documento.newPage();
                         } catch (Exception e) {
+                            
                         }
                     }
                     
