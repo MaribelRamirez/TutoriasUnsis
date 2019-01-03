@@ -44,7 +44,10 @@
 
         <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
-
+        <script src="../resources/alert/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../resources/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="../resources/alert/google.css">
+         
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -65,6 +68,28 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
+            
+            function Actualizar() {
+                swal({    
+                    title: "aviso!!",    
+                    text: "¿En verdad deseas actualizar el periodor?",    
+                    type: "warning",    
+                    showCancelButton: true,    
+                    confirmButtonColor: "#DD6B55",    
+                    confirmButtonText: "SI",    
+                    cancelButtonText: "NO",    
+                    closeOnConfirm: false,    
+                    closeOnCancel: false },   
+
+                    function(isConfirm){    
+                      if (isConfirm) {  
+                          document.getElementById('formularioAct').submit();
+                      } else {      
+                          window.location='ListarPeriodos.jsp';  
+                      }  
+                    });
+                  };
+          
         </script>
 
         <style>
@@ -156,11 +181,12 @@
                                     <td><%=ob.getFechaInicio()%></td>
                                     <td><%=ob.getFechaFin()%></td>
                                     <td>
-                                        <form id="formulario" action="../ControllerPeriodo" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')">
+                                        <form id="formularioAct" name="formularioAct" action="../ControllerPeriodo" method="post" >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdPeriodo()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
-                                            <button type="submit"  class="btn btn-link">Actualizar</button>
-                                        </form>
+                                            </form>
+                                            <button type="button" onclick="Actualizar()" class="btn btn-link">Actualizar</button>
+                                    
 
                                     </td>
 

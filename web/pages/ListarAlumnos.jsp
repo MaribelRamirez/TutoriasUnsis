@@ -39,9 +39,12 @@
         <script src="../resources/tablas/js/jquery-3.3.1.js"></script>  
         <script src="../resources/tablas/js/jquery.dataTables.min.js"></script>
         <script src="../resources/tablas/js/dataTables.bootstrap.min.js"></script> 
-
         <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
+         <script src="../resources/alert/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../resources/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="../resources/alert/google.css">
+            
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -62,6 +65,52 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
+
+
+
+            function Actualizar() {
+                swal({    
+                    title: "aviso!!",    
+                    text: "¿En verdad deseas actualizar al alumno?",    
+                    type: "warning",    
+                    showCancelButton: true,    
+                    confirmButtonColor: "#DD6B55",    
+                    confirmButtonText: "SI",    
+                    cancelButtonText: "NO",    
+                    closeOnConfirm: false,    
+                    closeOnCancel: false },   
+
+                    function(isConfirm){    
+                      if (isConfirm) {  
+                          document.getElementById('formularioAct').submit();
+                      } else {      
+                          window.location='ListarAlumnos.jsp';  
+                      }  
+                    });
+                  };
+          
+          
+           function Eliminar() {
+                swal({    
+                    title: "aviso!!",    
+                    text: "¿En verdad deseas eliminar al alumno?",    
+                    type: "warning",    
+                    showCancelButton: true,    
+                    confirmButtonColor: "#DD6B55",    
+                    confirmButtonText: "SI",    
+                    cancelButtonText: "NO",    
+                    closeOnConfirm: false,    
+                    closeOnCancel: false },   
+
+                    function(isConfirm){    
+                      if (isConfirm) {  
+                          document.getElementById('formularioElim').submit();
+                      } else {      
+                          window.location='ListarAlumnos.jsp';  
+                      }  
+                    });
+                  };
+        </script>
 
 
         </script>
@@ -162,19 +211,20 @@
                                     <td><%=ob.getGrupo()%></td>
                                     <td><%=ob.getLicenciatura()%></td>
                                     <td>
-                                        <form id="formulario" action="../ControllerAlumno" method="post" onsubmit="return  confirm('¿Realmente desea actualizars los datos?')">
+                                        <form id="formularioAct" id="formularioAct"  action="../ControllerAlumno" method="post" >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
-                                            <button type="submit"  class="btn btn-link">Actualizar</button>
                                         </form>
+                                      <button type="button" onclick="Actualizar()" class="btn btn-link">Actualizar</button>
 
                                     </td>
                                     <td >
-                                        <form id="formulario" action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea eliminar al alumno?')">
+                                        <form id="formularioElim" name="formularioElim" action="../ControllerAlumno" method="post" >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
                                             <input type="hidden" name = "action" id="action" value="delete">
-                                            <button type="submit"  class="btn btn-link">Eliminar</button>
                                         </form>
+                                       <button type="button" onclick="Eliminar()" class="btn btn-link">Eliminar</button>
+                                   
                                     </td>
                                     <td>
                                         <form id="formulario" action="../ControllerTutores" method="post">

@@ -46,7 +46,10 @@
 
         <link href="resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
-
+        <script src="resources/alert/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="resources/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="resources/alert/google.css">
+        
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -67,6 +70,27 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
+            
+            function Guardar() {
+                swal({    
+                    title: "aviso!!",    
+                    text: "¿En verdad deseas guardar los datos?",    
+                    type: "warning",    
+                    showCancelButton: true,    
+                    confirmButtonColor: "#DD6B55",    
+                    confirmButtonText: "SI",    
+                    cancelButtonText: "NO",    
+                    closeOnConfirm: false,    
+                    closeOnCancel: false },   
+
+                    function(isConfirm){    
+                      if (isConfirm) {  
+                          document.getElementById('formularioG').submit();
+                      } else {      
+                          window.location='pages/ListarAlumnos.jsp';  
+                      }  
+                    });
+                  };
         </script>
 
         <style>
@@ -129,15 +153,16 @@
                         <span>Agregar alumno</span><br>
                     </h2>
                 </div>
-                <form id="formulario" action="ControllerAlumno" method="post" onsubmit="return confirm('Realmente desea ACTUALIZAR los datos')">
-                    <input type="hidden" name = "action" value="edit">
-                    <input type="hidden" name = "matricula"  value="<c:out value="${alm.getMatricula()}"/>"/> 
-
-                    <div class="blank">
+                  <div class="blank">
 
                         <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <h3 id="forms-example" class="">Datos del alumno</h3>
+                             
+                <form id="formularioG" name="formularioG" action="ControllerAlumno" method="post" >
+                    <input type="hidden" name = "action" value="edit">
+                    <input type="hidden" name = "matricula"  value="<c:out value="${alm.getMatricula()}"/>"/> 
+
+                     <h3 id="forms-example" class="">Datos del alumno</h3>
                                 <div class="form-group">
                                     <label for="nomLicc">Nombre del alumno</label>
 
@@ -153,13 +178,26 @@
                                     <label>Grupo</label>	      
                                     <select class="form-control " id="grupo" name="grupo"  >
 
-                                        <option  value="<c:out value="${alm.getIdGrupo()}"/>"> ${alm.getGrupo()}</option>\n\
-                                        <%                                                while (list_Grup.hasNext()) {
+
+                                        <%                                           
+                                            while (list_Grup.hasNext()) {
                                                 Grupo ob = new Grupo();
                                                 ob = list_Grup.next();
                                         %>
+                                          <c:set var="id" value="<%=ob.getIdGrupo()%>"/>
+                                        <c:choose >
+                                            <c:when test="${alm.getIdGrupo()== id}">
+                                                <option  selected="selected"  value="<%= ob.getIdGrupo()%>"> <%=ob.getGrupo()%></option>
 
-                                        <option  value="<%= ob.getIdGrupo()%>"> <%=ob.getGrupo()%></option>\n\
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option    value="<%= ob.getIdGrupo()%>"> <%=ob.getGrupo()%></option>
+
+                                            </c:otherwise>
+
+                                        </c:choose>
+
+
                                         <% }
 
                                         %>   
@@ -173,28 +211,36 @@
                                 <div class = "form-group">
                                     <label>Licenciatura</label>	      
                                     <select class="form-control " id="lic" name="lic" >
-                                        <option value="<c:out value="${alm.getIdLicenciatura()}"/>"> ${alm.getLicenciatura()}</option>\n\
-
-                                        <%                                        while (list_Lic.hasNext()) {
+                                       
+                                        <%                                       
+                                            while (list_Lic.hasNext()) {
                                                 Licenciatura ob = new Licenciatura();
                                                 ob = list_Lic.next();
-                                                int x = ob.getIdLicenciatura();
+                                               
 
                                         %>
 
-                                        <option value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>\n\
+                                     
+                                        <c:set var="id" value="<%=ob.getIdLicenciatura()%>"/>
+                                         <c:choose >
+                                             <c:when test="${ alm.getIdLicenciatura()==id}">
+                                                <option  selected="selected"  value="<%= ob.getIdLicenciatura() %>"> <%=ob.getNombre()%></option>
+
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="<%=ob.getIdLicenciatura()%>"> <%=ob.getNombre() %></option>
+                                             </c:otherwise>
+                                        </c:choose>
                                         <% }
 
                                         %>   
                                     </select>
                                 </div>
 
-                            </div>
-                            <button type="submit" class="bl btn btn-danger pull-right">Guardar</button>
-
-                        </div>
-                    </div>
+                           
                 </form>
+                      <button type="button" onclick="Guardar()" class="bl btn btn-danger pull-right">Guardar</button>
+                   </div> </div> </div>   
             </div>
         </div>
 
@@ -202,7 +248,7 @@
     <div class="clearfix"> </div>
 </div>
 <div class="copy">
-    <p><img src="resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+    <p><img src="resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur</p>          
 </div>
 <!---->
 <!--scrolling js-->

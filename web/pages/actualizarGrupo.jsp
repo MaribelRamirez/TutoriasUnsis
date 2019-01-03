@@ -122,7 +122,7 @@
                         <span>Actualizar grupo</span><br>
                     </h2>
                 </div>
-                <form id="formulario" action="ControllerGrupo" method="post" onsubmit="return confirm('Realmente desea ACTUALIZAR los datos')">
+                <form id="formulario" action="ControllerGrupo" method="post">
                     <input type="hidden" name = "action" value="edit">
                     <input type="hidden" name = "id"  value="<c:out value="${grp.getIdGrupo()}"/>"/> 
 
@@ -150,12 +150,22 @@
                                 <div class = "form-group">
                                     <label>Periodo</label>	      
                                     <select class="form-control " id="per" name="per">
-                                        <option  value="<c:out value="${grp.getIdPeriodo()}"/>"> ${grp. getPeriodo()}</option>\n\
                                         <%                                        while (it_list.hasNext()) {
                                                 Periodo ob = new Periodo();
                                                 ob = it_list.next();
                                         %>
-                                        <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>\n\
+                                       
+                                     
+                                        <c:set var="id" value="<%=ob.getIdPeriodo()%>"/>
+                                         <c:choose >
+                                             <c:when test="${ grp.getIdPeriodo()==id}">
+                                                <option  selected="selected"  value="<%=ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
+
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="<%=ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
+                                             </c:otherwise>
+                                        </c:choose>
                                         <% }
 
                                         %>   
@@ -172,12 +182,22 @@
                                 <div class = "form-group">
                                     <label>Licenciatura</label>	      
                                     <select class="form-control " id="lic" name="lic">
-                                        <option  value="<c:out value="${grp.getIdLicenciatura()}"/>"> ${grp. getLicenciatura()}</option>\n\
                                         <%                                        while (it_listL.hasNext()) {
                                                 Licenciatura ob = new Licenciatura();
                                                 ob = it_listL.next();
                                         %>
-                                        <option value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>\n\
+                                        
+                                     
+                                        <c:set var="id" value="<%=ob.getIdLicenciatura()%>"/>
+                                         <c:choose >
+                                             <c:when test="${ grp.getIdLicenciatura()==id}">
+                                                <option  selected="selected"  value="<%= ob.getIdLicenciatura() %>"> <%=ob.getNombre()%></option>
+
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="<%=ob.getIdLicenciatura()%>"> <%=ob.getNombre() %></option>
+                                             </c:otherwise>
+                                        </c:choose>
                                         <% }
 
                                         %>   

@@ -131,7 +131,7 @@
                         <span>Agregar alumno</span><br>
                     </h2>
                 </div>
-                <form id="formulario" action="ControllerTutores" method="post" onsubmit="return confirm('Realmente desea guardar los datos')">
+                <form id="formulario" action="ControllerTutores" method="post">
                     <input type="hidden" name = "action" value="add">
                     <input type="hidden" name = "tipo" value="individual">
 

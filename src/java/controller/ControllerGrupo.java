@@ -100,9 +100,35 @@ public class ControllerGrupo extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             try {
                 grupodao.eliminar(id);
-                out.print("<html><head></head><body "
-                           + "onload=\"alert('Grupo eliminado de forma correcta');"
-                           + " window.location='pages/ListarGrupos.jsp'\"><body></html>");
+                out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Grupo eliminado de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarGrupos.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+               
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerGrupo.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -115,9 +141,34 @@ public class ControllerGrupo extends HttpServlet {
             grupo.setIdLicenciatura(lic);
             try {
                 grupodao.insertar(grupo);
-                out.print("<html><head></head><body "
-                           + "onload=\"alert('Grupo insertado de forma correcta');"
-                           + " window.location='pages/ListarGrupos.jsp'\"><body></html>");
+                 out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Grupo agregado de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarGrupos.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -133,9 +184,34 @@ public class ControllerGrupo extends HttpServlet {
             grupo.setIdPeriodo(periodo);
             grupodao.updateGrp(grupo);
             
-                out.print("<html><head></head><body "
-                           + "onload=\"alert('Grupo actualizado de forma correcta');"
-                           + " window.location='pages/ListarGrupos.jsp'\"><body></html>");
+                out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Grupo actualizado de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarGrupos.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
                 
             } catch (Exception e) {
             }

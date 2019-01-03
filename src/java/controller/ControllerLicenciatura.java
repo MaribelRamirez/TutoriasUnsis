@@ -102,11 +102,34 @@ public class ControllerLicenciatura extends HttpServlet {
             
             try {
                 licenciaturadao.eliminar(id);
-                
-                 out.print("<html><head></head><body "
-                           + "onload=\"alert('Licenciatura eliminada de forma correcta');"
-                           + " window.location='pages/ListarLicenciaturas.jsp'\"><body></html>");
-        
+                 out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Licenciatura eliminada de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarLicenciaturas.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -116,10 +139,35 @@ public class ControllerLicenciatura extends HttpServlet {
             Lic.setNombre(nomLic);
             try {
                 licenciaturadao.insertar(Lic);
+                  out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Licenciatura agregada de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarLicenciaturas.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
                
-                out.print("<html><head></head><body "
-                           + "onload=\"alert('Licenciatura agregada de forma correcta');"
-                           + " window.location='pages/ListarLicenciaturas.jsp'\"><body></html>");
                 
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,9 +181,34 @@ public class ControllerLicenciatura extends HttpServlet {
             Lic.setNombre(nomLic);
             licenciaturadao.updateLic(Lic);
             
-                out.print("<html><head></head><body "
-                           + "onload=\"alert('Licenciatura actualizada de forma correcta');"
-                           + " window.location='pages/ListarLicenciaturas.jsp'\"><body></html>");
+                  out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Licenciatura actualizada de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarLicenciaturas.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
             } catch (Exception e) {
             }
         }

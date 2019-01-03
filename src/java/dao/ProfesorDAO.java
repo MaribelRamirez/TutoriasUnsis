@@ -48,9 +48,9 @@ public class ProfesorDAO {
             int idLicenciatura=resulSet.getInt("profesores.licenciatura");
             String licenciatura = resulSet.getString("licenciaturas.nombre");
             String curp = resulSet.getString("profesores.curp");
-      int tipoTutoria=resulSet.getInt("tutores.tipo");
+           int tipoTutoria=resulSet.getInt("tutores.tipo");
           
-            Profesor profesor = new Profesor(0, nombre, estatus, null, idLicenciatura, licenciatura, curp,tipoTutoria);
+            Profesor profesor = new Profesor(idProfesor, nombre, estatus, null,idLicenciatura,licenciatura, curp,tipoTutoria);
             listaProfesores.add(profesor);
         }
         con.desconectar();

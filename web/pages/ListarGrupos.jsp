@@ -40,9 +40,11 @@
         <script src="../resources/tablas/js/jquery-3.3.1.js"></script>  
         <script src="../resources/tablas/js/jquery.dataTables.min.js"></script>
         <script src="../resources/tablas/js/dataTables.bootstrap.min.js"></script> 
-
         <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
+        <script src="../resources/alert/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../resources/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="../resources/alert/google.css">
 
         <script>
             $(function () {
@@ -64,6 +66,51 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
+            
+            
+            
+            function Actualizar() {
+                swal({    
+                    title: "aviso!!",    
+                    text: "¿En verdad deseas actualizar al grupo?",    
+                    type: "warning",    
+                    showCancelButton: true,    
+                    confirmButtonColor: "#DD6B55",    
+                    confirmButtonText: "SI",    
+                    cancelButtonText: "NO",    
+                    closeOnConfirm: false,    
+                    closeOnCancel: false },   
+
+                    function(isConfirm){    
+                      if (isConfirm) {  
+                          document.getElementById('formularioAct').submit();
+                      } else {      
+                          window.location='ListarGrupos.jsp';  
+                      }  
+                    });
+                  };
+          
+          
+           function Eliminar() {
+                swal({    
+                    title: "aviso!!",    
+                    text: "¿En verdad deseas eliminar al grupo?",    
+                    type: "warning",    
+                    showCancelButton: true,    
+                    confirmButtonColor: "#DD6B55",    
+                    confirmButtonText: "SI",    
+                    cancelButtonText: "NO",    
+                    closeOnConfirm: false,    
+                    closeOnCancel: false },   
+
+                    function(isConfirm){    
+                      if (isConfirm) {  
+                          document.getElementById('formularioElim').submit();
+                      } else {      
+                          window.location='ListarGrupos.jsp';  
+                      }  
+                    });
+                  };
         </script>
 
         <style>
@@ -160,19 +207,20 @@
                                     <td><%=ob.getPeriodo()%></td>
                                     <td><%=ob.getLicenciatura()%></td>
                                     <td>
-                                        <form id="formulario" action="../ControllerGrupo" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')">
+                                        <form id="formularioAct" name="formularioAct" action="../ControllerGrupo" method="post">
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
-                                            <button type="submit"  class="btn btn-link">Actualizar</button>
-                                        </form>
-
+                                            </form>
+                                            <button type="button" onclick="Actualizar()" class="btn btn-link">Actualizar</button>
+                                    
                                     </td>
                                     <td >
-                                        <form id="formulario" action="../ControllerGrupo" method="post" onsubmit="return confirm('¿Realmente desea eliminar el grupo?')">
+                                        <form id="formularioElim" name="formularioElim" action="../ControllerGrupo" method="post" >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
                                             <input type="hidden" name = "action" id="action" value="delete">
-                                            <button type="submit"  class="btn btn-link">Eliminar</button>
                                         </form>
+                                            <button type="button" onclick="Eliminar()" class="btn btn-link">Eliminar</button>
+                                   
                                     </td>
                                     <td >
                                         <% if (perA == ob.getIdPeriodo()) {%>  

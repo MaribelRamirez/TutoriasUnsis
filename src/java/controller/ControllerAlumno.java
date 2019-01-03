@@ -96,11 +96,35 @@ public class ControllerAlumno extends HttpServlet {
             String matricula = request.getParameter("id");
             try {
                 alumnodao.eliminar(matricula);
-
-                out.print("<html><head></head><body "
-                        + "onload=\"alert('Alumno eliminado de forma correcta');"
-                        + " window.location='pages/ListarAlumnos.jsp'\"><body></html>");
-
+                        out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Alumno eliminado de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarAlumnos.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+               
 //response.sendRedirect("ListarAlumnos.jsp");
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerAlumno.class.getName()).log(Level.SEVERE, null, ex);
@@ -120,9 +144,34 @@ public class ControllerAlumno extends HttpServlet {
             try {
                 alumnodao.insertar(alum);
                
-                out.print("<html><head></head><body "
-                        + "onload=\"alert('Alumno agregado de forma correcta');"
-                     + " window.location='pages/ListarAlumnos.jsp'\"><body></html>");
+                out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Alumno agregado de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarAlumnos.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -140,9 +189,34 @@ public class ControllerAlumno extends HttpServlet {
                 alum.setIdLicenciatura(lic);
                 alumnodao.updateAlumno(alum);
 
-                out.print("<html><head></head><body "
-                        + "onload=\"alert('Alumno actualizado de forma correcta');"
-                        + " window.location='pages/ListarAlumnos.jsp'\"><body></html>");
+                out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Alumno actualizado de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarAlumnos.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
             } catch (Exception e) {
             }
 

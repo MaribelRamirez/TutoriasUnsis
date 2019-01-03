@@ -37,7 +37,10 @@
 
         <link href="resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
-
+           <script src="resources/alert/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="resources/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="resources/alert/google.css">
+        
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -58,6 +61,27 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
+            
+             function Guardar() {
+                swal({    
+                    title: "aviso!!",    
+                    text: "¿En verdad deseas guardar los datos?",    
+                    type: "warning",    
+                    showCancelButton: true,    
+                    confirmButtonColor: "#DD6B55",    
+                    confirmButtonText: "SI",    
+                    cancelButtonText: "NO",    
+                    closeOnConfirm: false,    
+                    closeOnCancel: false },   
+
+                    function(isConfirm){    
+                      if (isConfirm) {  
+                          document.getElementById('formularioG').submit();
+                      } else {      
+                          window.location='pages/ListarLicenciaturas.jsp';  
+                      }  
+                    });
+                  };
         </script>
 
         <style>
@@ -115,28 +139,26 @@
                         <span>Agregar licenciatura</span><br>
                     </h2>
                 </div>
-                <form id="formulario" action="ControllerLicenciatura" method="post" onsubmit="return confirm('Realmente desea ACTUALIZAR los datos')">
-                    <input type="hidden" name = "action" value="edit">
-                    <input type="hidden" name = "id"  value="<c:out value="${lic.getIdLicenciatura()}"/>"/> 
-
-                    <div class="blank">
+                
+                <div class="blank">
 
                         <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <h3 id="forms-example" class="">Datos de la licenciatura</h3>
+                               
+                <form id="formularioG" name="formularioG" action="ControllerLicenciatura" method="post" >
+                    <input type="hidden" name = "action" value="edit">
+                    <input type="hidden" name = "id"  value="<c:out value="${lic.getIdLicenciatura()}"/>"/> 
+
+                     <h3 id="forms-example" class="">Datos de la licenciatura</h3>
 
                                 <div class="form-group">
                                     <label for="nomLicc">Nombre de la licenciatura</label>
 
                                     <input  required class="form-control" id="nombreLic" name="nombreLic"  value="<c:out value="${lic.getNombre()}"/>"/>
-                                </div>
-
-                            </div>
-                            <button type="submit" class="bl btn btn-danger pull-right">Guardar</button>
-
-                        </div>
-                    </div>
+                                </div>  
                 </form>
+                    <button type="button" onclick="Guardar()" class="bl btn btn-danger pull-right">Guardar</button>
+                   </div> </div> </div>                   
             </div>
         </div>
 

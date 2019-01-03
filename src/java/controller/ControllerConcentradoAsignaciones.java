@@ -85,11 +85,10 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-Sheet sheet= null;
-            Sheet sheet2 =null;
+        Sheet sheet = null;
+        Sheet sheet2 = null;
         try {
 
-            
             Workbook book = new XSSFWorkbook();
             // sheet = book.createSheet("");
             sheet = book.createSheet("ConcentradoAsignaciones");
@@ -101,12 +100,15 @@ Sheet sheet= null;
             //poner negrita a la cabecera
             CellStyle style = book.createCellStyle();
             CellStyle style2 = book.createCellStyle();
+            CellStyle style3 = book.createCellStyle();
+            CellStyle style4 = book.createCellStyle();
 
             Font font = book.createFont();
             font.setBold(true);
 
             style.setFont(font);
-
+            style3.setFont(font);
+            style4.setFont(font);
             style.setBorderBottom(BorderStyle.MEDIUM);
             style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
             style.setBorderLeft(BorderStyle.MEDIUM);
@@ -129,7 +131,29 @@ Sheet sheet= null;
             style2.setTopBorderColor(IndexedColors.BLACK.getIndex());
             style2.setAlignment(HorizontalAlignment.CENTER);
 
-            /// style3.setAlignment(HorizontalAlignment.CENTER);
+            //style3.setBorderBottom(BorderStyle.MEDIUM);
+            style3.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+            style3.setBorderLeft(BorderStyle.MEDIUM);
+            style3.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+            style3.setBorderRight(BorderStyle.MEDIUM);
+            style3.setRightBorderColor(IndexedColors.BLACK.getIndex());
+            style3.setBorderTop(BorderStyle.MEDIUM);
+            style3.setTopBorderColor(IndexedColors.BLACK.getIndex());
+            style3.setAlignment(HorizontalAlignment.CENTER);
+            style3.setFillForegroundColor(IndexedColors.AQUA.getIndex());
+            style3.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+            style4.setBorderBottom(BorderStyle.MEDIUM);
+            style4.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+            style4.setBorderLeft(BorderStyle.MEDIUM);
+            style4.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+            style4.setBorderRight(BorderStyle.MEDIUM);
+            style4.setRightBorderColor(IndexedColors.BLACK.getIndex());
+            //style4.setBorderTop(BorderStyle.MEDIUM);
+            style4.setTopBorderColor(IndexedColors.BLACK.getIndex());
+            style4.setAlignment(HorizontalAlignment.CENTER);
+            style4.setFillForegroundColor(IndexedColors.AQUA.getIndex());
+            style4.setFillPattern(FillPatternType.SOLID_FOREGROUND);
             int j = 0;
 
             Row rowT1 = sheet.createRow(j);
@@ -137,15 +161,15 @@ Sheet sheet= null;
             Row rowT2 = sheet.createRow(j);
             Cell cellT2 = rowT2.createCell(0);
             cellT2.setCellValue("ESTATUS");
-            cellT2.setCellStyle(style);
+            cellT2.setCellStyle(style3);
 
             cellT2 = rowT2.createCell(1);
             cellT2.setCellValue("NOMBRE");
-            cellT2.setCellStyle(style);
+            cellT2.setCellStyle(style3);
 
             cellT2 = rowT2.createCell(2);
             cellT2.setCellValue("GRUPooooooooooooO");
-            cellT2.setCellStyle(style);
+            cellT2.setCellStyle(style3);
 
             cellT2 = rowT2.createCell(3);
             cellT2.setCellValue("LICENCIATURA");
@@ -156,15 +180,15 @@ Sheet sheet= null;
             Row rowT3 = sheet.createRow(j);
             Cell cellT3 = rowT3.createCell(0);
             cellT3.setCellValue("");
-            cellT3.setCellStyle(style);
+            cellT3.setCellStyle(style4);
 
             cellT3 = rowT3.createCell(1);
             cellT3.setCellValue("");
-            cellT3.setCellStyle(style);
+            cellT3.setCellStyle(style4);
 
             cellT3 = rowT3.createCell(2);
             cellT3.setCellValue("");
-            cellT3.setCellStyle(style);
+            cellT3.setCellStyle(style4);
 
             ///Contar cuantas carreras existen registradas
             int carreras = 0;
@@ -172,9 +196,9 @@ Sheet sheet= null;
             LicenciaturaDAO obj_lic = new LicenciaturaDAO();
             carreras = obj_lic.countLicenciaturas();
 
-            sheet.addMergedRegion(new CellRangeAddress(1, 2, 0, 0));
-            sheet.addMergedRegion(new CellRangeAddress(1, 2, 1, 1));
-            sheet.addMergedRegion(new CellRangeAddress(1, 2, 2, 2));
+            //sheet.addMergedRegion(new CellRangeAddress(1, 2, 0, 0));
+            // sheet.addMergedRegion(new CellRangeAddress(1, 2, 1, 1));
+            //sssheet.addMergedRegion(new CellRangeAddress(1, 2, 2, 2));
             carreras = carreras + 2;
 
             Cell cellT1 = rowT1.createCell(0);
@@ -193,7 +217,7 @@ Sheet sheet= null;
                 cellT2.setCellValue("");
                 cellT2.setCellStyle(style);
             }
-            
+
             l = 3;
 
             while (it_list.hasNext()) {
@@ -211,39 +235,43 @@ Sheet sheet= null;
             sheet.addMergedRegion(new CellRangeAddress(1, 1, 3, carreras));
 
             carreras = carreras + 1;
-            
+
             cellT2 = rowT2.createCell(l);
-            cellT2.setCellValue(" TUTORADOooooooooooooooS");
-            cellT2.setCellStyle(style);
-            
+            cellT2.setCellValue("TUTORADOooooooooooooooS");
+            cellT2.setCellStyle(style3);
+
             cellT3 = rowT3.createCell(l);
             cellT3.setCellValue("");
-            cellT3.setCellStyle(style);
-            
-            
-            
-           
-            
-             l++;
-             j++;
-           
-                     sheet.addMergedRegion(new CellRangeAddress(1, 2, carreras, carreras));
-                     
-                     sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, carreras));
+            cellT3.setCellStyle(style4);
 
-            
-         //   while (it_list.hasNext()) {
+            l++;
+            j++;
 
-               // Licenciatura ob = new Licenciatura();
-              //  ob = it_list.next();
-              //  sheet2 = book.createSheet("Cokgvfh");
-              //  sheet = book.createSheet(ob.getNombre());
-               // System.out.println("nombre de la carrera para hoja"+ob.getNombre());
-               // ProfesorDAO obj_Read = new ProfesorDAO();
-                //List<Profesor> list_tutor = obj_Read.obtenerProfesorTutor(ob.getIdLicenciatura());
-                //Iterator<Profesor> it_list_tutor = list_tutor.iterator();
+            // sheet.addMergedRegion(new CellRangeAddress(1, 2, carreras, carreras));
+            sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, carreras));
 
-                /*while (it_list_tutor.hasNext()) {
+            LicenciaturaDAO obj_Read_lic = new LicenciaturaDAO();
+            List<Licenciatura> list_lic = obj_Read_lic.listarLicenciaturas();
+            Iterator<Licenciatura> it_list_lic = list_lic.iterator();
+
+            while (it_list_lic.hasNext()) {
+
+                Licenciatura ob = new Licenciatura();
+                ob = it_list_lic.next();
+                System.out.println("nombre de la carrera para hoja " + ob.getNombre());
+
+                //sheet2 = book.createSheet("Cokgvfh");
+                //sheet = book.createSheet(ob.getNombre());
+
+                ProfesorDAO obj_Read = new ProfesorDAO();
+                System.out.println("1");
+                List<Profesor> list_tutor = obj_Read.obtenerProfesorTutor(ob.getIdLicenciatura());
+                System.out.println("2");
+                Iterator<Profesor> it_list_tutor = list_tutor.iterator();
+               
+                System.out.println("ante del whileee");
+                
+                while (it_list_tutor.hasNext()) {
                     l = 0;
                     Profesor Obt = new Profesor();
                     Obt = it_list_tutor.next();
@@ -259,22 +287,21 @@ Sheet sheet= null;
                     cellT4.setCellValue(Obt.getNombre());
                     cellT4.setCellStyle(style);
 
-                    j++;*/
+                    j++;
                     //if(Obt.getTipoTutoria()==1){
 
                     //  }
                     //  else{
                     // }
-                //}
-
-          //  }
-
-           for (int k = 0; k < carreras+1; k++) {
-                    sheet.autoSizeColumn((short) k);
-System.out.println("valor de k"+k);
                 }
 
+            }
+
             try {
+                for (int k = 0; k < carreras + 1; k++) {
+                    sheet.autoSizeColumn((short) k);
+                    System.out.println("valor de k" + k);
+                }
                 try (FileOutputStream elFichero
                         = new FileOutputStream("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\" + "Concentrado_Asignaciones" + ".xlsx")) {
 
@@ -285,9 +312,36 @@ System.out.println("valor de k"+k);
                 }
             } catch (IOException e) {
             }
-            out.print("<html><head></head><body "
-                    + "onload=\"alert('Reportes generados con exito');"
-                    + " window.location='pages/generarReportes.jsp'\"><body></html>");
+            
+            out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Reporte generado con exito...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/generarReportes.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+            
         } catch (Exception e) {
         }
 

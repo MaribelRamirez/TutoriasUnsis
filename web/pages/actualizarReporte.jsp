@@ -53,6 +53,10 @@
         <link href="resources/calendario/css/bootstrap-datepicker3.min.css" rel='stylesheet' type='text/css'/>
         <script src="resources/calendario/js/bootstrap-datepicker.min.js"></script>
 
+         <script src="resources/alert/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="resources/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="resources/alert/google.css">
+        
 
         <script type='text/javascript'>
             $(function () {
@@ -103,6 +107,28 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
+            
+            
+            function Guardar() {
+                swal({    
+                    title: "aviso!!",    
+                    text: "¿En verdad deseas guardar los datos?",    
+                    type: "warning",    
+                    showCancelButton: true,    
+                    confirmButtonColor: "#DD6B55",    
+                    confirmButtonText: "SI",    
+                    cancelButtonText: "NO",    
+                    closeOnConfirm: false,    
+                    closeOnCancel: false },   
+
+                    function(isConfirm){    
+                      if (isConfirm) {  
+                          document.getElementById('formularioG').submit();
+                      } else {      
+                          window.location='pages/ListarReportes.jsp';  
+                      }  
+                    });
+                  };
         </script>
 
         <style>
@@ -162,14 +188,15 @@
                         <span>Actualizar datos de la tutoria</span><br>
                     </h2>
                 </div>
-                <form id="formulario"  action="ControllerReportesTutorias" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')" >
-                    <input type="hidden" name = "action" value="edit">
-                    <input type="hidden" name = "idRep" id="idRep" value="<c:out value="${rep.getIdReporte()}"/>"/>
-                    <div class="blank">
+                <div class="blank">
 
                         <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
+                <form id="formularioG" name="formularioG"  action="ControllerReportesTutorias" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')" >
+                    <input type="hidden" name = "action" value="edit">
+                    <input type="hidden" name = "idRep" id="idRep" value="<c:out value="${rep.getIdReporte()}"/>"/>
+                    
 
 
                                 <div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -202,13 +229,22 @@
                                     <label>Periodo</label>	    
 
                                     <select class="form-control " id="idPeriodo" name="idPeriodo">
-                                        <option selected="selected" value="<c:out value="${rep.getIdPeriodo()}"/>"> ${rep.getPeriodo()}</option>
 
                                         <%                                        while (it_list.hasNext()) {
                                                 Periodo ob = new Periodo();
                                                 ob = it_list.next();
                                         %>
-                                        <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>\n\
+                                       
+                                        <c:set var="id" value="<%=ob.getIdPeriodo()%>"/>
+                                         <c:choose >
+                                             <c:when test="${ rep.getIdPeriodo()==id}">
+                                                <option  selected="selected"  value="<%=ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
+
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="<%=ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
+                                             </c:otherwise>
+                                        </c:choose>
                                         <% }
 
                                         %>   
@@ -243,18 +279,32 @@
                                 <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                     <label for="nombre">¿Entregó el reporte a tiempo?</label>
                                     <select class="form-control " id="EntT" name="EntT">
-                                        <option selected="selected" value="<c:out value="${rep. getaTiempo()}"/>"> ${rep. getaTiempo()}</option>
-                                        <option value="SI"> SI</option>
-                                        <option value="NO"> NO</option>
+                                      
+                                          <c:if test="${rep.getaTiempo()=='SI'}">
+                                            <option selected="selected" value="SI"> SI</option>
+                                            <option value="NO">NO</option>
+                                        </c:if>
+                                              
+                                        <c:if test="${rep.getaTiempo()=='NO'}">
+                                            <option selected="selected" value="NO"> NO</option>
+                                            <option value="SI">SI</option>
+                                        </c:if>
                                     </select>
                                 </div>
 
                                 <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                     <label for="nombre">¿Entregó reporte?</label>
                                     <select class="form-control " id="EntRp" name="EntRp">
-                                        <option selected="selected" value="<c:out value="${rep.getEntrego()}"/>"> ${rep.getEntrego()}</option>
-                                        <option value="SI"> SI</option>
-                                        <option value="NO"> NO</option>
+                                        
+                                         <c:if test="${rep.getEntrego()=='SI'}">
+                                            <option selected="selected" value="SI"> SI</option>
+                                            <option value="NO">NO</option>
+                                        </c:if>
+                                            
+                                        <c:if test="${rep.getEntrego()=='NO'}">
+                                            <option selected="selected" value="NO"> NO</option>
+                                            <option value="SI">SI</option>
+                                        </c:if>
                                     </select>
                                 </div>
 
@@ -289,13 +339,9 @@
                                     <label for="nombre">Observaciones</label><br>
                                     <textarea class=estilotextarea4 cols="50" rows="5" id="obs" name="obs">${rep.getObservaciones()}</textarea>
                                 </div>
-
-                            </div> 
-                            <button type="submit" class="bl btn btn-danger pull-right">Guardar</button>
-                        </div>
-
-                    </div>
                 </form>
+                                 <button type="button" onclick="Guardar()" class="bl btn btn-danger pull-right">Guardar</button>
+                            </div> </div> </div> <br>
             </div>
         </div>
 

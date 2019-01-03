@@ -122,7 +122,7 @@
                         <span>Agregar alumno</span><br>
                     </h2>
                 </div>
-                <form id="formulario" action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')">
+                <form id="formulario" action="../ControllerAlumno" method="post" >
                     <input type="hidden" name = "action" value="add">
 
                     <div class="blank">
