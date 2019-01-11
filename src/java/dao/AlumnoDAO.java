@@ -33,6 +33,75 @@ public class AlumnoDAO {
         this.con = con;
         this.connection = connection;
     }
+    public int countEstadistica3() {
+       
+         int count=0;
+        try {
+            String sql = "select tutores.curp,profesores.nombre, profesores.licenciatura, alumnos.nombre,alumnos.matricula, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre \n" +
+"from tutores ,profesores,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura \n" +
+"where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo \n" +
+"and tutores.curp=profesores.curp ;";
+            System.out.println("consulta"+sql);
+            connection = con.conectar();
+            Statement statement = connection.createStatement();
+            ResultSet resulSet = statement.executeQuery(sql);
+           
+            while (resulSet.next()) {
+                count ++;
+            }
+            con.desconectar();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+}
+    public int countEstadistica2(int carreraT) {
+       
+         int count=0;
+        try {
+            String sql = "select tutores.curp,profesores.nombre, profesores.licenciatura, alumnos.nombre,alumnos.matricula, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre \n" +
+"from tutores ,profesores,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura \n" +
+"                     where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo \n" +
+"                     and tutores.curp=profesores.curp and profesores.licenciatura='"+carreraT+"' ;";
+            System.out.println("consulta"+sql);
+            connection = con.conectar();
+            Statement statement = connection.createStatement();
+            ResultSet resulSet = statement.executeQuery(sql);
+           
+            while (resulSet.next()) {
+                count ++;
+            }
+            con.desconectar();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+}
+public int countEstadistica(int carreraT,int carreraA) {
+       
+         int count=0;
+        try {
+            String sql = "select tutores.curp,profesores.nombre, profesores.licenciatura, alumnos.nombre,alumnos.matricula, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre \n" +
+"from tutores ,profesores,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura \n" +
+"                     where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo \n" +
+"                     and tutores.curp=profesores.curp and profesores.licenciatura='"+carreraT+"' and alumnos.idLicenciatura='"+carreraA+"';";
+            System.out.println("consulta"+sql);
+            connection = con.conectar();
+            Statement statement = connection.createStatement();
+            ResultSet resulSet = statement.executeQuery(sql);
+           
+            while (resulSet.next()) {
+                count ++;
+            }
+            con.desconectar();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+}
 
     public int countAlumnosTutorados(String curp) {
        
@@ -57,7 +126,30 @@ public class AlumnoDAO {
         }
         return count;
 }
-    
+   public int countAlumnosTutoradosByCarrera(String curp, String carrera) {
+       
+         int count=0;
+        try {
+            String sql = "select alumnos.matricula , alumnos.nombre, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+                    " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
+                    " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
+                    " and tutores.curp='"+curp+"' and licenciaturas.nombre='"+carrera+"' ;";
+            System.out.println("consulta"+sql);
+            connection = con.conectar();
+            Statement statement = connection.createStatement();
+            ResultSet resulSet = statement.executeQuery(sql);
+           
+            while (resulSet.next()) {
+                count ++;
+            }
+            con.desconectar();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+}
+  
     public boolean insertar(Alumno alumno) throws SQLException {
         try {
             String sql = "INSERT INTO alumnos (matricula,nombre,idGrupo,idLicenciatura)"

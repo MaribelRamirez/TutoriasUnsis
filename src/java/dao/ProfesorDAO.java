@@ -32,26 +32,40 @@ public class ProfesorDAO {
         this.connection = connection;
     }
     
-    public List<Profesor> obtenerProfesorTutor(int lic) throws SQLException {
-
+    public List<Profesor> obtenerProfesorTutor(String lic) throws SQLException {
         List<Profesor> listaProfesores = new ArrayList<Profesor>();
-       String sql = "select distinct profesores.idProfesor,profesores.estatus,profesores.nombre,profesores.grado,licenciaturas.nombre,profesores.curp from profesores,tutores,licenciaturas where profesores.curp=tutores.curp and licenciaturas.idLicenciatura=licenciatura and tutores.tipo=2";
+       String sql = "select distinct tutores.tipo,profesores.idProfesor,profesores.estatus,profesores.nombre,"
+               + "profesores.grado,licenciaturas.nombre,licenciaturas.idLicenciatura,profesores.curp from profesores,tutores,"
+               + "licenciaturas where profesores.curp=tutores.curp and licenciaturas.idLicenciatura=licenciatura"
+               + " and licenciaturas.nombre='"+lic+"';";
 
+        System.out.println("consulta"+sql);
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
 
+        
         while (resulSet.next()) {
             int idProfesor = resulSet.getInt("idProfesor");
+            System.out.println("id"+idProfesor);
             String estatus = resulSet.getString("profesores.estatus");
+             System.out.println("estatus"+estatus);
             String nombre = resulSet.getString("profesores.nombre");
-            int idLicenciatura=resulSet.getInt("profesores.licenciatura");
+            System.out.println("nombre"+nombre);
             String licenciatura = resulSet.getString("licenciaturas.nombre");
+            System.out.println("licenciatutra"+licenciatura);
+            int tipoTutoria=resulSet.getInt("tutores.tipo");
+            String grado = resulSet.getString("profesores.grado");
+            System.out.println("grado"+grado);
             String curp = resulSet.getString("profesores.curp");
-           int tipoTutoria=resulSet.getInt("tutores.tipo");
-          
-            Profesor profesor = new Profesor(idProfesor, nombre, estatus, null,idLicenciatura,licenciatura, curp,tipoTutoria);
+            System.out.println("curp"+curp);
+            int idLic = resulSet.getInt("licenciaturas.idLicenciatura");
+            System.out.println("idLic"+curp);
+            Profesor profesor = new Profesor(idProfesor,nombre,estatus,grado,idLic,licenciatura,curp,tipoTutoria);
+            
             listaProfesores.add(profesor);
+            System.out.println("numero de profesores");
+           
         }
         con.desconectar();
         return listaProfesores;
@@ -104,7 +118,7 @@ public class ProfesorDAO {
             String grado = resulSet.getString("grado");
             String licenciatura = resulSet.getString("licenciaturas.nombre");
             String curp = resulSet.getString("curp");
-      int tipoTutoria=0;
+            int tipoTutoria=0;
             int idLicenciatura = 0;
             Profesor profesor = new Profesor(idProfesor, nombre, estatus, grado, idLicenciatura, licenciatura, curp,tipoTutoria);
             listaProfesores.add(profesor);
@@ -112,6 +126,7 @@ public class ProfesorDAO {
         con.desconectar();
         return listaProfesores;
     }
+    
     public List<Profesor> tutorIndividual() throws SQLException {
 
         List<Profesor> listaProfesores = new ArrayList<Profesor>();

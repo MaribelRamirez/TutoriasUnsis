@@ -854,7 +854,7 @@ public class ControllerReportesTutorias extends HttpServlet {
     }// </editor-fold>
 
     java.util.Date convertirStrToDate(String fecha) {
-        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd-MM-yyyy");
 
         java.util.Date date = null;
         try {
