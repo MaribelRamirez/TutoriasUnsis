@@ -478,10 +478,8 @@ Row rowT = sheet.createRow(j);
                     elFichero.close();
 
                 }
-            } catch (IOException e) {
-            }
-
-            out.print("<html>"
+                
+                out.print("<html>"
                     + "<head>"
                     + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
                     + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
@@ -510,6 +508,39 @@ Row rowT = sheet.createRow(j);
                     + "</body>\n"
                     + "</html>");
 
+            } catch (IOException e) {
+                out.print("<html>"
+                    + "<head>"
+                    + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                    + "</head>"
+                    + "<body >"
+                    + "<script>\n"
+                    + "function EventoAlert(){\n"
+                    + "  swal({\n"
+                    + "title: \"Aviso!!\",\n"
+                    + "text: \"Error al generar el reporte...\",\n"
+                    + "type: \"warning\",    \n"
+                    + "confirmButtonColor: \"#DD6B55\",\n"
+                    + "confirmButtonText: \"Aceptar\",\n"
+                    + "closeOnConfirm: false,\n"
+                    + "},\n"
+                    + "\n"
+                    + "function(isConfirm){\n"
+                    + "if (isConfirm) {\n"
+                    + "window.location='pages/generarReportes.jsp'   \n"
+                    + "} \n"
+                    + "});\n"
+                    + "}\n"
+                    + "EventoAlert();\n"
+                    + "</script>"
+                    + "</body>\n"
+                    + "</html>");
+
+            }
+
+            
         } catch (Exception e) {
         }
 
