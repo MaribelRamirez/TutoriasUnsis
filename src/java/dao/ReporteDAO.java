@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.ConnectionClass;
 import model.Reporte;
 
@@ -32,6 +34,38 @@ public class ReporteDAO {
         this.con = con;
         this.connection = connection;
     }
+    
+       public int verificar(String curp,int idPeriodo) {
+       
+         int count=0;
+        try {
+            
+            
+            String sql = "SELECT profesores.nombre, periodo.idPeriodo, periodo.periodo, licenciaturas.idLicenciatura,\n" +
+"	licenciaturas.nombre,reportes.idReporte,reportes.curp, reportes.entrego,reportes.aTiempo,\n" +
+"	reportes.fecha,reportes.tipoTutoria,reportes.noSesiones,reportes.noCanalizaciones,\n" +
+"	reportes.alumnosAsignados,reportes.alumnosReportados,reportes.alumnosAsistencia,\n" +
+"	reportes.observaciones,reportes.faltantes FROM profesores inner join reportes inner join\n" +
+"	licenciaturas inner join periodo on profesores.curp=reportes.curp and \n" +
+"	reportes.idPeriodo=periodo.idPeriodo and reportes.licenciatura=licenciaturas.idLicenciatura\n" +
+"    where profesores.curp='"+curp+"' and periodo.idPeriodo='"+idPeriodo+"' ; ";
+            
+            System.out.println("consulta"+sql);
+            connection = con.conectar();
+            Statement statement = connection.createStatement();
+            ResultSet resulSet = statement.executeQuery(sql);
+           
+            while (resulSet.next()) {
+                count ++;
+            }
+            con.desconectar();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("este es el valor de conunt"+count);
+        return count;
+}
 
     public List<Reporte> listarReportes() throws SQLException {
 

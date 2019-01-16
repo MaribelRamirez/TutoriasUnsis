@@ -769,6 +769,8 @@ public class ControllerReportesTutorias extends HttpServlet {
         } else if (action.equalsIgnoreCase("add")) {
             java.util.Date fechaRep = new java.util.Date();
             try {
+                
+                
                 String curp = request.getParameter("curp");
                 int idLicenciatura = Integer.parseInt(request.getParameter("idLic"));
 
@@ -776,6 +778,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                 String entrego = request.getParameter("EntRp");
                 String aTiempo = request.getParameter("EntT");
                 String fecha = request.getParameter("datepicker");
+                System.out.println("esta es la fecha"+fecha);
                 fechaRep = convertirStrToDate(fecha);
                 String tipoTutoria = request.getParameter("tipoTutoria");
                 int noSesiones = Integer.parseInt(request.getParameter("numSes"));
@@ -801,7 +804,9 @@ public class ControllerReportesTutorias extends HttpServlet {
                 rep.setAlumnosAsistencia(alumnosAsistencia);
                 rep.setObservaciones(observaciones);
                 rep.setFaltantes(faltantes);
-                if (reportedao.insertar(rep) == true) {
+                if(reportedao.verificar(curp , idPeriodo)==0)
+                {
+                    if (reportedao.insertar(rep) == true) {
                         out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
@@ -843,7 +848,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                         + "function EventoAlert(){\n"
                         + "  swal({\n"
                         + "title: \"Aviso!!\",\n"
-                        + "text: \"Error al guardar el reporte verifica tus datos, es posible que el reporte ya exista\",\n"
+                        + "text: \"Error al guardar el reporte\",\n"
                         + "type: \"warning\",    \n"
                         + "confirmButtonColor: \"#DD6B55\",\n"
                         + "confirmButtonText: \"Aceptar\",\n"
@@ -862,6 +867,40 @@ public class ControllerReportesTutorias extends HttpServlet {
                         + "</html>");
                     
                 }
+                    
+                }
+                else{
+                    
+                out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Error al guardar el reporte verifica tus datos, es posible que el reporte ya exista\",\n"
+                        + "type: \"warning\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarReportes.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+                }
+                
 
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerReportesTutorias.class.getName()).log(Level.SEVERE, null, ex);
@@ -882,7 +921,7 @@ public class ControllerReportesTutorias extends HttpServlet {
     }// </editor-fold>
 
     java.util.Date convertirStrToDate(String fecha) {
-        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 
         java.util.Date date = null;
         try {

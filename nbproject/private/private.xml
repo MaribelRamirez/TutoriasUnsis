@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/web/pages/headAdmin.jsp</file>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/web/pages/headProfesor.jsp</file>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/web/pages/headAdminUpdate.jsp</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/web/pages/actualizarReporte.jsp</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/web/pages/registroReportesTutorias.jsp</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/src/java/controller/ControllerReportesTutorias.java</file>
         </group>
     </open-files>
 </project-private>

@@ -47,25 +47,13 @@
 
 
 
-        <script src="resources/calendario/js/bootstrap.min.js"></script>
-        <script src="resources/calendario/js/jquery-1.8.3.js"></script>
-
-        <link href="resources/calendario/css/bootstrap-datepicker3.min.css" rel='stylesheet' type='text/css'/>
-        <script src="resources/calendario/js/bootstrap-datepicker.min.js"></script>
-
+        
          <script src="resources/alert/sweetalert.min.js"></script>
         <link rel="stylesheet" type="text/css" href="resources/alert/sweetalert.css">
         <link rel="stylesheet" type="text/css" href="resources/alert/google.css">
         
-
         <script type='text/javascript'>
-            $(function () {
-                $('.input-group.date').datepicker({
-                    calendarWeeks: true,
-                    todayHighlight: true,
-                    autoclose: true
-                }).datepicker("setDate", new Date());
-            });
+          
 
             function soloNumeros(e) {
                 key = e.keyCode || e.which;
@@ -193,7 +181,7 @@
                         <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                <form id="formularioG" name="formularioG"  action="ControllerReportesTutorias" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')" >
+                <form id="formularioG" name="formularioG"  action="ControllerReportesTutorias" method="post"  >
                     <input type="hidden" name = "action" value="edit">
                     <input type="hidden" name = "idRep" id="idRep" value="<c:out value="${rep.getIdReporte()}"/>"/>
                     
@@ -209,7 +197,6 @@
                                     <input type="hidden" class="form-control" id="curp" name="curp" value="<c:out value="${rep.getCurp()}"/>"/>
                                     <input type="text" disabled="true" required class="form-control"  value="<c:out value="${rep.getCurp()}"/>"/>
                                 </div>
-
 
 
                                 <div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -265,16 +252,13 @@
                                     <input type="text" disabled="true" required class="form-control" value="<c:out value="${rep.getTipoTutoria()}"/>"/>
                                 </div>
 
-                                <div id="filterDate2" class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <!-- Datepicker as text field -->  
-                                    <label for="fecha">Fecha de entrega de reporte</label>
-                                    <div class="input-group date" data-date-format="dd-mm-yyyy">
-                                        <input  required readonly="readonly" type="text" class="form-control"  name="datepicker" id="datepicker" value="<c:out value="${rep.getFecha()}"/>"/>
-                                        <div class="input-group-addon" >
-                                            <span class="glyphicon glyphicon-th"></span>
-                                        </div>
-                                    </div>
-                                </div> 
+                                                 <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                             <label for="nombre">Fecha de entrega de reporte</label>
+                                             <input type="date" name="datepicker" id="datepicker" class="form-control"  value="<c:out value="${rep.getFecha()}"/>"/>
+
+                                           </div>
+                       
+                                     
 
                                 <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                     <label for="nombre">¿Entregó el reporte a tiempo?</label>
@@ -344,7 +328,6 @@
                             </div> </div> </div> <br>
             </div>
         </div>
-
     </div>
     <div class="clearfix"> </div>
 </div>

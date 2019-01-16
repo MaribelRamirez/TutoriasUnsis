@@ -44,24 +44,13 @@ Author     : Marifer
 
         <link href="resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
-
-
-        <script src="resources/calendario/js/bootstrap.min.js"></script>
-        <script src="resources/calendario/js/jquery-1.8.3.js"></script>
-
-        <link href="resources/calendario/css/bootstrap-datepicker3.min.css" rel='stylesheet' type='text/css'/>
-        <script src="resources/calendario/js/bootstrap-datepicker.min.js"></script>
-
-
+        
+        
+         <script src="resources/alert/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="resources/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="resources/alert/google.css">
         <script type='text/javascript'>
-            $(function () {
-                $('.input-group.date').datepicker({
-                    calendarWeeks: true,
-                    todayHighlight: true,
-                    autoclose: true
-                }).datepicker("setDate", new Date());
-            });
-
+           
             function soloNumeros(e) {
                 key = e.keyCode || e.which;
                 tecla = String.fromCharCode(key).toLowerCase();
@@ -161,7 +150,7 @@ Author     : Marifer
                         <span>Datos de la tutoria</span><br>
                     </h2>
                 </div>
-                <form id="formulario"  action="ControllerReportesTutorias" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')" >
+                <form id="formulario"  action="ControllerReportesTutorias" method="post" >
                     <input type="hidden" name = "action" id="action" value="add">
                     <div class="blank">
 
@@ -212,26 +201,18 @@ Author     : Marifer
                                     <label for="nombre">Número de alumnos asignados</label>
                                     <input type="text" disabled="true" required class="form-control"  value="<c:out value="${count}"/>"/>
                                     <input type="hidden"  id="asg" name="asg" value="<c:out value="${count}"/>"/>
-
                                 </div>
 
                                 <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                     <label for="nombre">Tipo de tutoria</label>
                                     <input type="text" disabled="true" required class="form-control"  value="<c:out value="${tipo}"/>"/>
                                     <input type="hidden" class="form-control" id="tipoTutoria" name="tipoTutoria" value="<c:out value="${tipo}"/>"/>
-
                                 </div>
 
-                                <div id="filterDate2" class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <!-- Datepicker as text field -->  
-                                    <label for="fecha">Fecha de entrega de reporte</label>
-                                    <div class="input-group date" data-date-format="dd-mm-yyyy">
-                                        <input  required readonly="readonly" type="text" class="form-control" name="datepicker" id="datepicker" />
-                                        <div class="input-group-addon" >
-                                            <span class="glyphicon glyphicon-th"></span>
-                                        </div>
-                                    </div>
-                                </div> 
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <label for="nombre">Fecha de entrega de reporte</label>
+                                    <input name="datepicker" id="datepicker"  type="date" class="form-control" />
+                                </div>
 
                                 <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                     <label for="nombre">¿Entregó el reporte a tiempo?</label>
