@@ -36,9 +36,12 @@
         <script src="resources/tablas/js/jquery.dataTables.min.js"></script>
         <script src="resources/tablas/js/dataTables.bootstrap.min.js"></script> 
 
-        <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
+        <link href="resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
-
+        <script src="resources/alert/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="resources/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="resources/alert/google.css">
+        
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -59,6 +62,28 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
+            
+             
+            function Guardar() {
+                swal({    
+                    title: "aviso!!",    
+                    text: "¿En verdad deseas guardar los datos?",    
+                    type: "warning",    
+                    showCancelButton: true,    
+                    confirmButtonColor: "#DD6B55",    
+                    confirmButtonText: "SI",    
+                    cancelButtonText: "NO",    
+                    closeOnConfirm: false,    
+                    closeOnCancel: false },   
+
+                    function(isConfirm){    
+                      if (isConfirm) {  
+                          document.getElementById('formularioG').submit();
+                      } else {      
+                          window.location='pages/ListarPeriodos.jsp';  
+                      }  
+                    });
+                  };
         </script>
 
         <style>
@@ -104,61 +129,61 @@
             }
         %>
 
-       <jsp:include page="headAdminUpdate.jsp" flush="true" />
-            <div id="page-wrapper" class="gray-bg dashbard-1">
-                <div class="content-main">
+        <jsp:include page="headAdminUpdate.jsp" flush="true" />
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="content-main">
 
-                    <!--banner-->	
-                    <div class="banner">
-                        <h2>
-                            <a href="indexAdmin.jsp">Home</a>
-                            <i class="fa fa-angle-right"></i>
-                            <span>Actualizar periodo</span><br>
-                        </h2>
-                    </div>
-                    <div class="blank">
-
-                        <div class="blank-page">
-                            <div class="grid-form1">
-                                <h3 id="forms-example" class="">Datos del periodo</h3>
-
-                                  <form id="formulario" action="ControllerPeriodo" method="post" onsubmit="return confirm('Realmente desea ACTUALIZAR los datos')">
-                                  <input type="hidden" name = "action" value="edit">
-                                    <input type="hidden" name = "id"  value="<c:out value="${pdo.getIdPeriodo()}"/>"/> 
-                                    <div class="form-group">
-                                        <label for="nomGrpp">Periodo</label>
-
-                                        <input  required class="form-control" id="periodo" name="periodo"  value="<c:out value="${pdo.getPeriodo()}"/>"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nomGrpp">Fecha Inicio</label>
-
-                                        <input  required class="form-control" id="fechaI" name="fechaI"  value="<c:out value="${pdo.getFechaInicio()}"/>"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nomGrpp">Fecha Fin</label>
-
-                                        <input  required class="form-control" id="fechaF" name="fechaF"  value="<c:out value="${pdo.getFechaFin()}"/>"/>
-                                    </div>
-                                    <button type="submit" class="bl btn btn-danger">Guardar</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                <!--banner-->	
+                <div class="banner">
+                    <h2>
+                        <a href="indexAdmin.jsp">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                        <span>Actualizar periodo</span><br>
+                    </h2>
                 </div>
-            </div>
+                <div class="blank">
 
+                        <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                               
+                <form id="formularioG" name="formularioG" action="ControllerPeriodo" method="post" >
+                    <input type="hidden" name = "action" value="edit">
+                    <input type="hidden" name = "id"  value="<c:out value="${pdo.getIdPeriodo()}"/>"/> 
+
+                     <h3 id="forms-example" class="">Datos del periodo</h3>
+
+                                <div class="form-group">
+                                    <label for="nomGrpp">Periodo</label>
+
+                                    <input  required class="form-control" id="periodo" name="periodo"  value="<c:out value="${pdo.getPeriodo()}"/>"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nomGrpp">Fecha Inicio</label>
+
+                                    <input  required class="form-control" id="fechaI" name="fechaI"  value="<c:out value="${pdo.getFechaInicio()}"/>"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nomGrpp">Fecha Fin</label>
+
+                                    <input  required class="form-control" id="fechaF" name="fechaF"  value="<c:out value="${pdo.getFechaFin()}"/>"/>
+                                </div>
+                </form>
+                                  <button type="button" onclick="Guardar()" class="bl btn btn-danger pull-right">Guardar</button>
+                   </div> </div> </div>
+            </div>
         </div>
-        <div class="clearfix"> </div>
+
     </div>
-    <div class="copy">
-        <p><img src="resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-    </div>
-    <!---->
-    <!--scrolling js-->
-    <script src="js/jquery.nicescroll.js"></script>
-    <script src="js/scripts.js"></script>
-    <!--//scrolling js-->
+    <div class="clearfix"> </div>
+</div>
+<div class="copy">
+    <p><img src="resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+</div>
+<!---->
+<!--scrolling js-->
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/scripts.js"></script>
+<!--//scrolling js-->
 </body>
 </html>
 

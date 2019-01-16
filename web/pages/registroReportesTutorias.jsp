@@ -177,7 +177,7 @@ Author     : Marifer
                                     <label for="curp">Curp</label>
                                     <input type="text" disabled="true" required class="form-control"  value="<c:out value="${prf.getCurp()}"/>"/>
                                     <input type="hidden" class="form-control" id="curp" name="curp" value="<c:out value="${prf.getCurp()}"/>"/>
-                                
+
                                 </div>
 
                                 <div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -212,14 +212,14 @@ Author     : Marifer
                                     <label for="nombre">Número de alumnos asignados</label>
                                     <input type="text" disabled="true" required class="form-control"  value="<c:out value="${count}"/>"/>
                                     <input type="hidden"  id="asg" name="asg" value="<c:out value="${count}"/>"/>
-                                      
+
                                 </div>
 
                                 <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                     <label for="nombre">Tipo de tutoria</label>
                                     <input type="text" disabled="true" required class="form-control"  value="<c:out value="${tipo}"/>"/>
                                     <input type="hidden" class="form-control" id="tipoTutoria" name="tipoTutoria" value="<c:out value="${tipo}"/>"/>
-                                
+
                                 </div>
 
                                 <div id="filterDate2" class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">

@@ -122,14 +122,15 @@
                         <span>Agregar grupo</span><br>
                     </h2>
                 </div>
-                <div class="blank">
+                <form id="formulario" action="../ControllerGrupo" method="post" >
+                    <input type="hidden" name = "action" value="add">
 
-                    <div class="blank-page">
-                        <div class="grid-form1">
-                            <h3 id="forms-example" class="">Datos del grupo</h3>
+                    <div class="blank">
 
-                            <form id="formulario" action="../ControllerGrupo" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')">
-                                <input type="hidden" name = "action" value="add">
+                        <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h3 id="forms-example" class="">Datos del grupo</h3>
+
                                 <div class="form-group">
                                     <label for="nomGrup">Nombre del grupo</label>
 
@@ -177,11 +178,13 @@
 
 
 
-                                <button type="submit" class="bl btn btn-danger">Guardar</button>
-                            </form>
+
+                            </div>
+                            <button type="submit" class="bl btn btn-danger pull-right">Guardar</button>
+
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 

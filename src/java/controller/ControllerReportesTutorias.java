@@ -418,7 +418,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                         cell = row2.createCell(1);
                         cell.setCellStyle(style2);
                         cell.setCellValue("" + ob_lic_rep.getProfesor());
-
+                        
                         cell = row2.createCell(2);
                         cell.setCellStyle(style2);
                         cell.setCellValue("" + ob_lic_rep.getLicenciatura());
@@ -488,13 +488,67 @@ public class ControllerReportesTutorias extends HttpServlet {
                     }
                 } catch (IOException e) {
                 }
-                out.print("<html><head></head><body "
-                        + "onload=\"alert('Reporte creado de forma correcta');"
-                        + " window.location='pages/ListarReportes.jsp'\"><body></html>");
+                out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Reporte creado de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarReportes.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+                
                 /// response.sendRedirect("pages/generarReportes.jsp");
 
             } catch (SQLException ex) {
-                Logger.getLogger(ControllerReportesTutorias.class.getName()).log(Level.SEVERE, null, ex);
+                 out.print("<html>"
+                    + "<head>"
+                    + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                    + "</head>"
+                    + "<body >"
+                    + "<script>\n"
+                    + "function EventoAlert(){\n"
+                    + "  swal({\n"
+                    + "title: \"Aviso!!\",\n"
+                    + "text: \"Error al generar el reporte...\",\n"
+                    + "type: \"warning\",    \n"
+                    + "confirmButtonColor: \"#DD6B55\",\n"
+                    + "confirmButtonText: \"Aceptar\",\n"
+                    + "closeOnConfirm: false,\n"
+                    + "},\n"
+                    + "\n"
+                    + "function(isConfirm){\n"
+                    + "if (isConfirm) {\n"
+                    + "window.location='pages/ListarReportes.jsp'   \n"
+                    + "} \n"
+                    + "});\n"
+                    + "}\n"
+                    + "EventoAlert();\n"
+                    + "</script>"
+                    + "</body>\n"
+                    + "</html>");
+
             }
         } else if (action.equalsIgnoreCase("update")) {
             try {
@@ -513,9 +567,35 @@ public class ControllerReportesTutorias extends HttpServlet {
             try {
                 int idReporte = Integer.parseInt(request.getParameter("id"));
                 reportedao.eliminarById(idReporte); //response.sendRedirect("pages/indexAdmin.jsp");
-                out.print("<html><head></head><body "
-                        + "onload=\"alert('Reporte eliminado de forma correcta');"
-                        + " window.location='pages/ListarReportes.jsp'\"><body></html>");
+                  out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Reporte eliminado de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarReportes.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+               
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerReportesTutorias.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -533,10 +613,35 @@ public class ControllerReportesTutorias extends HttpServlet {
                 int count = alumnodao.countAlumnosTutorados(request.getParameter("prof"));
               
                 if (count == 0) {
-
-                    out.print("<html><head></head><body "
-                            + "onload=\"alert('El profesor no tiene alumnos asignados');"
-                            + " window.location='pages/ListarReportes.jsp'\"><body></html>");
+                        out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"El profesor no tiene alumnos asignados...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarReportes.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+                    
                 } else {
 
                     request.setAttribute("count", count);
@@ -598,13 +703,65 @@ public class ControllerReportesTutorias extends HttpServlet {
                 rep.setFaltantes(faltantes);
 
                 if (reportedao.update(rep) == true) {
-                    out.print("<html><head></head><body "
-                            + "onload=\"alert('Reporte actualizado de forma correcta');"
-                            + " window.location='pages/ListarReportes.jsp'\"><body></html>");
+                    out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"El reporte a sido actualizado de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarReportes.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+                    
                 } else {
-                    out.print("<html><head></head><body "
-                            + "onload=\"alert('Error al actualizar');"
-                            + " window.location='pages/ListarReportes.jsp'\"><body></html>");
+                    out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Error al actualizar...\",\n"
+                        + "type: \"warning\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarReportes.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+                   
                 }
 
             } catch (Exception e) {
@@ -645,14 +802,65 @@ public class ControllerReportesTutorias extends HttpServlet {
                 rep.setObservaciones(observaciones);
                 rep.setFaltantes(faltantes);
                 if (reportedao.insertar(rep) == true) {
-
-                    out.print("<html><head></head><body "
-                            + "onload=\"alert('Reporte guardado de forma correcta');"
-                            + " window.location='pages/ListarReportes.jsp'\"><body></html>");
+                        out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Reporte guardado de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarReportes.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+                   
                 } else {
-                    out.print("<html><head></head><body "
-                            + "onload=\"alert('Error al guardar el reporte verifica tus datos, es posible que el reporte ya exista');"
-                            + " window.location='pages/ListarReportes.jsp'\"><body></html>");
+                     out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Error al guardar el reporte verifica tus datos, es posible que el reporte ya exista\",\n"
+                        + "type: \"warning\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarReportes.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+                    
                 }
 
             } catch (SQLException ex) {
@@ -674,7 +882,7 @@ public class ControllerReportesTutorias extends HttpServlet {
     }// </editor-fold>
 
     java.util.Date convertirStrToDate(String fecha) {
-        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd-MM-yyyy");
 
         java.util.Date date = null;
         try {

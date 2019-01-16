@@ -44,7 +44,10 @@
 
         <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
-
+        <script src="../resources/alert/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../resources/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="../resources/alert/google.css">
+         
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -65,6 +68,28 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
+            
+            function Actualizar() {
+                swal({    
+                    title: "aviso!!",    
+                    text: "¿En verdad deseas actualizar el periodor?",    
+                    type: "warning",    
+                    showCancelButton: true,    
+                    confirmButtonColor: "#DD6B55",    
+                    confirmButtonText: "SI",    
+                    cancelButtonText: "NO",    
+                    closeOnConfirm: false,    
+                    closeOnCancel: false },   
+
+                    function(isConfirm){    
+                      if (isConfirm) {  
+                          document.getElementById('formularioAct').submit();
+                      } else {      
+                          window.location='ListarPeriodos.jsp';  
+                      }  
+                    });
+                  };
+          
         </script>
 
         <style>
@@ -111,82 +136,83 @@
         %>
 
         <jsp:include page="headAdmin.jsp" flush="true" />
-            <div id="page-wrapper" class="gray-bg dashbard-1">
-                <div class="content-main">
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="content-main">
 
-                    <!--banner-->	
-                    <div class="banner">
-                        <h2>
-                            <a href="indexAdmin.jsp">Home</a>
-                            <i class="fa fa-angle-right"></i>
-                            <span>Periodos</span><br>
-                        </h2>
-                    </div>
-                    <div class="blank">
-
-                        <div class="blank-page">
-                            <%
-                                PeriodoDAO obj_Read_Values = new PeriodoDAO();
-                                List<Periodo> list = obj_Read_Values.listarPeriodos();
-                                Iterator<Periodo> it_list = list.iterator();
-                            %>
-                            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                <a href="agregarPeriodo.jsp">
-                                    <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo periodo</a>
-                                <thead>
-
-                                    <tr>
-
-                                        <th>Periodo</th>
-                                        <th>Fecha inicio</th>
-                                        <th>fecha fin</th>
-                                        <th>Editar</th>
-                                        
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <%
-                                        while (it_list.hasNext()) {
-                                            Periodo ob = new Periodo();
-                                            ob = it_list.next();
-                                    %>  
-                                    <tr>
-                                        <td><%=ob.getPeriodo()%></td>
-                                        <td><%=ob.getFechaInicio()%></td>
-                                        <td><%=ob.getFechaFin()%></td>
-                                        <td>
-                                            <form id="formulario" action="../ControllerPeriodo" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')">
-                                                <input type="hidden" name = "id" id="id" value="<%=ob.getIdPeriodo() %>">
-                                                <input type="hidden" name = "action" id="action" value="update">
-                                       <button type="submit"  class="btn btn-link">Actualizar</button>
-                                            </form>
-                                            
-                                        </td>
-
-
-                                    </tr>
-                                    <%
-                                        }
-                                    %>     
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
+                <!--banner-->	
+                <div class="banner">
+                    <h2>
+                        <a href="indexAdmin.jsp">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                        <span>Periodos</span><br>
+                    </h2>
                 </div>
-                <div class="clearfix"> </div>
+                <div class="blank">
+
+                    <div class="blank-page">
+                        <%
+                            PeriodoDAO obj_Read_Values = new PeriodoDAO();
+                            List<Periodo> list = obj_Read_Values.listarPeriodos();
+                            Iterator<Periodo> it_list = list.iterator();
+                        %>
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <a href="agregarPeriodo.jsp">
+                                <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo periodo</a>
+                            <thead>
+
+                                <tr>
+
+                                    <th>Periodo</th>
+                                    <th>Fecha inicio</th>
+                                    <th>fecha fin</th>
+                                    <th>Editar</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <%
+                                    while (it_list.hasNext()) {
+                                        Periodo ob = new Periodo();
+                                        ob = it_list.next();
+                                %>  
+                                <tr>
+                                    <td><%=ob.getPeriodo()%></td>
+                                    <td><%=ob.getFechaInicio()%></td>
+                                    <td><%=ob.getFechaFin()%></td>
+                                    <td>
+                                        <form id="formularioAct" name="formularioAct" action="../ControllerPeriodo" method="post" >
+                                            <input type="hidden" name = "id" id="id" value="<%=ob.getIdPeriodo()%>">
+                                            <input type="hidden" name = "action" id="action" value="update">
+                                            </form>
+                                            <button type="button" onclick="Actualizar()" class="btn btn-link">Actualizar</button>
+                                    
+
+                                    </td>
+
+
+                                </tr>
+                                <%
+                                    }
+                                %>     
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
-            <div class="copy">
-                <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-            </div>
-            <!---->
-            <!--scrolling js-->
-            <script src="js/jquery.nicescroll.js"></script>
-            <script src="js/scripts.js"></script>
-            <!--//scrolling js-->
+            <div class="clearfix"> </div>
+        </div>
+        <div class="copy">
+            <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+        </div>
+        <!---->
+        <!--scrolling js-->
+        <script src="js/jquery.nicescroll.js"></script>
+        <script src="js/scripts.js"></script>
+        <!--//scrolling js-->
     </body>
 </html>
 

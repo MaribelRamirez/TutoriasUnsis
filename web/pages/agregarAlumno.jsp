@@ -110,92 +110,96 @@
             }
         %>
 
-       <jsp:include page="headAdmin.jsp" flush="true" />
-            <div id="page-wrapper" class="gray-bg dashbard-1">
-                <div class="content-main">
+        <jsp:include page="headAdmin.jsp" flush="true" />
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="content-main">
 
-                    <!--banner-->	
-                    <div class="banner">
-                        <h2>
-                            <a href="indexAdmin.jsp">Home</a>
-                            <i class="fa fa-angle-right"></i>
-                            <span>Agregar alumno</span><br>
-                        </h2>
-                    </div>
+                <!--banner-->	
+                <div class="banner">
+                    <h2>
+                        <a href="indexAdmin.jsp">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                        <span>Agregar alumno</span><br>
+                    </h2>
+                </div>
+                <form id="formulario" action="../ControllerAlumno" method="post" >
+                    <input type="hidden" name = "action" value="add">
+
                     <div class="blank">
 
-                        <div class="blank-page">
-                            <div class="grid-form1">
+                        <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                            <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <h3 id="forms-example" class="">Datos del alumno</h3>
-                                <form id="formulario" action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')">
-                                    <input type="hidden" name = "action" value="add">
-                                    <div class="form-group">
-                                        <label for="matricula">Matricula</label>
-                                        <input  required class="form-control" type="number" id="matricula" name="matricula" placeholder="Introduce la matricula del alumno">
+                                <div class="form-group">
+                                    <label for="matricula">Matricula</label>
+                                    <input  required class="form-control" type="number" id="matricula" name="matricula" placeholder="Introduce la matricula del alumno">
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nombre">Nombre completo</label>
-                                        <input  required class="form-control" id="nombre" name="nombre" placeholder="Introduce el nombre del alumno">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nombre">Nombre completo</label>
+                                    <input  required class="form-control" id="nombre" name="nombre" placeholder="Introduce el nombre del alumno">
 
-                                    </div>
-                                    <%
-                                        GrupoDAO obj_Read_grp = new GrupoDAO();
-                                        List<Grupo> listGrup = obj_Read_grp.listarGrupos();
-                                        Iterator<Grupo> list_Grup = listGrup.iterator();
+                                </div>
+                                <%
+                                    GrupoDAO obj_Read_grp = new GrupoDAO();
+                                    List<Grupo> listGrup = obj_Read_grp.listarGrupos();
+                                    Iterator<Grupo> list_Grup = listGrup.iterator();
 
-                                    %>
-                                    <div class = "form-group">
-                                        <label>Grupos</label>	      
-                                        <select class="form-control " id="grupo" name="grupo" >
-                                            <%                                        while (list_Grup.hasNext()) {
-                                                    Grupo ob = new Grupo();
-                                                    ob = list_Grup.next();
-                                            %>
-                                            <option value="<%= ob.getIdGrupo()%>"> <%=ob.getGrupo()%></option>\n\
-                                            <% }
+                                %>
+                                <div class = "form-group">
+                                    <label>Grupos</label>	      
+                                    <select class="form-control " id="grupo" name="grupo" >
+                                        <%                                        while (list_Grup.hasNext()) {
+                                                Grupo ob = new Grupo();
+                                                ob = list_Grup.next();
+                                        %>
+                                        <option value="<%= ob.getIdGrupo()%>"> <%=ob.getGrupo()%></option>\n\
+                                        <% }
 
-                                            %>   
-                                        </select>
-                                    </div>
-                                    <%                         LicenciaturaDAO obj_Read_Lic = new LicenciaturaDAO();
-                                        List<Licenciatura> listLic = obj_Read_Lic.listarLicenciaturas();
-                                        Iterator<Licenciatura> list_Lic = listLic.iterator();
+                                        %>   
+                                    </select>
+                                </div>
+                                <%                         LicenciaturaDAO obj_Read_Lic = new LicenciaturaDAO();
+                                    List<Licenciatura> listLic = obj_Read_Lic.listarLicenciaturas();
+                                    Iterator<Licenciatura> list_Lic = listLic.iterator();
 
-                                    %>
-                                    <div class = "form-group">
-                                        <label>Licenciatura</label>	      
-                                        <select class="form-control " id="lic" name="lic" >
-                                            <%                                        while (list_Lic.hasNext()) {
-                                                    Licenciatura ob = new Licenciatura();
-                                                    ob = list_Lic.next();
-                                            %>
-                                            <option value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>\n\
-                                            <% }
+                                %>
+                                <div class = "form-group">
+                                    <label>Licenciatura</label>	      
+                                    <select class="form-control " id="lic" name="lic" >
+                                        <%                                        while (list_Lic.hasNext()) {
+                                                Licenciatura ob = new Licenciatura();
+                                                ob = list_Lic.next();
+                                        %>
+                                        <option value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>\n\
+                                        <% }
 
-                                            %>   
-                                        </select>
-                                    </div>
+                                        %>   
+                                    </select>
+                                </div>
 
-                                    <button type="submit" class="bl btn btn-danger">Guardar</button>
-                                </form>
                             </div>
+                            <button type="submit" class="bl btn btn-danger pull-right">Guardar</button>
+
                         </div>
                     </div>
-                </div>
-            </div>
 
+                </form>
+
+            </div>
         </div>
-        <div class="clearfix"> </div>
+
     </div>
-    <div class="copy">
-        <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-    </div>
-    <!---->
-    <!--scrolling js-->
-    <script src="js/jquery.nicescroll.js"></script>
-    <script src="js/scripts.js"></script>
-    <!--//scrolling js-->
+    <div class="clearfix"> </div>
+</div>
+<div class="copy">
+    <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+</div>
+<!---->
+<!--scrolling js-->
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/scripts.js"></script>
+<!--//scrolling js-->
 </body>
 </html>
 

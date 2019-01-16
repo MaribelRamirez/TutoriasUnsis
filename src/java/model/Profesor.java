@@ -33,22 +33,6 @@ public class Profesor {
         this.tipoTutoria=tipoTutoria;
     }
 
-    public int getTipoTutoria() {
-        return tipoTutoria;
-    }
-
-    public void setTipoTutoria(int tipoTutoria) {
-        this.tipoTutoria = tipoTutoria;
-    }
-
-    public String getCurp() {
-        return curp;
-    }
-
-    public void setCurp(String curp) {
-        this.curp = curp;
-    }
-
     public int getIdProfesor() {
         return idProfesor;
     }
@@ -81,6 +65,14 @@ public class Profesor {
         this.grado = grado;
     }
 
+    public String getLicenciatura() {
+        return licenciatura;
+    }
+
+    public void setLicenciatura(String licenciatura) {
+        this.licenciatura = licenciatura;
+    }
+
     public int getIdLicenciatura() {
         return idLicenciatura;
     }
@@ -89,13 +81,20 @@ public class Profesor {
         this.idLicenciatura = idLicenciatura;
     }
 
-    
-
-    public String getLicenciatura() {
-        return licenciatura;
+    public String getCurp() {
+        return curp;
     }
 
-    public void setLicenciatura(String licenciatura) {
-        this.licenciatura = licenciatura;
+    public void setCurp(String curp) {
+        this.curp = curp;
     }
+
+    public int getTipoTutoria() {
+        return tipoTutoria;
+    }
+
+    public void setTipoTutoria(int tipoTutoria) {
+        this.tipoTutoria = tipoTutoria;
+    }
+
 }

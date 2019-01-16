@@ -40,9 +40,11 @@
         <script src="../resources/tablas/js/jquery-3.3.1.js"></script>  
         <script src="../resources/tablas/js/jquery.dataTables.min.js"></script>
         <script src="../resources/tablas/js/dataTables.bootstrap.min.js"></script> 
-
         <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
+        <script src="../resources/alert/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../resources/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="../resources/alert/google.css">
 
         <script>
             $(function () {
@@ -64,6 +66,51 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
+            
+            
+            
+            function Actualizar() {
+                swal({    
+                    title: "aviso!!",    
+                    text: "¿En verdad deseas actualizar al grupo?",    
+                    type: "warning",    
+                    showCancelButton: true,    
+                    confirmButtonColor: "#DD6B55",    
+                    confirmButtonText: "SI",    
+                    cancelButtonText: "NO",    
+                    closeOnConfirm: false,    
+                    closeOnCancel: false },   
+
+                    function(isConfirm){    
+                      if (isConfirm) {  
+                          document.getElementById('formularioAct').submit();
+                      } else {      
+                          window.location='ListarGrupos.jsp';  
+                      }  
+                    });
+                  };
+          
+          
+           function Eliminar() {
+                swal({    
+                    title: "aviso!!",    
+                    text: "¿En verdad deseas eliminar al grupo?",    
+                    type: "warning",    
+                    showCancelButton: true,    
+                    confirmButtonColor: "#DD6B55",    
+                    confirmButtonText: "SI",    
+                    cancelButtonText: "NO",    
+                    closeOnConfirm: false,    
+                    closeOnCancel: false },   
+
+                    function(isConfirm){    
+                      if (isConfirm) {  
+                          document.getElementById('formularioElim').submit();
+                      } else {      
+                          window.location='ListarGrupos.jsp';  
+                      }  
+                    });
+                  };
         </script>
 
         <style>
@@ -107,106 +154,106 @@
             } else {
                 out.print("<script>location.replace('login.jsp');</script>");
             }
-            
 
             sql auto = new sql();
-            int perA= auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo")-1;
+            int perA = auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo") - 1;
         %>
 
         <jsp:include page="headAdmin.jsp" flush="true" />
-            <div id="page-wrapper" class="gray-bg dashbard-1">
-                <div class="content-main">
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="content-main">
 
-                    <!--banner-->	
-                    <div class="banner">
-                        <h2>
-                            <a href="indexAdmin.jsp">Home</a>
-                            <i class="fa fa-angle-right"></i>
-                            <span>Grupos</span><br>
-                        </h2>
-                    </div>
-                    <div class="blank">
-
-                        <div class="blank-page">
-                            <%
-                                GrupoDAO obj_Read_Values = new GrupoDAO();
-                                List<Grupo> list = obj_Read_Values.listarGrupos();
-                                Iterator<Grupo> it_list = list.iterator();
-                            %>
-                            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                <a href="agregarGrupo.jsp">
-                                    <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo grupo</a>
-                                <thead>
-
-                                    <tr>
-
-                                        <th>Grupo</th>
-                                        <th>Periodo</th>
-                                        <th>Licenciatura</th>
-                                        <th>Editar</th>
-                                        <th>Eliminar</th>
-                                        <th>Agregar Tutor</th>
-                                        
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <%
-                                        while (it_list.hasNext()) {
-                                            Grupo ob = new Grupo();
-                                            ob = it_list.next();
-                                    %>  
-                                    <tr>
-                                        <td><%=ob.getGrupo()%></td>
-                                        <td><%=ob.getPeriodo()%></td>
-                                        <td><%=ob.getLicenciatura()%></td>
-                                        <td>
-                                            <form id="formulario" action="../ControllerGrupo" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')">
-                                                <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo() %>">
-                                                <input type="hidden" name = "action" id="action" value="update">
-                                       <button type="submit"  class="btn btn-link">Actualizar</button>
-                                            </form>
-                                            
-                                        </td>
-                                        <td >
-                                           <form id="formulario" action="../ControllerGrupo" method="post" onsubmit="return confirm('¿Realmente desea eliminar el grupo?')">
-                                               <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
-                                                  <input type="hidden" name = "action" id="action" value="delete">
-                                       <button type="submit"  class="btn btn-link">Eliminar</button>
-                                            </form>
-                                        </td>
-                                         <td >
-                                             <% if(perA==ob.getIdPeriodo()){%>  
-                                           <form id="formulario" action="../ControllerTutores" method="post">
-                                               <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
-                                                  <input type="hidden" name = "action" id="action" value="addTG">
-                                       <button type="submit"  class="btn btn-link">Agregar Tutor</button>
-                                            </form>
-                                        </td>
-
-                                    </tr>
-                                    <%
-                                        }
-                                        }
-                                    %>     
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
+                <!--banner-->	
+                <div class="banner">
+                    <h2>
+                        <a href="indexAdmin.jsp">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                        <span>Grupos</span><br>
+                    </h2>
                 </div>
-                <div class="clearfix"> </div>
+                <div class="blank">
+
+                    <div class="blank-page">
+                        <%
+                            GrupoDAO obj_Read_Values = new GrupoDAO();
+                            List<Grupo> list = obj_Read_Values.listarGrupos();
+                            Iterator<Grupo> it_list = list.iterator();
+                        %>
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <a href="agregarGrupo.jsp">
+                                <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo grupo</a>
+                            <thead>
+
+                                <tr>
+
+                                    <th>Grupo</th>
+                                    <th>Periodo</th>
+                                    <th>Licenciatura</th>
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
+                                    <th>Agregar Tutor</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <%
+                                    while (it_list.hasNext()) {
+                                        Grupo ob = new Grupo();
+                                        ob = it_list.next();
+                                %>  
+                                <tr>
+                                    <td><%=ob.getGrupo()%></td>
+                                    <td><%=ob.getPeriodo()%></td>
+                                    <td><%=ob.getLicenciatura()%></td>
+                                    <td>
+                                        <form id="formularioAct" name="formularioAct" action="../ControllerGrupo" method="post">
+                                            <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
+                                            <input type="hidden" name = "action" id="action" value="update">
+                                            </form>
+                                            <button type="button" onclick="Actualizar()" class="btn btn-link">Actualizar</button>
+                                    
+                                    </td>
+                                    <td >
+                                        <form id="formularioElim" name="formularioElim" action="../ControllerGrupo" method="post" >
+                                            <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
+                                            <input type="hidden" name = "action" id="action" value="delete">
+                                        </form>
+                                            <button type="button" onclick="Eliminar()" class="btn btn-link">Eliminar</button>
+                                   
+                                    </td>
+                                    <td >
+                                        <% if (perA == ob.getIdPeriodo()) {%>  
+                                        <form id="formulario" action="../ControllerTutores" method="post">
+                                            <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
+                                            <input type="hidden" name = "action" id="action" value="addTG">
+                                            <button type="submit"  class="btn btn-link">Agregar Tutor</button>
+                                        </form>
+                                    </td>
+
+                                </tr>
+                                <%
+                                        }
+                                    }
+                                %>     
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
-            <div class="copy">
-                <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-            </div>
-            <!---->
-            <!--scrolling js-->
-            <script src="js/jquery.nicescroll.js"></script>
-            <script src="js/scripts.js"></script>
-            <!--//scrolling js-->
+            <div class="clearfix"> </div>
+        </div>
+        <div class="copy">
+            <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+        </div>
+        <!---->
+        <!--scrolling js-->
+        <script src="js/jquery.nicescroll.js"></script>
+        <script src="js/scripts.js"></script>
+        <!--//scrolling js-->
     </body>
 </html>
 

@@ -59,8 +59,8 @@
                     autoclose: true
                 }).datepicker("setDate", new Date());
             });
-            
-            
+
+
         </script>
         <script>
             $(function () {
@@ -143,18 +143,18 @@
                 </div>
 
 
-                <div class="blank">
+                <div class="blank ">
 
 
-                    <div class="blank-page">
-                        
-                        
-                        
-        
+                    <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 
 
-                        
+
+
+
+
+
                         <%
                             ProfesorDAO obj_Read_Values = new ProfesorDAO();
                             List<Profesor> list = obj_Read_Values.tutorIndividual();
@@ -163,28 +163,28 @@
 
                         %>
                         <form id="formulario" action="../ControllerConstancias" method="post" target="_blank">
-                                  
 
-<div class="container">
-  <br />
-  <div class="row">
-    <div class='col-sm-3'>
-      <div class="form-group">
-        <div id="filterDate2">
-          
-          <!-- Datepicker as text field -->         
-          <div class="input-group date" data-date-format="dd-mm-yyyy">
-              <input  required readonly="readonly" type="text" class="form-control" name="datepicker" id="datepicker" >
-            <div class="input-group-addon" >
-              <span class="glyphicon glyphicon-th"></span>
-            </div>
-          </div>
-          
-        </div>    
-      </div>
-    </div>
-  </div>
-</div>
+
+                            <div class="container">
+                                <br />
+                                <div class="row">
+                                    <div class='col-sm-3'>
+                                        <div class="form-group">
+                                            <div id="filterDate2">
+
+                                                <!-- Datepicker as text field -->         
+                                                <div class="input-group date" data-date-format="dd-mm-yyyy">
+                                                    <input  required readonly="readonly" type="text" class="form-control" name="datepicker" id="datepicker" >
+                                                    <div class="input-group-addon" >
+                                                        <span class="glyphicon glyphicon-th"></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <input type="hidden" name = "action" value="individual">
                             <input type="hidden" name = "sizeList" value="<%=cont%>">
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -223,8 +223,8 @@
 
                                 </tbody>
                             </table><br>
-                            
-                            <button type="submit" class="bl btn btn-danger">Generar Constancias</button>
+
+                            <button type="submit" class="bl btn btn-danger pull-right">Generar Constancias</button>
                         </form> 
                     </div>
                 </div>

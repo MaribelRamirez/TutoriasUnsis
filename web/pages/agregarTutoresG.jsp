@@ -130,7 +130,7 @@
                         <div class="grid-form1">
                             <h3 id="forms-example" class="">Datos de la tutoria</h3>
 
-                            <form id="formulario"  action="../ControllerTutores" method="post" onsubmit="return confirm('¿Realmente desea guardar los datos?')">
+                            <form id="formulario"  action="../ControllerTutores" method="post" >
                                 <input type="hidden" name = "action" value="add">
                                 <input type="hidden" name = "tipo" value="grupal">
                                 <input type="hidden" name = "grupo"  value="<c:out value="${grp.getIdGrupo()}"/>"/> 
@@ -157,7 +157,7 @@
                                 </div>
 
 
-                                <%                                        
+                                <%
                                     ProfesorDAO obj_Read_Pro = new ProfesorDAO();
                                     List<Profesor> listPro = obj_Read_Pro.listarProfesores();
                                     Iterator<Profesor> list_Pro = listPro.iterator();

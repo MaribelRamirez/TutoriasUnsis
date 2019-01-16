@@ -456,12 +456,65 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                 }
 
             }
-            out.print("<html><head></head><body "
-                    + "onload=\"alert('Reportes generados con exito');"
-                    + " window.location='pages/generarReportes.jsp'\"><body></html>");
-            ////response.sendRedirect("pages/generarReportes.jsp");
+             out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Reporte generado de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/generarReportes.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+           
+             ////response.sendRedirect("pages/generarReportes.jsp");
         } catch (SQLException ex) {
-            Logger.getLogger(ControllerReporteAsignacionTutorias.class.getName()).log(Level.SEVERE, null, ex);
+          out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Error al generar el reporte\",\n"
+                        + "type: \"warning\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/generarReportes.jsp'  \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
         }
 
     }

@@ -25,7 +25,8 @@ import model.Profesor;
  */
 @WebServlet(name = "ControllerProfesor", urlPatterns = {"/ControllerProfesor"})
 public class ControllerProfesor extends HttpServlet {
- private static final String edit = "pages/actualizarProfesor.jsp";
+
+    private static final String edit = "pages/actualizarProfesor.jsp";
     String forward = "";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -61,7 +62,7 @@ public class ControllerProfesor extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-       
+
     }
 
     /**
@@ -76,14 +77,14 @@ public class ControllerProfesor extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-   response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        PrintWriter out=response.getWriter();
+        PrintWriter out = response.getWriter();
         Profesor pro = new Profesor();
- String action = request.getParameter("action");
+        String action = request.getParameter("action");
         if (action.equalsIgnoreCase("update")) {
-        
-        try {
+
+            try {
                 forward = edit;
                 Profesor prf = profesordao.obtenerProfesorById(Integer.parseInt(request.getParameter("idprf")));
                 request.setAttribute("prf", prf);
@@ -92,73 +93,138 @@ public class ControllerProfesor extends HttpServlet {
             } catch (NumberFormatException | SQLException e) {
                 System.out.println("Error en servlet: " + e);
             }
-        }
-        else if (action.equalsIgnoreCase("delete")) {
-        
-      int idprf = Integer.parseInt(request.getParameter("idprf"));
+        } else if (action.equalsIgnoreCase("delete")) {
+
+             int idprf = Integer.parseInt(request.getParameter("idprf"));
             try {
                 profesordao.eliminar(idprf);
-                 out.print("<html><head></head><body "
-                           + "onload=\"alert('Profesor eliminado de forma correcta');"
-                           + " window.location='pages/indexAdmin.jsp'\"><body></html>");
-            } catch (SQLException ex) {
-                Logger.getLogger(ControllerProfesor.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            //response.sendRedirect("pages/indexAdmin.jsp");
+                out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Profesor eliminado de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/indexAdmin.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+                   response.sendRedirect("pages/indexAdmin.jsp");
+           } catch (SQLException ex) {
+               Logger.getLogger(ControllerProfesor.class.getName()).log(Level.SEVERE, null, ex);
+           }
+            
 
-        }
-        
-        else if (action.equalsIgnoreCase("add")) {
-        
-        
-        String curp = request.getParameter("curp");
-        String nombre = request.getParameter("nombre");
-        String grado_acad = request.getParameter("grado_acad");
-        String status = request.getParameter("status");
-        int lic = Integer.parseInt(request.getParameter("lic"));
-        pro.setCurp(curp);
-        pro.setNombre(nombre);
-        pro.setGrado(grado_acad);
-        pro.setEstatus(status);
-        pro.setIdLicenciatura(lic);
+        } else if (action.equalsIgnoreCase("add")) {
 
-        try {
-            profesordao.insertar(pro);
-             out.print("<html><head></head><body "
-                           + "onload=\"alert('Profesor agregado de forma correcta');"
-                           + " window.location='pages/indexAdmin.jsp'\"><body></html>");
-        } catch (SQLException ex) {
-            Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
-        else if (action.equalsIgnoreCase("edit")) {
-            try {
-                int idprf = Integer.parseInt(request.getParameter("idprf"));
             String curp = request.getParameter("curp");
             String nombre = request.getParameter("nombre");
-            String grado =request.getParameter("grado");
-            String estatus =request.getParameter("estatus");
+            String grado_acad = request.getParameter("grado_acad");
+            String status = request.getParameter("status");
             int lic = Integer.parseInt(request.getParameter("lic"));
-            pro.setIdProfesor(idprf);
             pro.setCurp(curp);
             pro.setNombre(nombre);
-            pro.setGrado(grado);
-            pro.setEstatus(estatus);
+            pro.setGrado(grado_acad);
+            pro.setEstatus(status);
             pro.setIdLicenciatura(lic);
-            profesordao.updateProfesor(pro);
-            
-                out.print("<html><head></head><body "
-                           + "onload=\"alert('Profesor actualizado de forma correcta');"
-                           + " window.location='pages/indexAdmin.jsp'\"><body></html>");
+
+            try {
+                profesordao.insertar(pro);
+               out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Profesor agregado de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/indexAdmin.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+            } catch (SQLException ex) {
+                Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (action.equalsIgnoreCase("edit")) {
+            try {
+                int idprf = Integer.parseInt(request.getParameter("idprf"));
+                String curp = request.getParameter("curp");
+                String nombre = request.getParameter("nombre");
+                String grado = request.getParameter("grado");
+                String estatus = request.getParameter("estatus");
+                int lic = Integer.parseInt(request.getParameter("lic"));
+                pro.setIdProfesor(idprf);
+                pro.setCurp(curp);
+                pro.setNombre(nombre);
+                pro.setGrado(grado);
+                pro.setEstatus(estatus);
+                pro.setIdLicenciatura(lic);
+                profesordao.updateProfesor(pro);
+                        out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Profesor actualizado de forma correcta...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/indexAdmin.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
             } catch (Exception e) {
             }
-            
 
-           
-        
-        
         }
-        
+
     }
 
     /**

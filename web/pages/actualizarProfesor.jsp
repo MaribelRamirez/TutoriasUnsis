@@ -44,7 +44,10 @@
 
         <link href="resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
-
+        <script src="resources/alert/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="resources/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="resources/alert/google.css">
+        
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -65,6 +68,27 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
+            
+            function Guardar() {
+                swal({    
+                    title: "aviso!!",    
+                    text: "¿En verdad deseas guardar los datos?",    
+                    type: "warning",    
+                    showCancelButton: true,    
+                    confirmButtonColor: "#DD6B55",    
+                    confirmButtonText: "SI",    
+                    cancelButtonText: "NO",    
+                    closeOnConfirm: false,    
+                    closeOnCancel: false },   
+
+                    function(isConfirm){    
+                      if (isConfirm) {  
+                          document.getElementById('formularioG').submit();
+                      } else {      
+                          window.location='pages/indexAdmin.jsp';  
+                      }  
+                    });
+                  };
         </script>
 
         <style>
@@ -110,97 +134,150 @@
             }
         %>
 
-      <jsp:include page="headAdminUpdate.jsp" flush="true" />
-            <div id="page-wrapper" class="gray-bg dashbard-1">
-                <div class="content-main">
+        <jsp:include page="headAdminUpdate.jsp" flush="true" />
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="content-main">
 
-                    <!--banner-->	
-                    <div class="banner">
-                        <h2>
-                            <a href="indexAdmin.jsp">Home</a>
-                            <i class="fa fa-angle-right"></i>
-                            <span>Agregar profesor</span><br>
-                        </h2>
-                    </div>
+                <!--banner-->	
+                <div class="banner">
+                    <h2>
+                        <a href="indexAdmin.jsp">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                        <span>Actualizar profesor</span><br>
+                    </h2>
+                </div>
+            
                     <div class="blank">
 
-                        <div class="blank-page">
-                            	<div class="grid-form1">
- 		<h3 id="forms-example" class="">Datos del profesor</h3>
-                     
- <form id="formulario"  action="ControllerProfesor" method="post" onsubmit="return confirm('Realmente desea guardar los datos')">
-  <input type="hidden" name = "action" value="edit">
-  <input type="hidden" name = "idprf" id="idprf" value="<c:out value="${prf.getIdProfesor()}"/>"/>
-  <div class="form-group">
-    <label for="curp">Curp</label>
- <input  required class="form-control" id="curp" name="curp"  value="<c:out value="${prf.getCurp()}"/>"/>
+                        <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                             <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            
+                            <form id="formularioG"  name="formularioG" action="ControllerProfesor" method="post">
+                    <input type="hidden" name = "action" value="edit">
+                    <input type="hidden" name = "idprf" id="idprf" value="<c:out value="${prf.getIdProfesor()}"/>"/>
 
-  </div>
-                    <div class="form-group">
-    <label for="nombre">Nombre completo</label>
-      <input  required class="form-control" id="nombre" name="nombre"  value="<c:out value="${prf.getNombre()}"/>"/>
-                    </div>
-       <div class = "form-group">
-                                <label>Grado academico</label>	      
-                                <select class="form-control " id="grado" name="grado">
-                                    <option selected="selected" value="<c:out value="${prf.getGrado()}"/>"> ${prf.getGrado()}</option>
-                                    <option value="Licenciatura"> Licenciatura</option>
-                                    <option value="Maestria">Maestria</option>
-                                    <option value="Doctorado">Doctorado</option>
-                                    <option value="Pos Doctorado">Pos doctorado</option>
-                                </select>
-                            </div>
-                   <div class = "form-group">
-                                <label>Status</label>	      
-                                <select  class="form-control " id="estatus" name="estatus">
-                                    <option selected="selected" value="<c:out value="${prf.getEstatus()}"/>">${prf.getEstatus()}</option>
-                                    <option value="Activo">Activo</option>
-                                    <option value="Inactivo">Inactivo</option>
-                                    <option value="Licencia">Licencia</option>
-                                    <option value="Sabatico">Sabatico</option>
-                                </select>
-                            </div>
-                    <%
-                               LicenciaturaDAO obj_Read_Values = new LicenciaturaDAO();
-                                List<Licenciatura> list = obj_Read_Values.listarLicenciaturas();
-                                Iterator<Licenciatura> it_list = list.iterator();
-                        
-                            %>
-                <div class = "form-group">
-                                <label>Licenciatura</label>	      
-                                <select class="form-control " id="lic" name="lic">
-                                    <option  value="<c:out value="${prf.getIdLicenciatura()}"/>"> ${prf. getLicenciatura()}</option>\n\
-                                    <%
-                                        while (it_list.hasNext()) {
-                                            Licenciatura ob = new Licenciatura();
-                                            ob = it_list.next();
-                                    %>
-                                    <option value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre() %></option>\n\
-                                    <% }
+                                <h3 id="forms-example" class="">Datos del profesor</h3>
+
+                                <div class="form-group">
+                                    <label for="curp">Curp</label>
+                                    <input  required class="form-control" id="curp" name="curp"  value="<c:out value="${prf.getCurp()}"/>"/>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="nombre">Nombre completo</label>
+                                    <input  required class="form-control" id="nombre" name="nombre"  value="<c:out value="${prf.getNombre()}"/>"/>
+                                </div>
+                                  
+                                <div class = "form-group">
+                                    <label>Grado academico</label>	      
+                                    <select class="form-control " id="grado" name="grado">
                                         
-                                    %>   
-                                </select>
-                            </div>
-  
-  <button type="submit" class="bl btn btn-danger">Guardar</button>
-</form>
+                                        <c:if test="${prf.getGrado()=='Licenciatura'}">
+                                            <option selected="selected" value="Licenciatura"> Licenciatura</option>
+                                            <option value="Maestria">Maestria</option>
+                                            <option value="Doctorado">Doctorado</option>
+                                            <option value="Pos Doctorado">Pos doctorado</option>
+                                        </c:if>
+                                        <c:if test="${prf.getGrado()=='Maestria'}">
+                                            <option selected="selected" value="Maestria"> Maestria</option>
+                                            <option value="Licenciatura"> Licenciatura</option>
+                                            <option value="Doctorado">Doctorado</option>
+                                            <option value="Pos Doctorado">Pos doctorado</option>
+                                        </c:if>
+                                        <c:if test="${prf.getGrado()=='Doctorado'}">
+                                            <option selected="selected" value="Doctorado"> Doctorado</option>
+                                            <option value="Licenciatura"> Licenciatura</option>
+                                            <option value="Maestria">Maestria</option>
+                                            <option value="Pos Doctorado">Pos doctorado</option>
+                                        </c:if>
+                                        <c:if test="${prf.getGrado()=='Pos doctorado'}">
+                                            <option selected="selected" value="Pos doctorado"> Pos doctorado</option>
+                                            <option value="Licenciatura"> Licenciatura</option>
+                                            <option value="Maestria">Maestria</option>
+                                            <option value="Doctorado">Doctorado</option>
+                                        </c:if>
+
+                                    </select>
+                                </div>
+                                <div class = "form-group">
+                                    <label>Status</label>	      
+                                    <select  class="form-control " id="estatus" name="estatus">
+                                         <c:if test="${prf.getEstatus()=='Activo'}">
+                                            <option selected="selected" value="Activo"> Activo</option>
+                                            <option value="Inactivo">Inactivo</option>
+                                            <option value="Licencia">Licencia</option>
+                                            <option value="Sabatico">Sabatico</option>
+                                        </c:if>
+                                        <c:if test="${prf.getEstatus()=='Inactivo'}">
+                                            <option selected="selected" value="Inactivo"> Inactivo</option>
+                                              <option value="Activo">Activo</option>
+                                            <option value="Licencia">Licencia</option>
+                                            <option value="Sabatico">Sabatico</option>
+                                        </c:if>
+                                        <c:if test="${prf.getEstatus()=='Licencia'}">
+                                            <option selected="selected" value="Licencia"> Licencia</option>
+                                            <option value="Activo">Activo</option>
+                                            <option value="Inactivo">Inactivo</option>
+                                            <option value="Sabatico">Sabatico</option>
+                                        </c:if>
+                                          <c:if test="${prf.getEstatus()=='Sabatico'}">
+                                            <option selected="selected" value="Sabatico"> Sabatico</option>
+                                            <option value="Activo">Activo</option>
+                                            <option value="Inactivo">Inactivo</option>
+                                            <option value="Licencia">Licencia</option>
+                                        </c:if>
+                                        
+                                    </select>
+                                </div>
+                                <%
+                                    LicenciaturaDAO obj_Read_Values = new LicenciaturaDAO();
+                                    List<Licenciatura> list = obj_Read_Values.listarLicenciaturas();
+                                    Iterator<Licenciatura> it_list = list.iterator();
+
+                                %>
+                                <div class = "form-group">
+                                    <label>Licenciatura</label>	      
+                                    <select class="form-control " id="lic" name="lic">
+                                      
+                                        <%                      
+                                            while (it_list.hasNext()) {
+                                                Licenciatura ob = new Licenciatura();
+                                                ob = it_list.next();
+                                        %>
+                                        <c:set var="id" value="<%=ob.getIdLicenciatura()%>"/>
+                                         <c:choose >
+                                             <c:when test="${ prf.getIdLicenciatura()==id}">
+                                                <option  selected="selected"  value="<%= ob.getIdLicenciatura() %>"> <%=ob.getNombre()%></option>
+
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="<%=ob.getIdLicenciatura()%>"> <%=ob.getNombre() %></option>
+                                             </c:otherwise>
+                                        </c:choose>
+                                        
+                                        <% }
+
+                                        %>   
+                                    </select>
+                                </div>
+                         
+                </form>
+                   <button type="button" onclick="Guardar()" class="bl btn btn-danger pull-right">Guardar</button>
+                   </div> </div> </div>                                
+            </div>
+        </div>
+
+    </div>
+    <div class="clearfix"> </div>
 </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-            <div class="copy">
-                <p><img src="resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-            </div>
-            <!---->
-            <!--scrolling js-->
-            <script src="js/jquery.nicescroll.js"></script>
-            <script src="js/scripts.js"></script>
-            <!--//scrolling js-->
-    </body>
+<div class="copy">
+    <p><img src="resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+</div>
+<!---->
+<!--scrolling js-->
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/scripts.js"></script>
+<!--//scrolling js-->
+</body>
 </html>
 
