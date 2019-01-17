@@ -31,10 +31,16 @@
      <div class="drop-men" >
                 <ul class=" nav_1">
 
-                    
+                   
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret">Coria olgin<i ></i></span></a>
-                      
+                        
+                        <form action="../login" method="get">
+<!--                        <input type="hidden" name = "action" value="close">-->
+<button name="action" type="submit" value="close"> Cerrar sesion</button>
+                            <!--<input  name="action" type="submit" value="close" >--> 
+                       
+
+                    </form>
                     </li>
 
                 </ul>

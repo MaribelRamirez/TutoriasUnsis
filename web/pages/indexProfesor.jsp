@@ -4,6 +4,8 @@
     Author     : Marifer
 --%>
 
+<%@page import="model.Profesor"%>
+<%@page import="dao.ProfesorDAO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Alumno"%>
@@ -67,9 +69,8 @@
                 usuario = sesion.getAttribute("user").toString();
                 nivel = sesion.getAttribute("nivel").toString();
                 curp = sesion.getAttribute("curp").toString();
-                out.print("<a href='login.jsp?cerrar=true'><h5>cerrar Sesion" + usuario + "</h5>");
             } else {
-                out.print("<script>location.replace('login.jsp');</script>");
+                out.print("<script>location.replace('/TutoriasUnsis');</script>");
             }
         %>
         <jsp:include page="headProfesor.jsp" flush="true" />
@@ -90,68 +91,66 @@
 
 
                     <div class="blank-page">
-                        <%
-                            AlumnoDAO obj_Read_Values = new AlumnoDAO();
-                            System.out.println("llego a jsp");
-                            List<Alumno> list = obj_Read_Values.listarAlumnosTutorados(curp);
-                            System.out.println("despues de optener datos");
-                            Iterator<Alumno> it_list = list.iterator();
-                        %>
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Matricula</th>
-                                    <th>Nombre</th>
-                                    <th>Grupo</th>
-                                    <th>Licenciatura</th>
-                                    <th>Tutoria</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%
-                                    String tipo;
-                                    while (it_list.hasNext()) {
-                                        Alumno ob = new Alumno();
-                                        ob = it_list.next();
-                                %>  
-                                <tr>
-                                    <td><%=ob.getMatricula()%></td>  
-                                    <td><%=ob.getNombre()%></td>  
-                                    <td><%=ob.getGrupo()%></td>  
-                                    <td><%=ob.getLicenciatura()%></td>  
-                                    <%
-                                        if (ob.getTipo() == 1) {
-                                            tipo = "Individual";
-                                        } else {
-                                            tipo = "Grupal";
-                                        }
+                        <form id="formulario" action="../listarTutorados" method="post">
+
+                            <h5 class="modal-title" id="exampleModalLabel">Selecciona el nombre del profesor de quien deseas mostrar los tutorados</h5>      
+
+
+
+
+                            <%
+                                ProfesorDAO obj_Read_Values2 = new ProfesorDAO();
+                                List<Profesor> list2 = obj_Read_Values2.listarProfesoresActivos();
+                                Iterator<Profesor> it_list2 = list2.iterator();
+
+                            %>
+
+                            <div class = "form-group">    
+
+                                <select class="form-control " id="prof" name="prof">
+                                    <%                                        while (it_list2.hasNext()) {
+                                            Profesor ob = new Profesor();
+                                            ob = it_list2.next();
                                     %>
-                                    <td><%=tipo%></td>  
-                                </tr>
-                                <%
-                                    }
-                                %>     
+                                    <option value="<%= ob.getCurp()%>"> <%=ob.getNombre()%></option>\n\
+                                    <% }
+
+                                    %>   
+                                </select>
+                            </div>
 
 
-                            </tbody>
-                        </table>
-                    </div>
+
+                            <div class = "form-group">
+
+
+                                <button type="submit" class="btn btn-primary">Mostrar tutorados</button> 
+
+                            </div>
+
+
+                        </form>
+
+                    </div>   
+
+
                 </div>
-
-                <!--//faq-->
-                <!---->
-
             </div>
-            <div class="clearfix"> </div>
+
+            <!--//faq-->
+            <!---->
+
         </div>
-        <div class="copy">
-            <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-        </div>
-        <!---->
-        <!--scrolling js-->
-        <script src="js/jquery.nicescroll.js"></script>
-        <script src="js/scripts.js"></script>
-        <!--//scrolling js-->
-    </body>
+        <div class="clearfix"> </div>
+    </div>
+    <div class="copy">
+        <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+    </div>
+    <!---->
+    <!--scrolling js-->
+    <script src="js/jquery.nicescroll.js"></script>
+    <script src="js/scripts.js"></script>
+    <!--//scrolling js-->
+</body>
 </html>
 

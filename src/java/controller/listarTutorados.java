@@ -7,22 +7,17 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.ConnectionClass;
-import model.usuario;
 
 /**
  *
  * @author Mine
  */
-public class login extends HttpServlet {
+public class listarTutorados extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -54,68 +49,25 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        //Cierra la sesion y redirige a index
-
-        HttpSession sesion = request.getSession();
-
-            sesion.invalidate();
-            response.sendRedirect("/TutoriasUnsis");
-     
-        System.err.println("llegue a get");
-//        processRequest(request, response);
+      
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String usuario = request.getParameter("txtUsuario");
-        String contraseña = request.getParameter("password");
-        ConnectionClass conn = new ConnectionClass();
+        String curp = request.getParameter("prof");
         
-        usuario user = conn.loguear(usuario, contraseña);
-        int nivel = user.getNivel();
-        String curp = user.getCurp();
-        try {
-            conn.desconectar();
-        } catch (SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
         
         HttpSession sesion = request.getSession();
-        switch (nivel) {
-                 case 1:
+        
 
-                     sesion.setAttribute("user", usuario);
-                     sesion.setAttribute("nivel", "1");
+               
                      sesion.setAttribute("curp", curp);
-                     response.sendRedirect("pages/indexAdmin.jsp");
-//                     request.getRequestDispatcher("indexAdmin.jsp").forward(request, response);
-                     break;
-                 case 2:
-
-                     sesion.setAttribute("user", usuario);
-                     sesion.setAttribute("nivel", "2");
-                     sesion.setAttribute("curp", curp);
-                     response.sendRedirect("pages/indexProfesor.jsp");
-                     break;
-                 case 3:
-                     sesion.setAttribute("user", usuario);
-                     sesion.setAttribute("nivel", "3");
-                     response.sendRedirect("pages/indexAlumno.jsp");
-                     break;
-                 default:
-//                     out.write("El usuario no existe, o la contraseña es invalida");
-                     break;
-              }
+                     
+                     response.sendRedirect("pages/tutoradosByCurp.jsp");
+                    
         processRequest(request, response);
     }
 
