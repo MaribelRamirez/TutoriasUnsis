@@ -136,13 +136,14 @@
 
                                 <div class="form-group">
                                     <label for="nomGrup">Fecha inicio</label>
+                                    <input type="date" name="fechaI" id="datepicker" class="form-control"  />
 
-                                    <input  required class="form-control" id="fechaI" name="fechaI" placeholder="Introduce la fecha inicio">
                                 </div>
                                 <div class="form-group">
                                     <label for="nomGrup">Fecha fin</label>
 
-                                    <input  required class="form-control" id="fechaF" name="fechaF" placeholder="Introduce ls fecha fin">
+                                    <input type="date" name="fechaF" id="datepicker" class="form-control"  />
+
                                 </div>
 
 

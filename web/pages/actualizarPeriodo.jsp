@@ -159,14 +159,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="nomGrpp">Fecha Inicio</label>
-
-                                    <input  required class="form-control" id="fechaI" name="fechaI"  value="<c:out value="${pdo.getFechaInicio()}"/>"/>
+                                     <input type="date" name="fechaI" id="datepicker" class="form-control" value="<c:out value="${pdo.getFechaInicio()}"/>"/>
+                                    
                                 </div>
                                 <div class="form-group">
                                     <label for="nomGrpp">Fecha Fin</label>
-
-                                    <input  required class="form-control" id="fechaF" name="fechaF"  value="<c:out value="${pdo.getFechaFin()}"/>"/>
-                                </div>
+                                       <input type="date" name="fechaF" id="datepicker" class="form-control"  value="<c:out value="${pdo.getFechaFin()}"/>"/>
+                                    </div>
                 </form>
                                   <button type="button" onclick="Guardar()" class="bl btn btn-danger pull-right">Guardar</button>
                    </div> </div> </div>
