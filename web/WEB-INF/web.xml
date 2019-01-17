@@ -104,6 +104,10 @@
         <servlet-name>pdf</servlet-name>
         <servlet-class>controller.pdf</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>listarTutorados</servlet-name>
+        <servlet-class>controller.listarTutorados</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>obtenerExel</servlet-name>
         <url-pattern>/obtenerExel</url-pattern>
@@ -127,5 +131,9 @@
     <servlet-mapping>
         <servlet-name>ControllerTutores</servlet-name>
         <url-pattern>/ControllerTutores</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>listarTutorados</servlet-name>
+        <url-pattern>/listarTutorados</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -1,5 +1,7 @@
 <div id="wrapper">
-
+<script type="text/javascript">
+history.forward();
+</script>
     <nav class="navbar-default navbar-static-top" role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -29,20 +31,11 @@
                     
                     <li class="dropdown">
                         <!--<a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret">Coria olgin<i ></i></span></a>-->
-                        <form action="login" method="GET">
-                        <div class="field_w3ls">
-                            <div class="field-group">
-                                <input name="txtUsuario" id="text1" type="text" value="" placeholder="username" required>
-                            </div>
-                            <div class="field-group">
-
-                                <input id="password-field" type="password" class="form-control" name="password" value="" placeholder="Password">
-                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                            </div>
-                        </div>
-                        <div class="wthree-field">
-                            <input id="saveForm" name="btnIngresar" type="submit" value="Login" />
-                        </div>
+                        <form action="../login" method="get">
+<!--                        <input type="hidden" name = "action" value="close">-->
+<button name="action" type="submit" value="close"> Cerrar sesion</button>
+                            <!--<input  name="action" type="submit" value="close" >--> 
+                       
 
                     </form>
                     </li>

@@ -105,10 +105,9 @@
             if (sesion.getAttribute("user") != null && sesion.getAttribute("nivel") != null) {
                 usuario = sesion.getAttribute("user").toString();
                 nivel = sesion.getAttribute("nivel").toString();
-                out.print("<a href='login.jsp?cerrar=true'><h5>cerrar Sesion" + usuario + "</h5>");
 
             } else {
-                out.print("<script>location.replace('login.jsp');</script>");
+                out.print("<script>location.replace('/TutoriasUnsis');</script>");
             }
         %>
 
@@ -130,7 +129,7 @@
                         <div class="grid-form1">
                             <h3 id="forms-example" class="">Datos de la tutoria</h3>
 
-                            <form id="formulario"  action="../ControllerTutores" method="post" >
+                            <form id="formulario"  action="ControllerTutores" method="post" >
                                 <input type="hidden" name = "action" value="add">
                                 <input type="hidden" name = "tipo" value="grupal">
                                 <input type="hidden" name = "grupo"  value="<c:out value="${grp.getIdGrupo()}"/>"/> 
