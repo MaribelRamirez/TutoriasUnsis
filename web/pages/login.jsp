@@ -59,7 +59,7 @@
                             </div>
                             <div class="field-group">
 
-                                <input id="password-field" type="password" class="form-control" name="password" value="" placeholder="Password">
+                                <input id="password-field" type="password" class="form-control" name="password" value="" placeholder="Password" required>
                                 <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             </div>
                         </div>
