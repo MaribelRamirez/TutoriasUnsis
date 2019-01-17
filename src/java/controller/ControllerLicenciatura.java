@@ -245,8 +245,7 @@ public class ControllerLicenciatura extends HttpServlet {
             Lic.setIdLicenciatura(id);
             Lic.setNombre(nomLic);
             
-            if(licenciaturadao.verificar(nomLic)==0)
-                {
+           
                     if (licenciaturadao.updateLic(Lic) == true) {
                           out.print("<html>"
                         + "<head>"
@@ -307,36 +306,7 @@ public class ControllerLicenciatura extends HttpServlet {
                         + "</html>");
                     }
                     
-                }else{
-                    out.print("<html>"
-                        + "<head>"
-                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
-                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
-                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
-                        + "</head>"
-                        + "<body >"
-                        + "<script>\n"
-                        + "function EventoAlert(){\n"
-                        + "  swal({\n"
-                        + "title: \"Aviso!!\",\n"
-                        + "text: \"Error al guardar la licenciatura, verifica tus datos, es posible que la licenciatura ya exista\",\n"
-                        + "type: \"warning\",    \n"
-                        + "confirmButtonColor: \"#DD6B55\",\n"
-                        + "confirmButtonText: \"Aceptar\",\n"
-                        + "closeOnConfirm: false,\n"
-                        + "},\n"
-                        + "\n"
-                        + "function(isConfirm){\n"
-                        + "if (isConfirm) {\n"
-                        + "window.location='pages/ListarLicenciaturas.jsp'   \n"
-                        + "} \n"
-                        + "});\n"
-                        + "}\n"
-                        + "EventoAlert();\n"
-                        + "</script>"
-                        + "</body>\n"
-                        + "</html>");
-            }
+                
            
             
                   

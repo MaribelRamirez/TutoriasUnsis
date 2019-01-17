@@ -701,9 +701,9 @@ public class ControllerReportesTutorias extends HttpServlet {
                 rep.setAlumnosAsistencia(alumnosAsistencia);
                 rep.setObservaciones(observaciones);
                 rep.setFaltantes(faltantes);
-
-                if (reportedao.update(rep) == true) {
-                    out.print("<html>"
+                
+                    if (reportedao.update(rep)  == true) {
+                        out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
                         + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
@@ -714,7 +714,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                         + "function EventoAlert(){\n"
                         + "  swal({\n"
                         + "title: \"Aviso!!\",\n"
-                        + "text: \"El reporte a sido actualizado de forma correcta...\",\n"
+                        + "text: \"Reporte guardado de forma correcta...\",\n"
                         + "type: \"success\",    \n"
                         + "confirmButtonColor: \"#DD6B55\",\n"
                         + "confirmButtonText: \"Aceptar\",\n"
@@ -731,9 +731,9 @@ public class ControllerReportesTutorias extends HttpServlet {
                         + "</script>"
                         + "</body>\n"
                         + "</html>");
-                    
+                   
                 } else {
-                    out.print("<html>"
+                     out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
                         + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
@@ -744,7 +744,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                         + "function EventoAlert(){\n"
                         + "  swal({\n"
                         + "title: \"Aviso!!\",\n"
-                        + "text: \"Error al actualizar...\",\n"
+                        + "text: \"Error al guardar el reporte\",\n"
                         + "type: \"warning\",    \n"
                         + "confirmButtonColor: \"#DD6B55\",\n"
                         + "confirmButtonText: \"Aceptar\",\n"
@@ -761,8 +761,11 @@ public class ControllerReportesTutorias extends HttpServlet {
                         + "</script>"
                         + "</body>\n"
                         + "</html>");
-                   
+                    
                 }
+                    
+                
+               
 
             } catch (Exception e) {
             }

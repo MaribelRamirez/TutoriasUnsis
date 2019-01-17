@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.ConnectionClass;
 import model.Grupo;
 
@@ -32,7 +34,30 @@ public class GrupoDAO {
         this.connection = connection;
     }
     
-    
+    public int verificar(String grupo) {
+       
+         int count=0;
+        try {
+            
+            
+            String sql = "SELECT *from grupos where grupos.grupo='"+grupo+"'; ";
+            
+            System.out.println("consulta"+sql);
+            connection = con.conectar();
+            Statement statement = connection.createStatement();
+            ResultSet resulSet = statement.executeQuery(sql);
+           
+            while (resulSet.next()) {
+                count ++;
+            }
+            con.desconectar();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("este es el valor de conunt"+count);
+        return count;
+}
     
     public Grupo obtenerGrupobyProf(String curp) throws SQLException {
         Grupo grupo = null;
