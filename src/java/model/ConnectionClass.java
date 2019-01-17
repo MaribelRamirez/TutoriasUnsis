@@ -41,7 +41,7 @@ public class ConnectionClass {
         PreparedStatement pst;
         ResultSet rs;
         int nivel = 0;
-        String sql = "select nivel, curp from usuarios where user='" + us + "'and pass='" + pass + "';";
+        String sql = "select nivel from usuarios where user='" + us + "'and pass='" + pass + "';";
         System.out.println("" + sql);
         try {
             System.out.println("dentro de try");
@@ -57,7 +57,6 @@ public class ConnectionClass {
 	 rs = pst.executeQuery();
 	 while (rs.next()) {
 	     user.setNivel(rs.getInt(1));
-             user.setCurp(rs.getString(2));
              user.setPassw(pass);
              user.setUsuario(us);
 	 }

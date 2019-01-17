@@ -63,31 +63,28 @@
             HttpSession sesion = request.getSession();
             String usuario;
             String nivel;
-            String curp = "";
 
             if (sesion.getAttribute("user") != null && sesion.getAttribute("nivel") != null) {
                 usuario = sesion.getAttribute("user").toString();
                 nivel = sesion.getAttribute("nivel").toString();
-                curp = sesion.getAttribute("curp").toString();
             } else {
                 out.print("<script>location.replace('/TutoriasUnsis');</script>");
             }
         %>
         <jsp:include page="headProfesor.jsp" flush="true" />
-        <div id="page-wrapper" class="gray-bg dashbard-1">
+       <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
 
                 <!--banner-->	
                 <div class="banner">
                     <h2>
-                        <a href="index.html">Home</a>
+                        <a href="indexAdmin.jsp">Home</a>
                         <i class="fa fa-angle-right"></i>
                         <span>Tutorados</span><br>
                     </h2>
                 </div>
-                <!--//banner-->
-                <!--faq-->
                 <div class="blank">
+
 
 
                     <div class="blank-page">
@@ -137,10 +134,8 @@
                 </div>
             </div>
 
-            <!--//faq-->
-            <!---->
 
-        </div>
+    
         <div class="clearfix"> </div>
     </div>
     <div class="copy">
