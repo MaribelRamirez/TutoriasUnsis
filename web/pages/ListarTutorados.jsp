@@ -189,7 +189,7 @@
                                     <td><%=ob.getLic()%></td>
                                     <td></td>
                                     <td>
-                                        <form id="formulario" action="../ControllerTutores" method="post">
+                                        <form id="formulario" action="../ControllerTutores" method="post" onsubmit="return confirm('¿Realmente desea agregar tutor?')">
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
                                             <input type="hidden" name = "action" id="action" value="addTI">
                                             <button type="submit"  class="btn btn-link">Agregar tutor</button>
