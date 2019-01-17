@@ -12,27 +12,19 @@ import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
  * @author Marifer
  */
 public class usuario {
-    private String curp;
     private int nivel;
     private String usuario;
     private String passw;
       public usuario() {
     }
 
-    public usuario(String curp, int nivel, String usuario, String passw) {
-        this.curp = curp;
+    public usuario( int nivel, String usuario, String passw) {
         this.nivel = nivel;
         this.usuario = usuario;
         this.passw = passw;
     }
 
-    public String getCurp() {
-        return curp;
-    }
-
-    public void setCurp(String curp) {
-        this.curp = curp;
-    }
+   
 
     public int getNivel() {
         return nivel;

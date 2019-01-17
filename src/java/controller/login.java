@@ -102,7 +102,6 @@ public class login extends HttpServlet {
         
         usuario user = conn.loguear(usuario, contraseña);
         int nivel = user.getNivel();
-        String curp = user.getCurp();
         try {
             conn.desconectar();
         } catch (SQLException ex) {
@@ -115,7 +114,6 @@ public class login extends HttpServlet {
 
                      sesion.setAttribute("user", usuario);
                      sesion.setAttribute("nivel", "1");
-                     sesion.setAttribute("curp", curp);
                      response.sendRedirect("pages/indexAdmin.jsp");
 //                     request.getRequestDispatcher("indexAdmin.jsp").forward(request, response);
                      break;
@@ -123,14 +121,9 @@ public class login extends HttpServlet {
 
                      sesion.setAttribute("user", usuario);
                      sesion.setAttribute("nivel", "2");
-                     sesion.setAttribute("curp", curp);
                      response.sendRedirect("pages/indexProfesor.jsp");
                      break;
-                 case 3:
-                     sesion.setAttribute("user", usuario);
-                     sesion.setAttribute("nivel", "3");
-                     response.sendRedirect("pages/indexAlumno.jsp");
-                     break;
+                 
                  default:
 //                     out.write("El usuario no existe, o la contraseña es invalida");
                      break;
