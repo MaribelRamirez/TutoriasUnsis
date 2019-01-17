@@ -180,11 +180,12 @@
                                     <td><%=ob.getFechaInicio()%></td>
                                     <td><%=ob.getFechaFin()%></td>
                                     <td>
-                                        <form id="formularioAct" name="formularioAct" action="../ControllerPeriodo" method="post" >
+                                        <form id="formularioAct" name="formularioAct" action="../ControllerPeriodo" method="post" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')"  >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdPeriodo()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
+                                             <button type="submitm "  class="btn btn-link">Actualizar</button>
                                             </form>
-                                            <button type="button" onclick="Actualizar()" class="btn btn-link">Actualizar</button>
+                                           
                                     
 
                                     </td>
