@@ -131,8 +131,12 @@ public class ControllerGrupo extends HttpServlet {
             grupo.setIdPeriodo(periodo);
             int lic = Integer.parseInt(request.getParameter("lic"));
             grupo.setIdLicenciatura(lic);
+            if(grupodao.verificar(nomGrup)==0)
+            {
             try {
-                grupodao.insertar(grupo);
+                
+             if (grupodao.insertar(grupo) == true) {
+                
                  out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
@@ -161,8 +165,71 @@ public class ControllerGrupo extends HttpServlet {
                         + "</script>"
                         + "</body>\n"
                         + "</html>");
+             }else
+                    {
+                        out.print("<html>"
+                                + "<head>"
+                                + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                                + "</head>"
+                                + "<body >"
+                                + "<script>\n"
+                                + "function EventoAlert(){\n"
+                                + "  swal({\n"
+                                + "title: \"Aviso!!\",\n"
+                                + "text: \"Error al guardar el grupo\",\n"
+                                + "type: \"warning\",    \n"
+                                + "confirmButtonColor: \"#DD6B55\",\n"
+                                + "confirmButtonText: \"Aceptar\",\n"
+                                + "closeOnConfirm: false,\n"
+                                + "},\n"
+                                + "\n"
+                                + "function(isConfirm){\n"
+                                + "if (isConfirm) {\n"
+                                + "window.location='pages/ListarLicenciaturas.jsp'   \n"
+                                + "} \n"
+                                + "});\n"
+                                + "}\n"
+                                + "EventoAlert();\n"
+                                + "</script>"
+                                + "</body>\n"
+                                + "</html>");
+                    }
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }else{
+            
+                out.print("<html>"
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Error al guardar el grupo, verifica tus datos, es posible que la licenciatura ya exista\",\n"
+                        + "type: \"warning\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/ListarLicenciaturas.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
+            
             }
         } else if (action.equalsIgnoreCase("edit")) {
             try {

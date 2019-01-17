@@ -211,19 +211,21 @@
                                     <td><%=ob.getGrupo()%></td>
                                     <td><%=ob.getLicenciatura()%></td>
                                     <td>
-                                        <form id="formularioAct" id="formularioAct"  action="../ControllerAlumno" method="post" >
+                                        <form id="formularioAct" id="formularioAct"  action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')"  >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
+                                            <button type="submit" class="btn btn-link">Actualizar</button>
                                         </form>
-                                      <button type="button" onclick="Actualizar()" class="btn btn-link">Actualizar</button>
+                                      
 
                                     </td>
                                     <td >
-                                        <form id="formularioElim" name="formularioElim" action="../ControllerAlumno" method="post" >
+                                        <form id="formularioElim" name="formularioElim" action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')" >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
                                             <input type="hidden" name = "action" id="action" value="delete">
+                                            <button type="submit"  class="btn btn-link">Eliminar</button>
                                         </form>
-                                       <button type="button" onclick="Eliminar()" class="btn btn-link">Eliminar</button>
+                                            
                                    
                                     </td>
                                     <td>

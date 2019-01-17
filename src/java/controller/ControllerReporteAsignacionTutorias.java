@@ -484,7 +484,6 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                         + "</script>"
                         + "</body>\n"
                         + "</html>");
-           
              ////response.sendRedirect("pages/generarReportes.jsp");
         } catch (SQLException ex) {
           out.print("<html>"

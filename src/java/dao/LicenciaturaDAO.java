@@ -34,6 +34,30 @@ public class LicenciaturaDAO {
         this.connection = connection;
     }
 
+    public int verificar(String lic) {
+       
+         int count=0;
+        try {
+            
+            
+            String sql = "select *from licenciaturas where nombre='"+lic+"';";
+            
+            System.out.println("consulta"+sql);
+            connection = con.conectar();
+            Statement statement = connection.createStatement();
+            ResultSet resulSet = statement.executeQuery(sql);
+           
+            while (resulSet.next()) {
+                count ++;
+            }
+            con.desconectar();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("este es el valor de conunt"+count);
+        return count;
+}
      public int countLicenciaturas() {
        
          int count=0;
@@ -103,11 +127,12 @@ public class LicenciaturaDAO {
             statement.executeUpdate();
             statement.close();
             con.desconectar();
-
+ return true;
         } catch (Exception e) {
             System.out.print("error al insertar:" + e);
+            return false;
         }
-        return false;
+        
 
     }
 
@@ -129,7 +154,7 @@ public class LicenciaturaDAO {
         return licenciatura;
     }
 
-    public void updateLic(Licenciatura licenciatura) {
+   public boolean updateLic(Licenciatura licenciatura) {
         try {
             String sql = "update licenciaturas set idLicenciatura=?, nombre=?"
                     + "where idLicenciatura=?";
@@ -142,8 +167,10 @@ public class LicenciaturaDAO {
                 statement.executeUpdate();
             }
             con.desconectar();
+            return true;
         } catch (SQLException e) {
             System.out.print("error al insertar:" + e);
+            return false;
         }
     }
 
