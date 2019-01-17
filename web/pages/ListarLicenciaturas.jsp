@@ -192,6 +192,7 @@
                                     while (it_list.hasNext()) {
                                         Licenciatura ob = new Licenciatura();
                                         ob = it_list.next();
+                                        
                                 %>  
                                 <tr>
                                     <td><%=ob.getNombre()%></td>
@@ -199,16 +200,18 @@
                                         <form id="formularioAct" name="formularioAct" action="../ControllerLicenciatura" method="post" >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
+                                            <button type="submitu"  class="btn btn-link">Actualizar</button>
                                              </form>
-                                            <button type="button" onclick="Actualizar()" class="btn btn-link">Actualizar</button>
+                                            
                                    
                                     </td>
                                     <td >
                                         <form id="formularioElim" name="formularioElim" action="../ControllerLicenciatura" method="post" >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
                                             <input type="hidden" name = "action" id="action" value="delete">
+                                            <button type="submit"  class="btn btn-link">Eliminar</button>
                                            </form>
-                                             <button type="button" onclick="Eliminar()" class="btn btn-link">Eliminar</button>
+                                            
                                    
                                     </td>
 

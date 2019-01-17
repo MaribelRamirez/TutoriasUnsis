@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/web/pages/agregarPeriodo.jsp</file>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/src/java/controller/ControllerPeriodo.java</file>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/web/pages/actualizarPeriodo.jsp</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/web/pages/ListarLicenciaturas.jsp</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/src/java/dao/LicenciaturaDAO.java</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/src/java/controller/ControllerLicenciatura.java</file>
         </group>
     </open-files>
 </project-private>

@@ -41,7 +41,7 @@
         <script src="resources/alert/sweetalert.min.js"></script>
         <link rel="stylesheet" type="text/css" href="resources/alert/sweetalert.css">
         <link rel="stylesheet" type="text/css" href="resources/alert/google.css">
-        
+
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -62,28 +62,28 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
-            
-             
-            function Guardar() {
-                swal({    
-                    title: "aviso!!",    
-                    text: "¿En verdad deseas guardar los datos?",    
-                    type: "warning",    
-                    showCancelButton: true,    
-                    confirmButtonColor: "#DD6B55",    
-                    confirmButtonText: "SI",    
-                    cancelButtonText: "NO",    
-                    closeOnConfirm: false,    
-                    closeOnCancel: false },   
 
-                    function(isConfirm){    
-                      if (isConfirm) {  
-                          document.getElementById('formularioG').submit();
-                      } else {      
-                          window.location='pages/ListarPeriodos.jsp';  
-                      }  
-                    });
-                  };
+
+            function Guardar() {
+                swal({
+                    title: "aviso!!",
+                    text: "¿En verdad deseas guardar los datos?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "SI",
+                    cancelButtonText: "NO",
+                    closeOnConfirm: false,
+                    closeOnCancel: false},
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                document.getElementById('formularioG').submit();
+                            } else {
+                                window.location = 'pages/ListarPeriodos.jsp';
+                            }
+                        });
+            }
+            ;
         </script>
 
         <style>
@@ -143,14 +143,14 @@
                 </div>
                 <div class="blank">
 
-                        <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                               
-                <form id="formularioG" name="formularioG" action="ControllerPeriodo" method="post" >
-                    <input type="hidden" name = "action" value="edit">
-                    <input type="hidden" name = "id"  value="<c:out value="${pdo.getIdPeriodo()}"/>"/> 
+                    <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                     <h3 id="forms-example" class="">Datos del periodo</h3>
+                            <form id="formularioG" name="formularioG" action="ControllerPeriodo" method="post" >
+                                <input type="hidden" name = "action" value="edit">
+                                <input type="hidden" name = "id"  value="<c:out value="${pdo.getIdPeriodo()}"/>"/> 
+
+                                <h3 id="forms-example" class="">Datos del periodo</h3>
 
                                 <div class="form-group">
                                     <label for="nomGrpp">Periodo</label>
@@ -159,16 +159,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="nomGrpp">Fecha Inicio</label>
-                                     <input type="date" name="fechaI" id="datepicker" class="form-control" value="<c:out value="${pdo.getFechaInicio()}"/>"/>
-                                    
+                                    <input type="date" name="fechaI" id="datepicker" class="form-control" value="<c:out value="${pdo.getFechaInicio()}"/>"/>
+
                                 </div>
                                 <div class="form-group">
                                     <label for="nomGrpp">Fecha Fin</label>
-                                       <input type="date" name="fechaF" id="datepicker" class="form-control"  value="<c:out value="${pdo.getFechaFin()}"/>"/>
-                                    </div>
-                </form>
-                                  <button type="button" onclick="Guardar()" class="bl btn btn-danger pull-right">Guardar</button>
-                   </div> </div> </div>
+                                    <input type="date" name="fechaF" id="datepicker" class="form-control"  value="<c:out value="${pdo.getFechaFin()}"/>"/>
+                                </div>
+                            </form>
+                            <button type="button" onclick="Guardar()" class="bl btn btn-danger pull-right">Guardar</button>
+                        </div> </div> </div>
             </div>
         </div>
 
