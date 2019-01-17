@@ -28,7 +28,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="drop-men" >
+     <div class="drop-men" >
                 <ul class=" nav_1">
 
                    
@@ -45,8 +45,6 @@
 
                 </ul>
             </div><!-- /.navbar-collapse -->
-            <div class="clearfix">
-
             </div>
 
             <div class="navbar-default sidebar" role="navigation">
