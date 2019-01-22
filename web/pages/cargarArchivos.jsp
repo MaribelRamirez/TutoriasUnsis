@@ -115,7 +115,10 @@
                 <!--faq-->
                 <div class="blank">
 
-
+                    
+                    
+                    
+                    
                     <div class="blank-page">
                         <%
                             PdfDAO emp = new PdfDAO();
@@ -123,6 +126,7 @@
                             ArrayList<PdfVO> listar = emp.Listar_PdfVO();
                         %>
 
+                        <a id="mostrar" href="../ControllerPdf?action=insert&id=">Agregar archivo<img src="../resources/images/nuevo.png" title="Nuevo registro"/></a><br>
                         <div class="datagrid">
                             <table>
                                 <thead>

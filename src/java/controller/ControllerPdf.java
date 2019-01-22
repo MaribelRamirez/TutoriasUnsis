@@ -18,9 +18,10 @@ import model.sql;
 @WebServlet(name = "ControllerPdf", urlPatterns = {"/ControllerPdf"})
 @MultipartConfig(maxFileSize = 16177215)    // upload file's size up to 16MB
 
+
 public class ControllerPdf extends HttpServlet {
    
-    public static final String lIST_STUDENT = "/pages/cargarArchivos.jsp";
+    public static final String lIST = "/pages/cargarArchivos.jsp";
     public static final String INSERT_OR_EDIT = "/pages/altaPdf.jsp";
     
 
@@ -46,8 +47,8 @@ public class ControllerPdf extends HttpServlet {
         if (action.equalsIgnoreCase("delete")) {
             int studentId = Integer.parseInt(request.getParameter("id"));
             pdfdao.Eliminar_PdfVO(studentId);
-            
-            response.sendRedirect("pages/cargarArchivos.jsp");
+            forward = lIST;
+//            response.sendRedirect("pages/cargarArchivos.jsp");
         }
         if (action.equalsIgnoreCase("edit")) {
             forward = INSERT_OR_EDIT;

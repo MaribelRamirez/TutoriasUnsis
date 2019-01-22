@@ -182,6 +182,7 @@ public class PdfDAO {
         ConnectionClass conec = new ConnectionClass();
         String sql = "DELETE FROM archivos WHERE idArchivo = ?;";
         PreparedStatement ps = null;
+        System.err.println("llegue a eliminar pdf");
         try {
             ps = conec.conectar().prepareStatement(sql);
             ps.setInt(1, id);

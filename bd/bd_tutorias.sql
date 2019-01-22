@@ -1,6 +1,7 @@
 drop database if exists tutoriasunsis;
 create database tutoriasUnsis;
 use  tutoriasunsis;
+
 create table reportes(
 idReporte int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 idPeriodo int not null REFERENCES periodo (idPeriodo) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -52,7 +53,7 @@ licenciatura int REFERENCES licenciaturas (idLicenciatura) ON DELETE CASCADE ON 
 create table usuarios(
 user varchar(10) primary key,
 pass varchar(50) not null,
-nivel int(1)  REFERENCES profesores (profesores) ON DELETE CASCADE ON UPDATE CASCADE
+nivel int(1)
 );
 
 
@@ -72,12 +73,12 @@ fecha date,
 noTutoria int,
 reporte text
 );
-
+drop table archivos;
 create table archivos(
 idArchivo int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 nombre varchar (100) not null,
 categoria varchar (19) not null,
-archivo blob not null
+archivo LONGBLOB not null
 );
 -- agregue la tablas periodo
 create table periodo(

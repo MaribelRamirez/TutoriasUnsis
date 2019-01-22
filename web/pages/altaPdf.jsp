@@ -60,6 +60,37 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
+            
+
+
+
+$(document).on('change','input[type="file"]',function(){
+	// this.files[0].size recupera el tamaño del archivo
+	// alert(this.files[0].size);
+	
+	var fileName = this.files[0].name;
+	var fileSize = this.files[0].size;
+
+	if(fileSize > 3000000){
+		alert('El archivo no debe superar los 3MB');
+		this.value = '';
+		this.files[0].name = '';
+	}else{
+		// recuperamos la extensión del archivo
+		var ext = fileName.split('.').pop();
+
+		// console.log(ext);
+		switch (ext) {
+			case 'docx':
+			case 'xlsx':
+			case 'pdf': break;
+			default:
+				alert('El archivo no tiene la extensión adecuada');
+				this.value = ''; // reset del valor
+				this.files[0].name = '';
+		}
+	}
+});
         </script>
 
         <style>
@@ -139,7 +170,7 @@
                             <div class="form-group">
                                 <label for="nomGrup">Nombre del archivo:</label>
 
-                                <input  required class="form-control" id="grupo" name="txtname" placeholder="Introduce el nombre del grupo" value="<c:out value="${row.nombrepdf}" />">
+                                <input  required class="form-control" id="grupo" name="txtname" placeholder="Introduce el nombre del archivo" value="<c:out value="${row.nombrepdf}" />">
                             </div>
                             <div class="form-group">
                                 <label for="nomGrup">Tipo de archivo:</label>
@@ -167,7 +198,7 @@
                                 <input type="file" name="fichero" value="" class="btn"/>
                             </div>
                             <div class="form-group">           
-                                <input type="submit" value="Enviar Archivo" name="submit" id="btn" class="btn"/>
+                                <input type="submit" value="Enviar Archivo" name="submit" id="btn" class="btn"  />
                             </div>
 
 
