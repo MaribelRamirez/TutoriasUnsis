@@ -121,21 +121,12 @@ public class obtenerExel extends HttpServlet {
                 //se obtiene las celdas por fila
                 Iterator<Cell> cellIterator = row.cellIterator();
                 Cell cell;
-                //se recorre cada celda
-//				while (cellIterator.hasNext()) {
-//					// se obtiene la celda en espec�fico y se la imprime
-//					cell = cellIterator.next();
-//					System.out.print(cell.getStringCellValue()+"  ");
-//				}
-
-
-
                 
                 //Matricula
                 if (cellIterator.hasNext()){
                 cell = cellIterator.next();
-                alumno.setMatricula(cell.getStringCellValue());
-                System.out.print(cell.getStringCellValue() + "  ");
+                alumno.setMatricula(String.valueOf(cell.getNumericCellValue()));
+                System.out.print(String.valueOf(cell.getNumericCellValue()) + "  ");
                 }
                 //NOmbre
                 if (cellIterator.hasNext()){
