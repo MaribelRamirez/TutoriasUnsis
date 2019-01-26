@@ -5,7 +5,6 @@
  */
 package controller;
 
-
 import dao.AlumnoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +22,7 @@ import model.Alumno;
 /**
  *
  * @author Marifer
- */         
+ */
 @WebServlet(name = "ControllerAlumno", urlPatterns = {"/ControllerAlumno"})
 public class ControllerAlumno extends HttpServlet {
 
@@ -46,7 +45,7 @@ public class ControllerAlumno extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
-  
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -96,7 +95,7 @@ public class ControllerAlumno extends HttpServlet {
             String matricula = request.getParameter("id");
             try {
                 alumnodao.eliminar(matricula);
-                        out.print("<html>"
+                out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
                         + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
@@ -124,15 +123,14 @@ public class ControllerAlumno extends HttpServlet {
                         + "</script>"
                         + "</body>\n"
                         + "</html>");
-               
+
 //response.sendRedirect("ListarAlumnos.jsp");
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerAlumno.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         } else if (action.equalsIgnoreCase("add")) {
             String matricula = request.getParameter("matricula");
-            System.out.println("esta es la matricula" + matricula);
             String nombre = request.getParameter("nombre");
             int grupo = Integer.parseInt(request.getParameter("grupo"));
             int lic = Integer.parseInt(request.getParameter("lic"));
@@ -143,7 +141,7 @@ public class ControllerAlumno extends HttpServlet {
 
             try {
                 alumnodao.insertar(alum);
-               
+
                 out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
@@ -179,7 +177,6 @@ public class ControllerAlumno extends HttpServlet {
 
             try {
                 String matricula = request.getParameter("matricula");
-                System.out.println("esta es la matricula que llega a edit" + matricula);
                 String nombreGrp = request.getParameter("nombreAlum");
                 int grupo = Integer.parseInt(request.getParameter("grupo"));
                 int lic = Integer.parseInt(request.getParameter("lic"));

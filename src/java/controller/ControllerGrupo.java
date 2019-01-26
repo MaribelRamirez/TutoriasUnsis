@@ -50,7 +50,6 @@ public class ControllerGrupo extends HttpServlet {
             throws ServletException, IOException {
     }
 
-  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -70,10 +69,10 @@ public class ControllerGrupo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-   response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        PrintWriter out=response.getWriter();
-        
+        PrintWriter out = response.getWriter();
+
         Grupo grupo = new Grupo();
         String action = request.getParameter("action");
         if (action.equalsIgnoreCase("update")) {
@@ -120,7 +119,7 @@ public class ControllerGrupo extends HttpServlet {
                         + "</script>"
                         + "</body>\n"
                         + "</html>");
-               
+
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerGrupo.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -131,14 +130,12 @@ public class ControllerGrupo extends HttpServlet {
             grupo.setIdPeriodo(periodo);
             int lic = Integer.parseInt(request.getParameter("lic"));
             grupo.setIdLicenciatura(lic);
-            if(grupodao.verificar(nomGrup)==0)
-            {
-            try {
-                
-             if (grupodao.insertar(grupo) == true) {
-                
-                 
-                 out.print("<html>"
+            if (grupodao.verificar(nomGrup) == 0) {
+                try {
+
+                    if (grupodao.insertar(grupo) == true) {
+
+                        out.print("<html>"
                                 + "<head>"
                                 + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
                                 + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
@@ -166,42 +163,41 @@ public class ControllerGrupo extends HttpServlet {
                                 + "</script>"
                                 + "</body>\n"
                                 + "</html>");
-             }else
-                    {
-                            out.print("<html>"
-                        + "<head>"
-                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
-                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
-                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
-                        + "</head>"
-                        + "<body >"
-                        + "<script>\n"
-                        + "function EventoAlert(){\n"
-                        + "  swal({\n"
-                        + "title: \"Aviso!!\",\n"
-                        + "text: \"Grupo agregado de forma correcta...\",\n"
-                        + "type: \"success\",    \n"
-                        + "confirmButtonColor: \"#DD6B55\",\n"
-                        + "confirmButtonText: \"Aceptar\",\n"
-                        + "closeOnConfirm: false,\n"
-                        + "},\n"
-                        + "\n"
-                        + "function(isConfirm){\n"
-                        + "if (isConfirm) {\n"
-                        + "window.location='pages/ListarGrupos.jsp'   \n"
-                        + "} \n"
-                        + "});\n"
-                        + "}\n"
-                        + "EventoAlert();\n"
-                        + "</script>"
-                        + "</body>\n"
-                        + "</html>");
+                    } else {
+                        out.print("<html>"
+                                + "<head>"
+                                + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                                + "</head>"
+                                + "<body >"
+                                + "<script>\n"
+                                + "function EventoAlert(){\n"
+                                + "  swal({\n"
+                                + "title: \"Aviso!!\",\n"
+                                + "text: \"Grupo agregado de forma correcta...\",\n"
+                                + "type: \"success\",    \n"
+                                + "confirmButtonColor: \"#DD6B55\",\n"
+                                + "confirmButtonText: \"Aceptar\",\n"
+                                + "closeOnConfirm: false,\n"
+                                + "},\n"
+                                + "\n"
+                                + "function(isConfirm){\n"
+                                + "if (isConfirm) {\n"
+                                + "window.location='pages/ListarGrupos.jsp'   \n"
+                                + "} \n"
+                                + "});\n"
+                                + "}\n"
+                                + "EventoAlert();\n"
+                                + "</script>"
+                                + "</body>\n"
+                                + "</html>");
                     }
-            } catch (SQLException ex) {
-                Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            }else{
-            
+                } catch (SQLException ex) {
+                    Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+
                 out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
@@ -230,20 +226,20 @@ public class ControllerGrupo extends HttpServlet {
                         + "</script>"
                         + "</body>\n"
                         + "</html>");
-            
+
             }
         } else if (action.equalsIgnoreCase("edit")) {
             try {
-                   int id = Integer.parseInt(request.getParameter("id"));
-            String grup = request.getParameter("grupo");
-            int periodo = Integer.parseInt(request.getParameter("per"));
-            int lic = Integer.parseInt(request.getParameter("lic"));
-            grupo.setIdGrupo(id);
-            grupo.setGrupo(grup);
-            grupo.setIdLicenciatura(lic);
-            grupo.setIdPeriodo(periodo);
-            grupodao.updateGrp(grupo);
-            
+                int id = Integer.parseInt(request.getParameter("id"));
+                String grup = request.getParameter("grupo");
+                int periodo = Integer.parseInt(request.getParameter("per"));
+                int lic = Integer.parseInt(request.getParameter("lic"));
+                grupo.setIdGrupo(id);
+                grupo.setGrupo(grup);
+                grupo.setIdLicenciatura(lic);
+                grupo.setIdPeriodo(periodo);
+                grupodao.updateGrp(grupo);
+
                 out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
@@ -272,17 +268,10 @@ public class ControllerGrupo extends HttpServlet {
                         + "</script>"
                         + "</body>\n"
                         + "</html>");
-                
+
             } catch (Exception e) {
             }
-            
-              
-            
-              
-                
-                
-            
-           
+
         }
 
     }

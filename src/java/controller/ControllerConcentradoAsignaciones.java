@@ -160,9 +160,7 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
 
                 Licenciatura ob = new Licenciatura();
                 ob = it_list_lic.next();
-                System.out.println("nombre de la carrera para hoja " + ob.getNombre());
 
-                
                 sheet = book.createSheet(ob.getNombre());
                 //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
                 sheet.getPrintSetup().setLandscape(false);
@@ -209,9 +207,6 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                 LicenciaturaDAO obj_lic = new LicenciaturaDAO();
                 carreras = obj_lic.countLicenciaturas();
 
-                //sheet.addMergedRegion(new CellRangeAddress(1, 2, 0, 0));
-                // sheet.addMergedRegion(new CellRangeAddress(1, 2, 1, 1));
-                //sssheet.addMergedRegion(new CellRangeAddress(1, 2, 2, 2));
                 carreras = carreras + 2;
 
                 Cell cellT1 = rowT1.createCell(0);
@@ -232,7 +227,7 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                 }
 
                 l = 3;
-                
+
                 while (it_list.hasNext()) {
 
                     Licenciatura obj = new Licenciatura();
@@ -260,7 +255,6 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                 l++;
                 j++;
 
-                // sheet.addMergedRegion(new CellRangeAddress(1, 2, carreras, carreras));
                 sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, carreras));
 
                 /**
@@ -271,10 +265,7 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                 System.out.println("2");
                 Iterator<Profesor> it_list_tutor = list_tutor.iterator();
 
-                System.out.println("ante del whileee 2");
-
                 while (it_list_tutor.hasNext()) {
-                    System.out.println("entre al segundo while");
                     l = 0;
                     Profesor Obt = new Profesor();
                     Obt = it_list_tutor.next();
@@ -291,185 +282,167 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                     cellT4.setCellStyle(style2);
 
                     l++;
-                   
-                    
-                    
-                   if(Obt.getTipoTutoria()==1 ){
-                       cellT4 = rowT4.createCell(l);
-                    cellT4.setCellValue("NA");
-                    cellT4.setCellStyle(style2);
-                    l++;
-                    
-                   /* for(int m=1;m<=carreras-3;m++){
+
+                    if (Obt.getTipoTutoria() == 1) {
+                        cellT4 = rowT4.createCell(l);
+                        cellT4.setCellValue("NA");
+                        cellT4.setCellStyle(style2);
+                        l++;
+
+                        /* for(int m=1;m<=carreras-3;m++){
                     cellT4 = rowT4.createCell(l);
                     cellT4.setCellValue("-");
                     cellT4.setCellStyle(style2);
                     l++;
                     }*/
-                    
-                     }
-                     else{
-                        
-                    if("Inactivo".equals(Obt.getEstatus())||"Licencia".equals(Obt.getEstatus())||"Sabatico".equals(Obt.getEstatus())){
-                    cellT4 = rowT4.createCell(l);
-                    cellT4.setCellValue("NA");
-                    cellT4.setCellStyle(style2);
-                    l++;
-                    }else{
-                        GrupoDAO grup_read=new GrupoDAO();
-                        Grupo grp=new Grupo();
-                        grp=grup_read.obtenerGrupobyProf(Obt.getCurp());
-                    cellT4 = rowT4.createCell(l);
-                    cellT4.setCellValue(grp.getGrupo());
-                    cellT4.setCellStyle(style2);
-                    l++;
-                    }
-                       //obtener grupo
-                    }
-                   
-                          AlumnoDAO alum_read=new AlumnoDAO();
-                       
-                       
-                 List<Licenciatura> list2 = obj_Read_Values.listarLicenciaturas();
-                Iterator<Licenciatura> it_list2 = list2.iterator();
-                
-                while (it_list2.hasNext()) {
+                    } else {
 
-                    Licenciatura obj = new Licenciatura();
-                    obj = it_list2.next();
-
-                    
-                   
-                     
-                     
-                    if(alum_read.countAlumnosTutoradosByCarrera(Obt.getCurp(),obj.getNombre())==0){
-                         
-                    if(Obt.getEstatus()=="Inactivo"||Obt.getEstatus()=="Licencia"||Obt.getEstatus()=="Sabatico"){
-                    cellT4 = rowT4.createCell(l);
-                    cellT4.setCellValue("NA");
-                    cellT4.setCellStyle(style2);
-                    l++;
-                    }else{
-                    cellT4 = rowT4.createCell(l);
-                    cellT4.setCellValue( "-");
-                    cellT4.setCellStyle(style2);
-                    l++;
+                        if ("Inactivo".equals(Obt.getEstatus()) || "Licencia".equals(Obt.getEstatus()) || "Sabatico".equals(Obt.getEstatus())) {
+                            cellT4 = rowT4.createCell(l);
+                            cellT4.setCellValue("NA");
+                            cellT4.setCellStyle(style2);
+                            l++;
+                        } else {
+                            GrupoDAO grup_read = new GrupoDAO();
+                            Grupo grp = new Grupo();
+                            grp = grup_read.obtenerGrupobyProf(Obt.getCurp());
+                            cellT4 = rowT4.createCell(l);
+                            cellT4.setCellValue(grp.getGrupo());
+                            cellT4.setCellStyle(style2);
+                            l++;
+                        }
+                        //obtener grupo
                     }
-                    
-                     
-                    }else{
-                     cellT4 = rowT4.createCell(l);
-                    cellT4.setCellValue( alum_read.countAlumnosTutoradosByCarrera(Obt.getCurp(),obj.getNombre()));
-                    cellT4.setCellStyle(style2);
-                    l++;
-                    }
-                    
 
+                    AlumnoDAO alum_read = new AlumnoDAO();
+
+                    List<Licenciatura> list2 = obj_Read_Values.listarLicenciaturas();
+                    Iterator<Licenciatura> it_list2 = list2.iterator();
+
+                    while (it_list2.hasNext()) {
+
+                        Licenciatura obj = new Licenciatura();
+                        obj = it_list2.next();
+
+                        if (alum_read.countAlumnosTutoradosByCarrera(Obt.getCurp(), obj.getNombre()) == 0) {
+
+                            if (Obt.getEstatus() == "Inactivo" || Obt.getEstatus() == "Licencia" || Obt.getEstatus() == "Sabatico") {
+                                cellT4 = rowT4.createCell(l);
+                                cellT4.setCellValue("NA");
+                                cellT4.setCellStyle(style2);
+                                l++;
+                            } else {
+                                cellT4 = rowT4.createCell(l);
+                                cellT4.setCellValue("-");
+                                cellT4.setCellStyle(style2);
+                                l++;
+                            }
+
+                        } else {
+                            cellT4 = rowT4.createCell(l);
+                            cellT4.setCellValue(alum_read.countAlumnosTutoradosByCarrera(Obt.getCurp(), obj.getNombre()));
+                            cellT4.setCellStyle(style2);
+                            l++;
+                        }
+
+                    }
+                    if (Obt.getEstatus() == "Inactivo" || Obt.getEstatus() == "Licencia" || Obt.getEstatus() == "Sabatico") {
+                        cellT4 = rowT4.createCell(l);
+                        cellT4.setCellValue("NA");
+                        cellT4.setCellStyle(style2);
+                        l++;
+                    } else {
+
+                        cellT4 = rowT4.createCell(l);
+                        cellT4.setCellValue(alum_read.countAlumnosTutorados(Obt.getCurp()));
+                        cellT4.setCellStyle(style2);
+                        l++;
+                    }
+
+                    j++;
                 }
-                if(Obt.getEstatus()=="Inactivo"||Obt.getEstatus()=="Licencia"||Obt.getEstatus()=="Sabatico"){
-                    cellT4 = rowT4.createCell(l);
-                    cellT4.setCellValue("NA");
-                    cellT4.setCellStyle(style2);
-                    l++;
-                    }else{
-                
-                    cellT4 = rowT4.createCell(l);
-                    cellT4.setCellValue( alum_read.countAlumnosTutorados(Obt.getCurp()));
-                    cellT4.setCellStyle(style2);
-                    l++;
-                }
-                   
-                    
-                   j++;
-                }
-                 for (int k = 0; k < carreras + 1; k++) {
+                for (int k = 0; k < carreras + 1; k++) {
                     sheet.autoSizeColumn((short) k);
                 }
             }
-         
-            
-                sheet = book.createSheet("Estadística");
-                //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
-                sheet.getPrintSetup().setLandscape(false);
-                //indicando el tamaño de la hoja
-                sheet.getPrintSetup().setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);
 
-                List<Licenciatura> list_lic2 = obj_Read_lic.listarLicenciaturas();
-                Iterator<Licenciatura> it_list_lic2 = list_lic2.iterator();
-int j=0;
-int l=0;
-Row rowT = sheet.createRow(j);
-                    Cell cellT4 = rowT.createCell(l);
-                    cellT4.setCellValue("LIC");
-                    cellT4.setCellStyle(style3);
-                    l++;
-                while (it_list_lic2.hasNext()) {
-                
-                  Licenciatura obj = new Licenciatura();
-                  obj = it_list_lic2.next();
-                  
+            sheet = book.createSheet("Estadística");
+            //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
+            sheet.getPrintSetup().setLandscape(false);
+            //indicando el tamaño de la hoja
+            sheet.getPrintSetup().setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);
+
+            List<Licenciatura> list_lic2 = obj_Read_lic.listarLicenciaturas();
+            Iterator<Licenciatura> it_list_lic2 = list_lic2.iterator();
+            int j = 0;
+            int l = 0;
+            Row rowT = sheet.createRow(j);
+            Cell cellT4 = rowT.createCell(l);
+            cellT4.setCellValue("LIC");
+            cellT4.setCellStyle(style3);
+            l++;
+            while (it_list_lic2.hasNext()) {
+
+                Licenciatura obj = new Licenciatura();
+                obj = it_list_lic2.next();
 
                 cellT4 = rowT.createCell(l);
-                    cellT4.setCellValue(obj.getNombre());
-                    cellT4.setCellStyle(style3);
-                    l++;
-                 }
+                cellT4.setCellValue(obj.getNombre());
+                cellT4.setCellStyle(style3);
+                l++;
+            }
             cellT4 = rowT.createCell(l);
-                    cellT4.setCellValue("TOTAL");
-                    cellT4.setCellStyle(style3);
-                   
-                      
-                      List<Licenciatura> list_licTut= obj_Read_lic.listarLicenciaturas();
-                Iterator<Licenciatura> it_list_licTut = list_licTut.iterator();
-                AlumnoDAO alum_read=new AlumnoDAO();
-                while (it_list_licTut.hasNext()) {
-                     j++;
-                           l=0;
-                    Licenciatura objTut= new Licenciatura();
-                                objTut = it_list_licTut.next();
-                  rowT = sheet.createRow(j);
-                  cellT4 = rowT.createCell(l);
-                                cellT4.setCellValue(objTut.getNombre());
-                                cellT4.setCellStyle(style3);
-                                l++;
-                             List<Licenciatura> list_licAlum = obj_Read_lic.listarLicenciaturas();
-                            Iterator<Licenciatura> it_list_licAlumno = list_licAlum.iterator();
-                           while (it_list_licAlumno.hasNext()) {
-                
-                                Licenciatura objAlm = new Licenciatura();
-                                objAlm = it_list_licAlumno.next();
-                                
-                                 System.out.println(objAlm.getNombre());
-                                 System.out.println(objTut.getNombre());
-                                 
-                                
-                                cellT4 = rowT.createCell(l);
-                                cellT4.setCellValue(alum_read.countEstadistica(objTut.getIdLicenciatura(), objAlm.getIdLicenciatura()));
-                                cellT4.setCellStyle(style2);
-                                l++;
-                              }
-                           
-                                cellT4 = rowT.createCell(l);
-                                cellT4.setCellValue(alum_read.countEstadistica2(objTut.getIdLicenciatura()));
-                                cellT4.setCellStyle(style2);
-                                
-                          
-                           
-                }
-                j++;
-              
-                                rowT = sheet.createRow(j);
-                               
-                                cellT4 = rowT.createCell(l);
-                                cellT4.setCellValue(alum_read.countEstadistica3() );
-                                cellT4.setCellStyle(style2);
-                                sheet.addMergedRegion(new CellRangeAddress(j, j, l-4, l-1));
-                                 for (int k = 0; k < j; k++) {
-                    sheet.autoSizeColumn((short) k);
+            cellT4.setCellValue("TOTAL");
+            cellT4.setCellStyle(style3);
 
+            List<Licenciatura> list_licTut = obj_Read_lic.listarLicenciaturas();
+            Iterator<Licenciatura> it_list_licTut = list_licTut.iterator();
+            AlumnoDAO alum_read = new AlumnoDAO();
+            while (it_list_licTut.hasNext()) {
+                j++;
+                l = 0;
+                Licenciatura objTut = new Licenciatura();
+                objTut = it_list_licTut.next();
+                rowT = sheet.createRow(j);
+                cellT4 = rowT.createCell(l);
+                cellT4.setCellValue(objTut.getNombre());
+                cellT4.setCellStyle(style3);
+                l++;
+                List<Licenciatura> list_licAlum = obj_Read_lic.listarLicenciaturas();
+                Iterator<Licenciatura> it_list_licAlumno = list_licAlum.iterator();
+                while (it_list_licAlumno.hasNext()) {
+
+                    Licenciatura objAlm = new Licenciatura();
+                    objAlm = it_list_licAlumno.next();
+
+                    System.out.println(objAlm.getNombre());
+                    System.out.println(objTut.getNombre());
+
+                    cellT4 = rowT.createCell(l);
+                    cellT4.setCellValue(alum_read.countEstadistica(objTut.getIdLicenciatura(), objAlm.getIdLicenciatura()));
+                    cellT4.setCellStyle(style2);
+                    l++;
                 }
+
+                cellT4 = rowT.createCell(l);
+                cellT4.setCellValue(alum_read.countEstadistica2(objTut.getIdLicenciatura()));
+                cellT4.setCellStyle(style2);
+
+            }
+            j++;
+
+            rowT = sheet.createRow(j);
+
+            cellT4 = rowT.createCell(l);
+            cellT4.setCellValue(alum_read.countEstadistica3());
+            cellT4.setCellStyle(style2);
+            sheet.addMergedRegion(new CellRangeAddress(j, j, l - 4, l - 1));
+            for (int k = 0; k < j; k++) {
+                sheet.autoSizeColumn((short) k);
+
+            }
             try {
-               
+
                 try (FileOutputStream elFichero
                         = new FileOutputStream("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\" + "Concentrado_Asignaciones" + ".xlsx")) {
 
@@ -478,69 +451,68 @@ Row rowT = sheet.createRow(j);
                     elFichero.close();
 
                 }
-                
+
                 out.print("<html>"
-                    + "<head>"
-                    + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
-                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
-                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
-                    + "</head>"
-                    + "<body >"
-                    + "<script>\n"
-                    + "function EventoAlert(){\n"
-                    + "  swal({\n"
-                    + "title: \"Aviso!!\",\n"
-                    + "text: \"Reporte generado con exito...\",\n"
-                    + "type: \"success\",    \n"
-                    + "confirmButtonColor: \"#DD6B55\",\n"
-                    + "confirmButtonText: \"Aceptar\",\n"
-                    + "closeOnConfirm: false,\n"
-                    + "},\n"
-                    + "\n"
-                    + "function(isConfirm){\n"
-                    + "if (isConfirm) {\n"
-                    + "window.location='pages/generarReportes.jsp'   \n"
-                    + "} \n"
-                    + "});\n"
-                    + "}\n"
-                    + "EventoAlert();\n"
-                    + "</script>"
-                    + "</body>\n"
-                    + "</html>");
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Reporte generado con exito...\",\n"
+                        + "type: \"success\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/generarReportes.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
 
             } catch (IOException e) {
                 out.print("<html>"
-                    + "<head>"
-                    + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
-                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
-                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
-                    + "</head>"
-                    + "<body >"
-                    + "<script>\n"
-                    + "function EventoAlert(){\n"
-                    + "  swal({\n"
-                    + "title: \"Aviso!!\",\n"
-                    + "text: \"Error al generar el reporte...\",\n"
-                    + "type: \"warning\",    \n"
-                    + "confirmButtonColor: \"#DD6B55\",\n"
-                    + "confirmButtonText: \"Aceptar\",\n"
-                    + "closeOnConfirm: false,\n"
-                    + "},\n"
-                    + "\n"
-                    + "function(isConfirm){\n"
-                    + "if (isConfirm) {\n"
-                    + "window.location='pages/generarReportes.jsp'   \n"
-                    + "} \n"
-                    + "});\n"
-                    + "}\n"
-                    + "EventoAlert();\n"
-                    + "</script>"
-                    + "</body>\n"
-                    + "</html>");
+                        + "<head>"
+                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                        + "</head>"
+                        + "<body >"
+                        + "<script>\n"
+                        + "function EventoAlert(){\n"
+                        + "  swal({\n"
+                        + "title: \"Aviso!!\",\n"
+                        + "text: \"Error al generar el reporte...\",\n"
+                        + "type: \"warning\",    \n"
+                        + "confirmButtonColor: \"#DD6B55\",\n"
+                        + "confirmButtonText: \"Aceptar\",\n"
+                        + "closeOnConfirm: false,\n"
+                        + "},\n"
+                        + "\n"
+                        + "function(isConfirm){\n"
+                        + "if (isConfirm) {\n"
+                        + "window.location='pages/generarReportes.jsp'   \n"
+                        + "} \n"
+                        + "});\n"
+                        + "}\n"
+                        + "EventoAlert();\n"
+                        + "</script>"
+                        + "</body>\n"
+                        + "</html>");
 
             }
 
-            
         } catch (Exception e) {
         }
 

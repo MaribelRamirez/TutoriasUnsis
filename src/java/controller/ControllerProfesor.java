@@ -95,7 +95,7 @@ public class ControllerProfesor extends HttpServlet {
             }
         } else if (action.equalsIgnoreCase("delete")) {
 
-             int idprf = Integer.parseInt(request.getParameter("idprf"));
+            int idprf = Integer.parseInt(request.getParameter("idprf"));
             try {
                 profesordao.eliminar(idprf);
                 out.print("<html>"
@@ -126,11 +126,10 @@ public class ControllerProfesor extends HttpServlet {
                         + "</script>"
                         + "</body>\n"
                         + "</html>");
-                   response.sendRedirect("pages/indexAdmin.jsp");
-           } catch (SQLException ex) {
-               Logger.getLogger(ControllerProfesor.class.getName()).log(Level.SEVERE, null, ex);
-           }
-            
+                response.sendRedirect("pages/indexAdmin.jsp");
+            } catch (SQLException ex) {
+                Logger.getLogger(ControllerProfesor.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         } else if (action.equalsIgnoreCase("add")) {
 
@@ -147,7 +146,7 @@ public class ControllerProfesor extends HttpServlet {
 
             try {
                 profesordao.insertar(pro);
-               out.print("<html>"
+                out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
                         + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
@@ -193,7 +192,7 @@ public class ControllerProfesor extends HttpServlet {
                 pro.setEstatus(estatus);
                 pro.setIdLicenciatura(lic);
                 profesordao.updateProfesor(pro);
-                        out.print("<html>"
+                out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
                         + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"

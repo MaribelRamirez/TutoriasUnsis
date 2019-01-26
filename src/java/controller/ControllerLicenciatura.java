@@ -78,18 +78,18 @@ public class ControllerLicenciatura extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-           response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        PrintWriter out=response.getWriter();
-        
+        PrintWriter out = response.getWriter();
+
         Licenciatura Lic = new Licenciatura();
         String action = request.getParameter("action");
-        
+
         if (action.equalsIgnoreCase("update")) {
             try {
                 forward = edit;
                 Licenciatura lic = licenciaturadao.obtenerLicenciaturaById(Integer.parseInt(request.getParameter("id")));
-                
+
                 request.setAttribute("lic", lic);
                 RequestDispatcher view = request.getRequestDispatcher(forward);
                 view.forward(request, response);
@@ -97,12 +97,12 @@ public class ControllerLicenciatura extends HttpServlet {
                 System.out.println("Error en servlet: " + e);
             }
         } else if (action.equalsIgnoreCase("delete")) {
-             
+
             int id = Integer.parseInt(request.getParameter("id"));
-            
+
             try {
                 licenciaturadao.eliminar(id);
-                 out.print("<html>"
+                out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
                         + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
@@ -137,11 +137,10 @@ public class ControllerLicenciatura extends HttpServlet {
 
             String nomLic = request.getParameter("nombreLic");
             Lic.setNombre(nomLic);
-             if(licenciaturadao.verificar(nomLic)==0)
-                {
+            if (licenciaturadao.verificar(nomLic) == 0) {
                 try {
                     if (licenciaturadao.insertar(Lic) == true) {
-                        
+
                         out.print("<html>"
                                 + "<head>"
                                 + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
@@ -170,8 +169,7 @@ public class ControllerLicenciatura extends HttpServlet {
                                 + "</script>"
                                 + "</body>\n"
                                 + "</html>");
-                    }else
-                    {
+                    } else {
                         out.print("<html>"
                                 + "<head>"
                                 + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
@@ -204,9 +202,9 @@ public class ControllerLicenciatura extends HttpServlet {
                 } catch (SQLException ex) {
                     Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                    
-                }else{
-                    out.print("<html>"
+
+            } else {
+                out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
                         + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
@@ -234,86 +232,79 @@ public class ControllerLicenciatura extends HttpServlet {
                         + "</script>"
                         + "</body>\n"
                         + "</html>");
-             }
-             
-           
-        }
-        else if (action.equalsIgnoreCase("edit")) {
+            }
+
+        } else if (action.equalsIgnoreCase("edit")) {
             try {
                 int id = Integer.parseInt(request.getParameter("id"));
-            String nomLic = request.getParameter("nombreLic");
-            Lic.setIdLicenciatura(id);
-            Lic.setNombre(nomLic);
-            
-           
-                    if (licenciaturadao.updateLic(Lic) == true) {
-                          out.print("<html>"
-                        + "<head>"
-                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
-                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
-                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
-                        + "</head>"
-                        + "<body >"
-                        + "<script>\n"
-                        + "function EventoAlert(){\n"
-                        + "  swal({\n"
-                        + "title: \"Aviso!!\",\n"
-                        + "text: \"Licenciatura actualizada de forma correcta...\",\n"
-                        + "type: \"success\",    \n"
-                        + "confirmButtonColor: \"#DD6B55\",\n"
-                        + "confirmButtonText: \"Aceptar\",\n"
-                        + "closeOnConfirm: false,\n"
-                        + "},\n"
-                        + "\n"
-                        + "function(isConfirm){\n"
-                        + "if (isConfirm) {\n"
-                        + "window.location='pages/ListarLicenciaturas.jsp'   \n"
-                        + "} \n"
-                        + "});\n"
-                        + "}\n"
-                        + "EventoAlert();\n"
-                        + "</script>"
-                        + "</body>\n"
-                        + "</html>");  
-                    }else{
-                        out.print("<html>"
-                        + "<head>"
-                        + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
-                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
-                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
-                        + "</head>"
-                        + "<body >"
-                        + "<script>\n"
-                        + "function EventoAlert(){\n"
-                        + "  swal({\n"
-                        + "title: \"Aviso!!\",\n"
-                        + "text: \"Error al actualizar la licenciatura\",\n"
-                        + "type: \"warning\",    \n"
-                        + "confirmButtonColor: \"#DD6B55\",\n"
-                        + "confirmButtonText: \"Aceptar\",\n"
-                        + "closeOnConfirm: false,\n"
-                        + "},\n"
-                        + "\n"
-                        + "function(isConfirm){\n"
-                        + "if (isConfirm) {\n"
-                        + "window.location='pages/ListarLicenciaturas.jsp'   \n"
-                        + "} \n"
-                        + "});\n"
-                        + "}\n"
-                        + "EventoAlert();\n"
-                        + "</script>"
-                        + "</body>\n"
-                        + "</html>");
-                    }
-                    
-                
-           
-            
-                  
+                String nomLic = request.getParameter("nombreLic");
+                Lic.setIdLicenciatura(id);
+                Lic.setNombre(nomLic);
+
+                if (licenciaturadao.updateLic(Lic) == true) {
+                    out.print("<html>"
+                            + "<head>"
+                            + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                            + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                            + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                            + "</head>"
+                            + "<body >"
+                            + "<script>\n"
+                            + "function EventoAlert(){\n"
+                            + "  swal({\n"
+                            + "title: \"Aviso!!\",\n"
+                            + "text: \"Licenciatura actualizada de forma correcta...\",\n"
+                            + "type: \"success\",    \n"
+                            + "confirmButtonColor: \"#DD6B55\",\n"
+                            + "confirmButtonText: \"Aceptar\",\n"
+                            + "closeOnConfirm: false,\n"
+                            + "},\n"
+                            + "\n"
+                            + "function(isConfirm){\n"
+                            + "if (isConfirm) {\n"
+                            + "window.location='pages/ListarLicenciaturas.jsp'   \n"
+                            + "} \n"
+                            + "});\n"
+                            + "}\n"
+                            + "EventoAlert();\n"
+                            + "</script>"
+                            + "</body>\n"
+                            + "</html>");
+                } else {
+                    out.print("<html>"
+                            + "<head>"
+                            + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                            + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                            + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                            + "</head>"
+                            + "<body >"
+                            + "<script>\n"
+                            + "function EventoAlert(){\n"
+                            + "  swal({\n"
+                            + "title: \"Aviso!!\",\n"
+                            + "text: \"Error al actualizar la licenciatura\",\n"
+                            + "type: \"warning\",    \n"
+                            + "confirmButtonColor: \"#DD6B55\",\n"
+                            + "confirmButtonText: \"Aceptar\",\n"
+                            + "closeOnConfirm: false,\n"
+                            + "},\n"
+                            + "\n"
+                            + "function(isConfirm){\n"
+                            + "if (isConfirm) {\n"
+                            + "window.location='pages/ListarLicenciaturas.jsp'   \n"
+                            + "} \n"
+                            + "});\n"
+                            + "}\n"
+                            + "EventoAlert();\n"
+                            + "</script>"
+                            + "</body>\n"
+                            + "</html>");
+                }
+
             } catch (Exception e) {
             }
         }
-            
+
     }
 
     /**

@@ -81,12 +81,11 @@ public class ControllerTutores extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-           response.setContentType("text/html;charset=UTF-8");
+
+        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        PrintWriter out=response.getWriter();
-        
-        System.err.println("llego al post");
+        PrintWriter out = response.getWriter();
+
         Tutor tutor = new Tutor();
         String action = request.getParameter("action");
 
@@ -94,10 +93,8 @@ public class ControllerTutores extends HttpServlet {
 
             try {
                 forward = edit1;
-                System.err.println("Este es el id" + request.getParameter("id"));
                 Grupo grp = grupodao.obtenerGrupoById(Integer.parseInt(request.getParameter("id")));
 
-                System.err.println("termine el bloque try");
                 request.setAttribute("grp", grp);
                 RequestDispatcher view = request.getRequestDispatcher(forward);
                 view.forward(request, response);
@@ -118,11 +115,9 @@ public class ControllerTutores extends HttpServlet {
 
         } else if (action.equalsIgnoreCase("add")) {
 
-            System.err.println("llego al add");
             String tipo = request.getParameter("tipo");
             if (tipo.equalsIgnoreCase("grupal")) {
 
-                System.err.println("llego al grupal");
                 int idGrupo = Integer.parseInt(request.getParameter("grupo"));
                 String curp = request.getParameter("profesor");
                 System.err.println("este es el curp " + curp);
@@ -153,10 +148,8 @@ public class ControllerTutores extends HttpServlet {
                 }
 
             } else if ("individual".equals(tipo)) {
-                System.err.println("llego al individual");
                 String matricula = request.getParameter("matricula");
                 String curp = request.getParameter("profesor");
-                System.err.println("este es el curp " + curp);
                 sql auto = new sql();
                 int idPeriodo = auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo") - 1;
 

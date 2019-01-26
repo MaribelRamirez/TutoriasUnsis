@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -85,17 +85,13 @@ public class ControllerPeriodo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-   response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        PrintWriter out=response.getWriter();
-        
+        PrintWriter out = response.getWriter();
+
         Periodo periodo = new Periodo();
         String action = request.getParameter("action");
-        
-       
-        
-        
-        
+
         if (action.equalsIgnoreCase("update")) {
 
             try {
@@ -119,29 +115,25 @@ public class ControllerPeriodo extends HttpServlet {
         } else if (action.equalsIgnoreCase("add")) {
             String perio = request.getParameter("periodo");
             periodo.setPeriodo(perio);
-            
+
             java.util.Date fechaIni = new java.util.Date();
             java.util.Date fechaFin = new java.util.Date();
-            
-            
+
             String fechaI = request.getParameter("fechaI");
             String fechaF = request.getParameter("fechaF");
-            
-            fechaIni= convertirStrToDate(fechaI);
-            fechaFin=convertirStrToDate(fechaF);
-            
-            
-            
+
+            fechaIni = convertirStrToDate(fechaI);
+            fechaFin = convertirStrToDate(fechaF);
+
             java.sql.Date sqlFeI = new java.sql.Date(fechaIni.getTime());
             java.sql.Date sqlFeF = new java.sql.Date(fechaFin.getTime());
-            
-            
+
             periodo.setFechaInicio(sqlFeI);
             periodo.setFechaFin(sqlFeF);
 
             try {
                 periododao.insertar(periodo);
-                   out.print("<html>"
+                out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
                         + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
@@ -169,8 +161,7 @@ public class ControllerPeriodo extends HttpServlet {
                         + "</script>"
                         + "</body>\n"
                         + "</html>");
-               
-               
+
             } catch (SQLException ex) {
                 Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -178,33 +169,29 @@ public class ControllerPeriodo extends HttpServlet {
 
             try {
                 int id = Integer.parseInt(request.getParameter("id"));
-            String perio = request.getParameter("periodo");
-            String fechaI = request.getParameter("fechaI");
-            String fechaF = request.getParameter("fechaF");
-            
-            
-            java.util.Date fechaIni = new java.util.Date();
-            java.util.Date fechaFin = new java.util.Date();
-            
-            fechaIni= convertirStrToDate(fechaI);
-            fechaFin=convertirStrToDate(fechaF);
-            
-            
-            
-            java.sql.Date sqlFeI = new java.sql.Date(fechaIni.getTime());
-            java.sql.Date sqlFeF = new java.sql.Date(fechaFin.getTime());
-            
-            System.err.println("Estas son las fechas 1"+sqlFeI);
-            System.err.println("Estas son las fechas 2"+sqlFeF);
-            
-            
-            periodo.setIdPeriodo(id);
-            periodo.setPeriodo(perio);
-            periodo.setFechaInicio( sqlFeI);
-            periodo.setFechaFin(sqlFeF);
-            
-            periododao.updatePeriodo(periodo);
-             out.print("<html>"
+                String perio = request.getParameter("periodo");
+                String fechaI = request.getParameter("fechaI");
+                String fechaF = request.getParameter("fechaF");
+
+                java.util.Date fechaIni = new java.util.Date();
+                java.util.Date fechaFin = new java.util.Date();
+
+                fechaIni = convertirStrToDate(fechaI);
+                fechaFin = convertirStrToDate(fechaF);
+
+                java.sql.Date sqlFeI = new java.sql.Date(fechaIni.getTime());
+                java.sql.Date sqlFeF = new java.sql.Date(fechaFin.getTime());
+
+                System.err.println("Estas son las fechas 1" + sqlFeI);
+                System.err.println("Estas son las fechas 2" + sqlFeF);
+
+                periodo.setIdPeriodo(id);
+                periodo.setPeriodo(perio);
+                periodo.setFechaInicio(sqlFeI);
+                periodo.setFechaFin(sqlFeF);
+
+                periododao.updatePeriodo(periodo);
+                out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
                         + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
@@ -234,7 +221,7 @@ public class ControllerPeriodo extends HttpServlet {
                         + "</html>");
             } catch (Exception e) {
             }
-            
+
         }
 
     }
@@ -248,15 +235,14 @@ public class ControllerPeriodo extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    
+
     Date convertirStrToDate(String fecha) {
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-        
+
         Date date = null;
         try {
 
-            date =  (Date) formatoDelTexto.parse(fecha);
+            date = (Date) formatoDelTexto.parse(fecha);
 
         } catch (ParseException ex) {
 
@@ -266,7 +252,6 @@ public class ControllerPeriodo extends HttpServlet {
 
         System.out.println(date.toString());
 
-        
         return date;
     }
 

@@ -92,8 +92,8 @@ public class ControllerConstancias extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-          String action = request.getParameter("action");
-       
+        String action = request.getParameter("action");
+
         String calendario = request.getParameter("datepicker");
 
         String[] bar = calendario.split("-");
@@ -251,7 +251,7 @@ public class ControllerConstancias extends HttpServlet {
                             PdfPTable tabla = new PdfPTable(2);
                             tabla.setWidthPercentage(100);
                             tabla.setWidths(new float[]{5, 95});
-                            
+
                             PdfPCell celda1 = new PdfPCell(new Paragraph("N°", FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK)));
                             PdfPCell celda2 = new PdfPCell(new Paragraph("Nombre", FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK)));
 
@@ -351,9 +351,9 @@ public class ControllerConstancias extends HttpServlet {
                 }
 
             }
-            
+
             documento.close();
-            
+
         } catch (NumberFormatException e) {
             System.out.println("Error en servlet: " + e);
         } catch (SQLException ex) {
@@ -361,9 +361,9 @@ public class ControllerConstancias extends HttpServlet {
         } catch (DocumentException ex) {
             Logger.getLogger(ControllerConstancias.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+
     }
-    
+
     /**
      * Returns a short description of the servlet.
      *
