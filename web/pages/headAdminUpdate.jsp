@@ -31,9 +31,20 @@ history.forward();
                 <ul class=" nav_1">
 
                     
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret">Coria olgin<i ></i></span></a>
-                      
+                  <li class="dropdown">
+                        <!--<a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret">Coria olgin<i ></i></span></a>-->
+                        
+                        
+                        <form action="../login" method="get">
+                            <div class="form-group">
+                            <!--                        <input type="hidden" name = "action" value="close">-->
+                            <!--<button name="action" type="submit" value="close"> </button>-->
+                            <input type=image src="resources/images/cerrarSesion.png" width="30" height="30"  >
+                          
+                            <!--<input  name="action" type="submit" value="close" >--> 
+</div>
+
+                        </form>
                     </li>
 
                 </ul>

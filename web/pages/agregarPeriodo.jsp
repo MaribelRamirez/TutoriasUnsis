@@ -126,12 +126,9 @@
                         <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <h3 id="forms-example" class="">Datos del periodo</h3>
-
-
                                 <div class="form-group">
                                     <label for="nomGrup">Periodo</label>
-
-                                    <input  required class="form-control" id="periodo" name="periodo" placeholder="Introduce el nombre del grupo">
+                                    <input  required class="form-control" id="periodo" name="periodo" placeholder="Introduce el identificador del periodo">
                                 </div>
 
                                 <div class="form-group">
@@ -141,21 +138,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="nomGrup">Fecha fin</label>
-
                                     <input type="date" name="fechaF" id="datepicker" class="form-control"  />
-
                                 </div>
-
-
-
-
-
-
-
-
                             </div>
                             <button type="submit" class="bl btn btn-danger pull-right">Guardar</button>
-
                         </div>
                     </div>
                 </form>

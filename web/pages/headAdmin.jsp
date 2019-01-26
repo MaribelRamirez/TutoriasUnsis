@@ -37,7 +37,7 @@
                             <div class="form-group">
                             <!--                        <input type="hidden" name = "action" value="close">-->
                             <!--<button name="action" type="submit" value="close"> </button>-->
-                            <input type=image src="../resources/images/sesion.png" width="30" height="30">
+                            <input type=image src="../resources/images/cerrarSesion.png" width="30" height="30">
                             <!--<input  name="action" type="submit" value="close" >--> 
 </div>
 

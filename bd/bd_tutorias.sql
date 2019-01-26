@@ -73,7 +73,7 @@ fecha date,
 noTutoria int,
 reporte text
 );
-drop table archivos;
+
 create table archivos(
 idArchivo int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 nombre varchar (100) not null,
