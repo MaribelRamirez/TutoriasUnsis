@@ -23,13 +23,19 @@
             function hideURLbar() {
                 window.scrollTo(0, 1);
             }
+            function deshabilitaRetroceso(){
+    window.location.hash="no-back-button";
+    window.location.hash="Again-No-back-button" //chrome
+    window.onhashchange=function(){window.location.hash="no-back-button";}
+}
         </script>
+        
         <link rel="stylesheet" href="resources/login/css/style.css" type="text/css" media="all">
         <link href="//fonts.googleapis.com/css?family=Mukta+Mahee:200,300,400,500,600,700,800" rel="stylesheet">
         <link rel="stylesheet" href="resources/login/css/font-awesome.css" type="text/css" media="all">
     </head>
 
-    <body><br><br><br><br>
+    <body onload="deshabilitaRetroceso()"><br><br><br><br>
         <%
             ConnectionClass op = new ConnectionClass();
             if (request.getParameter("btnIngresar") != null) {

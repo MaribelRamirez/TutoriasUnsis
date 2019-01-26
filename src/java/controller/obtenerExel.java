@@ -22,9 +22,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Alumno;
 import model.Grupo;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.NumberToTextConverter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -77,15 +81,18 @@ public class obtenerExel extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        PrintWriter out = response.getWriter();
+
+//        Liata para guardar error al insertar
+        List<String> error = new ArrayList<String>();
+
         String archivoRecivido = request.getParameter("archivosubido");
         int grup = Integer.parseInt(request.getParameter("grupo"));
         System.err.println("este dato recibe " + archivoRecivido);
 
         String rutaArchivo = "C:\\alumnos\\" + archivoRecivido;
         String hoja = "Hoja1";
-        System.err.println("antes del try");
-        
-        
+
         Alumno alumno = new Alumno();
         Alumno alumno2 = new Alumno();
         AlumnoDAO alumnoDAO = new AlumnoDAO();
@@ -98,15 +105,11 @@ public class obtenerExel extends HttpServlet {
         }
 
         try {
-            System.err.println("en el try");
             FileInputStream file = new FileInputStream(new File(rutaArchivo));
-            System.err.println("Antes de leer el archivo");
             // leer archivo excel
             XSSFWorkbook worbook = new XSSFWorkbook(file);
-            System.err.println("despues de leer el archivo");
             //obtener la hoja que se va leer
             XSSFSheet sheet = worbook.getSheetAt(0);
-            System.err.println("despues de obtener la hoja");
             //obtener todas las filas de la hoja excel
 
             Iterator<Row> rowIterator = sheet.iterator();
@@ -121,39 +124,80 @@ public class obtenerExel extends HttpServlet {
                 //se obtiene las celdas por fila
                 Iterator<Cell> cellIterator = row.cellIterator();
                 Cell cell;
-                
+
                 //Matricula
-                if (cellIterator.hasNext()){
-                cell = cellIterator.next();
-                alumno.setMatricula(String.valueOf(cell.getNumericCellValue()));
-                System.out.print(String.valueOf(cell.getNumericCellValue()) + "  ");
+                if (cellIterator.hasNext()) {
+                    cell = cellIterator.next();
+                    if (cell.getCellType() == 0 ) {
+                         //matricula
+                        alumno.setMatricula(NumberToTextConverter.toText(cell.getNumericCellValue()));
+                        System.out.print(NumberToTextConverter.toText(cell.getNumericCellValue()) + " Esta es la matricula ");
+                        //NOmbre\
+                        cell = cellIterator.next();
+                        alumno.setNombre(cell.getStringCellValue());
+                        System.out.print(cell.getStringCellValue() + " nombre  ");
+
+                        //Grupo
+                        alumno.setIdGrupo(grupo.getIdGrupo());
+                        System.out.print(grupo.getIdGrupo() + " grupo ");
+
+                        //IdLicenciatura
+                        alumno.setIdLicenciatura(grupo.getIdLicenciatura());
+                        System.out.print(grupo.getIdLicenciatura() + "  ");
+                        System.err.println("esta es la matricula " + alumno.getMatricula());
+                        if (alumnoDAO.obtenerAlumnoByMatricula(alumno.getMatricula()) == null) {
+                            alumnoDAO.insertar(alumno);
+                        } else {
+                            alumnoDAO.updateAlumno(alumno);
+                        }
+                        
+                    }   else {
+                       
+                        error.add(", " + (row.getRowNum() + 1));
+                    }
                 }
-                //NOmbre
-                if (cellIterator.hasNext()){
-                cell = cellIterator.next();
-                alumno.setNombre(cell.getStringCellValue());
-                System.out.print(cell.getStringCellValue() + "  ");
-//                }
-                //Grupo
-                alumno.setIdGrupo(grupo.getIdGrupo());
-                System.out.print(grupo.getIdGrupo() + "  ");
-                
-                //IdLicenciatura
-                alumno.setIdLicenciatura(grupo.getIdLicenciatura());
-                System.out.print(grupo.getIdLicenciatura() + "  ");
-                System.err.println("esta es la matricula " +alumno.getMatricula() );
-//                alumno2 = alumnoDAO.obtenerAlumnoByMatricula(alumno.getMatricula());
-                if (alumnoDAO.obtenerAlumnoByMatricula(alumno.getMatricula())==null){
-                    alumnoDAO.insertar(alumno);
-                }else {
-                    alumnoDAO.updateAlumno(alumno);
-                    System.err.println("Estoy en el else en alguna parte del planeta");
-                }
-//                System.err.println("Esto regresa alumno 2" +alumno2.getMatricula() );
-                }
-                
 
             }
+            String mensaje;
+
+            if (error.isEmpty()) {
+                mensaje = "Alumnos agregados de forma correcta... ";
+            } else {
+                mensaje = "Algunos alumnos fueron agregados, pero en los registros ";
+                for (int i = 0; i <= error.size() - 1; i++) {
+                    mensaje = mensaje + error.get(i) + " ";
+                }
+                mensaje = mensaje + " verifique que los datos sean correctos.";
+
+            }
+            out.print("<html>"
+                    + "<head>"
+                    + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                    + "</head>"
+                    + "<body >"
+                    + "<script>\n"
+                    + "function EventoAlert(){\n"
+                    + "  swal({\n"
+                    + "title: \"Aviso!!\",\n"
+                    + "text: \" " + mensaje + "\",\n"
+                    + "type: \"success\",    \n"
+                    + "confirmButtonColor: \"#DD6B55\",\n"
+                    + "confirmButtonText: \"Aceptar\",\n"
+                    + "closeOnConfirm: false,\n"
+                    + "},\n"
+                    + "\n"
+                    + "function(isConfirm){\n"
+                    + "if (isConfirm) {\n"
+                    + "window.location='pages/loadAlumnos.jsp'   \n"
+                    + "} \n"
+                    + "});\n"
+                    + "}\n"
+                    + "EventoAlert();\n"
+                    + "</script>"
+                    + "</body>\n"
+                    + "</html>");
         } catch (IOException e) {
             e.getMessage();
             System.err.println("Error" + e);
