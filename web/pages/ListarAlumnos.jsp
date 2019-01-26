@@ -201,7 +201,9 @@
                             </thead>
 
                             <tbody>
-                                <%                                        while (it_list.hasNext()) {
+                                <%  
+                                                                       
+                                    while (it_list.hasNext()) {
                                         Alumno ob = new Alumno();
                                         ob = it_list.next();
                                 %>  
