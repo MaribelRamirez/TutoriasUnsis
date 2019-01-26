@@ -94,7 +94,18 @@
 
     </head>
     <body>
-      
+        <%
+            HttpSession sesion = request.getSession();
+            String usuario;
+            String nivel;
+
+            if (sesion.getAttribute("user") != null && sesion.getAttribute("nivel") != null) {
+                usuario = sesion.getAttribute("user").toString();
+                nivel = sesion.getAttribute("nivel").toString();
+            } else {
+                out.print("<script>location.replace('login.jsp');</script>");
+            }
+        %>
         <jsp:include page="headAdmin.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">

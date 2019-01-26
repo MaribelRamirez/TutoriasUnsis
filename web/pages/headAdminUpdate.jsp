@@ -57,15 +57,18 @@ history.forward();
                 <div class="sidebar-nav navbar-collapse">
                     <img src="resources/images/escudo.png" width="90" height="90"> <br><br>
                     <ul class="nav" id="side-menu">
-
-                        <li>
-                            <a href="pages/indexAdmin.jsp" class=" hvr-bounce-to-right">
+                                  <a href="indexAdmin.jsp" class=" hvr-bounce-to-right">
                                 <i class="fa fa-file-o nav_icon"></i>Maestros
                             </a>
                         </li>
                         <li>
                             <a href="pages/ListarAlumnos.jsp" class=" hvr-bounce-to-right">
                                 <i class="fa fa-file-o nav_icon"></i>Alumnos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/ListarTutorados.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-file-o nav_icon"></i>Tutorados
                             </a>
                         </li>
                         <li>
@@ -94,12 +97,11 @@ history.forward();
                                 <i class="fa fa-file-o nav_icon">  </i>Cargar archivos
                             </a>
                         </li>
-                        <li>
-                            <a href="pages/agregarTutoresG.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Crear tutorias grupales</a>
-                        </li>
+
                         <li>
                             <a href="pages/ListarPeriodos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Periodos</a>
                         </li>
+
 
                         <li>
                             <a href="pages/ListarReportes.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Reportes tutorias</a>
