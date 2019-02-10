@@ -22,6 +22,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 import dao.AlumnoDAO;
 import dao.GrupoDAO;
 import dao.ProfesorDAO;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -190,7 +192,9 @@ public class ControllerConstancias extends HttpServlet {
                     Iterator<Alumno> it_list2 = list2.iterator();
 
                     try {
+                        
                         Paragraph par1 = new Paragraph();
+                        
                         Image imagenes = Image.getInstance("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\web\\resources\\images\\escudo.png");
                         imagenes.setAlignment(Element.ALIGN_CENTER);
                         imagenes.scaleToFit(100, 100);
@@ -353,6 +357,7 @@ public class ControllerConstancias extends HttpServlet {
             }
 
             documento.close();
+            
 
         } catch (NumberFormatException e) {
             System.out.println("Error en servlet: " + e);
