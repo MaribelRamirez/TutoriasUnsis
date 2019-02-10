@@ -300,9 +300,12 @@ public class ControllerConstancias extends HttpServlet {
                             if (action.equalsIgnoreCase("individual")) {
                                 while (it_list.hasNext()) {
                                     Alumno ob = new Alumno();
+                                    PdfPCell celda5 = new PdfPCell(new Paragraph(ob.getNombre(), FontFactory.getFont("Arial", 10, Font.ITALIC , BaseColor.BLACK )));
+
                                     ob = it_list.next();
                                     tabla.addCell("" + cont);
-                                    tabla.addCell(ob.getNombre());
+                                     
+                                    tabla.addCell(celda5);
                                     cont++;
 
                                 }
