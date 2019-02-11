@@ -34,7 +34,7 @@
                    
                     <li class="dropdown">
                         
-                        <form action="../login" method="get">
+                        <form action="../login" method="get" onsubmit="return confirm('¿Realmente desea cerrar sesión?')">
 <!--                        <input type="hidden" name = "action" value="close">-->
 <button name="action" type="submit" value="close"> Cerrar sesion</button>
                             <!--<input  name="action" type="submit" value="close" >--> 

@@ -127,7 +127,7 @@
             if (sesion.getAttribute("user") != null && sesion.getAttribute("nivel") != null) {
                 usuario = sesion.getAttribute("user").toString();
                 nivel = sesion.getAttribute("nivel").toString();
-                out.print("<a href='login.jsp?cerrar=true'><h5>cerrar Sesion" + usuario + "</h5>");
+//                out.print("<a href='login.jsp?cerrar=true'><h5>cerrar Sesion" + usuario + "</h5>");
 
             } else {
                 out.print("<script>location.replace('login.jsp');</script>");

@@ -160,7 +160,7 @@
                                 </div>
                                 <%
                                     ProfesorDAO obj_Read_Pro = new ProfesorDAO();
-                                    List<Profesor> listPro = obj_Read_Pro.listarProfesores();
+                                    List<Profesor> listPro = obj_Read_Pro.listarProfesoresActivos();
                                     Iterator<Profesor> list_Pro = listPro.iterator();
 
                                 %>
