@@ -45,8 +45,6 @@
 
 
 
-        <script src="../resources/calendario/js/bootstrap.min.js"></script>
-        <script src="../resources/calendario/js/jquery-1.8.3.js"></script>
 
         <link href="../resources/calendario/css/bootstrap-datepicker3.min.css" rel='stylesheet' type='text/css'/>
         <script src="../resources/calendario/js/bootstrap-datepicker.min.js"></script>
@@ -165,20 +163,19 @@
                         <form id="formulario" action="../ControllerConstancias" method="post" target="_blank">
 
 
-                            <div class="container">
+                         <div class="container">
                                 <br />
                                 <div class="row">
-                                    <div class='col-sm-3'>
+                                    <div class='col-sm-4'>
                                         <div class="form-group">
                                             <div id="filterDate2">
 
-                                                <!-- Datepicker as text field -->         
-                                                <div class="input-group date" data-date-format="dd-mm-yyyy">
-                                                    <input  required readonly="readonly" type="text" class="form-control" name="datepicker" id="datepicker" >
-                                                    <div class="input-group-addon" >
-                                                        <span class="glyphicon glyphicon-th"></span>
-                                                    </div>
-                                                </div>
+                                                <!-- Datepicker as text field -->  
+                                                <label for="nombre">Elegir fecha para generar la constancia</label>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    
+                                    <input name="datepicker" id="datepicker"  type="date" class="form-control" value="" />
+                                </div>
 
                                             </div>    
                                         </div>
