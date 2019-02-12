@@ -33,7 +33,7 @@
                         <!--<a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret">Coria olgin<i ></i></span></a>-->
                         
                         
-                        <form action="../login" method="get">
+                        <form action="login" method="get" onsubmit="return confirm('¿Realmente desea cerrar sesión?')">
                             <div class="form-group">
                             <!--                        <input type="hidden" name = "action" value="close">-->
                             <!--<button name="action" type="submit" value="close"> </button>-->
@@ -55,7 +55,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <img src="resources/images/escudo.png" width="90" height="90"> <br><br>
                     <ul class="nav" id="side-menu">
-                                  <a href="indexAdmin.jsp" class=" hvr-bounce-to-right">
+                                  <a href="pages/indexAdmin.jsp" class=" hvr-bounce-to-right">
                                 <i class="fa fa-file-o nav_icon"></i>Maestros
                             </a>
                         </li>

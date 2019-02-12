@@ -31,7 +31,7 @@
                         <!--<a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret">Coria olgin<i ></i></span></a>-->
                         
                         
-                        <form action="../login" method="get">
+                        <form action="../login" method="get" onsubmit="return confirm('¿Realmente desea cerrar sesión?')">
                             <div class="form-group">
                             <!--                        <input type="hidden" name = "action" value="close">-->
                             <!--<button name="action" type="submit" value="close"> </button>-->
