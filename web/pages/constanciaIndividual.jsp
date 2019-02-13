@@ -182,7 +182,7 @@
                                     <tr>
                                         <th></th>
                                         <th>Nombre</th></th> 
-                                        <th>Grado</th>
+                                        <th>Perfil</th>
                                         <th>Status</th>
                                         <th>Licenciatura</th>
 
