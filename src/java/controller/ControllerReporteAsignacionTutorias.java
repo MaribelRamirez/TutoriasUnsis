@@ -247,7 +247,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                     if (list2.size() > 0) {
 
                         //creando y asignando nombre a la hoja de excel
-                        sheetx = book.createSheet("" + obG.getNombre());
+                        sheetx = book.createSheet(obG.getGrado()+" "+ obG.getNombre());
                         //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
                         sheetx.getPrintSetup().setLandscape(false);
                         //indicando el tamaño de la hoja
@@ -263,7 +263,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                         sheetx.addMergedRegion(new CellRangeAddress(i, i, 0, 4));
 
                         cell = row1.createCell(0);
-                        cell.setCellValue("" + obG.getNombre());
+                        cell.setCellValue(obG.getGrado()+" "+ obG.getNombre());
                         cell.setCellStyle(styleColumn);
 
                         cell = row1.createCell(1);
@@ -354,7 +354,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
 
                             cell = rowGeneral1.createCell(2);
                             cell.setCellStyle(styleColumn);
-                            cell.setCellValue(obG.getNombre());
+                            cell.setCellValue(obG.getGrado()+" "+ obG.getNombre());
                             j++;
 
                         }
@@ -394,7 +394,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
 
                         sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
                         cell = rowGeneral1.createCell(0);
-                        cell.setCellValue(obI.getNombre());
+                        cell.setCellValue(obI.getGrado()+" "+ obI.getNombre());
                         cell.setCellStyle(styleColumn);
                         cell = rowGeneral1.createCell(1);
                         cell.setCellStyle(styleColumn);
