@@ -42,6 +42,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Alumno;
 import model.Grupo;
 import model.Profesor;
+import model.sql;
 
 /**
  *
@@ -237,15 +238,20 @@ public class ControllerConstancias extends HttpServlet {
 
                         if (action.equalsIgnoreCase("individual")) {
 
-                            par2.add(new Phrase(" impartió Tutorías Académicas Individuales, en el periodo "
+                            par2.add(new Phrase(" impartió Tutorías Académicas Individuales, en el periodo oct2018-feb2019"
                                     + ", a los siguientes alumnos:", text1));
+                         
+                            par2.add(new Phrase(Chunk.NEWLINE));
+                        
                         } else {
-                            par2.add(new Phrase(" impartió Tutorías Académicas Grupales, en el periodo "
+                            par2.add(new Phrase(" impartió Tutorías Académicas Grupales, en el periodo oct2018-feb2019"
                                     + ", al grupo " + grupo.getGrupo() + " conformado por los siguientes alumnos: ", text1));
+                     
+                            par2.add(new Phrase(Chunk.NEWLINE));
+                        
                         }
-
-                        par2.setAlignment(Element.ALIGN_JUSTIFIED);
-                        par2.add(new Phrase(Chunk.NEWLINE));
+ par2.add(new Phrase(Chunk.NEWLINE));
+                      
                         if (tamaño <= 16 && tamaño > 0) {
                             par2.add(new Phrase(Chunk.NEWLINE));
                             par2.add(new Phrase(Chunk.NEWLINE));

@@ -380,6 +380,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
 
                         sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
                         rowGeneral1 = sheet.createRow(j);
+                        
                         rowGeneral1.createCell(0).setCellValue("TUTORIAS INDIVIDUALES");
                         j++;
                         i++;

@@ -15,7 +15,7 @@ noSesiones int not null,
 noCanalizaciones int not null,
 alumnosAsignados int not null,
 alumnosReportados int not null,
-alumnosAsistencia int not null,
+alumnosAsistencia int not null, 
 observaciones varchar(250) not null,
 faltantes varchar(250) not null
 );
@@ -83,7 +83,7 @@ archivo LONGBLOB not null
 -- agregue la tablas periodo
 create table periodo(
 idPeriodo int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-periodo varchar (20) not null,
+periodo varchar (50) not null,
 fechaInicio date,
 fechaFin Date
 );

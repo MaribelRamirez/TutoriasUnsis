@@ -140,14 +140,8 @@
 
                                 </div>
                                 <div class = "form-group">
-                                    <label>Grado academico</label>	      
-                                    <select class="form-control " id="grado_acad" name="grado_acad">
-
-                                        <option value="Licenciatura"> Licenciatura</option>
-                                        <option value="Maestria">Maestria</option>
-                                        <option value="Doctorado">Doctorado</option>
-                                        <option value="Doctorado">Pos doctorado</option>
-                                    </select>
+                                    <label>Perfil academico</label>
+                                    <input  required class="form-control" id="grado_acad" name="grado_acad" placeholder="Introduce el perfil del profesor">
                                 </div>
                                 <div class = "form-group">
                                     <label>Status</label>	      
