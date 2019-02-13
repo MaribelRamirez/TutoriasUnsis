@@ -349,7 +349,7 @@ public class ControllerReportesTutorias extends HttpServlet {
 
                         cell = row2.createCell(1);
                         cell.setCellStyle(style2);
-                        cell.setCellValue("" + ob_lic_rep2.getProfesor());
+                        cell.setCellValue(ob_lic_rep2.getGrado() +" "+ob_lic_rep2.getProfesor());
 
                         cell = row2.createCell(2);
                         cell.setCellStyle(style2);
@@ -417,7 +417,7 @@ public class ControllerReportesTutorias extends HttpServlet {
 
                         cell = row2.createCell(1);
                         cell.setCellStyle(style2);
-                        cell.setCellValue("" + ob_lic_rep.getProfesor());
+                        cell.setCellValue(ob_lic_rep.getGrado() +" "+ ob_lic_rep.getProfesor());
 
                         cell = row2.createCell(2);
                         cell.setCellStyle(style2);

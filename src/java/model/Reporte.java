@@ -16,6 +16,7 @@ public class Reporte {
     private int idReporte;
     private String curp;
     private String profesor;
+    private String grado;
     private String licenciatura;
     private int idLicenciatura;
     private int idPeriodo;
@@ -34,12 +35,13 @@ public class Reporte {
     
     public Reporte(){}
             
-    public Reporte(int idReporte, String curp,String profesor, String licenciatura,int idLicenciatura,int idPeriodo,String periodo,String entrego, String aTiempo, Date fecha,String tipoTutoria, int noSesiones,int noCanalizaciones, int alumnosAsignados,int alumnosReportados, int alumnosAsistencia, String observaciones, String faltantes)
+    public Reporte(int idReporte, String curp,String profesor,String grado,String licenciatura,int idLicenciatura,int idPeriodo,String periodo,String entrego, String aTiempo, Date fecha,String tipoTutoria, int noSesiones,int noCanalizaciones, int alumnosAsignados,int alumnosReportados, int alumnosAsistencia, String observaciones, String faltantes)
     {
     
     this.idReporte=idReporte;
     this.curp=curp;
      this.profesor=profesor;
+     this.grado=grado;
     this.licenciatura=licenciatura;
     this.idLicenciatura=idLicenciatura;
     this.idPeriodo=idPeriodo;
@@ -203,4 +205,11 @@ public class Reporte {
     }
 
     
+    public String getGrado() {
+        return grado;
+    }
+
+    public void setGrado(String grado) {
+        this.grado = grado;
+    }
 }
