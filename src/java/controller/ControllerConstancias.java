@@ -161,7 +161,6 @@ public class ControllerConstancias extends HttpServlet {
                 throw new IllegalArgumentException("Invalid day of the week: " + mes);
         }
 
-        System.out.println("esta es la fecha.." + calendario);
         int i = 1;
 
         try {
@@ -214,7 +213,7 @@ public class ControllerConstancias extends HttpServlet {
                         par1.add(new Phrase(Chunk.NEWLINE));
 
                         par1.add(new Phrase(Chunk.NEWLINE));
-                        par1.add(new Phrase("A través de la Coordinación de Tutorías", text1));
+                        par1.add(new Phrase("A través del Programa Institucional de Tutorías", text1));
                         par1.add(new Phrase(Chunk.NEWLINE));
                         par1.add(new Phrase("HACE CONSTAR", text2));
                         par1.setAlignment(Element.ALIGN_CENTER);
@@ -233,8 +232,8 @@ public class ControllerConstancias extends HttpServlet {
                             tamaño = list2.size();
                         }
 
-                        par2.add(new Phrase("Que la Profesora de Tiempo Completo ", text1));
-                        par2.add(new Phrase("" + prof.getNombre(), text3));
+                        par2.add(new Phrase("Que la Profesor (a) de Tiempo Completo ", text1));
+                        par2.add(new Phrase("" +  prof.getNombre(), text3));
 
                         if (action.equalsIgnoreCase("individual")) {
 
@@ -252,12 +251,7 @@ public class ControllerConstancias extends HttpServlet {
                         }
  par2.add(new Phrase(Chunk.NEWLINE));
                       
-                        if (tamaño <= 16 && tamaño > 0) {
-                            par2.add(new Phrase(Chunk.NEWLINE));
-                            par2.add(new Phrase(Chunk.NEWLINE));
-                            par2.add(new Phrase(Chunk.NEWLINE));
-
-                        }
+                      
                         documento.add(par2);
 
                         if ((tamaño <= 10) && (tamaño > 0)) {
@@ -371,7 +365,7 @@ public class ControllerConstancias extends HttpServlet {
                         par4.add(new Phrase(Chunk.NEWLINE));
                         par4.add(new Phrase("LIC. YESENIA ROJAS ALCÁNTARA", text1));
                         par4.add(new Phrase(Chunk.NEWLINE));
-                        par4.add(new Phrase("Coordinadora de Tutorías", text5));
+                        par4.add(new Phrase("Coordinadora del Programa Institucional de Tutorías.", text5));
                         par4.setAlignment(Element.ALIGN_CENTER);
                         documento.add(par4);
                         documento.newPage();
