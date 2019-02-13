@@ -262,7 +262,6 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                  */
                 ProfesorDAO obj_Read = new ProfesorDAO();
                 List<Profesor> list_tutor = obj_Read.obtenerProfesorTutor(ob.getNombre());
-                System.out.println("2");
                 Iterator<Profesor> it_list_tutor = list_tutor.iterator();
 
                 while (it_list_tutor.hasNext()) {
@@ -278,7 +277,7 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                     l++;
 
                     cellT4 = rowT4.createCell(l);
-                    cellT4.setCellValue(Obt.getNombre());
+                    cellT4.setCellValue(Obt.getNombre()+" "+Obt.getNombre());
                     cellT4.setCellStyle(style2);
 
                     l++;
