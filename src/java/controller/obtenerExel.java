@@ -7,6 +7,7 @@ package controller;
 
 import dao.AlumnoDAO;
 import dao.GrupoDAO;
+import dao.TutorDAO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,6 +26,8 @@ import model.Grupo;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import model.Tutor;
+import model.sql;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -39,15 +42,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 @WebServlet(name = "obtenerExel", urlPatterns = {"/obtenerExel"})
 public class obtenerExel extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    public TutorDAO tutordao;
+    public obtenerExel() {
+        super();
+        tutordao = new TutorDAO();
+
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -95,6 +95,7 @@ public class obtenerExel extends HttpServlet {
 
         Alumno alumno = new Alumno();
         Alumno alumno2 = new Alumno();
+        Tutor tutor = new Tutor();
         AlumnoDAO alumnoDAO = new AlumnoDAO();
         Grupo grupo = new Grupo();
         GrupoDAO grupodao = new GrupoDAO();
@@ -149,6 +150,18 @@ public class obtenerExel extends HttpServlet {
                             alumnoDAO.insertar(alumno);
                         } else {
                             alumnoDAO.updateAlumno(alumno);
+                            //Obtenemos el periodo actual
+                            sql auto = new sql();
+                            int idPeriodo = auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo") - 1;
+                            
+                            if (0 != tutordao.comprobarRegistro(idPeriodo, alumno.getMatricula())) {
+//                                tutordao.update(tutor);
+                            } else {
+                                tutor=tutordao.tuturadoByMatricula(idPeriodo-1, alumno.getMatricula());
+                                tutor.setGrupo(grupo.getGrupo());
+                                tutor.setPeriodo(idPeriodo);
+                                tutordao.insertar(tutor);
+                            }
                         }
                         
                     }   else {

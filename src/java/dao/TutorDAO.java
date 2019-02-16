@@ -37,11 +37,10 @@ public class TutorDAO {
     public List<Tutor> listarTutorados(int idPer) throws SQLException {
 
         List<Tutor> listaTutores = new ArrayList<Tutor>();
-        String sql = "select idtutorado, tutores.matricula, tutores.curp, tutores.idperiodo, "
-                + "tipo, alumnos.nombre, profesores.nombre, grupos.grupo, licenciaturas.nombre "
-                + " from tutores , alumnos , profesores, grupos, licenciaturas "
+        String sql = "select idtutorado, tutores.matricula, tutores.curp, tutores.idperiodo, tipo, alumnos.nombre, profesores.nombre, grupo, licenciaturas.nombre  "
+                + "from tutores , alumnos , profesores, licenciaturas "
                 + "where tutores.curp=profesores.curp and tutores.matricula=alumnos.matricula "
-                + "and alumnos.idgrupo = grupos.idgrupo and grupos.idperiodo="+idPer+" and alumnos.idLicenciatura=licenciaturas.idLicenciatura;";
+                + "and  tutores.idperiodo="+idPer+" and alumnos.idLicenciatura=licenciaturas.idLicenciatura;";
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
@@ -54,7 +53,7 @@ public class TutorDAO {
             int tipo = resulSet.getInt("tipo");
             String nombreA = resulSet.getString("alumnos.nombre");
             String nombreP = resulSet.getString("profesores.nombre");
-            String grupo =resulSet.getString("grupos.grupo");
+            String grupo =resulSet.getString("grupo");
             String lic =resulSet.getString("licenciaturas.nombre");
             Tutor tutor;
             tutor = new Tutor(id, matricula,curp, idPerido, tipo,nombreA,nombreP, grupo, lic);
@@ -182,23 +181,39 @@ public class TutorDAO {
         
     }
       }
-//      public void updateGrp(Grupo grupo) {
-//        try {
-//            String sql = "update grupos set idGrupo=?, grupo=?, idPeriodo=?, idLicenciatura=? "
-//                    + "where idGrupo=?";
-//            con.conectar();
-//            connection = con.getJdbcConnection();
-//            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-//                statement.setInt(1, grupo.getIdGrupo());
-//                statement.setString(2, grupo.getGrupo());
-//                statement.setInt(3,grupo.getIdPeriodo());
-//                statement.setInt(4,grupo.getIdLicenciatura());
-//                 statement.setInt(5, grupo.getIdGrupo());
-//                statement.executeUpdate();
-//            }
-//            con.desconectar();
-//        } catch (SQLException e) {
-//            System.out.print("error al insertar:" + e);
-//        }
-//    }
+      public Tutor tuturadoByMatricula(int idPer, String matricula) throws SQLException {
+          // regresa el tutor para el tutoraado de de esa matricula en ese periodo
+        
+
+        String sql = "select * from tutores where matricula =? and idPeriodo=?;";
+        Tutor tutor = null;
+        
+        con.conectar();
+        connection = con.getJdbcConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, matricula);
+        statement.setInt(2, idPer);
+        ResultSet res = statement.executeQuery();
+        if (res.next()) {
+
+            tutor = new Tutor(res.getInt("idTutorado"), 
+                    res.getString("matricula"),
+                    res.getString("curp"),
+                    res.getInt("idPeriodo"),
+                    res.getInt("tipo"),
+                    "",
+                    "",
+                    res.getString("grupo"),
+                    "");
+            System.err.println("si hay alumno");
+
+        }
+        res.close();
+        con.desconectar();
+ 
+        return tutor;
+        
+    }
+      
+
 }
