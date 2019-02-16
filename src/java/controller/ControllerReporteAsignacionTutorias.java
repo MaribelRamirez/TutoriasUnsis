@@ -31,6 +31,7 @@ import model.Grupo;
 import model.Licenciatura;
 import model.Periodo;
 import model.Profesor;
+import model.sql;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
 import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
@@ -117,6 +118,8 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
             int cont2 = 0;
             int i = 0;
             int j = 0;
+sql auto = new sql();
+                int idPeriodo = auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo") - 1;
 
             while (it_list_lic.hasNext()) {
 
@@ -238,16 +241,16 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                     obG = it_listG.next();
 
                     AlumnoDAO objALum = new AlumnoDAO();
-                    List<Alumno> list2 = objALum.listarAlumnosTutoradosByCarrera(obG.getCurp(), ob_lic.getNombre());
+                    List<Alumno> list2 = objALum.listarAlumnosTutoradosByCarrera(obG.getCurp(), ob_lic.getNombre(),idPeriodo);
                     Iterator<Alumno> it_list2 = list2.iterator();
 
-                    List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_lic.getNombre());
+                    List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_lic.getNombre(),idPeriodo);
                     Iterator<Grupo> it_grupos = list_grupos.iterator();
 
                     if (list2.size() > 0) {
 
                         //creando y asignando nombre a la hoja de excel
-                        sheetx = book.createSheet("" + obG.getNombre());
+                        sheetx = book.createSheet(obG.getGrado()+" "+ obG.getNombre());
                         //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
                         sheetx.getPrintSetup().setLandscape(false);
                         //indicando el tamaño de la hoja
@@ -263,7 +266,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                         sheetx.addMergedRegion(new CellRangeAddress(i, i, 0, 4));
 
                         cell = row1.createCell(0);
-                        cell.setCellValue("" + obG.getNombre());
+                        cell.setCellValue(obG.getGrado()+" "+ obG.getNombre());
                         cell.setCellStyle(styleColumn);
 
                         cell = row1.createCell(1);
@@ -354,7 +357,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
 
                             cell = rowGeneral1.createCell(2);
                             cell.setCellStyle(styleColumn);
-                            cell.setCellValue(obG.getNombre());
+                            cell.setCellValue(obG.getGrado()+" "+ obG.getNombre());
                             j++;
 
                         }
@@ -373,13 +376,14 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                     obI = it_listI.next();
 
                     AlumnoDAO objALum = new AlumnoDAO();
-                    List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(), ob_lic.getNombre());
+                    List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(), ob_lic.getNombre(),idPeriodo);
                     Iterator<Alumno> it_list2 = list2.iterator();
 
                     if (list2.size() > 0) {
 
                         sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
                         rowGeneral1 = sheet.createRow(j);
+                        
                         rowGeneral1.createCell(0).setCellValue("TUTORIAS INDIVIDUALES");
                         j++;
                         i++;
@@ -393,7 +397,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
 
                         sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
                         cell = rowGeneral1.createCell(0);
-                        cell.setCellValue(obI.getNombre());
+                        cell.setCellValue(obI.getGrado()+" "+ obI.getNombre());
                         cell.setCellStyle(styleColumn);
                         cell = rowGeneral1.createCell(1);
                         cell.setCellStyle(styleColumn);

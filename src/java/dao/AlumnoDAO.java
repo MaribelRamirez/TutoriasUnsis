@@ -33,14 +33,14 @@ public class AlumnoDAO {
         this.con = con;
         this.connection = connection;
     }
-    public int countEstadistica3() {
+    public int countEstadistica3(int periodo) {
        
          int count=0;
         try {
-            String sql = "select tutores.curp,profesores.nombre, profesores.licenciatura, alumnos.nombre,alumnos.matricula, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre \n" +
-"from tutores ,profesores,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura \n" +
-"where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo \n" +
-"and tutores.curp=profesores.curp ;";
+            String sql = "select *" +
+"from tutores ,profesores,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura \n" +
+"where tutores.matricula=alumnos.matricula " +
+"and tutores.curp=profesores.curp and tutores.idPeriodo='"+periodo+"';";
             System.out.println("consulta"+sql);
             connection = con.conectar();
             Statement statement = connection.createStatement();
@@ -56,14 +56,14 @@ public class AlumnoDAO {
         }
         return count;
 }
-    public int countEstadistica2(int carreraT) {
+    public int countEstadistica2(int carreraT,int periodo) {
        
          int count=0;
         try {
-            String sql = "select tutores.curp,profesores.nombre, profesores.licenciatura, alumnos.nombre,alumnos.matricula, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre \n" +
-"from tutores ,profesores,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura \n" +
-"                     where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo \n" +
-"                     and tutores.curp=profesores.curp and profesores.licenciatura='"+carreraT+"' ;";
+            String sql = "select *" +
+"from tutores ,profesores ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura \n" +
+"                     where tutores.matricula=alumnos.matricula " +
+"                     and tutores.curp=profesores.curp and profesores.licenciatura='"+carreraT+"' and tutores.idPeriodo='"+periodo+"';";
             System.out.println("consulta"+sql);
             connection = con.conectar();
             Statement statement = connection.createStatement();
@@ -79,14 +79,14 @@ public class AlumnoDAO {
         }
         return count;
 }
-public int countEstadistica(int carreraT,int carreraA) {
+public int countEstadistica(int carreraT,int carreraA,int periodo) {
        
          int count=0;
         try {
-            String sql = "select tutores.curp,profesores.nombre, profesores.licenciatura, alumnos.nombre,alumnos.matricula, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre \n" +
-"from tutores ,profesores,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura \n" +
-"                     where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo \n" +
-"                     and tutores.curp=profesores.curp and profesores.licenciatura='"+carreraT+"' and alumnos.idLicenciatura='"+carreraA+"';";
+            String sql = "select *" +
+"from tutores ,profesores,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura \n" +
+"                     where tutores.matricula=alumnos.matricula " +
+"                     and tutores.curp=profesores.curp and profesores.licenciatura='"+carreraT+"' and alumnos.idLicenciatura='"+carreraA+"' and tutores.idPeriodo='"+periodo+"';";
             System.out.println("consulta"+sql);
             connection = con.conectar();
             Statement statement = connection.createStatement();
@@ -103,14 +103,14 @@ public int countEstadistica(int carreraT,int carreraA) {
         return count;
 }
 
-    public int countAlumnosTutorados(String curp) {
+    public int countAlumnosTutorados(String curp, int periodo) {
        
          int count=0;
         try {
-            String sql = "select alumnos.matricula , alumnos.nombre, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
-                    " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
-                    " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
-                    " and tutores.curp='"+curp+"';";
+            String sql = "select * " +
+                    " from tutores  ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
+                    " where tutores.matricula=alumnos.matricula  " +
+                    " and tutores.curp='"+curp+"' and tutores.idPeriodo='"+periodo+"'; ";
             System.out.println("consulta"+sql);
             connection = con.conectar();
             Statement statement = connection.createStatement();
@@ -126,14 +126,14 @@ public int countEstadistica(int carreraT,int carreraA) {
         }
         return count;
 }
-   public int countAlumnosTutoradosByCarrera(String curp, String carrera) {
+   public int countAlumnosTutoradosByCarrera(String curp, String carrera,int periodo) {
        
          int count=0;
         try {
-            String sql = "select alumnos.matricula , alumnos.nombre, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
-                    " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
-                    " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
-                    " and tutores.curp='"+curp+"' and licenciaturas.nombre='"+carrera+"' ;";
+            String sql = "select * " +
+                    " from tutores  ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
+                    " where tutores.matricula=alumnos.matricula " +
+                    " and tutores.curp='"+curp+"' and licenciaturas.nombre='"+carrera+"'  and tutores.idPeriodo='"+periodo+"';";
             System.out.println("consulta"+sql);
             connection = con.conectar();
             Statement statement = connection.createStatement();
@@ -176,7 +176,9 @@ public int countEstadistica(int carreraT,int carreraA) {
     public List<Alumno> listarAlumnos() throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "SELECT matricula, alumnos.nombre ,alumnos.idGrupo, alumnos.idLicenciatura,licenciaturas.nombre, grupos.grupo FROM alumnos inner join licenciaturas inner join grupos on grupos.idGrupo=alumnos.idGrupo and alumnos.idLicenciatura=licenciaturas.idLicenciatura";
+        String sql = "SELECT matricula, alumnos.nombre ,alumnos.idGrupo, alumnos.idLicenciatura,licenciaturas.nombre, "
+                + "grupos.grupo FROM alumnos inner join licenciaturas inner join grupos on "
+                + "grupos.idGrupo=alumnos.idGrupo and alumnos.idLicenciatura=licenciaturas.idLicenciatura";
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
@@ -246,12 +248,12 @@ public int countEstadistica(int carreraT,int carreraA) {
         con.desconectar();
         return listaAlumnos;
     }
-    public List<Alumno> listarAlumnosTutoradosByCarrera(String curp, String carrera) throws SQLException {
+    public List<Alumno> listarAlumnosTutoradosByCarrera(String curp, String carrera, int periodo) throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "select alumnos.matricula , alumnos.nombre, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
-            " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
-            " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo and licenciaturas.nombre='"+carrera+"' and tutores.curp='"+curp+"';"; 
+        String sql = "select alumnos.matricula , alumnos.nombre, tutores.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+            " from tutores  ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
+            " where tutores.matricula=alumnos.matricula and licenciaturas.nombre='"+carrera+"' and tutores.curp='"+curp+"' and tutores.idPeriodo='"+periodo+"';"; 
         System.out.println("consulta"+sql);
         connection = con.conectar();
         Statement statement = connection.createStatement();
@@ -260,7 +262,7 @@ public int countEstadistica(int carreraT,int carreraA) {
         while (resulSet.next()) {
 	 String  matricula = resulSet.getString("alumnos.matricula");
 	 String nombre = resulSet.getString("alumnos.nombre");
-	 String grupo = resulSet.getString("grupos.grupo");
+	 String grupo = resulSet.getString("tutores.grupo");
 	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
 	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
          int tipo = resulSet.getInt("tipo");
@@ -271,39 +273,35 @@ public int countEstadistica(int carreraT,int carreraA) {
         con.desconectar();
         return listaAlumnos;
     }
-    public List<Alumno> listarAlumnosTutoradosIndividual(String curp) throws SQLException {
+    public List<Alumno> listarAlumnosTutoradosIndividual(String curp,int periodo) throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "select alumnos.matricula , alumnos.nombre, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
-            " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
-            " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
-            " and tutores.curp='"+curp+"' and tutores.tipo=1;";
+       
+        
+        String sql = "select alumnos.nombre, tutores.grupo  from tutores  ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura where tutores.matricula=alumnos.matricula and tutores.curp='"+curp+"' and tutores.tipo=1 and tutores.idPeriodo='"+periodo+"';";
         System.out.println("consulta"+sql);
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
 
         while (resulSet.next()) {
-	 String  matricula = resulSet.getString("alumnos.matricula");
 	 String nombre = resulSet.getString("alumnos.nombre");
-	 String grupo = resulSet.getString("grupos.grupo");
-	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
-	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
-         int tipo = resulSet.getInt("tipo");
+	 String grupo = resulSet.getString("tutores.grupo");
+       
 	 Alumno alumno;
-	 alumno = new Alumno(matricula, nombre, 0, grupo,idLicenciatura,Licenciatura,tipo);
+	 alumno = new Alumno(null, nombre, 0, grupo,0,null,0);
 	 listaAlumnos.add(alumno);
         }
         con.desconectar();
         return listaAlumnos;
     }
-       public List<Alumno> listarAlumnosTutoradosIndividualByCarrera(String curp,String carrera) throws SQLException {
+       public List<Alumno> listarAlumnosTutoradosIndividualByCarrera(String curp,String carrera,int periodo) throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "select alumnos.matricula , alumnos.nombre, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
-            " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
-            " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
-            " and tutores.curp='"+curp+"' and tutores.tipo=1 and licenciaturas.nombre='"+carrera+"';";
+        String sql = "select alumnos.matricula , alumnos.nombre, tutores.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+            " from tutores  ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
+            " where tutores.matricula=alumnos.matricula  " +
+            " and tutores.curp='"+curp+"' and tutores.tipo=1 and licenciaturas.nombre='"+carrera+"' and tutores.idPeriodo='"+periodo+"';";
         
         System.out.println("consulta"+sql);
         connection = con.conectar();
@@ -313,7 +311,7 @@ public int countEstadistica(int carreraT,int carreraA) {
         while (resulSet.next()) {
 	 String  matricula = resulSet.getString("alumnos.matricula");
 	 String nombre = resulSet.getString("alumnos.nombre");
-	 String grupo = resulSet.getString("grupos.grupo");
+	 String grupo = resulSet.getString("tutores.grupo");
 	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
 	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
          int tipo = resulSet.getInt("tipo");
@@ -351,27 +349,24 @@ public int countEstadistica(int carreraT,int carreraA) {
         return listaAlumnos;
     }
       
-    public List<Alumno> listarAlumnosTutoradosGrupal(String curp) throws SQLException {
+    public List<Alumno> listarAlumnosTutoradosGrupal(String curp, int periodo) throws SQLException {
 
         List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        String sql = "select alumnos.matricula , alumnos.nombre, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
+        /*String sql = "select alumnos.matricula , alumnos.nombre, grupos.grupo , alumnos.idLicenciatura, tipo , licenciaturas.nombre " +
             " from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura " +
             " where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo " +
-            " and tutores.curp='"+curp+"' and tutores.tipo=2;";
+            " and tutores.curp='"+curp+"' and tutores.tipo=2;";*/
+                String sql = "select  alumnos.nombre from tutores  inner join alumnos where tutores.matricula=alumnos.matricula and tutores.curp='"+curp+"' and tutores.tipo=2 and tutores.idPeriodo='"+periodo+"'";
         System.out.println("consulta"+sql);
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
 
         while (resulSet.next()) {
-	 String  matricula = resulSet.getString("alumnos.matricula");
 	 String nombre = resulSet.getString("alumnos.nombre");
-	 String grupo = resulSet.getString("grupos.grupo");
-	 int idLicenciatura=resulSet.getInt("alumnos.idLicenciatura");
-	 String Licenciatura = resulSet.getString("licenciaturas.nombre");
-         int tipo = resulSet.getInt("tipo");
+
 	 Alumno alumno;
-	 alumno = new Alumno(matricula, nombre, 0, grupo,idLicenciatura,Licenciatura,tipo);
+	 alumno = new Alumno(null, nombre, 0, null,0,null,0);
 	 listaAlumnos.add(alumno);
         }
         con.desconectar();

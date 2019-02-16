@@ -59,21 +59,21 @@ public class GrupoDAO {
         return count;
 }
     
-    public Grupo obtenerGrupobyProf(String curp) throws SQLException {
+    public Grupo obtenerGrupobyProf(String curp, int periodo) throws SQLException {
         Grupo grupo = null;
 
-        String sql ="select grupos.grupo, grupos.idGrupo from tutores inner join alumnos inner join grupos on tutores.matricula=alumnos.matricula and alumnos.idGrupo=grupos.idGrupo where tutores.tipo=2 and tutores.curp= ? ";
+        String sql ="select tutores.grupo from tutores inner join alumnos on tutores.matricula=alumnos.matricula  where tutores.tipo=2 and tutores.curp=? and tutores.idPeriodo=?";
         
         con.conectar();
         connection = con.getJdbcConnection();
-        System.out.println("este es el sql de grupo"+sql);
+        System.out.println("este es el sql de gruposss"+sql);
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, curp);
-
+statement.setInt(2, periodo);
         ResultSet res = statement.executeQuery();
         if (res.next()) {
             
-                     grupo = new Grupo(res.getInt("idGrupo"), res.getString("grupo"),0 ,0,"","");
+                     grupo = new Grupo(0, res.getString("grupo"),0 ,0,"","");
                
                     
         }
@@ -155,10 +155,10 @@ public class GrupoDAO {
         return listaGrupos;
     }
  //regresa los grupos de determinada carrera a los que tutora determinado profesor 
-        public List<Grupo> listarGruposTutorados(String curp,String carrera) throws SQLException {
+        public List<Grupo> listarGruposTutorados(String curp,String carrera,int periodo) throws SQLException {
 
         List<Grupo> listaGrupos = new ArrayList<Grupo>();
-        String sql = "select  grupos.grupo , grupos.idGrupo from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura where tutores.matricula=alumnos.matricula and  grupos.idGrupo=alumnos.idGrupo and tutores.curp='"+curp+"' and tutores.tipo=2 and licenciaturas.nombre='"+carrera+"' group by(grupos.grupo);";
+        String sql = "select  grupos.grupo  from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura where tutores.matricula=alumnos.matricula  and tutores.curp='"+curp+"' and tutores.tipo=2 and licenciaturas.nombre='"+carrera+"' group by(grupos.grupo) and tutores.idPeriodo='"+periodo+"';";
          
         System.out.println("consulta"+sql);
         connection = con.conectar();
@@ -166,12 +166,11 @@ public class GrupoDAO {
         ResultSet resulSet = statement.executeQuery(sql);
 
         while (resulSet.next()) {
-	 int idGrupo=resulSet.getInt("grupos.idGrupo");
 	 String nombre = resulSet.getString("grupos.grupo");
          
          
          Grupo grupo;
-	 grupo = new Grupo(idGrupo, nombre,0 ,0,"","");
+	 grupo = new Grupo(0, nombre,0 ,0,"","");
 	 listaGrupos.add(grupo);
         }
         con.desconectar();

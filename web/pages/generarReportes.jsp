@@ -148,6 +148,7 @@
                                         <button type="submit"  class=" fa fa-file-o btn btn-link"> Constancia individual</button>
                                     </form>
                                 </li>
+                                
                                 <li class="active">
                                     <button type="button"  class=" fa fa-file-o btn btn-link" data-toggle="modal"  data-target="#exampleModal">Reportes de Tutorias</button>
 

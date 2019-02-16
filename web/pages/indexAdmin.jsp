@@ -181,7 +181,7 @@
                             <thead>
                                 <tr>
                                     <th>Nombre</th></th> 
-                                    <th>Grado</th>
+                                    <th>Perfil academico</th>
                                     <th>Status</th>
                                     <th>Licenciatura</th>
                                     <th>Editar</th>

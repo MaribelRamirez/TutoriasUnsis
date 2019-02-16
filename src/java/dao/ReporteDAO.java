@@ -70,7 +70,7 @@ public class ReporteDAO {
     public List<Reporte> listarReportes() throws SQLException {
 
         List<Reporte> listaReportes = new ArrayList<Reporte>();
-        String sql = "SELECT profesores.nombre, periodo.idPeriodo, periodo.periodo, licenciaturas.idLicenciatura,"
+        String sql = "SELECT profesores.nombre,profesores.grado, periodo.idPeriodo, periodo.periodo, licenciaturas.idLicenciatura,"
                 + "licenciaturas.nombre,reportes.idReporte,reportes.curp, reportes.entrego,reportes.aTiempo,"
                 + "reportes.fecha,reportes.tipoTutoria,reportes.noSesiones,reportes.noCanalizaciones,"
                 + "reportes.alumnosAsignados,reportes.alumnosReportados,reportes.alumnosAsistencia,"
@@ -86,6 +86,7 @@ public class ReporteDAO {
             int idReporte = resulSet.getInt("reportes.idReporte");
             String curp = resulSet.getString("reportes.curp");
             String profesor = resulSet.getString("profesores.nombre");
+            String grado = resulSet.getString("profesores.grado");
             String licenciatura = resulSet.getString("licenciaturas.nombre");
             int idLicenciatura = resulSet.getInt("licenciaturas.idLicenciatura");
             int idPeriodo = resulSet.getInt("periodo.idPeriodo");
@@ -101,7 +102,7 @@ public class ReporteDAO {
             int alumnosAsistencia = resulSet.getInt("reportes.alumnosAsistencia");
             String observaciones = resulSet.getString("reportes.observaciones");
             String faltantes = resulSet.getString("reportes.faltantes");
-            Reporte reporte = new Reporte(idReporte, curp, profesor, licenciatura, idLicenciatura, idPeriodo, periodo, entrego, aTiempo, fecha, tipoTutoria, noSesiones, noCanalizaciones, alumnosAsignados, alumnosReportados, alumnosAsistencia, observaciones, faltantes);
+            Reporte reporte = new Reporte(idReporte, curp, profesor,grado, licenciatura, idLicenciatura, idPeriodo, periodo, entrego, aTiempo, fecha, tipoTutoria, noSesiones, noCanalizaciones, alumnosAsignados, alumnosReportados, alumnosAsistencia, observaciones, faltantes);
             listaReportes.add(reporte);
         }
         con.desconectar();
@@ -121,7 +122,7 @@ public class ReporteDAO {
     public Reporte obtenerReporteById(int id) throws SQLException {
         Reporte reporte = null;
 
-        String sql = "SELECT profesores.nombre, periodo.idPeriodo, periodo.periodo, licenciaturas.idLicenciatura,"
+        String sql = "SELECT profesores.nombre,profesores.grado, periodo.idPeriodo, periodo.periodo, licenciaturas.idLicenciatura,"
                 + "licenciaturas.nombre,reportes.idReporte,reportes.curp, reportes.entrego,reportes.aTiempo,"
                 + "reportes.fecha,reportes.tipoTutoria,reportes.noSesiones,reportes.noCanalizaciones,"
                 + "reportes.alumnosAsignados,reportes.alumnosReportados,reportes.alumnosAsistencia,"
@@ -141,6 +142,7 @@ public class ReporteDAO {
                     res.getInt("reportes.idReporte"),
                     res.getString("reportes.curp"),
                     res.getString("profesores.nombre"),
+                    res.getString("profesores.grado"),
                     res.getString("licenciaturas.nombre"),
                     res.getInt("licenciaturas.idLicenciatura"),
                     res.getInt("periodo.idPeriodo"),
@@ -236,7 +238,7 @@ public class ReporteDAO {
     public List<Reporte> obtenerReportesByPeriodo(int Periodo) throws SQLException {
 
         List<Reporte> listaReportes = new ArrayList<Reporte>();
-        String sql = "SELECT profesores.nombre, periodo.idPeriodo, periodo.periodo, licenciaturas.idLicenciatura,"
+        String sql = "SELECT profesores.nombre,profesores.grado, periodo.idPeriodo, periodo.periodo, licenciaturas.idLicenciatura,"
                 + "licenciaturas.nombre, reportes.entrego,reportes.aTiempo,"
                 + "reportes.fecha,reportes.tipoTutoria,reportes.noSesiones,reportes.noCanalizaciones,"
                 + "reportes.alumnosAsignados,reportes.alumnosReportados,reportes.alumnosAsistencia,"
@@ -250,6 +252,7 @@ public class ReporteDAO {
 
         while (resulSet.next()) {
             String nombre = resulSet.getString("profesores.nombre");
+            String grado = resulSet.getString("profesores.grado");
             String Licenciatura = resulSet.getString("licenciaturas.nombre");
             String entrego = resulSet.getString("reportes.entrego");
             String aTiempo = resulSet.getString("reportes.aTiempo");
@@ -264,7 +267,7 @@ public class ReporteDAO {
             int alumnosAsistencia = resulSet.getInt("reportes.alumnosAsistencia");
             String observaciones = resulSet.getString("reportes.observaciones");
 
-            Reporte reporte = new Reporte(0, null, nombre, Licenciatura, 0, 0, periodo, entrego, aTiempo, fecha, tipoTutoria,
+            Reporte reporte = new Reporte(0, null, nombre,grado, Licenciatura, 0, 0, periodo, entrego, aTiempo, fecha, tipoTutoria,
                     noSesiones, noCanalizaciones, alumnosAsignados, alumnosReportados, alumnosAsistencia, observaciones, faltantes);
             listaReportes.add(reporte);
         }
