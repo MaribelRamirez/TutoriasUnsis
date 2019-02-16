@@ -56,10 +56,10 @@ pass varchar(50) not null,
 nivel int(1)
 );
 
-
 -- Drop table tutores;
 create table tutores(
 idTutorado int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+grupo varchar(10),
 matricula varchar(10) REFERENCES alumnos (matricula) ON DELETE CASCADE ON UPDATE CASCADE,
 curp  varchar(21) REFERENCES profesores (curp) ON DELETE CASCADE ON UPDATE CASCADE,
 idPeriodo int  REFERENCES periodo (idPeriodo) ON DELETE CASCADE ON UPDATE CASCADE,

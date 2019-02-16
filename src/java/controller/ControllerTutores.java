@@ -116,6 +116,7 @@ public class ControllerTutores extends HttpServlet {
         } else if (action.equalsIgnoreCase("add")) {
 
             String tipo = request.getParameter("tipo");
+            String grupo = request.getParameter("grupoN");
             if (tipo.equalsIgnoreCase("grupal")) {
 
                 int idGrupo = Integer.parseInt(request.getParameter("grupo"));
@@ -134,6 +135,7 @@ public class ControllerTutores extends HttpServlet {
                         tutor.setCurp(curp);
                         tutor.setPeriodo(idPeriodo);
                         tutor.setTipo(2);
+                        tutor.setGrupo(grupo);
                         if (0 != tutordao.comprobarRegistro(idPeriodo, ob.getMatricula())) {
                             tutordao.update(tutor);
                         } else {
@@ -157,6 +159,7 @@ public class ControllerTutores extends HttpServlet {
                 tutor.setCurp(curp);
                 tutor.setPeriodo(idPeriodo);
                 tutor.setTipo(1);
+                tutor.setGrupo(grupo);
                 try {
                     if (0 != tutordao.comprobarRegistro(idPeriodo, matricula)) {
                         tutordao.update(tutor);
