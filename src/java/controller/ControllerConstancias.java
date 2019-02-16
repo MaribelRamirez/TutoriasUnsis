@@ -191,11 +191,11 @@ public class ControllerConstancias extends HttpServlet {
                         Grupo grupo = ob_grupo.obtenerGrupobyProf(profCurp);
                         
                         AlumnoDAO obj_Read_Values = new AlumnoDAO();
-                        List<Alumno> list = obj_Read_Values.listarAlumnosTutoradosIndividual(profCurp);
+                        List<Alumno> list = obj_Read_Values.listarAlumnosTutoradosIndividual(profCurp,IdPeriodo);
                         Iterator<Alumno> it_list = list.iterator();
                         
                         AlumnoDAO obj_Read_Values2 = new AlumnoDAO();
-                        List<Alumno> list2 = obj_Read_Values2.listarAlumnosTutoradosGrupal(profCurp);
+                        List<Alumno> list2 = obj_Read_Values2.listarAlumnosTutoradosGrupal(profCurp, IdPeriodo);
                         Iterator<Alumno> it_list2 = list2.iterator();
                         
                         try {
@@ -244,13 +244,13 @@ public class ControllerConstancias extends HttpServlet {
                             
                             if (action.equalsIgnoreCase("individual")) {
                                 
-                                par2.add(new Phrase(" impartió Tutorías Académicas Individuales, en el periodo"+pdo.getPeriodo()
+                                par2.add(new Phrase(" impartió Tutorías Académicas Individuales, en el periodo "+pdo.getPeriodo()
                                         + ", a los siguientes alumnos:", text1));
                                 
                                 par2.add(new Phrase(Chunk.NEWLINE));
                                 
                             } else {
-                                par2.add(new Phrase(" impartió Tutorías Académicas Grupales, en el periodo oct2018-feb2019"
+                                par2.add(new Phrase(" impartió Tutorías Académicas Grupales, en el periodo "+pdo.getPeriodo()
                                         + ", al grupo " + grupo.getGrupo() + " conformado por los siguientes alumnos: ", text1));
                                 
                                 par2.add(new Phrase(Chunk.NEWLINE));

@@ -4,7 +4,8 @@
     Author     : Marifer
 --%>
 
-
+<%@page import="model.Periodo"%>
+<%@page import="dao.PeriodoDAO"%>
 <%@page import="model.Profesor"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
@@ -164,18 +165,42 @@
                             <div class="container">
                                 <br />
                                 <div class="row">
-                                    <div class='col-sm-4'>
+                                    <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
                                         <div class="form-group">
                                             <div id="filterDate2">
 
                                                 <!-- Datepicker as text field -->  
-                                                <label for="nombre">Elegir fecha para generar la constancia</label>
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <label for="nombre">Elegir periodo y fecha para generar la constancia</label>
+                                               
+
+                                                 <%  PeriodoDAO obj_Read_Values2 = new PeriodoDAO();
+                                                            List<Periodo> list2 = obj_Read_Values2.listarPeriodos();
+                                                            Iterator<Periodo> it_list2 = list2.iterator();
+
+                                                        %>
+<br>
+                                                        <div class = "form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                                            
+                                                            <select class="form-control " id="IdPeriodo" name="IdPeriodo">
+                                                              
+                                                                <%                    while (it_list2.hasNext()) {
+                                                                        Periodo ob = new Periodo();
+                                                                        ob = it_list2.next();
+                                                                %>
+                                                                <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
+
+                                                                <% }
+
+                                                                %>   
+                                                            </select>
+                                                            
+                                                        </div>
+                                                           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
                                                     <input name="datepicker" id="datepicker"  type="date" class="form-control" value="" />
-                                                </div>
-
+                                                </div>  
                                             </div>    
+                                                            
                                         </div>
                                     </div>
                                 </div>
