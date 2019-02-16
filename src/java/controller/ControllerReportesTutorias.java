@@ -33,6 +33,7 @@ import model.Licenciatura;
 import model.Periodo;
 import model.Profesor;
 import model.Reporte;
+import model.sql;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
 import org.apache.poi.hssf.util.HSSFColor;
@@ -604,8 +605,10 @@ public class ControllerReportesTutorias extends HttpServlet {
 
                 Profesor prf = null;
                 prf = profesordao.obtenerProfesorRegistroReporte(request.getParameter("prof"));
+ sql auto = new sql();
+                int idPeriodo = auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo") - 1;
 
-                int count = alumnodao.countAlumnosTutorados(request.getParameter("prof"));
+                int count = alumnodao.countAlumnosTutorados(request.getParameter("prof"),idPeriodo);
 
                 if (count == 0) {
                     out.print("<html>"

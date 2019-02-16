@@ -31,6 +31,7 @@ import model.Grupo;
 import model.Licenciatura;
 import model.Periodo;
 import model.Profesor;
+import model.sql;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
 import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
@@ -117,6 +118,8 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
             int cont2 = 0;
             int i = 0;
             int j = 0;
+sql auto = new sql();
+                int idPeriodo = auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo") - 1;
 
             while (it_list_lic.hasNext()) {
 
@@ -238,10 +241,10 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                     obG = it_listG.next();
 
                     AlumnoDAO objALum = new AlumnoDAO();
-                    List<Alumno> list2 = objALum.listarAlumnosTutoradosByCarrera(obG.getCurp(), ob_lic.getNombre());
+                    List<Alumno> list2 = objALum.listarAlumnosTutoradosByCarrera(obG.getCurp(), ob_lic.getNombre(),idPeriodo);
                     Iterator<Alumno> it_list2 = list2.iterator();
 
-                    List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_lic.getNombre());
+                    List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_lic.getNombre(),idPeriodo);
                     Iterator<Grupo> it_grupos = list_grupos.iterator();
 
                     if (list2.size() > 0) {
@@ -373,7 +376,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                     obI = it_listI.next();
 
                     AlumnoDAO objALum = new AlumnoDAO();
-                    List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(), ob_lic.getNombre());
+                    List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(), ob_lic.getNombre(),idPeriodo);
                     Iterator<Alumno> it_list2 = list2.iterator();
 
                     if (list2.size() > 0) {

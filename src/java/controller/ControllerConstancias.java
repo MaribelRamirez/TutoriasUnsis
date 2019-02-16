@@ -188,7 +188,7 @@ public class ControllerConstancias extends HttpServlet {
                         Profesor prof = obprof.obtenerProfesorBycurp(profCurp);
                         
                         GrupoDAO ob_grupo = new GrupoDAO();
-                        Grupo grupo = ob_grupo.obtenerGrupobyProf(profCurp);
+                        Grupo grupo = ob_grupo.obtenerGrupobyProf(profCurp,IdPeriodo);
                         
                         AlumnoDAO obj_Read_Values = new AlumnoDAO();
                         List<Alumno> list = obj_Read_Values.listarAlumnosTutoradosIndividual(profCurp,IdPeriodo);

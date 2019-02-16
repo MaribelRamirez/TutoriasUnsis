@@ -23,6 +23,7 @@ import model.Alumno;
 import model.Grupo;
 import model.Licenciatura;
 import model.Profesor;
+import model.sql;
 import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -90,6 +91,10 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
+        
+        sql auto = new sql();
+                int idPeriodo = auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo") - 1;
+
         Sheet sheet = null;
         Workbook book = new XSSFWorkbook();
         //poner negrita a la cabecera
@@ -304,7 +309,7 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                         } else {
                             GrupoDAO grup_read = new GrupoDAO();
                             Grupo grp = new Grupo();
-                            grp = grup_read.obtenerGrupobyProf(Obt.getCurp());
+                            grp = grup_read.obtenerGrupobyProf(Obt.getCurp(),idPeriodo);
                             cellT4 = rowT4.createCell(l);
                             cellT4.setCellValue(grp.getGrupo());
                             cellT4.setCellStyle(style2);
@@ -323,7 +328,7 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                         Licenciatura obj = new Licenciatura();
                         obj = it_list2.next();
 
-                        if (alum_read.countAlumnosTutoradosByCarrera(Obt.getCurp(), obj.getNombre()) == 0) {
+                        if (alum_read.countAlumnosTutoradosByCarrera(Obt.getCurp(), obj.getNombre(),idPeriodo) == 0) {
 
                             if (Obt.getEstatus() == "Inactivo" || Obt.getEstatus() == "Licencia" || Obt.getEstatus() == "Sabatico") {
                                 cellT4 = rowT4.createCell(l);
@@ -339,7 +344,7 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
 
                         } else {
                             cellT4 = rowT4.createCell(l);
-                            cellT4.setCellValue(alum_read.countAlumnosTutoradosByCarrera(Obt.getCurp(), obj.getNombre()));
+                            cellT4.setCellValue(alum_read.countAlumnosTutoradosByCarrera(Obt.getCurp(), obj.getNombre(),idPeriodo));
                             cellT4.setCellStyle(style2);
                             l++;
                         }
@@ -353,7 +358,7 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                     } else {
 
                         cellT4 = rowT4.createCell(l);
-                        cellT4.setCellValue(alum_read.countAlumnosTutorados(Obt.getCurp()));
+                        cellT4.setCellValue(alum_read.countAlumnosTutorados(Obt.getCurp(),idPeriodo));
                         cellT4.setCellStyle(style2);
                         l++;
                     }
@@ -418,13 +423,13 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                     System.out.println(objTut.getNombre());
 
                     cellT4 = rowT.createCell(l);
-                    cellT4.setCellValue(alum_read.countEstadistica(objTut.getIdLicenciatura(), objAlm.getIdLicenciatura()));
+                    cellT4.setCellValue(alum_read.countEstadistica(objTut.getIdLicenciatura(), objAlm.getIdLicenciatura(), idPeriodo));
                     cellT4.setCellStyle(style2);
                     l++;
                 }
 
                 cellT4 = rowT.createCell(l);
-                cellT4.setCellValue(alum_read.countEstadistica2(objTut.getIdLicenciatura()));
+                cellT4.setCellValue(alum_read.countEstadistica2(objTut.getIdLicenciatura(), idPeriodo));
                 cellT4.setCellStyle(style2);
 
             }
@@ -433,7 +438,7 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
             rowT = sheet.createRow(j);
 
             cellT4 = rowT.createCell(l);
-            cellT4.setCellValue(alum_read.countEstadistica3());
+            cellT4.setCellValue(alum_read.countEstadistica3(idPeriodo));
             cellT4.setCellStyle(style2);
             sheet.addMergedRegion(new CellRangeAddress(j, j, l - 4, l - 1));
             for (int k = 0; k < j; k++) {
