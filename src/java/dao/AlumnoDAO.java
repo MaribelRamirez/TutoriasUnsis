@@ -415,7 +415,6 @@ public int countEstadistica(int carreraT,int carreraA) {
                     " where matricula=?";
             con.conectar();
             connection = con.getJdbcConnection();
-            System.out.println("esta es la sql de actualizar alumnos: " + sql);
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                       
                 statement.setString(1, alumno.getNombre());
