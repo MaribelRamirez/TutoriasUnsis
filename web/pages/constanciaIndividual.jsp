@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="model.Periodo"%>
+<%@page import="dao.PeriodoDAO"%>
 <%@page import="model.Profesor"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
@@ -168,6 +170,29 @@
 
                                                     <input disable="true" name="datepicker" id="datepicker"  type="date" class="form-control" />
                                                 </div>
+<%
+                                                            PeriodoDAO obj_Read_Values2 = new PeriodoDAO();
+                                                            List<Periodo> list2 = obj_Read_Values2.listarPeriodos();
+                                                            Iterator<Periodo> it_list2 = list2.iterator();
+
+                                                        %>
+
+                                                        <div class = "form-group">
+                                                            <label>Periodos</label>	    
+
+                                                            <select class="form-control " id="IdPeriodo" name="IdPeriodo">
+                                                                <option value="todos">Todos</option>
+                                                                <%                    while (it_list2.hasNext()) {
+                                                                        Periodo ob = new Periodo();
+                                                                        ob = it_list2.next();
+                                                                %>
+                                                                <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
+
+                                                                <% }
+
+                                                                %>   
+                                                            </select>
+                                                        </div>
 
                                             </div>    
                                         </div>
