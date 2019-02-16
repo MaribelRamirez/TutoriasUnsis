@@ -36,6 +36,8 @@
         <script src="../resources/js/custom.js"></script>
         <script src="../resources/js/screenfull.js"></script>
 
+
+
         <script src="../resources/tablas/js/jquery-3.3.1.js"></script>  
         <script src="../resources/tablas/js/jquery.dataTables.min.js"></script>
         <script src="../resources/tablas/js/dataTables.bootstrap.min.js"></script> 
@@ -43,26 +45,21 @@
         <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
 
-
-
-        <script src="../resources/calendario/js/bootstrap.min.js"></script>
-        <script src="../resources/calendario/js/jquery-1.8.3.js"></script>
-
-        <link href="../resources/calendario/css/bootstrap-datepicker3.min.css" rel='stylesheet' type='text/css'/>
-        <script src="../resources/calendario/js/bootstrap-datepicker.min.js"></script>
-        <!--link href="../resources/calendario/css/bootstrap.min.css" rel="stylesheet" rel='stylesheet' type='text/css'/-->
-        <script type='text/javascript'>
-            $(function () {
-                $('.input-group.date').datepicker({
-                    calendarWeeks: true,
-                    todayHighlight: true,
-                    autoclose: true
-                }).datepicker("setDate", new Date());
-            });
-
-
-        </script>
         <script>
+            window.onload = function () {
+                var fecha = new Date(); //Fecha actual
+                var mes = fecha.getMonth() + 1; //obteniendo mes
+                var dia = fecha.getDate(); //obteniendo dia
+                var ano = fecha.getFullYear(); //obteniendo año
+                if (dia < 10)
+                    dia = '0' + dia; //agrega cero si el menor de 10
+                if (mes < 10)
+                    mes = '0' + mes //agrega cero si el menor de 10
+                document.getElementById('datepicker').value = ano + "-" + mes + "-" + dia;
+                
+            }
+
+
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
 
@@ -148,13 +145,6 @@
 
                     <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-
-
-
-
-
-
-
                         <%
                             ProfesorDAO obj_Read_Values = new ProfesorDAO();
                             List<Profesor> list = obj_Read_Values.tutorIndividual();
@@ -168,16 +158,15 @@
                             <div class="container">
                                 <br />
                                 <div class="row">
-                                    <div class='col-sm-3'>
+                                    <div class='col-sm-4'>
                                         <div class="form-group">
                                             <div id="filterDate2">
 
-                                                <!-- Datepicker as text field -->         
-                                                <div class="input-group date" data-date-format="dd-mm-yyyy">
-                                                    <input  required readonly="readonly" type="text" class="form-control" name="datepicker" id="datepicker" >
-                                                    <div class="input-group-addon" >
-                                                        <span class="glyphicon glyphicon-th"></span>
-                                                    </div>
+                                                <!-- Datepicker as text field -->  
+                                                <label for="nombre">Elegir fecha para generar la constancia</label>
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                                                    <input disable="true" name="datepicker" id="datepicker"  type="date" class="form-control" />
                                                 </div>
 
                                             </div>    

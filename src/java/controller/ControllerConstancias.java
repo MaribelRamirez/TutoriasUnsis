@@ -22,6 +22,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 import dao.AlumnoDAO;
 import dao.GrupoDAO;
 import dao.ProfesorDAO;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -106,11 +108,11 @@ public class ControllerConstancias extends HttpServlet {
         for (String fechas : bar) {
 
             if (j == 1) {
-                dia = fechas;
+                año = fechas;
             } else if (j == 2) {
                 mes = fechas;
             } else if (j == 3) {
-                año = fechas;
+                dia = fechas;
             }
             j++;
 
@@ -167,7 +169,7 @@ public class ControllerConstancias extends HttpServlet {
 
             response.setContentType("application/pdf");
             OutputStream outt = response.getOutputStream();
-            Document documento = new Document(PageSize.A4, 70, 70, 70, 70);
+            Document documento = new Document(PageSize.A4, 60, 60, 40, 40);
             PdfWriter.getInstance(documento, outt);
             documento.open();
             for (i = 1; i <= sizeList; i++) {
@@ -190,17 +192,19 @@ public class ControllerConstancias extends HttpServlet {
                     Iterator<Alumno> it_list2 = list2.iterator();
 
                     try {
+
                         Paragraph par1 = new Paragraph();
+
                         Image imagenes = Image.getInstance("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\web\\resources\\images\\escudo.png");
                         imagenes.setAlignment(Element.ALIGN_CENTER);
-                        imagenes.scaleToFit(100, 100);
+                        imagenes.scaleToFit(90, 90);
                         documento.add(imagenes);
                         par1.add(new Phrase(Chunk.NEWLINE));
 
                         //fuente del titulo
-                        Font fonttitulo = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLDITALIC, BaseColor.RED);
+                        Font fonttitulo = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLDITALIC, BaseColor.RED);
                         Font text1 = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
-                        Font text2 = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLDITALIC, BaseColor.BLACK);
+                        Font text2 = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLDITALIC, BaseColor.BLACK);
                         Font text3 = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLACK);
                         Font text4 = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.ITALIC, BaseColor.BLACK);
                         Font text5 = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.NORMAL, BaseColor.BLACK);
@@ -211,17 +215,22 @@ public class ControllerConstancias extends HttpServlet {
                         par1.add(new Phrase(Chunk.NEWLINE));
                         par1.add(new Phrase("A través de la Coordinación de Tutorías", text1));
                         par1.add(new Phrase(Chunk.NEWLINE));
-                        par1.add(new Phrase(Chunk.NEWLINE));
                         par1.add(new Phrase("HACE CONSTAR", text2));
                         par1.setAlignment(Element.ALIGN_CENTER);
                         par1.add(new Phrase(Chunk.NEWLINE));
                         //para hace salto de linea
                         par1.add(new Phrase(Chunk.NEWLINE));
-                        par1.add(new Phrase(Chunk.NEWLINE));
                         //agregar texto anterior al documento
                         documento.add(par1);
 
                         Paragraph par2 = new Paragraph();
+
+                        int tamaño = 0;
+                        if (action.equalsIgnoreCase("individual")) {
+                            tamaño = list.size();
+                        } else {
+                            tamaño = list2.size();
+                        }
 
                         par2.add(new Phrase("Que la Profesora de Tiempo Completo ", text1));
                         par2.add(new Phrase("" + prof.getNombre(), text3));
@@ -237,15 +246,13 @@ public class ControllerConstancias extends HttpServlet {
 
                         par2.setAlignment(Element.ALIGN_JUSTIFIED);
                         par2.add(new Phrase(Chunk.NEWLINE));
-                        par2.add(new Phrase(Chunk.NEWLINE));
+                        if (tamaño <= 16 && tamaño > 0) {
+                            par2.add(new Phrase(Chunk.NEWLINE));
+                            par2.add(new Phrase(Chunk.NEWLINE));
+                            par2.add(new Phrase(Chunk.NEWLINE));
 
-                        documento.add(par2);
-                        int tamaño = 0;
-                        if (action.equalsIgnoreCase("individual")) {
-                            tamaño = list.size();
-                        } else {
-                            tamaño = list2.size();
                         }
+                        documento.add(par2);
 
                         if ((tamaño <= 10) && (tamaño > 0)) {
                             PdfPTable tabla = new PdfPTable(2);
@@ -259,7 +266,9 @@ public class ControllerConstancias extends HttpServlet {
                             tabla.addCell(celda2);
                             int cont = 1;
                             if (action.equalsIgnoreCase("individual")) {
+
                                 while (it_list.hasNext()) {
+
                                     Alumno ob = new Alumno();
                                     ob = it_list.next();
                                     tabla.addCell("" + cont);
@@ -267,6 +276,7 @@ public class ControllerConstancias extends HttpServlet {
                                     cont++;
 
                                 }
+
                             } else {
                                 while (it_list2.hasNext()) {
                                     Alumno ob = new Alumno();
@@ -278,15 +288,16 @@ public class ControllerConstancias extends HttpServlet {
                                 }
                             }
                             documento.add(tabla);
+
                         } else {
                             PdfPTable tabla = new PdfPTable(4);
                             tabla.setWidthPercentage(100);
                             tabla.setWidths(new float[]{4, 46, 4, 46});
 
-                            PdfPCell celda1 = new PdfPCell(new Paragraph("N°", FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK)));
-                            PdfPCell celda2 = new PdfPCell(new Paragraph("Nombre", FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK)));
-                            PdfPCell celda3 = new PdfPCell(new Paragraph("N°", FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK)));
-                            PdfPCell celda4 = new PdfPCell(new Paragraph("Nombre", FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK)));
+                            PdfPCell celda1 = new PdfPCell(new Paragraph("N°", FontFactory.getFont("Arial", 10, Font.BOLD, BaseColor.BLACK)));
+                            PdfPCell celda2 = new PdfPCell(new Paragraph("Nombre", FontFactory.getFont("Arial", 10, Font.BOLD, BaseColor.BLACK)));
+                            PdfPCell celda3 = new PdfPCell(new Paragraph("N°", FontFactory.getFont("Arial", 10, Font.BOLD, BaseColor.BLACK)));
+                            PdfPCell celda4 = new PdfPCell(new Paragraph("Nombre", FontFactory.getFont("Arial", 10, Font.BOLD, BaseColor.BLACK)));
 
                             tabla.addCell(celda1);
                             tabla.addCell(celda2);
@@ -296,9 +307,12 @@ public class ControllerConstancias extends HttpServlet {
                             if (action.equalsIgnoreCase("individual")) {
                                 while (it_list.hasNext()) {
                                     Alumno ob = new Alumno();
+
                                     ob = it_list.next();
                                     tabla.addCell("" + cont);
-                                    tabla.addCell(ob.getNombre());
+                                    PdfPCell celda5 = new PdfPCell(new Paragraph(ob.getNombre(), FontFactory.getFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)));
+
+                                    tabla.addCell(celda5);
                                     cont++;
 
                                 }
@@ -307,7 +321,9 @@ public class ControllerConstancias extends HttpServlet {
                                     Alumno ob = new Alumno();
                                     ob = it_list2.next();
                                     tabla.addCell("" + cont);
-                                    tabla.addCell(ob.getNombre());
+                                    PdfPCell celda6 = new PdfPCell(new Paragraph(ob.getNombre(), FontFactory.getFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)));
+
+                                    tabla.addCell(celda6);
                                     cont++;
 
                                 }
@@ -318,6 +334,7 @@ public class ControllerConstancias extends HttpServlet {
                             }
                             documento.add(tabla);
                         }
+
                         Paragraph par3 = new Paragraph();
                         par3.add(new Phrase(Chunk.NEWLINE));
                         par3.add(new Phrase("Se extiende la presente, en la Ciudad de Miahuatlán de Porfirio Díaz, "
@@ -327,9 +344,16 @@ public class ControllerConstancias extends HttpServlet {
                         par3.add(new Phrase(Chunk.NEWLINE));
                         par3.add(new Phrase(Chunk.NEWLINE));
 
-                        par3.add(new Phrase(Chunk.NEWLINE));
-                        par3.add(new Phrase(Chunk.NEWLINE));
-                        par3.add(new Phrase(Chunk.NEWLINE));
+                        if (tamaño <= 16 && tamaño > 0) {
+                            par3.add(new Phrase(Chunk.NEWLINE));
+                            par3.add(new Phrase(Chunk.NEWLINE));
+                            par3.add(new Phrase(Chunk.NEWLINE));
+                            par3.add(new Phrase(Chunk.NEWLINE));
+                            par3.add(new Phrase(Chunk.NEWLINE));
+                            par3.add(new Phrase(Chunk.NEWLINE));
+                            par3.add(new Phrase(Chunk.NEWLINE));
+
+                        }
                         documento.add(par3);
                         Paragraph par4 = new Paragraph();
                         par4.add(new Phrase("ATENTAMENTE", text1));
@@ -338,7 +362,6 @@ public class ControllerConstancias extends HttpServlet {
                         par4.add(new Phrase(Chunk.NEWLINE));
                         par4.add(new Phrase("Iur rluaaia rsëedaa ", text4));
                         par4.add(new Phrase(Chunk.NEWLINE));
-                        par4.add(new Phrase(Chunk.NEWLINE));;
                         par4.add(new Phrase(Chunk.NEWLINE));
                         par4.add(new Phrase("LIC. YESENIA ROJAS ALCÁNTARA", text1));
                         par4.add(new Phrase(Chunk.NEWLINE));

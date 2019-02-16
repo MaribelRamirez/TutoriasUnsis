@@ -113,17 +113,20 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
             Sheet sheet = null;
             Row rowGeneral = null;
             Row rowGeneral1 = null;
-            int cont = 0, cont2 = 0;
+            int cont = 0;
+            int cont2 = 0;
             int i = 0;
             int j = 0;
+
             while (it_list_lic.hasNext()) {
+
                 j = 0;
                 Workbook book = new XSSFWorkbook();
                 Licenciatura ob_lic = new Licenciatura();
                 ob_lic = it_list_lic.next();
-
                 //creando y asignando nombre a la hoja de excel
                 sheet = book.createSheet("" + ob_lic.getNombre());
+                cont2 = 0;
                 //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
                 sheet.getPrintSetup().setLandscape(false);
                 //indicando el tamaño de la hoja
@@ -188,8 +191,8 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                 cell.setCellValue("");
                 j++;
 
-                sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 2));
-                sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 2));
+                sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 3));
+                sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 3));
                 Row titulo4 = sheet.createRow(j);
 
                 sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
@@ -242,6 +245,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                     Iterator<Grupo> it_grupos = list_grupos.iterator();
 
                     if (list2.size() > 0) {
+
                         //creando y asignando nombre a la hoja de excel
                         sheetx = book.createSheet("" + obG.getNombre());
                         //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
@@ -332,7 +336,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
 
                         }
                         cont = 0;
-                        cont2 = 0;
+
                         while (it_grupos.hasNext()) {
                             cont2++;
                             Grupo ob_grupo = new Grupo();
@@ -352,11 +356,13 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                             cell.setCellStyle(styleColumn);
                             cell.setCellValue(obG.getNombre());
                             j++;
+
                         }
+
                         i = i + 3;
 
                     }
-
+                    /**/
                 }
 
                 j = j + 3;
@@ -371,6 +377,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                     Iterator<Alumno> it_list2 = list2.iterator();
 
                     if (list2.size() > 0) {
+
                         sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
                         rowGeneral1 = sheet.createRow(j);
                         rowGeneral1.createCell(0).setCellValue("TUTORIAS INDIVIDUALES");
@@ -436,8 +443,8 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                         i = i + 3;
 
                     }
-
                 }
+
                 for (int k = 0; k < j; k++) {
                     sheet.autoSizeColumn((short) k);
 

@@ -473,21 +473,17 @@ public class ControllerReportesTutorias extends HttpServlet {
                     }
                 }
 
-                try {
-                    try (FileOutputStream elFichero
-                            = new FileOutputStream("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\" + "Registro de Reportes de Tutorías" + ".xlsx")) {
-                        for (int k = 0; k <= 15; k++) {
-                            sheet.autoSizeColumn((short) k);
+                FileOutputStream elFichero;
+                elFichero = new FileOutputStream("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\" + "Registro de Reportes de Tutorías" + ".xlsx");
+                for (int k = 0; k <= 15; k++) {
+                    sheet.autoSizeColumn((short) k);
 
-                        }
-
-                        book.write(elFichero);
-
-                        elFichero.close();
-
-                    }
-                } catch (IOException e) {
                 }
+
+                book.write(elFichero);
+
+                elFichero.close();
+
                 out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
@@ -516,6 +512,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                         + "</script>"
                         + "</body>\n"
                         + "</html>");
+
 
                 /// response.sendRedirect("pages/generarReportes.jsp");
             } catch (SQLException ex) {
