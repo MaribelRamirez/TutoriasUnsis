@@ -178,7 +178,7 @@
                                                             <label>Periodos</label>	    
 
                                                             <select class="form-control " id="IdPeriodo" name="IdPeriodo">
-                                                                <option value="todos">Todos</option>
+                                                               
                                                                 <%                                                                    while (it_list.hasNext()) {
                                                                         Periodo ob = new Periodo();
                                                                         ob = it_list.next();
@@ -215,17 +215,135 @@
 
 
                                 <li class="active">
+                                    <button type="button"  class=" fa fa-file-o btn btn-link" data-toggle="modal"  data-target="#ModalAsigTuto">Asignación de tutorias</button>
+
+
                                     <form id="formulario" action="../ControllerReporteAsignacionTutorias" method="post">
+                                        <input type="hidden" name = "action" value="reporte">
+                                        <!-- Modal --> <div class="modal" id="ModalAsigTuto" tabindex="-1" role="dialog"
+                                                            arialabelledby="exampleModalLabel" aria-hidden="true">   
+                                            <div class="modal-dialog" role="document">     
+                                                <div class="modal-content">      
+                                                    <div class="modal-header">     
+                                                        <h5 class="modal-title" id="exampleModalLabel">Selecciona el periodo del que 
+                                                            deseas generar el reporte</h5>      
 
-                                        <button type="submit"  class=" fa fa-file-o btn btn-link">Asignación de tutorias</button>
+                                                    </div>      
+                                                    <div class="modal-body">     
+
+
+                                                        <%
+                                                            PeriodoDAO obj_Read_Values2 = new PeriodoDAO();
+                                                            List<Periodo> list2 = obj_Read_Values2.listarPeriodos();
+                                                            Iterator<Periodo> it_list2 = list2.iterator();
+
+                                                        %>
+
+                                                        <div class = "form-group">
+                                                            <label>Periodos</label>	    
+
+                                                            <select class="form-control " id="IdPeriodo" name="IdPeriodo">
+                                                                
+                                                                <%                                                                  
+                                                                    while (it_list2.hasNext()) {
+                                                                        Periodo ob = new Periodo();
+                                                                        ob = it_list2.next();
+                                                                %>
+                                                                <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
+
+                                                                <% }
+
+                                                                %>   
+                                                            </select>
+                                                        </div>
+
+
+                                                    </div>     
+                                                    <div class="modal-footer"> 
+
+
+                                                        <button type="submit" class="btn btn-primary">Aceptar</button> 
+
+
+
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>   
+
+
+
+                                                    </div>   
+                                                </div>   
+                                            </div>
+                                        </div> 
+
                                     </form>
+
                                 </li>
-                                <li class="active">
+
+<li class="active">
+                                    <button type="button"  class=" fa fa-file-o btn btn-link" data-toggle="modal"  data-target="#ModalConAsig">Consentrado de asignaciones</button>
+
+
                                     <form id="formulario" action="../ControllerConcentradoAsignaciones" method="post">
+                                        <input type="hidden" name = "action" value="reporte">
+                                        <!-- Modal --> <div class="modal" id="ModalConAsig" tabindex="-1" role="dialog"
+                                                            arialabelledby="exampleModalLabel" aria-hidden="true">   
+                                            <div class="modal-dialog" role="document">     
+                                                <div class="modal-content">      
+                                                    <div class="modal-header">     
+                                                        <h5 class="modal-title" id="exampleModalLabel">Selecciona el periodo del que 
+                                                            deseas generar el reporte</h5>      
 
-                                        <button type="submit"  class=" fa fa-file-o btn btn-link">Concentrado de asignaciones</button>
+                                                    </div>      
+                                                    <div class="modal-body">     
+
+
+                                                        <%
+                                                            PeriodoDAO obj_Read_Values3 = new PeriodoDAO();
+                                                            List<Periodo> list3 = obj_Read_Values3.listarPeriodos();
+                                                            Iterator<Periodo> it_list3 = list3.iterator();
+
+                                                        %>
+
+                                                        <div class = "form-group">
+                                                            <label>Periodos</label>	    
+
+                                                            <select class="form-control " id="IdPeriodo" name="IdPeriodo">
+                                                                
+                                                                <%                                                                  
+                                                                    while (it_list3.hasNext()) {
+                                                                        Periodo ob = new Periodo();
+                                                                        ob = it_list3.next();
+                                                                %>
+                                                                <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
+
+                                                                <% }
+
+                                                                %>   
+                                                            </select>
+                                                        </div>
+
+
+                                                    </div>     
+                                                    <div class="modal-footer"> 
+
+
+                                                        <button type="submit" class="btn btn-primary">Aceptar</button> 
+
+
+
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>   
+
+
+
+                                                    </div>   
+                                                </div>   
+                                            </div>
+                                        </div> 
+
                                     </form>
+
                                 </li>
+                              
                             </ul>
                         </nav>
                                      
