@@ -137,7 +137,7 @@
                                 <div class="form-group">
                                     <label for="nomGrpp">Nombre del grupo</label>
 
-                                    <input  required class="form-control" id="grupo" name="grupo"  value="<c:out value="${grp.getGrupo()}"/>"/>
+                                    <input  required class="form-control" id="grupo" name="grupoN"  value="<c:out value="${grp.getGrupo()}"/>"/>
                                 </div>
 
 

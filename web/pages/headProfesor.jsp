@@ -36,7 +36,7 @@
                         
                         <form action="../login" method="get" onsubmit="return confirm('¿Realmente desea cerrar sesión?')">
 <!--                        <input type="hidden" name = "action" value="close">-->
-<button name="action" type="submit" value="close"> Cerrar sesion</button>
+<input type=image src="../resources/images/cerrarSesion.png" width="30" height="30">
                             <!--<input  name="action" type="submit" value="close" >--> 
                        
 

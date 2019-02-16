@@ -109,8 +109,8 @@ public class TutorDAO {
     public boolean insertar(Tutor tutor) throws SQLException {
 
         try {
-            String sql = "INSERT INTO tutores (idTutorado,matricula, curp, idPeriodo, tipo)"
-                    + " VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO tutores (idTutorado,matricula, curp, idPeriodo, tipo, grupo)"
+                    + " VALUES (?,?,?,?,?,?)";
             //System.out.println(profesor.getDescripcion());
             con.conectar();
             connection = con.getJdbcConnection();
@@ -120,6 +120,7 @@ public class TutorDAO {
             statement.setString(3, tutor.getCurp());
             statement.setInt(4,tutor.getPeriodo());
             statement.setInt(5,tutor.getTipo());
+            statement.setString(6,tutor.getGrupo());
 
             statement.executeUpdate();
             statement.close();
