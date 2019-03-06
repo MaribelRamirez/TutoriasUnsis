@@ -475,7 +475,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                 }
 
                 FileOutputStream elFichero;
-                elFichero = new FileOutputStream("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\" + "Registro de Reportes de Tutorías" + ".xlsx");
+                elFichero = new FileOutputStream("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\" + "Registro de Reportes de Tutorías-" +pdo.getPeriodo()+ ".xlsx");
                 for (int k = 0; k <= 15; k++) {
                     sheet.autoSizeColumn((short) k);
 

@@ -62,7 +62,7 @@ public class GrupoDAO {
     public Grupo obtenerGrupobyProf(String curp, int periodo) throws SQLException {
         Grupo grupo = null;
 
-        String sql ="select tutores.grupo from tutores inner join alumnos on tutores.matricula=alumnos.matricula  where tutores.tipo=2 and tutores.curp=? and tutores.idPeriodo=?";
+        String sql ="select distinct tutores.grupo from tutores inner join alumnos on tutores.matricula=alumnos.matricula  where tutores.tipo=2 and tutores.curp=? and tutores.idPeriodo=?";
         
         con.conectar();
         connection = con.getJdbcConnection();
@@ -158,7 +158,7 @@ statement.setInt(2, periodo);
         public List<Grupo> listarGruposTutorados(String curp,String carrera,int periodo) throws SQLException {
 
         List<Grupo> listaGrupos = new ArrayList<Grupo>();
-        String sql = "select  grupos.grupo  from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura where tutores.matricula=alumnos.matricula  and tutores.curp='"+curp+"' and tutores.tipo=2 and licenciaturas.nombre='"+carrera+"' group by(grupos.grupo) and tutores.idPeriodo='"+periodo+"';";
+        String sql = "select distinct grupos.grupo  from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura where tutores.matricula=alumnos.matricula  and tutores.curp='"+curp+"' and tutores.tipo=2 and licenciaturas.nombre='"+carrera+"' group by(grupos.grupo) and tutores.idPeriodo='"+periodo+"';";
          
         System.out.println("consulta"+sql);
         connection = con.conectar();

@@ -101,11 +101,11 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-
+int idPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
             //creando el libro de excel
             PeriodoDAO per = new PeriodoDAO();
             Periodo pdo;
-            pdo = per.obtenerPeriodoActual();
+            pdo = per.obtenerPeriodoById(idPeriodo);
 
             LicenciaturaDAO obj_Read_Values_lic = new LicenciaturaDAO();
             List<Licenciatura> list_lic = obj_Read_Values_lic.listarLicenciaturas();
@@ -118,9 +118,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
             int cont2 = 0;
             int i = 0;
             int j = 0;
-sql auto = new sql();
-                int idPeriodo = auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo") - 1;
-
+               
             while (it_list_lic.hasNext()) {
 
                 j = 0;
@@ -456,7 +454,7 @@ sql auto = new sql();
 
                 try {
                     try (FileOutputStream elFichero
-                            = new FileOutputStream("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\" + "Asignacion Tutorias " + ob_lic.getNombre() + ".xlsx")) {
+                            = new FileOutputStream("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\" + "Asignacion Tutorias " + ob_lic.getNombre() +"-"+pdo.getPeriodo()+ ".xlsx")) {
 
                         book.write(elFichero);
 
