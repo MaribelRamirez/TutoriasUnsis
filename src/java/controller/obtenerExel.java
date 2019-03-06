@@ -10,7 +10,10 @@ import dao.GrupoDAO;
 import dao.TutorDAO;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -26,6 +29,8 @@ import model.Grupo;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
 import model.Tutor;
 import model.sql;
 
@@ -40,6 +45,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Mine
  */
 @WebServlet(name = "obtenerExel", urlPatterns = {"/obtenerExel"})
+@MultipartConfig(maxFileSize = 16177215) 
 public class obtenerExel extends HttpServlet {
 
     public TutorDAO tutordao;
@@ -82,6 +88,40 @@ public class obtenerExel extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         PrintWriter out = response.getWriter();
+        
+        InputStream inFile = null;
+        
+        //Crea el archivo de destino
+        File destino = new File("C:\\alumnos\\asignaciones\\alumnos.xlsx");//ubicacion en el servidor
+        OutputStream outFile = new FileOutputStream(destino);
+        
+        try {
+            //Obtiene el archivo del request
+            Part filePart = request.getPart("archivosubido");
+            if (filePart.getSize() > 0) {//Si el archivo es valido  hace lo siguiente
+                System.out.println("nombre_" + filePart.getName());
+                System.out.println("tamaño-" + filePart.getSize());
+                System.out.println("tipo-" + filePart.getContentType());
+                inFile = filePart.getInputStream();//asigna el file part al inputStream
+            }
+        } catch (Exception ex) {
+            System.out.println("fichero: " + ex.getMessage());
+        }
+        
+        
+        //copia lo del inputStream al outputStream
+         try {
+                        byte[] buf = new byte[1024];
+                        int len;
+                        while ((len = inFile.read(buf)) > 0) {
+                                outFile.write(buf, 0, len);
+                        }
+
+                        inFile.close();
+                        outFile.close();
+                } catch (IOException ioe){
+                        ioe.printStackTrace();
+                }
 
 //        Liata para guardar error al insertar
         List<String> error = new ArrayList<String>();
@@ -90,7 +130,7 @@ public class obtenerExel extends HttpServlet {
         int grup = Integer.parseInt(request.getParameter("grupo"));
         System.err.println("este dato recibe " + archivoRecivido);
 
-        String rutaArchivo = "C:\\alumnos\\" + archivoRecivido;
+        String rutaArchivo = "C:\\alumnos\\asignaciones\\alumnos.xlsx";
         String hoja = "Hoja1";
 
         Alumno alumno = new Alumno();
