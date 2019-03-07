@@ -10,6 +10,7 @@ import dao.GrupoDAO;
 import dao.LicenciaturaDAO;
 import dao.PeriodoDAO;
 import dao.ProfesorDAO;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -453,9 +454,12 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                     
                 }
                 try {
-                    
-                    try (FileOutputStream elFichero
-                            = new FileOutputStream("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\" + "Concentrado_Asignaciones_" +pdo.getPeriodo()+ ".xlsx")) {
+                     File directorio=new File("C:\\TutoriasUnsis\\ConcentradoAsignacioines\\");
+                    directorio.mkdirs();
+                    try (
+                           
+                            FileOutputStream elFichero
+                            = new FileOutputStream("C:\\TutoriasUnsis\\ConcentradoAsignacioines\\" + "Concentrado_Asignaciones_" +pdo.getPeriodo()+ ".xlsx")) {
                         
                         book.write(elFichero);
                         

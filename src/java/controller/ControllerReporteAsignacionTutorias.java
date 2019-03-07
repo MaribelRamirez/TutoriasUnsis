@@ -10,17 +10,13 @@ import dao.GrupoDAO;
 import dao.LicenciaturaDAO;
 import dao.PeriodoDAO;
 import dao.ProfesorDAO;
-import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,10 +27,7 @@ import model.Grupo;
 import model.Licenciatura;
 import model.Periodo;
 import model.Profesor;
-import model.sql;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
-import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -453,13 +446,13 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                 }
 
                 try {
+                  
+                   File directorio=new File("C:\\TutoriasUnsis\\AsignacionesTutorias\\");
+                    directorio.mkdirs();
                     try (FileOutputStream elFichero
-                            = new FileOutputStream("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\" + "Asignacion Tutorias " + ob_lic.getNombre() + "-" + pdo.getPeriodo() + ".xlsx")) {
-
+                         = new FileOutputStream("C:\\TutoriasUnsis\\AsignacionesTutorias\\"+"Asignacion Tutorias " + ob_lic.getNombre() + "-" + pdo.getPeriodo() + ".xlsx")) {
                         book.write(elFichero);
-
                         elFichero.close();
-
                     }
                 } catch (IOException e) {
                 }
