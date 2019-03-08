@@ -5,6 +5,10 @@
 --%>
 
 
+<%@page import="java.io.FileReader"%>
+<%@page import="java.io.IOException"%>
+<%@page import="java.io.BufferedReader"%>
+<%@page import="java.io.File"%>
 <%@page import="model.Periodo"%>
 <%@page import="dao.PeriodoDAO"%>
 <%@page import="model.Profesor"%>
@@ -38,6 +42,14 @@
         <script src="../resources/js/custom.js"></script>
         <script src="../resources/js/screenfull.js"></script>
 
+        <script src="../resources/tablas/js/jquery-3.3.1.js"></script>  
+        <script src="../resources/tablas/js/jquery.dataTables.min.js"></script>
+        <script src="../resources/tablas/js/dataTables.bootstrap.min.js"></script> 
+        <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
+
+        <script src="../resources/alert/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../resources/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="../resources/alert/google.css">
 
         <script>
             $(function () {
@@ -124,13 +136,13 @@
                 <div class="blank">
 
 
-                    <div class="blank-page">
+                    <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 
 
 
 
-
+                        <h3>Generar Documentos</h3>
                         <nav class="nav-sidebar">
                             <ul class="nav tabs">
 
@@ -148,7 +160,7 @@
                                         <button type="submit"  class=" fa fa-file-o btn btn-link"> Constancia individual</button>
                                     </form>
                                 </li>
-                                
+
                                 <li class="active">
                                     <button type="button"  class=" fa fa-file-o btn btn-link" data-toggle="modal"  data-target="#exampleModal">Reportes de Tutorias</button>
 
@@ -178,7 +190,7 @@
                                                             <label>Periodos</label>	    
 
                                                             <select class="form-control " id="IdPeriodo" name="IdPeriodo">
-                                                               
+
                                                                 <%                                                                    while (it_list.hasNext()) {
                                                                         Periodo ob = new Periodo();
                                                                         ob = it_list.next();
@@ -232,8 +244,7 @@
                                                     <div class="modal-body">     
 
 
-                                                        <%
-                                                            PeriodoDAO obj_Read_Values2 = new PeriodoDAO();
+                                                        <%                                                            PeriodoDAO obj_Read_Values2 = new PeriodoDAO();
                                                             List<Periodo> list2 = obj_Read_Values2.listarPeriodos();
                                                             Iterator<Periodo> it_list2 = list2.iterator();
 
@@ -243,9 +254,8 @@
                                                             <label>Periodos</label>	    
 
                                                             <select class="form-control " id="IdPeriodo" name="IdPeriodo">
-                                                                
-                                                                <%                                                                  
-                                                                    while (it_list2.hasNext()) {
+
+                                                                <%                                                                    while (it_list2.hasNext()) {
                                                                         Periodo ob = new Periodo();
                                                                         ob = it_list2.next();
                                                                 %>
@@ -279,7 +289,7 @@
 
                                 </li>
 
-<li class="active">
+                                <li class="active">
                                     <button type="button"  class=" fa fa-file-o btn btn-link" data-toggle="modal"  data-target="#ModalConAsig">Consentrado de asignaciones</button>
 
 
@@ -297,8 +307,7 @@
                                                     <div class="modal-body">     
 
 
-                                                        <%
-                                                            PeriodoDAO obj_Read_Values3 = new PeriodoDAO();
+                                                        <%                                                            PeriodoDAO obj_Read_Values3 = new PeriodoDAO();
                                                             List<Periodo> list3 = obj_Read_Values3.listarPeriodos();
                                                             Iterator<Periodo> it_list3 = list3.iterator();
 
@@ -308,9 +317,8 @@
                                                             <label>Periodos</label>	    
 
                                                             <select class="form-control " id="IdPeriodo" name="IdPeriodo">
-                                                                
-                                                                <%                                                                  
-                                                                    while (it_list3.hasNext()) {
+
+                                                                <%                                                                    while (it_list3.hasNext()) {
                                                                         Periodo ob = new Periodo();
                                                                         ob = it_list3.next();
                                                                 %>
@@ -343,28 +351,28 @@
                                     </form>
 
                                 </li>
-                              
+
                             </ul>
                         </nav>
-                                     
+
                     </div>
+                    
+                  <jsp:include page="verArchivos.jsp" flush="true" />
+                  
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="copy">
+                    <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
                 </div>
 
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-        <div class="copy">
-            <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-        </div>
+
+                <!---->
+                <!--scrolling js-->
+                <script src="js/jquery.nicescroll.js"></script>
+                <script src="js/scripts.js"></script>
+                <!--//scrolling js-->
 
 
-        <!---->
-        <!--scrolling js-->
-        <script src="js/jquery.nicescroll.js"></script>
-        <script src="js/scripts.js"></script>
-        <!--//scrolling js-->
-
-
-    </body>
-</html>
+                </body>
+                </html>
 
