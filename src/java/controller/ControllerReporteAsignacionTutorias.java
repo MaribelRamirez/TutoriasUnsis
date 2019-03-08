@@ -447,10 +447,10 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
 
                 try {
                   
-                   File directorio=new File("C:\\TutoriasUnsis\\AsignacionesTutorias\\");
-                    directorio.mkdirs();
+                   File carpetas=new File("C:\\TutoriasUnsis\\Documentos\\");
+                    carpetas.mkdirs();
                     try (FileOutputStream elFichero
-                         = new FileOutputStream("C:\\TutoriasUnsis\\AsignacionesTutorias\\"+"Asignacion Tutorias " + ob_lic.getNombre() + "-" + pdo.getPeriodo() + ".xlsx")) {
+                         = new FileOutputStream("C:\\TutoriasUnsis\\Documentos\\"+"Asignacion_Tutorias " + ob_lic.getNombre() + "-" + pdo.getPeriodo() + ".xlsx")) {
                         book.write(elFichero);
                         elFichero.close();
                     }

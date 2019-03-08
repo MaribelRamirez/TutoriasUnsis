@@ -478,9 +478,9 @@ public class ControllerReportesTutorias extends HttpServlet {
                     sheet.autoSizeColumn((short) k);
 
                 }
-                File directorio=new File("C:\\TutoriasUnsis\\ReportesTutorias\\");
-                    directorio.mkdirs();
-                try (FileOutputStream elFichero = new FileOutputStream("C:\\TutoriasUnsis\\ReportesTutorias\\" + "Registro de Reportes de Tutorías-" +pdo.getPeriodo()+ ".xlsx")) {
+                File carpetas=new File("C:\\TutoriasUnsis\\Documentos\\");
+                    carpetas.mkdirs();
+                try (FileOutputStream elFichero = new FileOutputStream("C:\\TutoriasUnsis\\Documentos\\" + "Registro_de_Reportes_de_Tutorias-" +pdo.getPeriodo()+ ".xlsx")) {
                     book.write(elFichero);
                     elFichero.close();
                 }

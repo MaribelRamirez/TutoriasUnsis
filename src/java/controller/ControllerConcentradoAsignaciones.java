@@ -454,12 +454,12 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                     
                 }
                 try {
-                     File directorio=new File("C:\\TutoriasUnsis\\ConcentradoAsignacioines\\");
-                    directorio.mkdirs();
+                     File carpetas=new File("C:\\TutoriasUnsis\\Documentos\\");
+                    carpetas.mkdirs();
                     try (
                            
                             FileOutputStream elFichero
-                            = new FileOutputStream("C:\\TutoriasUnsis\\ConcentradoAsignacioines\\" + "Concentrado_Asignaciones_" +pdo.getPeriodo()+ ".xlsx")) {
+                            = new FileOutputStream("C:\\TutoriasUnsis\\Documentos\\" + "Concentrado_Asignaciones_" +pdo.getPeriodo()+ ".xlsx")) {
                         
                         book.write(elFichero);
                         
