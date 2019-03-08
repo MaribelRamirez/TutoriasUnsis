@@ -44,6 +44,10 @@
         <servlet-name>ControllerConcentradoAsignaciones</servlet-name>
         <servlet-class>controller.ControllerConcentradoAsignaciones</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControllerArchivos</servlet-name>
+        <servlet-class>controller.ControllerArchivos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllerAlumno</servlet-name>
         <url-pattern>/ControllerAlumno</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>ControllerConcentradoAsignaciones</servlet-name>
         <url-pattern>/ControllerConcentradoAsignaciones</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerArchivos</servlet-name>
+        <url-pattern>/ControllerArchivos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
