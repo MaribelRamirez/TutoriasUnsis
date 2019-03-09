@@ -94,7 +94,8 @@ public class obtenerExel extends HttpServlet {
         //Crea el archivo de destino
         File destino = new File("C:\\alumnos\\asignaciones\\alumnos.xlsx");//ubicacion en el servidor
         OutputStream outFile = new FileOutputStream(destino);
-        
+        // probando obtener ruta absoluta
+        System.err.println("esta es la ruta ...."+ getServletContext().getRealPath("/pages/cargarArchivos.jsp"));
         try {
             //Obtiene el archivo del request
             Part filePart = request.getPart("archivosubido");
