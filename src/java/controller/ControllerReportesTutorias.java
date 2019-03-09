@@ -10,6 +10,7 @@ import dao.LicenciaturaDAO;
 import dao.PeriodoDAO;
 import dao.ProfesorDAO;
 import dao.ReporteDAO;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -473,17 +474,18 @@ public class ControllerReportesTutorias extends HttpServlet {
 
                     }
                 }
-
-                FileOutputStream elFichero;
-                elFichero = new FileOutputStream("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\" + "Registro de Reportes de Tutorías-" +pdo.getPeriodo()+ ".xlsx");
-                for (int k = 0; k <= 15; k++) {
+  for (int k = 0; k <= 15; k++) {
                     sheet.autoSizeColumn((short) k);
 
                 }
-
-                book.write(elFichero);
-
-                elFichero.close();
+     String rutRel=getServletConfig().getServletContext().getRealPath("/Documentos");
+               
+               // File carpetas=new File("C:\\TutoriasUnsis\\Documentos\\");
+                 //   carpetas.mkdirs();
+                try (FileOutputStream elFichero = new FileOutputStream(rutRel + "/Registro_de_Reportes_de_Tutorias-" +pdo.getPeriodo()+ ".xlsx")) {
+                    book.write(elFichero);
+                    elFichero.close();
+                }
 
                 out.print("<html>"
                         + "<head>"

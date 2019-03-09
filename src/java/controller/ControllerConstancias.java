@@ -5,6 +5,7 @@
  */
 package controller;
 
+import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -28,6 +29,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
@@ -96,7 +99,7 @@ public class ControllerConstancias extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
+        
             processRequest(request, response);
             String action = request.getParameter("action");
             
@@ -110,8 +113,39 @@ public class ControllerConstancias extends HttpServlet {
             String nomMes = null;
             int IdPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
             PeriodoDAO per = new PeriodoDAO();
-            Periodo pdo;
+            Periodo pdo = null;
+        try {
             pdo = per.obtenerPeriodoById(IdPeriodo);
+        } catch (SQLException ex) {
+            out.print("<html>"
+                                + "<head>"
+                                + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                                + "</head>"
+                                + "<body >"
+                                + "<script>\n"
+                                + "function EventoAlert(){\n"
+                                + "  swal({\n"
+                                + "title: \"Aviso!!\",\n"
+                                + "text: \"Error al obtener el periodo \",\n"
+                                + "type: \"warning\",    \n"
+                                + "confirmButtonColor: \"#DD6B55\",\n"
+                                + "confirmButtonText: \"Aceptar\",\n"
+                                + "closeOnConfirm: false,\n"
+                                + "},\n"
+                                + "\n"
+                                + "function(isConfirm){\n"
+                                + "if (isConfirm) {\n"
+                                + "window.location='pages/generarReportes.jsp'   \n"
+                                + "} \n"
+                                + "});\n"
+                                + "}\n"
+                                + "EventoAlert();\n"
+                                + "</script>"
+                                + "</body>\n"
+                                + "</html>");
+        }
             
             for (String fechas : bar) {
                 
@@ -170,35 +204,67 @@ public class ControllerConstancias extends HttpServlet {
             
             int i = 1;
             
-            try {
+            
                 forward = edit;
                 int sizeList = Integer.parseInt(request.getParameter("sizeList"));
                 
                 response.setContentType("application/pdf");
                 OutputStream outt = response.getOutputStream();
                 Document documento = new Document(PageSize.A4, 60, 60, 40, 40);
-                PdfWriter.getInstance(documento, outt);
+        try {
+            PdfWriter.getInstance(documento, outt);
+        } catch (DocumentException ex) {
+            out.print("<html>"
+                                + "<head>"
+                                + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                                + "</head>"
+                                + "<body >"
+                                + "<script>\n"
+                                + "function EventoAlert(){\n"
+                                + "  swal({\n"
+                                + "title: \"Aviso!!\",\n"
+                                + "text: \"Error al crear el documento \",\n"
+                                + "type: \"warning\",    \n"
+                                + "confirmButtonColor: \"#DD6B55\",\n"
+                                + "confirmButtonText: \"Aceptar\",\n"
+                                + "closeOnConfirm: false,\n"
+                                + "},\n"
+                                + "\n"
+                                + "function(isConfirm){\n"
+                                + "if (isConfirm) {\n"
+                                + "window.location='pages/generarReportes.jsp'   \n"
+                                + "} \n"
+                                + "});\n"
+                                + "}\n"
+                                + "EventoAlert();\n"
+                                + "</script>"
+                                + "</body>\n"
+                                + "</html>");
+        }
                 documento.open();
                 for (i = 1; i <= sizeList; i++) {
                     String profCurp = request.getParameter("prof".concat(Integer.toString(i)));
                     
                     if (profCurp != null) {
                         
-                        ProfesorDAO obprof = new ProfesorDAO();
-                        Profesor prof = obprof.obtenerProfesorBycurp(profCurp);
-                        
-                        GrupoDAO ob_grupo = new GrupoDAO();
-                        Grupo grupo = ob_grupo.obtenerGrupobyProf(profCurp,IdPeriodo);
-                        
-                        AlumnoDAO obj_Read_Values = new AlumnoDAO();
-                        List<Alumno> list = obj_Read_Values.listarAlumnosTutoradosIndividual(profCurp,IdPeriodo);
-                        Iterator<Alumno> it_list = list.iterator();
-                        
-                        AlumnoDAO obj_Read_Values2 = new AlumnoDAO();
-                        List<Alumno> list2 = obj_Read_Values2.listarAlumnosTutoradosGrupal(profCurp, IdPeriodo);
-                        Iterator<Alumno> it_list2 = list2.iterator();
-                        
                         try {
+                            ProfesorDAO obprof = new ProfesorDAO();
+                            Profesor prof = obprof.obtenerProfesorBycurp(profCurp);
+                            
+                            GrupoDAO ob_grupo = new GrupoDAO();
+                            Grupo grupo = ob_grupo.obtenerGrupobyProf(profCurp,IdPeriodo);
+                            
+                            AlumnoDAO obj_Read_Values = new AlumnoDAO();
+                            List<Alumno> list = obj_Read_Values.listarAlumnosTutoradosIndividual(profCurp,IdPeriodo);
+                            Iterator<Alumno> it_list = list.iterator();
+                            
+                            AlumnoDAO obj_Read_Values2 = new AlumnoDAO();
+                            List<Alumno> list2 = obj_Read_Values2.listarAlumnosTutoradosGrupal(profCurp, IdPeriodo);
+                            Iterator<Alumno> it_list2 = list2.iterator();
+                            
+                            
                             
                             Paragraph par1 = new Paragraph();
                             
@@ -376,25 +442,52 @@ public class ControllerConstancias extends HttpServlet {
                             par4.setAlignment(Element.ALIGN_CENTER);
                             documento.add(par4);
                             documento.newPage();
-                        } catch (Exception e) {
+                        } catch (SQLException ex) {
+                            out.print("<html>"
+                                + "<head>"
+                                + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
+                                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
+                                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
+                                + "</head>"
+                                + "<body >"
+                                + "<script>\n"
+                                + "function EventoAlert(){\n"
+                                + "  swal({\n"
+                                + "title: \"Aviso!!\",\n"
+                                + "text: \"Error al obtener los datos del profesor \",\n"
+                                + "type: \"warning\",    \n"
+                                + "confirmButtonColor: \"#DD6B55\",\n"
+                                + "confirmButtonText: \"Aceptar\",\n"
+                                + "closeOnConfirm: false,\n"
+                                + "},\n"
+                                + "\n"
+                                + "function(isConfirm){\n"
+                                + "if (isConfirm) {\n"
+                                + "window.location='pages/generarReportes.jsp'   \n"
+                                + "} \n"
+                                + "});\n"
+                                + "}\n"
+                                + "EventoAlert();\n"
+                                + "</script>"
+                                + "</body>\n"
+                                + "</html>");
+                        } catch (BadElementException ex) {
+                            Logger.getLogger(ControllerConstancias.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (MalformedURLException ex) {
+                            Logger.getLogger(ControllerConstancias.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (DocumentException ex) {
+                            Logger.getLogger(ControllerConstancias.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                       
                     }
                     
                 }
 
                 documento.close();
-                
-            } catch (NumberFormatException e) {
-                System.out.println("Error en servlet: " + e);
-            } catch (SQLException ex) {
-                Logger.getLogger(ControllerConstancias.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (DocumentException ex) {
-                Logger.getLogger(ControllerConstancias.class.getName()).log(Level.SEVERE, null, ex);
-            }
+               
+            
 
-        } catch (SQLException ex) {
-            Logger.getLogger(ControllerConstancias.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
 
     }
 

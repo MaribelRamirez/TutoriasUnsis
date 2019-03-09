@@ -26,7 +26,9 @@ public class ConnectionClass {
     public ConnectionClass() {
         driver = "com.mysql.jdbc.Driver";
         url = "jdbc:mysql://localhost:3306/tutoriasunsis?autoReconnect=true&useSSL=false";
-       // url = "jdbc:mysql://localhost:3306/tutoriasUnsis";
+       //url = "jdbc:mysql://localhost:3306/tutoriasUnsis";
+       //user = "root";
+      // pass = "Kingston12.";
         user = "root";
         pass = "root";
     }

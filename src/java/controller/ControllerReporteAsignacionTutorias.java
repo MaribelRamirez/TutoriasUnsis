@@ -10,17 +10,13 @@ import dao.GrupoDAO;
 import dao.LicenciaturaDAO;
 import dao.PeriodoDAO;
 import dao.ProfesorDAO;
-import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,10 +27,7 @@ import model.Grupo;
 import model.Licenciatura;
 import model.Periodo;
 import model.Profesor;
-import model.sql;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
-import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -101,7 +94,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-int idPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
+            int idPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
             //creando el libro de excel
             PeriodoDAO per = new PeriodoDAO();
             Periodo pdo;
@@ -118,7 +111,7 @@ int idPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
             int cont2 = 0;
             int i = 0;
             int j = 0;
-               
+
             while (it_list_lic.hasNext()) {
 
                 j = 0;
@@ -208,10 +201,10 @@ int idPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
 
                 j++;
 
-                List<Profesor> listG = obj_Read_Values.tutorGrupal();
+                List<Profesor> listG = obj_Read_Values.tutorGrupal(idPeriodo);
                 Iterator<Profesor> it_listG = listG.iterator();
 
-                List<Profesor> listI = obj_Read_Values.tutorIndividual();
+                List<Profesor> listI = obj_Read_Values.tutorIndividual(idPeriodo);
                 Iterator<Profesor> it_listI = listI.iterator();
 
                 rowGeneral = sheet.createRow(j);
@@ -239,16 +232,16 @@ int idPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
                     obG = it_listG.next();
 
                     AlumnoDAO objALum = new AlumnoDAO();
-                    List<Alumno> list2 = objALum.listarAlumnosTutoradosByCarrera(obG.getCurp(), ob_lic.getNombre(),idPeriodo);
+                    List<Alumno> list2 = objALum.listarAlumnosTutoradosByCarrera(obG.getCurp(), ob_lic.getNombre(), idPeriodo);
                     Iterator<Alumno> it_list2 = list2.iterator();
 
-                    List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_lic.getNombre(),idPeriodo);
+                    List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_lic.getNombre(), idPeriodo);
                     Iterator<Grupo> it_grupos = list_grupos.iterator();
 
                     if (list2.size() > 0) {
 
                         //creando y asignando nombre a la hoja de excel
-                        sheetx = book.createSheet(obG.getGrado()+" "+ obG.getNombre());
+                        sheetx = book.createSheet(obG.getGrado() + " " + obG.getNombre());
                         //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
                         sheetx.getPrintSetup().setLandscape(false);
                         //indicando el tamaño de la hoja
@@ -264,7 +257,7 @@ int idPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
                         sheetx.addMergedRegion(new CellRangeAddress(i, i, 0, 4));
 
                         cell = row1.createCell(0);
-                        cell.setCellValue(obG.getGrado()+" "+ obG.getNombre());
+                        cell.setCellValue(obG.getGrado() + " " + obG.getNombre());
                         cell.setCellStyle(styleColumn);
 
                         cell = row1.createCell(1);
@@ -355,7 +348,7 @@ int idPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
 
                             cell = rowGeneral1.createCell(2);
                             cell.setCellStyle(styleColumn);
-                            cell.setCellValue(obG.getGrado()+" "+ obG.getNombre());
+                            cell.setCellValue(obG.getGrado() + " " + obG.getNombre());
                             j++;
 
                         }
@@ -374,14 +367,14 @@ int idPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
                     obI = it_listI.next();
 
                     AlumnoDAO objALum = new AlumnoDAO();
-                    List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(), ob_lic.getNombre(),idPeriodo);
+                    List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(), ob_lic.getNombre(), idPeriodo);
                     Iterator<Alumno> it_list2 = list2.iterator();
 
                     if (list2.size() > 0) {
 
                         sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
                         rowGeneral1 = sheet.createRow(j);
-                        
+
                         rowGeneral1.createCell(0).setCellValue("TUTORIAS INDIVIDUALES");
                         j++;
                         i++;
@@ -395,7 +388,7 @@ int idPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
 
                         sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
                         cell = rowGeneral1.createCell(0);
-                        cell.setCellValue(obI.getGrado()+" "+ obI.getNombre());
+                        cell.setCellValue(obI.getGrado() + " " + obI.getNombre());
                         cell.setCellStyle(styleColumn);
                         cell = rowGeneral1.createCell(1);
                         cell.setCellStyle(styleColumn);
@@ -453,13 +446,13 @@ int idPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
                 }
 
                 try {
+                  String rutRel=getServletConfig().getServletContext().getRealPath("/Documentos");
+                //   File carpetas=new File("C:\\TutoriasUnsis\\Documentos\\");
+                  //  carpetas.mkdirs();
                     try (FileOutputStream elFichero
-                            = new FileOutputStream("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\" + "Asignacion Tutorias " + ob_lic.getNombre() +"-"+pdo.getPeriodo()+ ".xlsx")) {
-
+                         = new FileOutputStream(rutRel+"/Asignacion_Tutorias " + ob_lic.getNombre() + "-" + pdo.getPeriodo() + ".xlsx")) {
                         book.write(elFichero);
-
                         elFichero.close();
-
                     }
                 } catch (IOException e) {
                 }
