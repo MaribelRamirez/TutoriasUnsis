@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 
 /**
  *
@@ -72,15 +73,18 @@ public class ControllerArchivos extends HttpServlet {
         String nombreArchivo = request.getParameter("nombre");
 
         if (action.equalsIgnoreCase("abrir")) {
-            String file;
-            file = new String("C:\\TutoriasUnsis\\Documentos\\" + nombreArchivo);
-            try {
-                Runtime.getRuntime().exec("cmd /c start" + file);
-            } catch (IOException e) {
-            }
+            //String file;
+               String rutRel=getServletConfig().getServletContext().getRealPath("/Documentos"+"\\" + nombreArchivo);
+              
+            File path =new File(rutRel);
+            Desktop.getDesktop().open(path);
+            //Runtime.getRuntime().exec("cmd /c start" + file);
         } else if (action.equalsIgnoreCase("eliminar")) {
+
             try {
-                File archivo = new File("C:\\TutoriasUnsis\\Documentos\\" + nombreArchivo);
+                   String rutRel=getServletConfig().getServletContext().getRealPath("/Documentos");
+               
+                File archivo = new File(rutRel+"\\" + nombreArchivo);
                 archivo.delete();
             } catch (Exception e) {
                 System.err.println("Error" + e);

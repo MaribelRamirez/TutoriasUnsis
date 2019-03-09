@@ -454,13 +454,15 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                     
                 }
                 try {
-                     File carpetas=new File("C:\\TutoriasUnsis\\Documentos\\");
-                    carpetas.mkdirs();
+                    String rutRel=getServletConfig().getServletContext().getRealPath("/Documentos");
+                    //System.out.println("ruta que se genero"+rutRel);
+                     //File carpetas=new File(rutRel);
+                    //carpetas.mkdirs();
                     try (
                            
                             FileOutputStream elFichero
-                            = new FileOutputStream("C:\\TutoriasUnsis\\Documentos\\" + "Concentrado_Asignaciones_" +pdo.getPeriodo()+ ".xlsx")) {
-                        
+                            = new FileOutputStream(rutRel + "/Concentrado_Asignaciones_" +pdo.getPeriodo()+ ".xlsx")) {
+                     
                         book.write(elFichero);
                         
                         elFichero.close();

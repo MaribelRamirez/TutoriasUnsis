@@ -18,12 +18,13 @@
             </thead>
 
             <tbody>
-                <%                                        File carpetas = new File("C:\\TutoriasUnsis\\Documentos\\");
-                    carpetas.mkdirs();
-                    String path = "C:\\TutoriasUnsis\\Documentos\\";
+                <%                        
+                       String rutRel=getServletConfig().getServletContext().getRealPath("/Documentos");
+               
+                   
+                    String path = rutRel+"\\";
                     File directorio = new File(path);
                     String[] ficheros = directorio.list();
-                    String line;
                     for (int i = 0; i < ficheros.length; i++) {
 
                 %>
