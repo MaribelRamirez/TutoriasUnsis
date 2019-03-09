@@ -351,7 +351,7 @@ public class ControllerReportesTutorias extends HttpServlet {
 
                         cell = row2.createCell(1);
                         cell.setCellStyle(style2);
-                        cell.setCellValue(ob_lic_rep2.getGrado() +" "+ob_lic_rep2.getProfesor());
+                        cell.setCellValue(ob_lic_rep2.getGrado() + " " + ob_lic_rep2.getProfesor());
 
                         cell = row2.createCell(2);
                         cell.setCellStyle(style2);
@@ -419,7 +419,7 @@ public class ControllerReportesTutorias extends HttpServlet {
 
                         cell = row2.createCell(1);
                         cell.setCellStyle(style2);
-                        cell.setCellValue(ob_lic_rep.getGrado() +" "+ ob_lic_rep.getProfesor());
+                        cell.setCellValue(ob_lic_rep.getGrado() + " " + ob_lic_rep.getProfesor());
 
                         cell = row2.createCell(2);
                         cell.setCellStyle(style2);
@@ -474,15 +474,12 @@ public class ControllerReportesTutorias extends HttpServlet {
 
                     }
                 }
-  for (int k = 0; k <= 15; k++) {
+                for (int k = 0; k <= 15; k++) {
                     sheet.autoSizeColumn((short) k);
 
                 }
-     String rutRel=getServletConfig().getServletContext().getRealPath("/Documentos");
-               
-               // File carpetas=new File("C:\\TutoriasUnsis\\Documentos\\");
-                 //   carpetas.mkdirs();
-                try (FileOutputStream elFichero = new FileOutputStream(rutRel + "/Registro_de_Reportes_de_Tutorias-" +pdo.getPeriodo()+ ".xlsx")) {
+                String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
+                try (FileOutputStream elFichero = new FileOutputStream(rutRel + "/Registro_de_Reportes_de_Tutorias-" + pdo.getPeriodo() + ".xlsx")) {
                     book.write(elFichero);
                     elFichero.close();
                 }
@@ -515,7 +512,6 @@ public class ControllerReportesTutorias extends HttpServlet {
                         + "</script>"
                         + "</body>\n"
                         + "</html>");
-
 
                 /// response.sendRedirect("pages/generarReportes.jsp");
             } catch (SQLException ex) {
@@ -607,10 +603,10 @@ public class ControllerReportesTutorias extends HttpServlet {
 
                 Profesor prf = null;
                 prf = profesordao.obtenerProfesorRegistroReporte(request.getParameter("prof"));
- sql auto = new sql();
+                sql auto = new sql();
                 int idPeriodo = auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo") - 1;
 
-                int count = alumnodao.countAlumnosTutorados(request.getParameter("prof"),idPeriodo);
+                int count = alumnodao.countAlumnosTutorados(request.getParameter("prof"), idPeriodo);
 
                 if (count == 0) {
                     out.print("<html>"
