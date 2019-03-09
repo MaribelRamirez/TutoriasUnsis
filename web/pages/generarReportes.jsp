@@ -150,14 +150,14 @@
 
                                     <form id="formulario" action="constanciaGrupal.jsp" method="post">
 
-                                        <button type="submit"  class=" fa fa-file-o btn btn-link">  Constancia grupal</button>
+                                        <button type="submit"  class=" fa fa-file-o btn btn-link">Constancia grupal</button>
                                     </form>
                                 </li>
                                 <li class="active">
 
                                     <form id="formulario" action="constanciaIndividual.jsp" method="post">
 
-                                        <button type="submit"  class=" fa fa-file-o btn btn-link"> Constancia individual</button>
+                                        <button type="submit"  class=" fa fa-file-o btn btn-link">Constancia individual</button>
                                     </form>
                                 </li>
 

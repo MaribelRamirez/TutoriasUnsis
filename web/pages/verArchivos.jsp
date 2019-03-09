@@ -29,7 +29,7 @@
                 <tr>
                     <td><%=ficheros[i]%></td>
                     <td>
-                       <a href="../Documentos/<%=ficheros[i]%>" target="_blank" type="application/vnd.ms-excel"> abrir </a>
+                       <a href="../resources/Documentos/<%=ficheros[i]%>" target="_blank" type="application/vnd.ms-excel"> abrir </a>
                     </td>
                     <td >
                         <form id="formularioElim" name="formularioElim" action="../ControllerArchivos" method="post" onsubmit="return confirm('¿Realmente desea eliminar el documento?')" >
