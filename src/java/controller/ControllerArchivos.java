@@ -72,19 +72,12 @@ public class ControllerArchivos extends HttpServlet {
         String action = request.getParameter("action");
         String nombreArchivo = request.getParameter("nombre");
 
-        if (action.equalsIgnoreCase("abrir")) {
-            //String file;
-               String rutRel=getServletConfig().getServletContext().getRealPath("/Documentos"+"\\" + nombreArchivo);
-              
-            File path =new File(rutRel);
-            Desktop.getDesktop().open(path);
-            //Runtime.getRuntime().exec("cmd /c start" + file);
-        } else if (action.equalsIgnoreCase("eliminar")) {
+       if (action.equalsIgnoreCase("eliminar")) {
 
             try {
-                   String rutRel=getServletConfig().getServletContext().getRealPath("/Documentos");
-               
-                File archivo = new File(rutRel+"\\" + nombreArchivo);
+                String rutRel = getServletConfig().getServletContext().getRealPath("/Documentos");
+
+                File archivo = new File(rutRel + "/" + nombreArchivo);
                 archivo.delete();
             } catch (Exception e) {
                 System.err.println("Error" + e);

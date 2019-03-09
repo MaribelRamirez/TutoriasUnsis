@@ -19,10 +19,8 @@
 
             <tbody>
                 <%                        
-                       String rutRel=getServletConfig().getServletContext().getRealPath("/Documentos");
-               
-                   
-                    String path = rutRel+"\\";
+                    String rutRel=getServletConfig().getServletContext().getRealPath("/Documentos");
+                    String path = rutRel+"/";
                     File directorio = new File(path);
                     String[] ficheros = directorio.list();
                     for (int i = 0; i < ficheros.length; i++) {
@@ -30,18 +28,8 @@
                 %>
                 <tr>
                     <td><%=ficheros[i]%></td>
-
-
-
-
                     <td>
-                        <form id="formularioAct" name="formularioAbr" action="../ControllerArchivos" method="post" onsubmit="return confirm('¿Realmente desea abrir el documento?')" >
-                            <input type="hidden" name = "nombre" id="id" value="<%=ficheros[i]%>">
-                            <input type="hidden" name = "action" id="action" value="abrir">
-                            <button type="submit"  class="btn btn-link">Abrir</button>
-                        </form>
-
-
+                       <a href="../Documentos/<%=ficheros[i]%>" target="_blank" type="application/vnd.ms-excel"> abrir </a>
                     </td>
                     <td >
                         <form id="formularioElim" name="formularioElim" action="../ControllerArchivos" method="post" onsubmit="return confirm('¿Realmente desea eliminar el documento?')" >
