@@ -150,7 +150,7 @@
             <div class="clearfix"> </div>
         </div>
         <div class="copy">
-            <p><img src="../resources/images/escudo.png" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+            <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
         </div>
         <!---->
         <!--scrolling js-->
