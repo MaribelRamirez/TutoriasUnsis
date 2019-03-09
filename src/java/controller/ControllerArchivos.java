@@ -75,7 +75,7 @@ public class ControllerArchivos extends HttpServlet {
        if (action.equalsIgnoreCase("eliminar")) {
 
             try {
-                String rutRel = getServletConfig().getServletContext().getRealPath("/Documentos");
+                String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
 
                 File archivo = new File(rutRel + "/" + nombreArchivo);
                 archivo.delete();

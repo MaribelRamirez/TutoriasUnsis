@@ -19,7 +19,7 @@
 
             <tbody>
                 <%                        
-                    String rutRel=getServletConfig().getServletContext().getRealPath("/Documentos");
+                    String rutRel=getServletConfig().getServletContext().getRealPath("/resources/Documentos");
                     String path = rutRel+"/";
                     File directorio = new File(path);
                     String[] ficheros = directorio.list();

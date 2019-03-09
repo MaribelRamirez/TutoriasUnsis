@@ -454,7 +454,7 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
 
                 }
                 try {
-                    String rutRel = getServletConfig().getServletContext().getRealPath("/Documentos");
+                    String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
                     try (
                             FileOutputStream elFichero
                             = new FileOutputStream(rutRel + "/Concentrado_Asignaciones_" + pdo.getPeriodo() + ".xlsx")) {

@@ -478,7 +478,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                     sheet.autoSizeColumn((short) k);
 
                 }
-                String rutRel = getServletConfig().getServletContext().getRealPath("/Documentos");
+                String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
                 try (FileOutputStream elFichero = new FileOutputStream(rutRel + "/Registro_de_Reportes_de_Tutorias-" + pdo.getPeriodo() + ".xlsx")) {
                     book.write(elFichero);
                     elFichero.close();
