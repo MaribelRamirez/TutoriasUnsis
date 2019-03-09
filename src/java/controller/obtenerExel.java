@@ -92,10 +92,11 @@ public class obtenerExel extends HttpServlet {
         InputStream inFile = null;
         
         //Crea el archivo de destino
-        File destino = new File("C:\\alumnos\\asignaciones\\alumnos.xlsx");//ubicacion en el servidor
+        System.err.println("esta es la ruta ...."+ getServletContext().getRealPath("/Documentos"));
+        File destino = new File(getServletContext().getRealPath("/Documentos")+"\\alumnos.xlsx");//ubicacion en el servidor
         OutputStream outFile = new FileOutputStream(destino);
         // probando obtener ruta absoluta
-        System.err.println("esta es la ruta ...."+ getServletContext().getRealPath("/pages/cargarArchivos.jsp"));
+        
         try {
             //Obtiene el archivo del request
             Part filePart = request.getPart("archivosubido");
@@ -127,11 +128,9 @@ public class obtenerExel extends HttpServlet {
 //        Liata para guardar error al insertar
         List<String> error = new ArrayList<String>();
 
-        String archivoRecivido = request.getParameter("archivosubido");
         int grup = Integer.parseInt(request.getParameter("grupo"));
-        System.err.println("este dato recibe " + archivoRecivido);
 
-        String rutaArchivo = "C:\\alumnos\\asignaciones\\alumnos.xlsx";
+        String rutaArchivo = getServletContext().getRealPath("/Documentos")+"\\alumnos.xlsx";
         String hoja = "Hoja1";
 
         Alumno alumno = new Alumno();
@@ -194,8 +193,8 @@ public class obtenerExel extends HttpServlet {
                             //Obtenemos el periodo actual
                             sql auto = new sql();
                             int idPeriodo = auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo") - 1;
-                            
-                            if (0 != tutordao.comprobarRegistro(idPeriodo, alumno.getMatricula())) {
+                            // Codigo para mantener el tutorado de los alumnos
+                            if (0 == tutordao.comprobarRegistro(idPeriodo, alumno.getMatricula())) {
 //                                tutordao.update(tutor);
                             } else {
                                 tutor=tutordao.tuturadoByMatricula(idPeriodo-1, alumno.getMatricula());

@@ -173,9 +173,11 @@ public class TutorDAO {
         try (ResultSet res = statement.executeQuery()) {
             if (res.next()) {
                 con.desconectar();
+                
                  return 1;
             }else{
                 con.desconectar();
+                System.err.println("Deveria regresar 000");
                 return 0;
             }
         
