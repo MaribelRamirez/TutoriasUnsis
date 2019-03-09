@@ -93,7 +93,7 @@ public class obtenerExel extends HttpServlet {
         
         //Crea el archivo de destino
         System.err.println("esta es la ruta ...."+ getServletContext().getRealPath("/Documentos"));
-        File destino = new File(getServletContext().getRealPath("/Documentos")+"\\alumnos.xlsx");//ubicacion en el servidor
+        File destino = new File(getServletContext().getRealPath("/Documentos")+"/alumnos.xlsx");//ubicacion en el servidor
         OutputStream outFile = new FileOutputStream(destino);
         // probando obtener ruta absoluta
         
@@ -130,7 +130,7 @@ public class obtenerExel extends HttpServlet {
 
         int grup = Integer.parseInt(request.getParameter("grupo"));
 
-        String rutaArchivo = getServletContext().getRealPath("/Documentos")+"\\alumnos.xlsx";
+        String rutaArchivo = getServletContext().getRealPath("/Documentos")+"/alumnos.xlsx";
         String hoja = "Hoja1";
 
         Alumno alumno = new Alumno();

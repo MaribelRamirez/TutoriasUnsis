@@ -123,7 +123,7 @@
                 <div class="blank">
                     <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h3 id="forms-example" class="">Datos del grupo</h3>
+                            <h3 id="forms-example" class="">Actualización de alumnos</h3>
 
                             <form method="post" action="../obtenerExel"  enctype="multipart/form-data" onsubmit="return confirm('Realmente desea guardar los datos')">
                                 <div class = "form-group">
