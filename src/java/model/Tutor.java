@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
 
-/**
- *
- * @author Marifer
- */
 public class Tutor {
 
     private int idTutorado;
@@ -54,8 +45,6 @@ public class Tutor {
         this.lic = lic;
     }
 
-    
-
     public String getAlumno() {
         return alumno;
     }
@@ -71,8 +60,6 @@ public class Tutor {
     public void setProfesor(String profesor) {
         this.profesor = profesor;
     }
-
-    
 
     public int getIdTutorado() {
         return idTutorado;
@@ -113,8 +100,5 @@ public class Tutor {
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
-
-    
-   
 
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import java.sql.Connection;
@@ -16,10 +11,6 @@ import java.util.List;
 import model.ConnectionClass;
 import model.Periodo;
 
-/**
- *
- * @author Marifer
- */
 public class PeriodoDAO {
 
     ConnectionClass con = new ConnectionClass();
@@ -56,23 +47,11 @@ public class PeriodoDAO {
         return listaPeriodos;
     }
 
-//    public void eliminar(int id) throws SQLException {
-//
-//        String sql = "DELETE FROM grupos WHERE idGrupo=?";
-//        con.conectar();
-//        connection = con.getJdbcConnection();
-//        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//        preparedStatement.setInt(1, id);
-//        preparedStatement.executeUpdate();
-//
-//    }
-
     public boolean insertar(Periodo periodo) throws SQLException {
-        
+
         try {
             String sql = "INSERT INTO periodo (idPeriodo,periodo, fechaInicio, fechaFin)"
                     + " VALUES (?,?,?,?)";
-            //System.out.println(profesor.getDescripcion());
             con.conectar();
             connection = con.getJdbcConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -91,27 +70,29 @@ public class PeriodoDAO {
         return false;
 
     }
-      public Periodo obtenerPeriodoById(int idPdo) throws SQLException {
+
+    public Periodo obtenerPeriodoById(int idPdo) throws SQLException {
         Periodo periodo = null;
 
         String sql = "SELECT * FROM periodo WHERE idPeriodo= ? ";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1,idPdo );
+        statement.setInt(1, idPdo);
         try (ResultSet res = statement.executeQuery()) {
             if (res.next()) {
                 periodo = new Periodo(res.getInt("idPeriodo"),
                         res.getString("periodo"),
                         res.getDate("fechaInicio"),
                         res.getDate("fechaFin"));
-                
+
             }
         }
         con.desconectar();
         return periodo;
     }
-            public Periodo obtenerPeriodoActual() throws SQLException {
+
+    public Periodo obtenerPeriodoActual() throws SQLException {
         Periodo periodo = null;
 
         String sql = "SELECT *FROM periodo where idPeriodo=(SELECT  max(idPeriodo) FROM periodo)";
@@ -124,13 +105,14 @@ public class PeriodoDAO {
                         res.getString("periodo"),
                         res.getDate("fechaInicio"),
                         res.getDate("fechaFin"));
-                
+
             }
         }
         con.desconectar();
         return periodo;
     }
-      public void updatePeriodo(Periodo periodo) {
+
+    public void updatePeriodo(Periodo periodo) {
         try {
             String sql = "update periodo set  periodo=? , fechaInicio=?, fechaFin=?"
                     + "where idPeriodo=?";

@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
 
-/**
- *
- * @author Marifer
- */
 public class Grupo {
 
     private int idGrupo;
@@ -32,8 +23,6 @@ public class Grupo {
         this.licenciatura = licenciatura;
     }
 
-    
-
     public String getPeriodo() {
         return periodo;
     }
@@ -50,7 +39,6 @@ public class Grupo {
         this.licenciatura = licenciatura;
     }
 
-    
     public int getIdGrupo() {
         return idGrupo;
     }
@@ -82,7 +70,5 @@ public class Grupo {
     public void setIdLicenciatura(int idLicenciatura) {
         this.idLicenciatura = idLicenciatura;
     }
-
-   
 
 }
