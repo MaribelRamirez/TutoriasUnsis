@@ -5,19 +5,13 @@
  */
 package controller;
 
-import java.awt.Desktop;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import static java.lang.System.out;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 
 /**
  *
@@ -72,7 +66,7 @@ public class ControllerArchivos extends HttpServlet {
         String action = request.getParameter("action");
         String nombreArchivo = request.getParameter("nombre");
 
-       if (action.equalsIgnoreCase("eliminar")) {
+        if (action.equalsIgnoreCase("eliminar")) {
 
             try {
                 String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
@@ -83,19 +77,17 @@ public class ControllerArchivos extends HttpServlet {
                 System.err.println("Error" + e);
             }
 
-        }else  if (action.equalsIgnoreCase("eliminarTodo")) 
-       
-       {
-           String rutRel=getServletConfig().getServletContext().getRealPath("/resources/Documentos");
-                    String path = rutRel+"/";
-                    File directorio = new File(path);
-                    String[] ficheros = directorio.list();
-                    for (int i = 0; i < ficheros.length; i++) {
-                    File archivo = new File(rutRel + "/" + ficheros[i]);
-                          archivo.delete();
-                    }
-       
-       }
+        } else if (action.equalsIgnoreCase("eliminarTodo")) {
+            String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
+            String path = rutRel + "/";
+            File directorio = new File(path);
+            String[] ficheros = directorio.list();
+            for (int i = 0; i < ficheros.length; i++) {
+                File archivo = new File(rutRel + "/" + ficheros[i]);
+                archivo.delete();
+            }
+
+        }
         response.sendRedirect("pages/generarReportes.jsp");
     }
 

@@ -10,7 +10,6 @@ import dao.GrupoDAO;
 import dao.LicenciaturaDAO;
 import dao.PeriodoDAO;
 import dao.ProfesorDAO;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -448,7 +447,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                 try {
                     String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
                     try (FileOutputStream elFichero
-                    = new FileOutputStream(rutRel + "/Asignacion_Tutorias " + ob_lic.getNombre() + "-" + pdo.getPeriodo() + ".xlsx")) {
+                            = new FileOutputStream(rutRel + "/Asignacion_Tutorias " + ob_lic.getNombre() + "-" + pdo.getPeriodo() + ".xlsx")) {
                         book.write(elFichero);
                         elFichero.close();
                     }
@@ -484,7 +483,6 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                     + "</script>"
                     + "</body>\n"
                     + "</html>");
-            ////response.sendRedirect("pages/generarReportes.jsp");
         } catch (SQLException ex) {
             out.print("<html>"
                     + "<head>"

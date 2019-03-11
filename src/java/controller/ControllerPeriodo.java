@@ -5,7 +5,6 @@
  */
 package controller;
 
-import dao.GrupoDAO;
 import dao.PeriodoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,8 +12,6 @@ import java.util.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -23,8 +20,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Grupo;
-import model.Licenciatura;
 import model.Periodo;
 
 /**
@@ -104,14 +99,6 @@ public class ControllerPeriodo extends HttpServlet {
             } catch (NumberFormatException | SQLException e) {
                 System.out.println("Error en servlet: " + e);
             }
-        } else if (action.equalsIgnoreCase("delete")) {
-//          int id = Integer.parseInt(request.getParameter("id"));
-//            try {
-//                periododao.;
-//                 response.sendRedirect("pages/ListarGrupos.jsp");
-//            } catch (SQLException ex) {
-//                Logger.getLogger(ControllerPeriodo.class.getName()).log(Level.SEVERE, null, ex);
-//            } 
         } else if (action.equalsIgnoreCase("add")) {
             String perio = request.getParameter("periodo");
             periodo.setPeriodo(perio);
@@ -181,9 +168,6 @@ public class ControllerPeriodo extends HttpServlet {
 
                 java.sql.Date sqlFeI = new java.sql.Date(fechaIni.getTime());
                 java.sql.Date sqlFeF = new java.sql.Date(fechaFin.getTime());
-
-                System.err.println("Estas son las fechas 1" + sqlFeI);
-                System.err.println("Estas son las fechas 2" + sqlFeF);
 
                 periodo.setIdPeriodo(id);
                 periodo.setPeriodo(perio);
