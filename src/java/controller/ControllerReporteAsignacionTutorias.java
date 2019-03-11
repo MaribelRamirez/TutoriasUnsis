@@ -200,10 +200,10 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
 
                 j++;
 
-                List<Profesor> listG = obj_Read_Values.tutorGrupal(idPeriodo);
+                List<Profesor> listG = obj_Read_Values.tutorGrupalbyPeriodo(idPeriodo);
                 Iterator<Profesor> it_listG = listG.iterator();
 
-                List<Profesor> listI = obj_Read_Values.tutorIndividual(idPeriodo);
+                List<Profesor> listI = obj_Read_Values.tutorIndividualbyPeriodo(idPeriodo);
                 Iterator<Profesor> it_listI = listI.iterator();
 
                 rowGeneral = sheet.createRow(j);
