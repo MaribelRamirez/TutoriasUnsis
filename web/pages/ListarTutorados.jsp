@@ -133,12 +133,8 @@
                             Iterator<Tutor> it_list = list.iterator();
                         %>
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
-
-
                             <thead>
-
                                 <tr>
-
                                     <th>Matricula</th>
                                     <th>Alumno</th>
                                     <th>Grupo</th>
@@ -146,9 +142,6 @@
                                     <th>Curp</th>
                                     <th>Tutor</th>
                                     <th>Tipo de tutoria</th>
-
-
-
                                 </tr>
                             </thead>
 
@@ -196,9 +189,6 @@
                                         </form>
                                     </td>
                                     <td></td>
-
-
-
                                 </tr>
                                 <% }%>
                             </tbody>
@@ -212,11 +202,8 @@
         <div class="copy">
             <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
         </div>
-        <!---->
-        <!--scrolling js-->
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
-        <!--//scrolling js-->
     </body>
 </html>
 

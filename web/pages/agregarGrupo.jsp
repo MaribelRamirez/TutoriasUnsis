@@ -174,13 +174,8 @@
                                         %>   
                                     </select>
                                 </div>
-
-
-
-
                             </div>
                             <button type="submit" class="bl btn btn-danger pull-right">Guardar</button>
-
                         </div>
                     </div>
                 </form>
@@ -193,11 +188,8 @@
 <div class="copy">
     <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
 </div>
-<!---->
-<!--scrolling js-->
 <script src="js/jquery.nicescroll.js"></script>
 <script src="js/scripts.js"></script>
-<!--//scrolling js-->
 </body>
 </html>
 

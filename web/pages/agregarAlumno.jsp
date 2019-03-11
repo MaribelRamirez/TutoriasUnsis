@@ -103,7 +103,6 @@
             if (sesion.getAttribute("user") != null && sesion.getAttribute("nivel") != null) {
                 usuario = sesion.getAttribute("user").toString();
                 nivel = sesion.getAttribute("nivel").toString();
-               
 
             } else {
                 out.print("<script>location.replace('/TutoriasUnsis');</script>");
@@ -113,8 +112,6 @@
         <jsp:include page="headAdmin.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
-
-                <!--banner-->	
                 <div class="banner">
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
@@ -195,11 +192,8 @@
 <div class="copy">
     <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
 </div>
-<!---->
-<!--scrolling js-->
 <script src="js/jquery.nicescroll.js"></script>
 <script src="js/scripts.js"></script>
-<!--//scrolling js-->
 </body>
 </html>
 

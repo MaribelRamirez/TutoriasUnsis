@@ -47,7 +47,7 @@
         <script src="../resources/alert/sweetalert.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../resources/alert/sweetalert.css">
         <link rel="stylesheet" type="text/css" href="../resources/alert/google.css">
-         
+
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -68,28 +68,28 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
-            
-            function Actualizar() {
-                swal({    
-                    title: "aviso!!",    
-                    text: "¿En verdad deseas actualizar el periodor?",    
-                    type: "warning",    
-                    showCancelButton: true,    
-                    confirmButtonColor: "#DD6B55",    
-                    confirmButtonText: "SI",    
-                    cancelButtonText: "NO",    
-                    closeOnConfirm: false,    
-                    closeOnCancel: false },   
 
-                    function(isConfirm){    
-                      if (isConfirm) {  
-                          document.getElementById('formularioAct').submit();
-                      } else {      
-                          window.location='ListarPeriodos.jsp';  
-                      }  
-                    });
-                  };
-          
+            function Actualizar() {
+                swal({
+                    title: "aviso!!",
+                    text: "¿En verdad deseas actualizar el periodor?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "SI",
+                    cancelButtonText: "NO",
+                    closeOnConfirm: false,
+                    closeOnCancel: false},
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                document.getElementById('formularioAct').submit();
+                            } else {
+                                window.location = 'ListarPeriodos.jsp';
+                            }
+                        });
+            }
+            ;
+
         </script>
 
         <style>
@@ -137,8 +137,6 @@
         <jsp:include page="headAdmin.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
-
-                <!--banner-->	
                 <div class="banner">
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
@@ -158,9 +156,7 @@
                             <a href="agregarPeriodo.jsp">
                                 <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo periodo</a>
                             <thead>
-
                                 <tr>
-
                                     <th>Periodo</th>
                                     <th>Fecha inicio</th>
                                     <th>Fecha fin</th>
@@ -183,20 +179,13 @@
                                         <form id="formularioAct" name="formularioAct" action="../ControllerPeriodo" method="post" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')"  >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdPeriodo()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
-                                             <button type="submitm "  class="btn btn-link center-block">Actualizar</button>
-                                            </form>
-                                           
-                                    
-
+                                            <button type="submitm "  class="btn btn-link center-block">Actualizar</button>
+                                        </form>   
                                     </td>
-
-
                                 </tr>
                                 <%
                                     }
                                 %>     
-
-
                             </tbody>
                         </table>
                     </div>
@@ -208,11 +197,8 @@
         <div class="copy">
             <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
         </div>
-        <!---->
-        <!--scrolling js-->
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
-        <!--//scrolling js-->
     </body>
 </html>
 

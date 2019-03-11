@@ -34,7 +34,7 @@
         <link href="../resources/css/custom.css" rel="stylesheet">
         <script src="../resources/js/custom.js"></script>
         <script src="../resources/js/screenfull.js"></script>
-        
+
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -103,8 +103,6 @@
         <jsp:include page="headAdmin.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
-
-                <!--banner-->	
                 <div class="banner">
                     <h2>
                         <a href="index.html">Home</a>
@@ -112,14 +110,7 @@
                         <span>Material de apoyo</span><br>
                     </h2>
                 </div>
-                <!--//banner-->
-                <!--faq-->
                 <div class="blank">
-
-                    
-                    
-                    
-                    
                     <div class="blank-page">
                         <%
                             PdfDAO emp = new PdfDAO();
@@ -138,13 +129,6 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <!--                                <tfoot>
-                                                                    <tr>
-                                                                        <td colspan="4">
-                                                                            <div id="paging"><ul><li><a href="#"><span>Previous</span></a></li><li><a href="#" class="active"><span>1</span></a></li><li><a href="#"><span>2</span></a></li><li><a href="#"><span>3</span></a></li><li><a href="#"><span>4</span></a></li><li><a href="#"><span>5</span></a></li><li><a href="#"><span>Next</span></a></li></ul>
-                                                                            </div>
-                                                                    </tr>
-                                                                </tfoot>-->
                                 <tbody>
                                     <%if (listar.size() > 0) {
                                             for (PdfVO listar2 : listar) {
@@ -178,20 +162,14 @@
                     </div>
                 </div>
 
-                <!--//faq-->
-                <!---->
-
             </div>
             <div class="clearfix"> </div>
         </div>
         <div class="copy">
             <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
         </div>
-        <!---->
-        <!--scrolling js-->
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
-        <!--//scrolling js-->
     </body>
 </html>
 

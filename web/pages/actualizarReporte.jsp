@@ -47,13 +47,13 @@
 
 
 
-        
-         <script src="resources/alert/sweetalert.min.js"></script>
+
+        <script src="resources/alert/sweetalert.min.js"></script>
         <link rel="stylesheet" type="text/css" href="resources/alert/sweetalert.css">
         <link rel="stylesheet" type="text/css" href="resources/alert/google.css">
-        
+
         <script type='text/javascript'>
-          
+
 
             function soloNumeros(e) {
                 key = e.keyCode || e.which;
@@ -95,28 +95,28 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
-            
-            
-            function Guardar() {
-                swal({    
-                    title: "aviso!!",    
-                    text: "¿En verdad deseas guardar los datos?",    
-                    type: "warning",    
-                    showCancelButton: true,    
-                    confirmButtonColor: "#DD6B55",    
-                    confirmButtonText: "SI",    
-                    cancelButtonText: "NO",    
-                    closeOnConfirm: false,    
-                    closeOnCancel: false },   
 
-                    function(isConfirm){    
-                      if (isConfirm) {  
-                          document.getElementById('formularioG').submit();
-                      } else {      
-                          window.location='pages/ListarReportes.jsp';  
-                      }  
-                    });
-                  };
+
+            function Guardar() {
+                swal({
+                    title: "aviso!!",
+                    text: "¿En verdad deseas guardar los datos?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "SI",
+                    cancelButtonText: "NO",
+                    closeOnConfirm: false,
+                    closeOnCancel: false},
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                document.getElementById('formularioG').submit();
+                            } else {
+                                window.location = 'pages/ListarReportes.jsp';
+                            }
+                        });
+            }
+            ;
         </script>
 
         <style>
@@ -167,8 +167,6 @@
         <jsp:include page="headAdminUpdate.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main ">
-
-                <!--banner-->	
                 <div class="banner">
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
@@ -177,15 +175,11 @@
                     </h2>
                 </div>
                 <div class="blank">
-
-                        <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                <form id="formularioG" name="formularioG"  action="ControllerReportesTutorias" method="post"  >
-                    <input type="hidden" name = "action" value="edit">
-                    <input type="hidden" name = "idRep" id="idRep" value="<c:out value="${rep.getIdReporte()}"/>"/>
-                    
-
+                    <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <form id="formularioG" name="formularioG"  action="ControllerReportesTutorias" method="post"  >
+                                <input type="hidden" name = "action" value="edit">
+                                <input type="hidden" name = "idRep" id="idRep" value="<c:out value="${rep.getIdReporte()}"/>"/>
 
                                 <div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                     <label for="nombre">Nombre completo del profesor</label>
@@ -197,8 +191,6 @@
                                     <input type="hidden" class="form-control" id="curp" name="curp" value="<c:out value="${rep.getCurp()}"/>"/>
                                     <input type="text" disabled="true" required class="form-control"  value="<c:out value="${rep.getCurp()}"/>"/>
                                 </div>
-
-
                                 <div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                     <label for="nombre">Licenciatura</label>
                                     <input type="hidden" name = "idLic" id="idLic" value="<c:out value="${rep.getIdLicenciatura()}"/>"/>
@@ -214,23 +206,20 @@
 
                                 <div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                     <label>Periodo</label>	    
-
                                     <select class="form-control " id="idPeriodo" name="idPeriodo">
 
                                         <%                                        while (it_list.hasNext()) {
                                                 Periodo ob = new Periodo();
                                                 ob = it_list.next();
-                                        %>
-                                       
+                                        %>                                       
                                         <c:set var="id" value="<%=ob.getIdPeriodo()%>"/>
-                                         <c:choose >
-                                             <c:when test="${ rep.getIdPeriodo()==id}">
+                                        <c:choose >
+                                            <c:when test="${ rep.getIdPeriodo()==id}">
                                                 <option  selected="selected"  value="<%=ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
-
                                             </c:when>
                                             <c:otherwise>
                                                 <option value="<%=ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
-                                             </c:otherwise>
+                                            </c:otherwise>
                                         </c:choose>
                                         <% }
 
@@ -252,23 +241,23 @@
                                     <input type="text" disabled="true" required class="form-control" value="<c:out value="${rep.getTipoTutoria()}"/>"/>
                                 </div>
 
-                                                 <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                             <label for="nombre">Fecha de entrega de reporte</label>
-                                             <input type="date" name="datepicker" id="datepicker" class="form-control"  value="<c:out value="${rep.getFecha()}"/>"/>
+                                <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <label for="nombre">Fecha de entrega de reporte</label>
+                                    <input type="date" name="datepicker" id="datepicker" class="form-control"  value="<c:out value="${rep.getFecha()}"/>"/>
 
-                                           </div>
-                       
-                                     
+                                </div>
+
+
 
                                 <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                     <label for="nombre">¿Entregó el reporte a tiempo?</label>
                                     <select class="form-control " id="EntT" name="EntT">
-                                      
-                                          <c:if test="${rep.getaTiempo()=='SI'}">
+
+                                        <c:if test="${rep.getaTiempo()=='SI'}">
                                             <option selected="selected" value="SI"> SI</option>
                                             <option value="NO">NO</option>
                                         </c:if>
-                                              
+
                                         <c:if test="${rep.getaTiempo()=='NO'}">
                                             <option selected="selected" value="NO"> NO</option>
                                             <option value="SI">SI</option>
@@ -279,12 +268,12 @@
                                 <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                     <label for="nombre">¿Entregó reporte?</label>
                                     <select class="form-control " id="EntRp" name="EntRp">
-                                        
-                                         <c:if test="${rep.getEntrego()=='SI'}">
+
+                                        <c:if test="${rep.getEntrego()=='SI'}">
                                             <option selected="selected" value="SI"> SI</option>
                                             <option value="NO">NO</option>
                                         </c:if>
-                                            
+
                                         <c:if test="${rep.getEntrego()=='NO'}">
                                             <option selected="selected" value="NO"> NO</option>
                                             <option value="SI">SI</option>
@@ -323,9 +312,9 @@
                                     <label for="nombre">Observaciones</label><br>
                                     <textarea class=estilotextarea4 cols="50" rows="5" id="obs" name="obs">${rep.getObservaciones()}</textarea>
                                 </div>
-                </form>
-                                 <button type="button" onclick="Guardar()" class="bl btn btn-danger pull-right">Guardar</button>
-                            </div> </div> </div> <br>
+                            </form>
+                            <button type="button" onclick="Guardar()" class="bl btn btn-danger pull-right">Guardar</button>
+                        </div> </div> </div> <br>
             </div>
         </div>
     </div>
@@ -334,11 +323,8 @@
 <div class="copy">
     <p><img src="resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
 </div>
-<!---->
-<!--scrolling js-->
 <script src="js/jquery.nicescroll.js"></script>
 <script src="js/scripts.js"></script>
-<!--//scrolling js-->
 </body>
 </html>
 

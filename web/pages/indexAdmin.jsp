@@ -44,7 +44,7 @@
         <script src="../resources/alert/sweetalert.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../resources/alert/sweetalert.css">
         <link rel="stylesheet" type="text/css" href="../resources/alert/google.css">
-                        
+
 
         <script>
             $(function () {
@@ -66,50 +66,50 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
-            
-            
+
+
             function Actualizar() {
-                swal({    
-                    title: "aviso!!",    
-                    text: "¿En verdad deseas actualizar al profesor?",    
-                    type: "warning",    
-                    showCancelButton: true,    
-                    confirmButtonColor: "#DD6B55",    
-                    confirmButtonText: "SI",    
-                    cancelButtonText: "NO",    
-                    closeOnConfirm: false,    
-                    closeOnCancel: false },   
+                swal({
+                    title: "aviso!!",
+                    text: "¿En verdad deseas actualizar al profesor?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "SI",
+                    cancelButtonText: "NO",
+                    closeOnConfirm: false,
+                    closeOnCancel: false},
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                document.getElementById('formularioAct').submit();
+                            } else {
+                                window.location = 'indexAdmin.jsp';
+                            }
+                        });
+            }
+            ;
 
-                    function(isConfirm){    
-                      if (isConfirm) {  
-                          document.getElementById('formularioAct').submit();
-                      } else {      
-                          window.location='indexAdmin.jsp';  
-                      }  
-                    });
-                  };
-          
-          
-           function Eliminar() {
-                swal({    
-                    title: "aviso!!",    
-                    text: "¿En verdad deseas eliminar al profesor?",    
-                    type: "warning",    
-                    showCancelButton: true,    
-                    confirmButtonColor: "#DD6B55",    
-                    confirmButtonText: "SI",    
-                    cancelButtonText: "NO",    
-                    closeOnConfirm: false,    
-                    closeOnCancel: false },   
 
-                    function(isConfirm){    
-                      if (isConfirm) {  
-                          document.getElementById('formularioElim').submit();
-                      } else {      
-                          window.location='indexAdmin.jsp';  
-                      }  
-                    });
-                  };
+            function Eliminar() {
+                swal({
+                    title: "aviso!!",
+                    text: "¿En verdad deseas eliminar al profesor?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "SI",
+                    cancelButtonText: "NO",
+                    closeOnConfirm: false,
+                    closeOnCancel: false},
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                document.getElementById('formularioElim').submit();
+                            } else {
+                                window.location = 'indexAdmin.jsp';
+                            }
+                        });
+            }
+            ;
         </script>
 
         <style>
@@ -156,8 +156,6 @@
         <jsp:include page="headAdmin.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
-
-                <!--banner-->	
                 <div class="banner">
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
@@ -166,8 +164,6 @@
                     </h2>
                 </div>
                 <div class="blank">
-
-
                     <div class="blank-page">
                         <%
                             ProfesorDAO obj_Read_Values = new ProfesorDAO();
@@ -177,7 +173,6 @@
                         <table id="example" class="table table-striped table-bordered " style="width:100%">
                             <a href="agregarProfesor.jsp">
                                 <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo maestro</a>
-
                             <thead>
                                 <tr>
                                     <th>Nombre</th></th> 
@@ -186,8 +181,6 @@
                                     <th>Licenciatura</th>
                                     <th>Editar</th>
                                     <th>Eliminar</th>
-
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -201,25 +194,20 @@
                                     <td><%=ob.getGrado()%></td>
                                     <td><%=ob.getEstatus()%></td>
                                     <td><%=ob.getLicenciatura()%></td>
-                                    <td>
-                                        
+                                    <td>                                        
                                         <form id="formularioAct" name="formularioAct" action="../ControllerProfesor" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')">
                                             <input type="hidden" name = "idprf" id="idprf" value="<%=ob.getIdProfesor()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
                                             <button type="submit" class="btn btn-link center-block ">Actualizar</button>
-                                        </form>
-                                        
+                                        </form>                                        
                                     </td>
                                     <td >
                                         <form id="formularioElim" name="formularioElim" action="../ControllerProfesor" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')">
                                             <input type="hidden" name = "idprf" id="idprf" value="<%=ob.getIdProfesor()%>">
                                             <input type="hidden" name = "action" id="action" value="delete">
                                             <button type="submit"  class="btn btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
-                                            </form>
-                                            
-                                   
+                                        </form>
                                     </td>
-
                                 </tr>
                                 <%
                                     }
@@ -238,11 +226,8 @@
         <div class="copy">
             <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
         </div>
-        <!---->
-        <!--scrolling js-->
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
-        <!--//scrolling js-->
     </body>
 </html>
 

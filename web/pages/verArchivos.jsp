@@ -7,16 +7,11 @@
                         </form>
     <nav class="nav-sidebar">
         <table id="example" class="table table-striped table-bordered" style="width:100%">
-   
-            <thead>
-
+               <thead>
                 <tr>
-
                     <th>Archivo</th>
                     <th>Abrir</th>
                     <th>Eliminar</th>
-
-
                 </tr>
             </thead>
 
@@ -27,7 +22,6 @@
                     File directorio = new File(path);
                     String[] ficheros = directorio.list();
                     for (int i = 0; i < ficheros.length; i++) {
-
                 %>
                 <tr>
                     <td><%=ficheros[i]%></td>
@@ -40,15 +34,9 @@
                             <input type="hidden" name = "action" id="action" value="eliminar">
                             <button type="submit"  class="btn btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40" /></button>
                         </form>
-
-
                     </td>
-
-
                 </tr>
-
                 <%
-
                     }
                 %>
             </tbody>

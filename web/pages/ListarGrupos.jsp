@@ -66,51 +66,51 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
-            
-            
-            
+
+
+
             function Actualizar() {
-                swal({    
-                    title: "aviso!!",    
-                    text: "¿En verdad deseas actualizar al grupo?",    
-                    type: "warning",    
-                    showCancelButton: true,    
-                    confirmButtonColor: "#DD6B55",    
-                    confirmButtonText: "SI",    
-                    cancelButtonText: "NO",    
-                    closeOnConfirm: false,    
-                    closeOnCancel: false },   
+                swal({
+                    title: "aviso!!",
+                    text: "¿En verdad deseas actualizar al grupo?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "SI",
+                    cancelButtonText: "NO",
+                    closeOnConfirm: false,
+                    closeOnCancel: false},
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                document.getElementById('formularioAct').submit();
+                            } else {
+                                window.location = 'ListarGrupos.jsp';
+                            }
+                        });
+            }
+            ;
 
-                    function(isConfirm){    
-                      if (isConfirm) {  
-                          document.getElementById('formularioAct').submit();
-                      } else {      
-                          window.location='ListarGrupos.jsp';  
-                      }  
-                    });
-                  };
-          
-          
-           function Eliminar() {
-                swal({    
-                    title: "aviso!!",    
-                    text: "¿En verdad deseas eliminar al grupo?",    
-                    type: "warning",    
-                    showCancelButton: true,    
-                    confirmButtonColor: "#DD6B55",    
-                    confirmButtonText: "SI",    
-                    cancelButtonText: "NO",    
-                    closeOnConfirm: false,    
-                    closeOnCancel: false },   
 
-                    function(isConfirm){    
-                      if (isConfirm) {  
-                          document.getElementById('formularioElim').submit();
-                      } else {      
-                          window.location='ListarGrupos.jsp';  
-                      }  
-                    });
-                  };
+            function Eliminar() {
+                swal({
+                    title: "aviso!!",
+                    text: "¿En verdad deseas eliminar al grupo?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "SI",
+                    cancelButtonText: "NO",
+                    closeOnConfirm: false,
+                    closeOnCancel: false},
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                document.getElementById('formularioElim').submit();
+                            } else {
+                                window.location = 'ListarGrupos.jsp';
+                            }
+                        });
+            }
+            ;
         </script>
 
         <style>
@@ -149,7 +149,6 @@
             if (sesion.getAttribute("user") != null && sesion.getAttribute("nivel") != null) {
                 usuario = sesion.getAttribute("user").toString();
                 nivel = sesion.getAttribute("nivel").toString();
-                
 
             } else {
                 out.print("<script>location.replace('/TutoriasUnsis');</script>");
@@ -162,8 +161,6 @@
         <jsp:include page="headAdmin.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
-
-                <!--banner-->	
                 <div class="banner">
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
@@ -211,9 +208,9 @@
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
                                             <button type="submit"  class="btn btn-link center-block">Actualizar</button>
-                                            </form>
-                                            
-                                    
+                                        </form>
+
+
                                     </td>
                                     <td >
                                         <form id="formularioElim" name="formularioElim" action="../ControllerGrupo" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')" >
@@ -221,8 +218,8 @@
                                             <input type="hidden" name = "action" id="action" value="delete">
                                             <button type="submit"  class="btn btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
                                         </form>
-                                           
-                                   
+
+
                                     </td>
                                     <td >
                                         <% if (perA == ob.getIdPeriodo()) {%>  
@@ -251,11 +248,8 @@
         <div class="copy">
             <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
         </div>
-        <!---->
-        <!--scrolling js-->
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
-        <!--//scrolling js-->
     </body>
 </html>
 

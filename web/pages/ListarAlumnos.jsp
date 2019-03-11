@@ -41,10 +41,10 @@
         <script src="../resources/tablas/js/dataTables.bootstrap.min.js"></script> 
         <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
 
-         <script src="../resources/alert/sweetalert.min.js"></script>
+        <script src="../resources/alert/sweetalert.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../resources/alert/sweetalert.css">
         <link rel="stylesheet" type="text/css" href="../resources/alert/google.css">
-            
+
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -69,199 +69,187 @@
 
 
             function Actualizar() {
-                swal({    
-                    title: "aviso!!",    
-                    text: "¿En verdad deseas actualizar al alumno?",    
-                    type: "warning",    
-                    showCancelButton: true,    
-                    confirmButtonColor: "#DD6B55",    
-                    confirmButtonText: "SI",    
-                    cancelButtonText: "NO",    
-                    closeOnConfirm: false,    
-                    closeOnCancel: false },   
+                swal({
+                    title: "aviso!!",
+                    text: "¿En verdad deseas actualizar al alumno?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "SI",
+                    cancelButtonText: "NO",
+                    closeOnConfirm: false,
+                    closeOnCancel: false},
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                document.getElementById('formularioAct').submit();
+                            } else {
+                                window.location = 'ListarAlumnos.jsp';
+                            }
+                        });
+            }
+            ;
 
-                    function(isConfirm){    
-                      if (isConfirm) {  
-                          document.getElementById('formularioAct').submit();
-                      } else {      
-                          window.location='ListarAlumnos.jsp';  
-                      }  
-                    });
-                  };
-          
-          
-           function Eliminar() {
-                swal({    
-                    title: "aviso!!",    
-                    text: "¿En verdad deseas eliminar al alumno?",    
-                    type: "warning",    
-                    showCancelButton: true,    
-                    confirmButtonColor: "#DD6B55",    
-                    confirmButtonText: "SI",    
-                    cancelButtonText: "NO",    
-                    closeOnConfirm: false,    
-                    closeOnCancel: false },   
 
-                    function(isConfirm){    
-                      if (isConfirm) {  
-                          document.getElementById('formularioElim').submit();
-                      } else {      
-                          window.location='ListarAlumnos.jsp';  
-                      }  
-                    });
-                  };
+            function Eliminar() {
+                swal({
+                    title: "aviso!!",
+                    text: "¿En verdad deseas eliminar al alumno?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "SI",
+                    cancelButtonText: "NO",
+                    closeOnConfirm: false,
+                    closeOnCancel: false},
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                document.getElementById('formularioElim').submit();
+                            } else {
+                                window.location = 'ListarAlumnos.jsp';
+                            }
+                        });
+            }
+            ;
         </script>
 
 
-        </script>
+    </script>
 
-        <style>
+    <style>
 
-            body  {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                color: black;
-            }
-            table {
-                font-family: initial ;
-            }
+        body  {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: black;
+        }
+        table {
+            font-family: initial ;
+        }
 
-            th{
+        th{
 
-                background-color: #A4E7A5;
-            }
+            background-color: #A4E7A5;
+        }
 
-            tbody tr:hover {
-                background-color: #FFFF99;
-                cursor: default;
+        tbody tr:hover {
+            background-color: #FFFF99;
+            cursor: default;
 
-            }
-            tbody td {
-                border-bottom: 1px solid #ddd;
-            }
+        }
+        tbody td {
+            border-bottom: 1px solid #ddd;
+        }
 
-        </style>
+    </style>
 
-    </head>
-    <body>
-        <%
-            HttpSession sesion = request.getSession();
-            String usuario;
-            String nivel;
+</head>
+<body>
+    <%
+        HttpSession sesion = request.getSession();
+        String usuario;
+        String nivel;
 
-            if (sesion.getAttribute("user") != null && sesion.getAttribute("nivel") != null) {
-                usuario = sesion.getAttribute("user").toString();
-                nivel = sesion.getAttribute("nivel").toString();
-                
+        if (sesion.getAttribute("user") != null && sesion.getAttribute("nivel") != null) {
+            usuario = sesion.getAttribute("user").toString();
+            nivel = sesion.getAttribute("nivel").toString();
 
-            } else {
-                out.print("<script>location.replace('/TutoriasUnsis');</script>");
-            }
-        %>
+        } else {
+            out.print("<script>location.replace('/TutoriasUnsis');</script>");
+        }
+    %>
 
-        <jsp:include page="headAdmin.jsp" flush="true" />
+    <jsp:include page="headAdmin.jsp" flush="true" />
 
-        <div id="page-wrapper" class="gray-bg dashbard-1">
-            <div class="content-main">
-
-                <!--banner-->	
-                <div class="banner">
-                    <h2>
-                        <a href="indexAdmin.jsp">Home</a>
-                        <i class="fa fa-angle-right"></i>
-                        <span>Alumnos</span><br>
-                    </h2>
-                </div>
-                <div class="blank">
-
-                    <div class="blank-page">
-                        <%
-                            AlumnoDAO obj_Read_Values = new AlumnoDAO();
-                            List<Alumno> list = obj_Read_Values.listarAlumnos();
-                            Iterator<Alumno> it_list = list.iterator();
-
-                        %>
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
-                            <a href="agregarAlumno.jsp">
-                                <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo alumno</a>
-                            <thead>
-
-                                <tr>
-
-                                    <th>Matricula</th>
-                                    <th>Nombre</th>
-                                    <th>Grupo</th>
-                                    <th>Licenciatura</th>
-                                    <th>Editar</th>
-                                    <th>Eliminar</th>
-                                    <th>Listar tutores</th>
-
-
-
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <%  
-                                                                       
-                                    while (it_list.hasNext()) {
-                                        Alumno ob = new Alumno();
-                                        ob = it_list.next();
-                                %>  
-                                <tr>
-                                    <td><%=ob.getMatricula()%></td>
-                                    <td><%=ob.getNombre()%></td>
-                                    <td ><%=ob.getGrupo()%></td>
-                                    <td><%=ob.getLicenciatura()%></td>
-                                    <td>
-                                        <form id="formularioAct" id="formularioAct"  action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')"  >
-                                            <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
-                                            <input type="hidden" name = "action" id="action" value="update">
-                                            <button type="submit" class="btn btn-link center-block">Actualizar</button>
-                                        </form>
-                                      
-
-                                    </td>
-                                    <td >
-                                        <form id="formularioElim" name="formularioElim" action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')" >
-                                            <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
-                                            <input type="hidden" name = "action" id="action" value="delete">
-                                            <button type="submit"  class="btn btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
-                                        </form>
-                                            
-                                   
-                                    </td>
-                                    <td>
-                                        <form id="formulario" action="../ControllerTutores" method="post">
-                                            <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
-                                            <input type="hidden" name = "action" id="action" value="addTI">
-                                            <button type="submit"  class="btn btn-link center-block">Agregar tutor</button>
-                                        </form>
-
-                                    </td>
-
-
-                                </tr>
-                                <%
-                                    }
-                                %>     
-
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="content-main">	
+            <div class="banner">
+                <h2>
+                    <a href="indexAdmin.jsp">Home</a>
+                    <i class="fa fa-angle-right"></i>
+                    <span>Alumnos</span><br>
+                </h2>
             </div>
-            <div class="clearfix"> </div>
+            <div class="blank">
+
+                <div class="blank-page">
+                    <%
+                        AlumnoDAO obj_Read_Values = new AlumnoDAO();
+                        List<Alumno> list = obj_Read_Values.listarAlumnos();
+                        Iterator<Alumno> it_list = list.iterator();
+
+                    %>
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <a href="agregarAlumno.jsp">
+                            <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo alumno</a>
+                        <thead>
+
+                            <tr>
+                                <th>Matricula</th>
+                                <th>Nombre</th>
+                                <th>Grupo</th>
+                                <th>Licenciatura</th>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
+                                <th>Listar tutores</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <%                                    while (it_list.hasNext()) {
+                                    Alumno ob = new Alumno();
+                                    ob = it_list.next();
+                            %>  
+                            <tr>
+                                <td><%=ob.getMatricula()%></td>
+                                <td><%=ob.getNombre()%></td>
+                                <td ><%=ob.getGrupo()%></td>
+                                <td><%=ob.getLicenciatura()%></td>
+                                <td>
+                                    <form id="formularioAct" id="formularioAct"  action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')"  >
+                                        <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
+                                        <input type="hidden" name = "action" id="action" value="update">
+                                        <button type="submit" class="btn btn-link center-block">Actualizar</button>
+                                    </form>
+
+
+                                </td>
+                                <td >
+                                    <form id="formularioElim" name="formularioElim" action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')" >
+                                        <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
+                                        <input type="hidden" name = "action" id="action" value="delete">
+                                        <button type="submit"  class="btn btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
+                                    </form>
+
+
+                                </td>
+                                <td>
+                                    <form id="formulario" action="../ControllerTutores" method="post">
+                                        <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
+                                        <input type="hidden" name = "action" id="action" value="addTI">
+                                        <button type="submit"  class="btn btn-link center-block">Agregar tutor</button>
+                                    </form>
+
+                                </td>
+
+
+                            </tr>
+                            <%
+                                }
+                            %>     
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
-        <div class="copy">
-            <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-        </div>
-        <!---->
-        <!--scrolling js-->
-        <script src="js/jquery.nicescroll.js"></script>
-        <script src="js/scripts.js"></script>
-        <!--//scrolling js-->
-    </body>
+        <div class="clearfix"> </div>
+    </div>
+    <div class="copy">
+        <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+    </div>
+    <script src="js/jquery.nicescroll.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
 </html>
 

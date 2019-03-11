@@ -91,11 +91,6 @@
                         </form>
                         <div class="clearfix"> </div>
                     </div>
-
-
-                    <!-- Brand and toggle get grouped for better mobile display -->
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="drop-men" >
                         <ul class=" nav_1">
 
@@ -103,7 +98,6 @@
                                 <a href="#" class="dropdown-toggle dropdown-at " data-toggle="dropdown"><i class="fa fa-globe"></i> <span class="number">5</span></a>
                                 <ul class="dropdown-menu menu1 " role="menu">
                                     <li><a href="#">
-
                                             <div class="user-new">
                                                 <p>New user registered</p>
                                                 <span>40 seconds ago</span>
@@ -172,7 +166,7 @@
                             </li>
 
                         </ul>
-                    </div><!-- /.navbar-collapse -->
+                    </div>
                     <div class="clearfix">
 
                     </div>
@@ -192,8 +186,6 @@
             </nav>
             <div id="page-wrapper" class="gray-bg dashbard-1">
                 <div class="content-main">
-
-                    <!--banner-->	
                     <div class="banner">
                         <h2>
                             <a href="index.html">Home</a>
@@ -201,31 +193,19 @@
                             <span>Informacion personal</span><br>
                         </h2>
                     </div>
-                    <!--//banner-->
-                    <!--faq-->
                     <div class="blank">
-
-
                         <div class="blank-page">
-
                             <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                         </div>
                     </div>
-
-                    <!--//faq-->
-                    <!---->
-
                 </div>
                 <div class="clearfix"> </div>
             </div>
             <div class="copy">
                 <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
             </div>
-            <!---->
-            <!--scrolling js-->
             <script src="js/jquery.nicescroll.js"></script>
             <script src="js/scripts.js"></script>
-            <!--//scrolling js-->
     </body>
 </html>
 

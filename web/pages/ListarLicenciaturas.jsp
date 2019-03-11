@@ -44,7 +44,7 @@
         <script src="../resources/alert/sweetalert.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../resources/alert/sweetalert.css">
         <link rel="stylesheet" type="text/css" href="../resources/alert/google.css">
-          
+
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -65,51 +65,51 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
-            
-            
+
+
             function Actualizar() {
-                swal({    
-                    title: "aviso!!",    
-                    text: "¿En verdad deseas actualizar la licenciatura?",    
-                    type: "warning",    
-                    showCancelButton: true,    
-                    confirmButtonColor: "#DD6B55",    
-                    confirmButtonText: "SI",    
-                    cancelButtonText: "NO",    
-                    closeOnConfirm: false,    
-                    closeOnCancel: false },   
+                swal({
+                    title: "aviso!!",
+                    text: "¿En verdad deseas actualizar la licenciatura?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "SI",
+                    cancelButtonText: "NO",
+                    closeOnConfirm: false,
+                    closeOnCancel: false},
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                document.getElementById('formularioAct').submit();
+                            } else {
+                                window.location = 'ListarLicenciaturas.jsp';
+                            }
+                        });
+            }
+            ;
 
-                    function(isConfirm){    
-                      if (isConfirm) {  
-                          document.getElementById('formularioAct').submit();
-                      } else {      
-                          window.location='ListarLicenciaturas.jsp';  
-                      }  
-                    });
-                  };
-          
-          
-           function Eliminar() {
-                swal({    
-                    title: "aviso!!",    
-                    text: "¿En verdad deseas eliminar la licenciatura?",    
-                    type: "warning",    
-                    showCancelButton: true,    
-                    confirmButtonColor: "#DD6B55",    
-                    confirmButtonText: "SI",    
-                    cancelButtonText: "NO",    
-                    closeOnConfirm: false,    
-                    closeOnCancel: false },   
 
-                    function(isConfirm){    
-                      if (isConfirm) {  
-                          document.getElementById('formularioElim').submit();
-                      } else {      
-                          window.location='ListarLicenciaturas.jsp';  
-                      }  
-                    });
-                  };
-        
+            function Eliminar() {
+                swal({
+                    title: "aviso!!",
+                    text: "¿En verdad deseas eliminar la licenciatura?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "SI",
+                    cancelButtonText: "NO",
+                    closeOnConfirm: false,
+                    closeOnCancel: false},
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                document.getElementById('formularioElim').submit();
+                            } else {
+                                window.location = 'ListarLicenciaturas.jsp';
+                            }
+                        });
+            }
+            ;
+
         </script>
 
         <style>
@@ -157,8 +157,6 @@
         <jsp:include page="headAdmin.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
-
-                <!--banner-->	
                 <div class="banner">
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
@@ -192,7 +190,7 @@
                                     while (it_list.hasNext()) {
                                         Licenciatura ob = new Licenciatura();
                                         ob = it_list.next();
-                                        
+
                                 %>  
                                 <tr>
                                     <td><%=ob.getNombre()%></td>
@@ -201,26 +199,21 @@
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
                                             <button type="submitu"  class="btn btn-link center-block">Actualizar</button>
-                                             </form>
-                                            
-                                   
+                                        </form>                                         
+
                                     </td>
                                     <td >
                                         <form id="formularioElim" name="formularioElim" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')">
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
                                             <input type="hidden" name = "action" id="action" value="delete">
                                             <button type="submit"  class="btn btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
-                                           </form>
-                                            
-                                   
-                                    </td>
+                                        </form>                                          
 
+                                    </td>
                                 </tr>
                                 <%
                                     }
                                 %>     
-
-
                             </tbody>
                         </table>
                     </div>
@@ -232,11 +225,8 @@
         <div class="copy">
             <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
         </div>
-        <!---->
-        <!--scrolling js-->
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
-        <!--//scrolling js-->
     </body>
 </html>
 

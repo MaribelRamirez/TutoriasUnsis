@@ -35,7 +35,7 @@ public class ConnectionClass {
     /**funcion para loguear*/
 
     public ConnectionClass(String url, String user, String pass) {
-        throw new UnsupportedOperationException("Not supported yet."); /**To change body of generated methods, choose Tools | Templates.*/
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     public usuario loguear(String us, String pass) {

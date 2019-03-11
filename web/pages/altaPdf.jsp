@@ -60,37 +60,35 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
-            
 
 
 
-$(document).on('change','input[type="file"]',function(){
-	// this.files[0].size recupera el tamaño del archivo
-	// alert(this.files[0].size);
-	
-	var fileName = this.files[0].name;
-	var fileSize = this.files[0].size;
 
-	if(fileSize > 3000000){
-		alert('El archivo no debe superar los 3MB');
-		this.value = '';
-		this.files[0].name = '';
-	}else{
-		// recuperamos la extensión del archivo
-		var ext = fileName.split('.').pop();
+            $(document).on('change', 'input[type="file"]', function () {
+                var fileName = this.files[0].name;
+                var fileSize = this.files[0].size;
 
-		// console.log(ext);
-		switch (ext) {
-			case 'docx':
-			case 'xlsx':
-			case 'pdf': break;
-			default:
-				alert('El archivo no tiene la extensión adecuada');
-				this.value = ''; // reset del valor
-				this.files[0].name = '';
-		}
-	}
-});
+                if (fileSize > 3000000) {
+                    alert('El archivo no debe superar los 3MB');
+                    this.value = '';
+                    this.files[0].name = '';
+                } else {
+                    // recuperamos la extensión del archivo
+                    var ext = fileName.split('.').pop();
+
+                    // console.log(ext);
+                    switch (ext) {
+                        case 'docx':
+                        case 'xlsx':
+                        case 'pdf':
+                            break;
+                        default:
+                            alert('El archivo no tiene la extensión adecuada');
+                            this.value = ''; // reset del valor
+                            this.files[0].name = '';
+                    }
+                }
+            });
         </script>
 
         <style>
@@ -140,8 +138,6 @@ $(document).on('change','input[type="file"]',function(){
         <jsp:include page="headAdminUpdate.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
-
-                <!--banner-->	
                 <div class="banner">
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
@@ -169,14 +165,11 @@ $(document).on('change','input[type="file"]',function(){
                         <form name="formpdf" action="ControllerPdf" method="post" enctype="multipart/form-data" onsubmit="return confirm('Realmente desea guardar los datos')">
                             <div class="form-group">
                                 <label for="nomGrup">Nombre del archivo:</label>
-
                                 <input  required class="form-control" id="grupo" name="txtname" placeholder="Introduce el nombre del archivo" value="<c:out value="${row.nombrepdf}" />">
                             </div>
                             <div class="form-group">
                                 <label for="nomGrup">Tipo de archivo:</label>
-
                                 <select class="form-control " id="tipo" name="tipo">
-
                                     <option value="1"> Reportes</option>
                                     <option value="2">Material de apooyo</option>
                                 </select>
@@ -200,25 +193,19 @@ $(document).on('change','input[type="file"]',function(){
                             <div class="form-group">           
                                 <input type="submit" value="Enviar Archivo" name="submit" id="btn" class="btn"  />
                             </div>
-
-
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
     <div class="clearfix"> </div>
 </div>
 <div class="copy">
     <p><img src="resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
 </div>
-<!---->
-<!--scrolling js-->
 <script src="js/jquery.nicescroll.js"></script>
 <script src="js/scripts.js"></script>
-<!--//scrolling js-->
 </body>
 </html>
 
