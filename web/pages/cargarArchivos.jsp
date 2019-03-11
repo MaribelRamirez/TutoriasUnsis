@@ -34,6 +34,7 @@
         <link href="../resources/css/custom.css" rel="stylesheet">
         <script src="../resources/js/custom.js"></script>
         <script src="../resources/js/screenfull.js"></script>
+        
         <script>
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -165,7 +166,7 @@
                                         </td>
                                         <td>
                                             <a id="mostrar" href="../ControllerPdf?action=insert&id=<%=pdfvo.getCodigopdf()%>"> <img src="../resources/images/nuevo.png" title="Nuevo registro"/></a>
-                                            <a href="../ControllerPdf?action=delete&id=<%=pdfvo.getCodigopdf()%>"> <img src="../resources/images/delete.png" title="Eliminar"/></a>
+                                            <a href="../ControllerPdf?action=delete&id=<%=pdfvo.getCodigopdf()%>"> <img src="../resources/images/delete.jpeg" title="Eliminar" height="40"/></a>
                                         </td>
                                     </tr>
                                     <%}

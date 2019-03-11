@@ -225,7 +225,7 @@
                                         <form id="formularioElim" name="formularioElim" action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')" >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
                                             <input type="hidden" name = "action" id="action" value="delete">
-                                            <button type="submit"  class="btn btn-link">Eliminar</button>
+                                            <button type="submit"  class="btn btn-link"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
                                         </form>
                                             
                                    

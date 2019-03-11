@@ -29,13 +29,13 @@
                 <tr>
                     <td><%=ficheros[i]%></td>
                     <td>
-                       <a href="../resources/Documentos/<%=ficheros[i]%>" target="_blank" type="application/vnd.ms-excel"> abrir </a>
+                       <a href="../resources/Documentos/<%=ficheros[i]%>" target="_blank" type="application/vnd.ms-excel">Abrir </a>
                     </td>
                     <td >
                         <form id="formularioElim" name="formularioElim" action="../ControllerArchivos" method="post" onsubmit="return confirm('¿Realmente desea eliminar el documento?')" >
                             <input type="hidden" name = "nombre" id="id" value="<%=ficheros[i]%>">
                             <input type="hidden" name = "action" id="action" value="eliminar">
-                            <button type="submit"  class="btn btn-link">Eliminar</button>
+                            <button type="submit"  class="btn btn-link"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"/></button>
                         </form>
 
 
