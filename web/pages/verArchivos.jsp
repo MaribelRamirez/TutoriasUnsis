@@ -1,10 +1,13 @@
 <%@page import="java.io.File"%>
 <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-
+<form id="forEt" name="forEt" action="../ControllerArchivos" method="post" onsubmit="return confirm('¿Realmente desea eliminar todos los documentos?')" >
+                           <input type="hidden" name = "action" id="action" value="eliminarTodo">
+                            <button type="submit"  class="btn btn-link"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"/> Eliminar todos los archivos</button>
+                        </form>
     <nav class="nav-sidebar">
         <table id="example" class="table table-striped table-bordered" style="width:100%">
-
+   
             <thead>
 
                 <tr>

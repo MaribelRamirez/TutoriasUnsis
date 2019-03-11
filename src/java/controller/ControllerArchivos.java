@@ -83,7 +83,19 @@ public class ControllerArchivos extends HttpServlet {
                 System.err.println("Error" + e);
             }
 
-        }
+        }else  if (action.equalsIgnoreCase("eliminarTodo")) 
+       
+       {
+           String rutRel=getServletConfig().getServletContext().getRealPath("/resources/Documentos");
+                    String path = rutRel+"/";
+                    File directorio = new File(path);
+                    String[] ficheros = directorio.list();
+                    for (int i = 0; i < ficheros.length; i++) {
+                    File archivo = new File(rutRel + "/" + ficheros[i]);
+                          archivo.delete();
+                    }
+       
+       }
         response.sendRedirect("pages/generarReportes.jsp");
     }
 
