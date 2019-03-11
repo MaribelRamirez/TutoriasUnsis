@@ -174,7 +174,7 @@
                             List<Profesor> list = obj_Read_Values.listarProfesores();
                             Iterator<Profesor> it_list = list.iterator();
                         %>
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered " style="width:100%">
                             <a href="agregarProfesor.jsp">
                                 <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo maestro</a>
 
@@ -197,7 +197,7 @@
                                         ob = it_list.next();
                                 %>  
                                 <tr>
-                                    <td><%=ob.getNombre()%></td>
+                                    <td ><%=ob.getNombre()%></td>
                                     <td><%=ob.getGrado()%></td>
                                     <td><%=ob.getEstatus()%></td>
                                     <td><%=ob.getLicenciatura()%></td>
@@ -206,7 +206,7 @@
                                         <form id="formularioAct" name="formularioAct" action="../ControllerProfesor" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')">
                                             <input type="hidden" name = "idprf" id="idprf" value="<%=ob.getIdProfesor()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
-                                            <button type="submit" class="btn btn-link">Actualizar</button>
+                                            <button type="submit" class="btn btn-link center-block ">Actualizar</button>
                                         </form>
                                         
                                     </td>
@@ -214,7 +214,7 @@
                                         <form id="formularioElim" name="formularioElim" action="../ControllerProfesor" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')">
                                             <input type="hidden" name = "idprf" id="idprf" value="<%=ob.getIdProfesor()%>">
                                             <input type="hidden" name = "action" id="action" value="delete">
-                                            <button type="submit"  class="btn btn-link"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
+                                            <button type="submit"  class="btn btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
                                             </form>
                                             
                                    

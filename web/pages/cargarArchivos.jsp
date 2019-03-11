@@ -157,7 +157,7 @@
                                             <%
                                                 if (pdfvo.getArchivopdf2() != null) {
                                             %>
-                                            <a href="../pdf?id=<%=pdfvo.getCodigopdf()%>" target="_blank"><img src="../resources/images/mpdf.png" title="pdf"/></a>
+                                            <a href="../pdf?id=<%=pdfvo.getCodigopdf()%>" target="_blank"><img src="../resources/images/mpdf.png" title="pdf" class="center-block"l/></a>
                                                 <%
                                                     } else {
                                                         out.print("Vacio");
@@ -165,8 +165,8 @@
                                                 %>
                                         </td>
                                         <td>
-                                            <a id="mostrar" href="../ControllerPdf?action=insert&id=<%=pdfvo.getCodigopdf()%>"> <img src="../resources/images/nuevo.png" title="Nuevo registro"/></a>
-                                            <a href="../ControllerPdf?action=delete&id=<%=pdfvo.getCodigopdf()%>"> <img src="../resources/images/delete.jpeg" title="Eliminar" height="40"/></a>
+                                            <a id="mostrar" href="../ControllerPdf?action=insert&id=<%=pdfvo.getCodigopdf()%>"> <img src="../resources/images/nuevo.png" title="Nuevo registro" class="center-block"/></a>
+                                            <a href="../ControllerPdf?action=delete&id=<%=pdfvo.getCodigopdf()%>"> <img src="../resources/images/delete.jpeg" title="Eliminar" height="40" class="center-block"/></a>
                                         </td>
                                     </tr>
                                     <%}

@@ -179,7 +179,7 @@
                                 <img src="../resources/images/add.png" title="Agregar"/> Agregar nueva licenciatura</a>
                             <thead>
 
-                                <tr>
+                                <tr >
                                     <th>Name</th>
                                     <th>Editar</th>
                                     <th>Eliminar</th>
@@ -200,7 +200,7 @@
                                         <form id="formularioAct" name="formularioAct" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')" >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
-                                            <button type="submitu"  class="btn btn-link">Actualizar</button>
+                                            <button type="submitu"  class="btn btn-link center-block">Actualizar</button>
                                              </form>
                                             
                                    
@@ -209,7 +209,7 @@
                                         <form id="formularioElim" name="formularioElim" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')">
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
                                             <input type="hidden" name = "action" id="action" value="delete">
-                                            <button type="submit"  class="btn btn-link"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
+                                            <button type="submit"  class="btn btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
                                            </form>
                                             
                                    

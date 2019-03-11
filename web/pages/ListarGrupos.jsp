@@ -210,7 +210,7 @@
                                         <form id="formularioAct" name="formularioAct" action="../ControllerGrupo" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')" >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
-                                            <button type="submit"  class="btn btn-link">Actualizar</button>
+                                            <button type="submit"  class="btn btn-link center-block">Actualizar</button>
                                             </form>
                                             
                                     
@@ -219,7 +219,7 @@
                                         <form id="formularioElim" name="formularioElim" action="../ControllerGrupo" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')" >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
                                             <input type="hidden" name = "action" id="action" value="delete">
-                                            <button type="submit"  class="btn btn-link"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
+                                            <button type="submit"  class="btn btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
                                         </form>
                                            
                                    
@@ -229,7 +229,7 @@
                                         <form id="formulario" action="../ControllerTutores" method="post">
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
                                             <input type="hidden" name = "action" id="action" value="addTG">
-                                            <button type="submit"  class="btn btn-link">Agregar Tutor</button>
+                                            <button type="submit"  class="btn btn-link center-block">Agregar Tutor</button>
                                         </form>
                                     </td>
 

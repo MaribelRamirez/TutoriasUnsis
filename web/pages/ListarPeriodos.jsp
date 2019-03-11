@@ -183,7 +183,7 @@
                                         <form id="formularioAct" name="formularioAct" action="../ControllerPeriodo" method="post" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')"  >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdPeriodo()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
-                                             <button type="submitm "  class="btn btn-link">Actualizar</button>
+                                             <button type="submitm "  class="btn btn-link center-block">Actualizar</button>
                                             </form>
                                            
                                     
