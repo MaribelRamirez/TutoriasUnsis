@@ -189,7 +189,7 @@
 
                                     <th>Matricula</th>
                                     <th>Nombre</th>
-                                    <th>grupo</th>
+                                    <th>Grupo</th>
                                     <th>Licenciatura</th>
                                     <th>Editar</th>
                                     <th>Eliminar</th>

@@ -15,12 +15,7 @@
                 <section class="full-top">
                     <button id="toggle"><i class="fa fa-arrows-alt"></i></button>	
                 </section>
-                <form class=" navbar-left-right">
-                    <input type="text"  value="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {
-                                this.value = 'Search...';
-                            }">
-                    <input type="submit" value="" class="fa fa-search">
-                </form>
+               
                 <div class="clearfix"> </div>
             </div>
 
@@ -34,19 +29,15 @@
                    
                     <li class="dropdown">
                         
-                        <form action="../login" method="get" onsubmit="return confirm('¿Realmente desea cerrar sesión?')">
-<!--                        <input type="hidden" name = "action" value="close">-->
-<input type=image src="../resources/images/cerrarSesion.png" width="30" height="30">
-                            <!--<input  name="action" type="submit" value="close" >--> 
-                       
-
-                    </form>
+                        <form action="../login" method="get" onsubmit="return confirm('¿Realmente desea cerrar sesión?')"> 
+                            <input type=image src="../resources/images/cerrarSesion.png" width="30" height="30">
+                        </form>
                     </li>
-
+                   
                 </ul>
-            </div><!-- /.navbar-collapse -->
+     </div><br><br><br>
             </div>
-
+        
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <img src="../resources/images/escudo.jpg" width="90" height="90"> <br><br>

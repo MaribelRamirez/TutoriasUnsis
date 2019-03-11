@@ -163,7 +163,7 @@
 
                                     <th>Periodo</th>
                                     <th>Fecha inicio</th>
-                                    <th>fecha fin</th>
+                                    <th>Fecha fin</th>
                                     <th>Editar</th>
 
                                 </tr>
