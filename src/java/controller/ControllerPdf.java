@@ -1,6 +1,5 @@
 package controller;
 
-import model.ConnectionClass;
 import dao.PdfDAO;
 import VO.PdfVO;
 import java.io.IOException;
@@ -45,7 +44,6 @@ public class ControllerPdf extends HttpServlet {
             int studentId = Integer.parseInt(request.getParameter("id"));
             pdfdao.Eliminar_PdfVO(studentId);
             forward = lIST;
-//            response.sendRedirect("pages/cargarArchivos.jsp");
         }
         if (action.equalsIgnoreCase("edit")) {
             forward = INSERT_OR_EDIT;
@@ -86,9 +84,6 @@ public class ControllerPdf extends HttpServlet {
         try {
             Part filePart = request.getPart("fichero");
             if (filePart.getSize() > 0) {
-                System.out.println("nombre_" + filePart.getName());
-                System.out.println("tamaño-" + filePart.getSize());
-                System.out.println("tipo-" + filePart.getContentType());
                 inputStream = filePart.getInputStream();
             }
         } catch (Exception ex) {
@@ -118,8 +113,6 @@ public class ControllerPdf extends HttpServlet {
             System.out.println("textos: " + ex.getMessage());
         }
         response.sendRedirect("pages/cargarArchivos.jsp");
-//        RequestDispatcher view = request.getRequestDispatcher("/pages/cargarArchivos.jsp");
-//        view.forward(request, response);
     }
 
     @Override

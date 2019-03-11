@@ -121,7 +121,6 @@ public class ControllerTutores extends HttpServlet {
 
                 int idGrupo = Integer.parseInt(request.getParameter("grupo"));
                 String curp = request.getParameter("profesor");
-                System.err.println("este es el curp " + curp);
                 int idPeriodo = Integer.parseInt(request.getParameter("per"));
                 AlumnoDAO alumnoDao = new AlumnoDAO();
                 List<Alumno> listaAlumnos;
@@ -173,36 +172,6 @@ public class ControllerTutores extends HttpServlet {
                 response.sendRedirect("pages/ListarTutorados.jsp");
             }
 
-        } else if (action.equalsIgnoreCase("edit")) {
-
-//            int id = Integer.parseInt(request.getParameter("id"));
-//            String perio = request.getParameter("periodo");
-//            String fechaI = request.getParameter("fechaI");
-//            String fechaF = request.getParameter("fechaF");
-//            
-//            
-//            java.util.Date fechaIni = new java.util.Date();
-//            java.util.Date fechaFin = new java.util.Date();
-//            
-//            fechaIni= convertirStrToDate(fechaI);
-//            fechaFin=convertirStrToDate(fechaF);
-//            
-//            
-//            
-//            java.sql.Date sqlFeI = new java.sql.Date(fechaIni.getTime());
-//            java.sql.Date sqlFeF = new java.sql.Date(fechaFin.getTime());
-//            
-//            System.err.println("Estas son las fechas 1"+sqlFeI);
-//            System.err.println("Estas son las fechas 2"+sqlFeF);
-//            
-//            
-//            periodo.setIdPeriodo(id);
-//            periodo.setPeriodo(perio);
-//            periodo.setFechaInicio( sqlFeI);
-//            periodo.setFechaFin(sqlFeF);
-//            
-//            periododao.updatePeriodo(periodo);
-//            response.sendRedirect("pages/ListarPeriodos.jsp");
         }
 
     }

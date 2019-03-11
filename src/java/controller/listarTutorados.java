@@ -36,7 +36,7 @@ public class listarTutorados extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet login</title>");            
+            out.println("<title>Servlet login</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet login at " + request.getContextPath() + "</h1>");
@@ -45,29 +45,23 @@ public class listarTutorados extends HttpServlet {
         }
     }
 
-   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
+
     }
 
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String curp = request.getParameter("prof");
-        
-       
-        
-        HttpSession sesion = request.getSession();
-        
 
-               
-                     sesion.setAttribute("curp", curp);
-                     
-                     response.sendRedirect("pages/tutoradosByCurp.jsp");
-                    
+        HttpSession sesion = request.getSession();
+
+        sesion.setAttribute("curp", curp);
+
+        response.sendRedirect("pages/tutoradosByCurp.jsp");
+
         processRequest(request, response);
     }
 

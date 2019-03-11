@@ -6,16 +6,12 @@
 package controller;
 
 import dao.AlumnoDAO;
-import dao.LicenciaturaDAO;
 import dao.PeriodoDAO;
 import dao.ProfesorDAO;
 import dao.ReporteDAO;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,15 +25,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Alumno;
-import model.Licenciatura;
 import model.Periodo;
 import model.Profesor;
 import model.Reporte;
 import model.sql;
-import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -49,7 +41,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -548,7 +539,6 @@ public class ControllerReportesTutorias extends HttpServlet {
         } else if (action.equalsIgnoreCase("update")) {
             try {
                 forward = edit;
-                System.out.print(request.getParameter("id"));
                 rep = reportedao.obtenerReporteById(Integer.parseInt(request.getParameter("id")));
 
                 request.setAttribute("rep", rep);

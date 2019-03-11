@@ -27,7 +27,6 @@ import model.Licenciatura;
 public class ControllerLicenciatura extends HttpServlet {
 
     private static final String edit = "pages/actualizarLicenciatura.jsp";
-    // private static final String list="pages/ListarLicenciaturas.jsp";
     String forward = "";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

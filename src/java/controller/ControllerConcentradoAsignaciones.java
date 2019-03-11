@@ -10,7 +10,6 @@ import dao.GrupoDAO;
 import dao.LicenciaturaDAO;
 import dao.PeriodoDAO;
 import dao.ProfesorDAO;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,12 +23,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Alumno;
 import model.Grupo;
 import model.Licenciatura;
 import model.Periodo;
 import model.Profesor;
-import model.sql;
 import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -38,7 +35,6 @@ import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -300,13 +296,6 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                             cellT4.setCellValue("NA");
                             cellT4.setCellStyle(style2);
                             l++;
-
-                            /* for(int m=1;m<=carreras-3;m++){
-                            cellT4 = rowT4.createCell(l);
-                            cellT4.setCellValue("-");
-                            cellT4.setCellStyle(style2);
-                            l++;
-                            }*/
                         } else {
 
                             if ("Inactivo".equals(Obt.getEstatus()) || "Licencia".equals(Obt.getEstatus()) || "Sabatico".equals(Obt.getEstatus())) {

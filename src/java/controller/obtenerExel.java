@@ -45,15 +45,17 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Mine
  */
 @WebServlet(name = "obtenerExel", urlPatterns = {"/obtenerExel"})
-@MultipartConfig(maxFileSize = 16177215) 
+@MultipartConfig(maxFileSize = 16177215)
 public class obtenerExel extends HttpServlet {
 
     public TutorDAO tutordao;
+
     public obtenerExel() {
         super();
         tutordao = new TutorDAO();
 
     }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -88,15 +90,15 @@ public class obtenerExel extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         PrintWriter out = response.getWriter();
-        
+
         InputStream inFile = null;
-        
+
         //Crea el archivo de destino
-        System.err.println("esta es la ruta ...."+ getServletContext().getRealPath("/Documentos"));
-        File destino = new File(getServletContext().getRealPath("/Documentos")+"/alumnos.xlsx");//ubicacion en el servidor
+        System.err.println("esta es la ruta ...." + getServletContext().getRealPath("/Documentos"));
+        File destino = new File(getServletContext().getRealPath("/Documentos") + "/alumnos.xlsx");//ubicacion en el servidor
         OutputStream outFile = new FileOutputStream(destino);
         // probando obtener ruta absoluta
-        
+
         try {
             //Obtiene el archivo del request
             Part filePart = request.getPart("archivosubido");
@@ -109,28 +111,27 @@ public class obtenerExel extends HttpServlet {
         } catch (Exception ex) {
             System.out.println("fichero: " + ex.getMessage());
         }
-        
-        
-        //copia lo del inputStream al outputStream
-         try {
-                        byte[] buf = new byte[1024];
-                        int len;
-                        while ((len = inFile.read(buf)) > 0) {
-                                outFile.write(buf, 0, len);
-                        }
 
-                        inFile.close();
-                        outFile.close();
-                } catch (IOException ioe){
-                        ioe.printStackTrace();
-                }
+        //copia lo del inputStream al outputStream
+        try {
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = inFile.read(buf)) > 0) {
+                outFile.write(buf, 0, len);
+            }
+
+            inFile.close();
+            outFile.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
 
 //        Liata para guardar error al insertar
         List<String> error = new ArrayList<String>();
 
         int grup = Integer.parseInt(request.getParameter("grupo"));
 
-        String rutaArchivo = getServletContext().getRealPath("/Documentos")+"/alumnos.xlsx";
+        String rutaArchivo = getServletContext().getRealPath("/Documentos") + "/alumnos.xlsx";
         String hoja = "Hoja1";
 
         Alumno alumno = new Alumno();
@@ -169,8 +170,8 @@ public class obtenerExel extends HttpServlet {
                 //Matricula
                 if (cellIterator.hasNext()) {
                     cell = cellIterator.next();
-                    if (cell.getCellType() == 0 ) {
-                         //matricula
+                    if (cell.getCellType() == 0) {
+                        //matricula
                         alumno.setMatricula(NumberToTextConverter.toText(cell.getNumericCellValue()));
                         System.out.print(NumberToTextConverter.toText(cell.getNumericCellValue()) + " Esta es la matricula ");
                         //NOmbre\
@@ -197,15 +198,15 @@ public class obtenerExel extends HttpServlet {
                             if (0 == tutordao.comprobarRegistro(idPeriodo, alumno.getMatricula())) {
 //                                tutordao.update(tutor);
                             } else {
-                                tutor=tutordao.tuturadoByMatricula(idPeriodo-1, alumno.getMatricula());
+                                tutor = tutordao.tuturadoByMatricula(idPeriodo - 1, alumno.getMatricula());
                                 tutor.setGrupo(grupo.getGrupo());
                                 tutor.setPeriodo(idPeriodo);
                                 tutordao.insertar(tutor);
                             }
                         }
-                        
-                    }   else {
-                       
+
+                    } else {
+
                         error.add(", " + (row.getRowNum() + 1));
                     }
                 }
