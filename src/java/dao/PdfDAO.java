@@ -40,6 +40,7 @@ public class PdfDAO {
         }
         return list;
     }
+
     public ArrayList<PdfVO> Listar_PdfVO() {
         ArrayList<PdfVO> list = new ArrayList<PdfVO>();
         ConnectionClass conec = new ConnectionClass();
@@ -70,6 +71,7 @@ public class PdfDAO {
         }
         return list;
     }
+
     public ArrayList<PdfVO> Listar_PdfVOMaterial() {
         ArrayList<PdfVO> list = new ArrayList<PdfVO>();
         ConnectionClass conec = new ConnectionClass();
@@ -106,8 +108,6 @@ public class PdfDAO {
     public void Agregar_PdfVO(PdfVO vo) {
         ConnectionClass conec = new ConnectionClass();
         String sql = "INSERT INTO archivos (idArchivo, nombre, categoria, archivo) VALUES(?, ?, ?,? );";
-        System.err.println("Estoy agregaar datos " + vo.getNombrepdf()+vo.getCategoria()+vo.getCodigopdf());
-        System.out.println("consulta"+sql);
         PreparedStatement ps = null;
         try {
             ps = conec.conectar().prepareStatement(sql);
@@ -182,7 +182,6 @@ public class PdfDAO {
         ConnectionClass conec = new ConnectionClass();
         String sql = "DELETE FROM archivos WHERE idArchivo = ?;";
         PreparedStatement ps = null;
-        System.err.println("llegue a eliminar pdf");
         try {
             ps = conec.conectar().prepareStatement(sql);
             ps.setInt(1, id);

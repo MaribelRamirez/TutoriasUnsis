@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.sql.Date;
 
-/**
- *
- * @author Marifer
- */
 public class Reporte {
 
     private int idReporte;
@@ -30,34 +21,34 @@ public class Reporte {
     private int alumnosAsignados;
     private int alumnosReportados;
     private int alumnosAsistencia;
-     private String observaciones;
+    private String observaciones;
     private String faltantes;
-    
-    public Reporte(){}
-            
-    public Reporte(int idReporte, String curp,String profesor,String grado,String licenciatura,int idLicenciatura,int idPeriodo,String periodo,String entrego, String aTiempo, Date fecha,String tipoTutoria, int noSesiones,int noCanalizaciones, int alumnosAsignados,int alumnosReportados, int alumnosAsistencia, String observaciones, String faltantes)
-    {
-    
-    this.idReporte=idReporte;
-    this.curp=curp;
-     this.profesor=profesor;
-     this.grado=grado;
-    this.licenciatura=licenciatura;
-    this.idLicenciatura=idLicenciatura;
-    this.idPeriodo=idPeriodo;
-    this.periodo=periodo;
-    this.entrego=entrego;
-    this.aTiempo=aTiempo;
-    this.fecha=fecha;
-    this.tipoTutoria=tipoTutoria;
-    this.noSesiones=noSesiones;
-    this.noCanalizaciones=noCanalizaciones;
-    this.alumnosAsignados=alumnosAsignados;
-    this.alumnosReportados=alumnosReportados;
-    this.alumnosAsistencia=alumnosAsistencia;
-    this.observaciones=observaciones;
-    this.faltantes=faltantes;
-    
+
+    public Reporte() {
+    }
+
+    public Reporte(int idReporte, String curp, String profesor, String grado, String licenciatura, int idLicenciatura, int idPeriodo, String periodo, String entrego, String aTiempo, Date fecha, String tipoTutoria, int noSesiones, int noCanalizaciones, int alumnosAsignados, int alumnosReportados, int alumnosAsistencia, String observaciones, String faltantes) {
+
+        this.idReporte = idReporte;
+        this.curp = curp;
+        this.profesor = profesor;
+        this.grado = grado;
+        this.licenciatura = licenciatura;
+        this.idLicenciatura = idLicenciatura;
+        this.idPeriodo = idPeriodo;
+        this.periodo = periodo;
+        this.entrego = entrego;
+        this.aTiempo = aTiempo;
+        this.fecha = fecha;
+        this.tipoTutoria = tipoTutoria;
+        this.noSesiones = noSesiones;
+        this.noCanalizaciones = noCanalizaciones;
+        this.alumnosAsignados = alumnosAsignados;
+        this.alumnosReportados = alumnosReportados;
+        this.alumnosAsistencia = alumnosAsistencia;
+        this.observaciones = observaciones;
+        this.faltantes = faltantes;
+
     }
 
     public int getIdReporte() {
@@ -179,7 +170,7 @@ public class Reporte {
     public void setFaltantes(String faltantes) {
         this.faltantes = faltantes;
     }
-        
+
     public int getIdPeriodo() {
         return idPeriodo;
     }
@@ -204,7 +195,6 @@ public class Reporte {
         this.profesor = profesor;
     }
 
-    
     public String getGrado() {
         return grado;
     }

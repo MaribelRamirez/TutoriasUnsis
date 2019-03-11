@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import java.sql.Connection;
@@ -17,10 +12,6 @@ import java.util.logging.Logger;
 import model.ConnectionClass;
 import model.Licenciatura;
 
-/**
- *
- * @author Marifer
- */
 public class LicenciaturaDAO {
 
     ConnectionClass con = new ConnectionClass();
@@ -35,51 +26,47 @@ public class LicenciaturaDAO {
     }
 
     public int verificar(String lic) {
-       
-         int count=0;
+
+        int count = 0;
         try {
-            
-            
-            String sql = "select *from licenciaturas where nombre='"+lic+"';";
-            
-            System.out.println("consulta"+sql);
+
+            String sql = "select *from licenciaturas where nombre='" + lic + "';";
+
             connection = con.conectar();
             Statement statement = connection.createStatement();
             ResultSet resulSet = statement.executeQuery(sql);
-           
+
             while (resulSet.next()) {
-                count ++;
+                count++;
             }
             con.desconectar();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("este es el valor de conunt"+count);
         return count;
-}
-     public int countLicenciaturas() {
-       
-         int count=0;
+    }
+
+    public int countLicenciaturas() {
+
+        int count = 0;
         try {
             String sql = "select *from licenciaturas;";
             connection = con.conectar();
             Statement statement = connection.createStatement();
             ResultSet resulSet = statement.executeQuery(sql);
-           
+
             while (resulSet.next()) {
-                count ++;
+                count++;
             }
             con.desconectar();
-            
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
-}
-    
+    }
+
     // listar todos los productos
     public List<Licenciatura> listarLicenciaturas() throws SQLException {
 
@@ -127,12 +114,11 @@ public class LicenciaturaDAO {
             statement.executeUpdate();
             statement.close();
             con.desconectar();
- return true;
+            return true;
         } catch (Exception e) {
             System.out.print("error al insertar:" + e);
             return false;
         }
-        
 
     }
 
@@ -154,7 +140,7 @@ public class LicenciaturaDAO {
         return licenciatura;
     }
 
-   public boolean updateLic(Licenciatura licenciatura) {
+    public boolean updateLic(Licenciatura licenciatura) {
         try {
             String sql = "update licenciaturas set idLicenciatura=?, nombre=?"
                     + "where idLicenciatura=?";
@@ -163,7 +149,7 @@ public class LicenciaturaDAO {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, licenciatura.getIdLicenciatura());
                 statement.setString(2, licenciatura.getNombre());
-                   statement.setInt(3, licenciatura.getIdLicenciatura());
+                statement.setInt(3, licenciatura.getIdLicenciatura());
                 statement.executeUpdate();
             }
             con.desconectar();

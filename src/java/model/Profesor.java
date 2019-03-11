@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- *
- * @author Marifer
- */
 public class Profesor {
 
     private int idProfesor;
@@ -16,21 +7,22 @@ public class Profesor {
     private String estatus;
     private String grado;
     private String licenciatura;
-    private int idLicenciatura; 
+    private int idLicenciatura;
     private String curp;
     private int tipoTutoria;
+
     public Profesor() {
     }
 
-    public Profesor(int idProfesor, String nombre,String estatus,String grado,int idLicenciatura, String licenciatura,String curp,int tipoTutoria) {
+    public Profesor(int idProfesor, String nombre, String estatus, String grado, int idLicenciatura, String licenciatura, String curp, int tipoTutoria) {
         this.idProfesor = idProfesor;
         this.nombre = nombre;
-        this.idLicenciatura=idLicenciatura;
-        this.grado=grado;
-        this.estatus=estatus;
+        this.idLicenciatura = idLicenciatura;
+        this.grado = grado;
+        this.estatus = estatus;
         this.licenciatura = licenciatura;
-        this.curp=curp;
-        this.tipoTutoria=tipoTutoria;
+        this.curp = curp;
+        this.tipoTutoria = tipoTutoria;
     }
 
     public int getIdProfesor() {

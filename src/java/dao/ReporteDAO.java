@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import java.sql.Connection;
@@ -18,10 +13,6 @@ import java.util.logging.Logger;
 import model.ConnectionClass;
 import model.Reporte;
 
-/**
- *
- * @author Marifer
- */
 public class ReporteDAO {
 
     ConnectionClass con = new ConnectionClass();
@@ -34,38 +25,35 @@ public class ReporteDAO {
         this.con = con;
         this.connection = connection;
     }
-    
-       public int verificar(String curp,int idPeriodo) {
-       
-         int count=0;
+
+    public int verificar(String curp, int idPeriodo) {
+
+        int count = 0;
         try {
-            
-            
-            String sql = "SELECT profesores.nombre, periodo.idPeriodo, periodo.periodo, licenciaturas.idLicenciatura,\n" +
-"	licenciaturas.nombre,reportes.idReporte,reportes.curp, reportes.entrego,reportes.aTiempo,\n" +
-"	reportes.fecha,reportes.tipoTutoria,reportes.noSesiones,reportes.noCanalizaciones,\n" +
-"	reportes.alumnosAsignados,reportes.alumnosReportados,reportes.alumnosAsistencia,\n" +
-"	reportes.observaciones,reportes.faltantes FROM profesores inner join reportes inner join\n" +
-"	licenciaturas inner join periodo on profesores.curp=reportes.curp and \n" +
-"	reportes.idPeriodo=periodo.idPeriodo and reportes.licenciatura=licenciaturas.idLicenciatura\n" +
-"    where profesores.curp='"+curp+"' and periodo.idPeriodo='"+idPeriodo+"' ; ";
-            
-            System.out.println("consulta"+sql);
+
+            String sql = "SELECT profesores.nombre, periodo.idPeriodo, periodo.periodo, licenciaturas.idLicenciatura,\n"
+                    + "	licenciaturas.nombre,reportes.idReporte,reportes.curp, reportes.entrego,reportes.aTiempo,\n"
+                    + "	reportes.fecha,reportes.tipoTutoria,reportes.noSesiones,reportes.noCanalizaciones,\n"
+                    + "	reportes.alumnosAsignados,reportes.alumnosReportados,reportes.alumnosAsistencia,\n"
+                    + "	reportes.observaciones,reportes.faltantes FROM profesores inner join reportes inner join\n"
+                    + "	licenciaturas inner join periodo on profesores.curp=reportes.curp and \n"
+                    + "	reportes.idPeriodo=periodo.idPeriodo and reportes.licenciatura=licenciaturas.idLicenciatura\n"
+                    + "    where profesores.curp='" + curp + "' and periodo.idPeriodo='" + idPeriodo + "' ; ";
+
             connection = con.conectar();
             Statement statement = connection.createStatement();
             ResultSet resulSet = statement.executeQuery(sql);
-           
+
             while (resulSet.next()) {
-                count ++;
+                count++;
             }
             con.desconectar();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("este es el valor de conunt"+count);
         return count;
-}
+    }
 
     public List<Reporte> listarReportes() throws SQLException {
 
@@ -102,7 +90,7 @@ public class ReporteDAO {
             int alumnosAsistencia = resulSet.getInt("reportes.alumnosAsistencia");
             String observaciones = resulSet.getString("reportes.observaciones");
             String faltantes = resulSet.getString("reportes.faltantes");
-            Reporte reporte = new Reporte(idReporte, curp, profesor,grado, licenciatura, idLicenciatura, idPeriodo, periodo, entrego, aTiempo, fecha, tipoTutoria, noSesiones, noCanalizaciones, alumnosAsignados, alumnosReportados, alumnosAsistencia, observaciones, faltantes);
+            Reporte reporte = new Reporte(idReporte, curp, profesor, grado, licenciatura, idLicenciatura, idPeriodo, periodo, entrego, aTiempo, fecha, tipoTutoria, noSesiones, noCanalizaciones, alumnosAsignados, alumnosReportados, alumnosAsistencia, observaciones, faltantes);
             listaReportes.add(reporte);
         }
         con.desconectar();
@@ -132,7 +120,6 @@ public class ReporteDAO {
                 + " reportes.idReporte =? ; ";
         con.conectar();
         connection = con.getJdbcConnection();
-        System.out.println("este es el sql de reporte" + sql);
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, id);
 
@@ -170,7 +157,6 @@ public class ReporteDAO {
         try {
             String sql = "INSERT INTO reportes (idReporte,idPeriodo,curp,licenciatura,entrego,aTiempo,fecha,tipoTutoria,noSesiones,noCanalizaciones,"
                     + "alumnosAsignados ,alumnosReportados,alumnosAsistencia,observaciones,faltantes) VALUES (?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            //System.out.println(profesor.getDescripcion());
             con.conectar();
             connection = con.getJdbcConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -267,7 +253,7 @@ public class ReporteDAO {
             int alumnosAsistencia = resulSet.getInt("reportes.alumnosAsistencia");
             String observaciones = resulSet.getString("reportes.observaciones");
 
-            Reporte reporte = new Reporte(0, null, nombre,grado, Licenciatura, 0, 0, periodo, entrego, aTiempo, fecha, tipoTutoria,
+            Reporte reporte = new Reporte(0, null, nombre, grado, Licenciatura, 0, 0, periodo, entrego, aTiempo, fecha, tipoTutoria,
                     noSesiones, noCanalizaciones, alumnosAsignados, alumnosReportados, alumnosAsistencia, observaciones, faltantes);
             listaReportes.add(reporte);
         }
