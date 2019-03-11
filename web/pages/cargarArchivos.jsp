@@ -1,8 +1,3 @@
-<%-- 
-    Document   : reportes
-    Created on : 09-ago-2018, 21:23:41
-    Author     : Marifer
---%>
 <%@page import="VO.PdfVO"%>
 <%@page import="dao.PdfDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -125,7 +120,7 @@
                                     <tr>
                                         <th>Codigo</th>
                                         <th>Nombre</th>
-                                        <th>Pdf</th>
+                                        <th>Archivo</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -141,7 +136,7 @@
                                             <%
                                                 if (pdfvo.getArchivopdf2() != null) {
                                             %>
-                                            <a href="../pdf?id=<%=pdfvo.getCodigopdf()%>" target="_blank"><img src="../resources/images/mpdf.png" title="pdf" class="center-block"l/></a>
+                                            <a href="../pdf?id=<%=pdfvo.getCodigopdf()%>" target="_blank"><img src="../resources/images/documento.png" title="pdf" width="30" height="30"/></a>
                                                 <%
                                                     } else {
                                                         out.print("Vacio");
@@ -149,7 +144,6 @@
                                                 %>
                                         </td>
                                         <td>
-                                            <a id="mostrar" href="../ControllerPdf?action=insert&id=<%=pdfvo.getCodigopdf()%>"> <img src="../resources/images/nuevo.png" title="Nuevo registro" class="center-block"/></a>
                                             <a href="../ControllerPdf?action=delete&id=<%=pdfvo.getCodigopdf()%>"> <img src="../resources/images/delete.jpeg" title="Eliminar" height="40" class="center-block"/></a>
                                         </td>
                                     </tr>

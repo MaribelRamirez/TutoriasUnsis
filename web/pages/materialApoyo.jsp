@@ -96,7 +96,7 @@
                                     <tr>
                                         <th>Codigo</th>
                                         <th>Nombre</th>
-                                        <th>Pdf</th>
+                                        <th>Archivo</th>
                                     </tr>
                                 </thead>
                               
@@ -112,7 +112,7 @@
                                             <%
                                                 if (pdfvo.getArchivopdf2() != null) {
                                             %>
-                                            <a href="../pdf?id=<%=pdfvo.getCodigopdf()%>" target="_blank"><img src="../resources/images/mpdf.png" title="pdf"/></a>
+                                            <a href="../pdf?id=<%=pdfvo.getCodigopdf()%>" target="_blank"><img src="../resources/images/documento.png" title="pdf" width="30" height="30"/></a>
                                                 <%
                                                     } else {
                                                         out.print("Vacio");

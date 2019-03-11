@@ -43,7 +43,8 @@ public class ControllerPdf extends HttpServlet {
         if (action.equalsIgnoreCase("delete")) {
             int studentId = Integer.parseInt(request.getParameter("id"));
             pdfdao.Eliminar_PdfVO(studentId);
-            forward = lIST;
+            
+            response.sendRedirect("pages/cargarArchivos.jsp");
         }
         if (action.equalsIgnoreCase("edit")) {
             forward = INSERT_OR_EDIT;
@@ -57,12 +58,16 @@ public class ControllerPdf extends HttpServlet {
             }
             request.setAttribute("row2", boo);
             estado = "edit";
+            RequestDispatcher view = request.getRequestDispatcher(forward);
+        view.forward(request, response);
+            
         } else if (action.equalsIgnoreCase("insert")) {
             forward = INSERT_OR_EDIT;
             estado = "insert";
-        }
-        RequestDispatcher view = request.getRequestDispatcher(forward);
+            RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
+        }
+        
     }
 
     @Override

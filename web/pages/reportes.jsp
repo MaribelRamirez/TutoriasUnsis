@@ -87,7 +87,7 @@
                                     <tr>
                                         <th>Codigo</th>
                                         <th>Nombre</th>
-                                        <th>Pdf</th>
+                                        <th>Archivo</th>
                                     </tr>
                                 </thead>
                                 
