@@ -23,13 +23,15 @@
             function hideURLbar() {
                 window.scrollTo(0, 1);
             }
-            function deshabilitaRetroceso(){
-    window.location.hash="no-back-button";
-    window.location.hash="Again-No-back-button" //chrome
-    window.onhashchange=function(){window.location.hash="no-back-button";}
-}
+            function deshabilitaRetroceso() {
+                window.location.hash = "no-back-button";
+                window.location.hash = "Again-No-back-button" //chrome
+                window.onhashchange = function () {
+                    window.location.hash = "no-back-button";
+                }
+            }
         </script>
-        
+
         <link rel="stylesheet" href="resources/login/css/style.css" type="text/css" media="all">
         <link href="//fonts.googleapis.com/css?family=Mukta+Mahee:200,300,400,500,600,700,800" rel="stylesheet">
         <link rel="stylesheet" href="resources/login/css/font-awesome.css" type="text/css" media="all">
@@ -85,20 +87,18 @@
         <script src="resources/login/js/jquery-2.2.3.min.js"></script>
         <!-- script for show password -->
         <script>
-            $(".toggle-password").click(function () {
+        $(".toggle-password").click(function () {
 
-                $(this).toggleClass("fa-eye fa-eye-slash");
-                var input = $($(this).attr("toggle"));
-                if (input.attr("type") == "password") {
-                    input.attr("type", "text");
-                } else {
-                    input.attr("type", "password");
-                }
-            });
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
         </script>
-        <!-- /script for show password -->
 
     </body>
-    <!-- //Body -->
 
 </html>

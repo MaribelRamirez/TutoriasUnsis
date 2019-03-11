@@ -99,7 +99,6 @@
                             AlumnoDAO obj_Read_Values = new AlumnoDAO();
                             System.out.println("llego a jsp");
                             List<Alumno> list = obj_Read_Values.listarAlumnosTutorados(curp);
-                            System.out.println("despues de optener datos");
                             Iterator<Alumno> it_list = list.iterator();
                         %>
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -142,21 +141,14 @@
                         </table>
                     </div>
                 </div>
-
-                <!--//faq-->
-                <!---->
-
             </div>
             <div class="clearfix"> </div>
         </div>
         <div class="copy">
             <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
         </div>
-        <!---->
-        <!--scrolling js-->
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
-        <!--//scrolling js-->
     </body>
 </html>
 

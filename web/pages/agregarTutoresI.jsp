@@ -56,15 +56,9 @@
                 if (!screenfull.enabled) {
                     return false;
                 }
-
-
-
                 $('#toggle').click(function () {
                     screenfull.toggle($('#container')[0]);
                 });
-
-
-
             });
             $(document).ready(function () {
                 $('#example').DataTable();
@@ -116,13 +110,8 @@
 
 
         <jsp:include page="headAdminUpdate.jsp" flush="true" />
-
-        <!--include-->
-
         <div id="page-wrapper" class="gray-bg dashbard-1">
-            <div class="content-main">
-
-                <!--banner-->	
+            <div class="content-main">	
                 <div class="banner">
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
@@ -193,11 +182,8 @@
 <div class="copy">
     <p><img src="resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
 </div>
-<!---->
-<!--scrolling js-->
 <script src="js/jquery.nicescroll.js"></script>
 <script src="js/scripts.js"></script>
-<!--//scrolling js-->
 </body>
 </html>
 

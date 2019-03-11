@@ -129,8 +129,6 @@
         <jsp:include page="headAdmin.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
-
-                <!--banner-->	
                 <div class="banner">
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
@@ -138,71 +136,50 @@
                         <span>Constancias grupales</span><br>
                     </h2>
                 </div>
-
-
                 <div class="blank">
-
-
                     <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-
-
-
-
-
-
-
                         <%
                             PeriodoDAO obj_Read_periodo = new PeriodoDAO();
                             ProfesorDAO obj_Read_Values = new ProfesorDAO();
-                          ////int periodo = Integer.parseInt();
+                            ////int periodo = Integer.parseInt();
                             List<Profesor> list = obj_Read_Values.tutorGrupal(obj_Read_periodo.obtenerPeriodoActual().getIdPeriodo());
                             Iterator<Profesor> it_list = list.iterator();
                             int cont = list.size();
 
                         %>
                         <form id="formulario" action="../ControllerConstancias" method="post" target="blank">
-
-
                             <div class="container">
                                 <br />
                                 <div class="row">
                                     <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
                                         <div class="form-group">
                                             <div id="filterDate2">
-
-                                                <!-- Datepicker as text field -->  
                                                 <label for="nombre">Elegir periodo y fecha para generar la constancia</label>
-                                               
+                                                <%  PeriodoDAO obj_Read_Values2 = new PeriodoDAO();
+                                                    List<Periodo> list2 = obj_Read_Values2.listarPeriodos();
+                                                    Iterator<Periodo> it_list2 = list2.iterator();
 
-                                                 <%  PeriodoDAO obj_Read_Values2 = new PeriodoDAO();
-                                                            List<Periodo> list2 = obj_Read_Values2.listarPeriodos();
-                                                            Iterator<Periodo> it_list2 = list2.iterator();
+                                                %>
+                                                <br>
+                                                <div class = "form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                                    <select class="form-control " id="IdPeriodo" name="IdPeriodo">
 
+                                                        <%                    while (it_list2.hasNext()) {
+                                                                Periodo ob = new Periodo();
+                                                                ob = it_list2.next();
                                                         %>
-<br>
-                                                        <div class = "form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                                            
-                                                            <select class="form-control " id="IdPeriodo" name="IdPeriodo">
-                                                              
-                                                                <%                    while (it_list2.hasNext()) {
-                                                                        Periodo ob = new Periodo();
-                                                                        ob = it_list2.next();
-                                                                %>
-                                                                <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
+                                                        <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
 
-                                                                <% }
+                                                        <% }
 
-                                                                %>   
-                                                            </select>
-                                                            
-                                                        </div>
-                                                           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                                        %>   
+                                                    </select>
 
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                                     <input name="datepicker" id="datepicker"  type="date" class="form-control" value="" />
                                                 </div>  
-                                            </div>    
-                                                            
+                                            </div>         
                                         </div>
                                     </div>
                                 </div>
@@ -218,9 +195,6 @@
                                         <th>Perfil</th>
                                         <th>Status</th>
                                         <th>Licenciatura</th>
-
-
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -237,7 +211,6 @@
                                         <td><%=ob.getGrado()%></td>
                                         <td><%=ob.getEstatus()%></td>
                                         <td><%=ob.getLicenciatura()%></td>
-
                                     </tr>
                                     <%
                                         }
@@ -246,22 +219,17 @@
                                 </tbody>
                             </table><br>
                             <button type="submit" class="bl btn btn-danger pull-right">Generar Constancias</button>
-
                         </form> 
                     </div>
                 </div>
-
             </div>
             <div class="clearfix"> </div>
         </div>
         <div class="copy">
-            <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+            <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur </p>          
         </div>
-        <!---->
-        <!--scrolling js-->
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
-        <!--//scrolling js-->
     </body>
 </html>
 

@@ -1,5 +1,3 @@
-
-<!--Include-->
 <div id="wrapper">
 
     <nav class="navbar-default navbar-static-top" role="navigation">
@@ -20,33 +18,24 @@
 
                 <div class="clearfix"> </div>
             </div>
-
-
-            <!-- Brand and toggle get grouped for better mobile display -->
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-               <div class="drop-men" >
+            <div class="drop-men" >
                 <ul class=" nav_1">
 
-                    
-                  <li class="dropdown">
-                        <!--<a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret">Coria olgin<i ></i></span></a>-->
-                        
-                        
+
+                    <li class="dropdown">
                         <form action="login" method="get" onsubmit="return confirm('¿Realmente desea cerrar sesión?')">
                             <div class="form-group">
-                            <!--                        <input type="hidden" name = "action" value="close">-->
-                            <!--<button name="action" type="submit" value="close"> </button>-->
-                            <input type=image src="resources/images/cerrarSesion.png" width="30" height="30"  >
-                          
-                            <!--<input  name="action" type="submit" value="close" >--> 
-</div>
+                                <!--                        <input type="hidden" name = "action" value="close">-->
+                                <!--<button name="action" type="submit" value="close"> </button>-->
+                                <input type=image src="resources/images/cerrarSesion.png" width="30" height="30"  >
+
+                            </div>
 
                         </form>
                     </li>
 
                 </ul>
-            </div><!-- /.navbar-collapse -->
+            </div>
             <div class="clearfix">
 
             </div>
@@ -55,9 +44,9 @@
                 <div class="sidebar-nav navbar-collapse">
                     <img src="resources/images/escudo.jpg" width="90" height="90"> <br><br>
                     <ul class="nav" id="side-menu">
-                                  <a href="pages/indexAdmin.jsp" class=" hvr-bounce-to-right">
-                                <i class="fa fa-file-o nav_icon"></i>Maestros
-                            </a>
+                        <a href="pages/indexAdmin.jsp" class=" hvr-bounce-to-right">
+                            <i class="fa fa-file-o nav_icon"></i>Maestros
+                        </a>
                         </li>
                         <li>
                             <a href="pages/ListarAlumnos.jsp" class=" hvr-bounce-to-right">
@@ -99,8 +88,6 @@
                         <li>
                             <a href="pages/ListarPeriodos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Periodos</a>
                         </li>
-
-
                         <li>
                             <a href="pages/ListarReportes.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Reportes tutorias</a>
                         </li>

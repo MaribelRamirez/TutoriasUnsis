@@ -267,8 +267,8 @@ public class ControllerConstancias extends HttpServlet {
                             
                             
                             Paragraph par1 = new Paragraph();
-                            
-                            Image imagenes = Image.getInstance("C:\\Users\\Marifer\\Documents\\NetBeansProjects\\servicioSocial\\TutoriasUnsis\\web\\resources\\images\\escudo.png");
+                            String rutRel = getServletConfig().getServletContext().getRealPath("/resources/images");
+                            Image imagenes = Image.getInstance(rutRel + "/" +"escudo.jpg");
                             imagenes.setAlignment(Element.ALIGN_CENTER);
                             imagenes.scaleToFit(90, 90);
                             documento.add(imagenes);

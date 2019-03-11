@@ -40,19 +40,11 @@
                 if (!screenfull.enabled) {
                     return false;
                 }
-
-
-
                 $('#toggle').click(function () {
                     screenfull.toggle($('#container')[0]);
                 });
-
-
-
             });
         </script>
-
-
 
     </head>
     <body>
@@ -72,8 +64,6 @@
 
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
-
-                <!--banner-->	
                 <div class="banner">
                     <h2>
                         <a href="index.html">Home</a>
@@ -81,8 +71,6 @@
                         <span>Reportes</span><br>
                     </h2>
                 </div>
-                <!--//banner-->
-                <!--faq-->
                 <div class="blank">
 
 
@@ -102,13 +90,7 @@
                                         <th>Pdf</th>
                                     </tr>
                                 </thead>
-                                <!--                                <tfoot>
-                                                                    <tr>
-                                                                        <td colspan="4">
-                                                                            <div id="paging"><ul><li><a href="#"><span>Previous</span></a></li><li><a href="#" class="active"><span>1</span></a></li><li><a href="#"><span>2</span></a></li><li><a href="#"><span>3</span></a></li><li><a href="#"><span>4</span></a></li><li><a href="#"><span>5</span></a></li><li><a href="#"><span>Next</span></a></li></ul>
-                                                                            </div>
-                                                                    </tr>
-                                                                </tfoot>-->
+                                
                                 <tbody>
                                     <%if (listar.size() > 0) {
                                             for (PdfVO listar2 : listar) {
@@ -138,21 +120,14 @@
                         <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                     </div>
                 </div>
-
-                <!--//faq-->
-                <!---->
-
             </div>
             <div class="clearfix"> </div>
         </div>
         <div class="copy">
             <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
         </div>
-        <!---->
-        <!--scrolling js-->
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
-        <!--//scrolling js-->
     </body>
 </html>
 

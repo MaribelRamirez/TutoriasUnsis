@@ -37,7 +37,6 @@
         <script src="resources/tablas/js/dataTables.bootstrap.min.js"></script> 
 
         <link href="resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
-
         <script src="resources/alert/sweetalert.min.js"></script>
         <link rel="stylesheet" type="text/css" href="resources/alert/sweetalert.css">
         <link rel="stylesheet" type="text/css" href="resources/alert/google.css">
@@ -132,8 +131,6 @@
         <jsp:include page="headAdminUpdate.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
-
-                <!--banner-->	
                 <div class="banner">
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
@@ -149,18 +146,14 @@
                             <form id="formularioG" name="formularioG" action="ControllerPeriodo" method="post" >
                                 <input type="hidden" name = "action" value="edit">
                                 <input type="hidden" name = "id"  value="<c:out value="${pdo.getIdPeriodo()}"/>"/> 
-
                                 <h3 id="forms-example" class="">Datos del periodo</h3>
-
                                 <div class="form-group">
                                     <label for="nomGrpp">Periodo</label>
-
                                     <input  required class="form-control" id="periodo" name="periodo"  value="<c:out value="${pdo.getPeriodo()}"/>"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="nomGrpp">Fecha Inicio</label>
                                     <input type="date" name="fechaI" id="datepicker" class="form-control" value="<c:out value="${pdo.getFechaInicio()}"/>"/>
-
                                 </div>
                                 <div class="form-group">
                                     <label for="nomGrpp">Fecha Fin</label>
@@ -178,11 +171,8 @@
 <div class="copy">
     <p><img src="resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
 </div>
-<!---->
-<!--scrolling js-->
 <script src="js/jquery.nicescroll.js"></script>
 <script src="js/scripts.js"></script>
-<!--//scrolling js-->
 </body>
 </html>
 

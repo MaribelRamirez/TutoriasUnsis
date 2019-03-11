@@ -131,32 +131,18 @@
                         <span>Documentos</span><br>
                     </h2>
                 </div>
-
-
                 <div class="blank">
-
-
                     <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-
-
-
-
                         <h3>Generar Documentos</h3>
                         <nav class="nav-sidebar">
                             <ul class="nav tabs">
-
                                 <li class="active">
-
                                     <form id="formulario" action="constanciaGrupal.jsp" method="post">
-
                                         <button type="submit"  class=" fa fa-file-o btn btn-link">Constancia grupal</button>
                                     </form>
                                 </li>
                                 <li class="active">
-
                                     <form id="formulario" action="constanciaIndividual.jsp" method="post">
-
                                         <button type="submit"  class=" fa fa-file-o btn btn-link">Constancia individual</button>
                                     </form>
                                 </li>
@@ -164,20 +150,16 @@
                                 <li class="active">
                                     <button type="button"  class=" fa fa-file-o btn btn-link" data-toggle="modal"  data-target="#exampleModal">Reportes de Tutorias</button>
 
-
                                     <form id="formulario" action="../ControllerReportesTutorias" method="post">
                                         <input type="hidden" name = "action" value="reporte">
-                                        <!-- Modal --> <div class="modal" id="exampleModal" tabindex="-1" role="dialog"
-                                                            arialabelledby="exampleModalLabel" aria-hidden="true">   
+                                                <div class="modal" id="exampleModal" tabindex="-1" role="dialog" arialabelledby="exampleModalLabel" aria-hidden="true">   
                                             <div class="modal-dialog" role="document">     
                                                 <div class="modal-content">      
                                                     <div class="modal-header">     
                                                         <h5 class="modal-title" id="exampleModalLabel">Selecciona el periodo del que 
-                                                            deseas generar el reporte</h5>      
-
+                                                            deseas generar el reporte</h5>  
                                                     </div>      
-                                                    <div class="modal-body">     
-
+                                                    <div class="modal-body">   
 
                                                         <%
                                                             PeriodoDAO obj_Read_Values = new PeriodoDAO();
@@ -202,34 +184,18 @@
                                                                 %>   
                                                             </select>
                                                         </div>
-
-
                                                     </div>     
                                                     <div class="modal-footer"> 
-
-
                                                         <button type="submit" class="btn btn-primary">Aceptar</button> 
-
-
-
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>   
-
-
-
                                                     </div>   
                                                 </div>   
                                             </div>
-                                        </div> 
-
+                                        </div>
                                     </form>
-
                                 </li>
-
-
                                 <li class="active">
                                     <button type="button"  class=" fa fa-file-o btn btn-link" data-toggle="modal"  data-target="#ModalAsigTuto">Asignación de tutorias</button>
-
-
                                     <form id="formulario" action="../ControllerReporteAsignacionTutorias" method="post">
                                         <input type="hidden" name = "action" value="reporte">
                                         <!-- Modal --> <div class="modal" id="ModalAsigTuto" tabindex="-1" role="dialog"
@@ -238,21 +204,16 @@
                                                 <div class="modal-content">      
                                                     <div class="modal-header">     
                                                         <h5 class="modal-title" id="exampleModalLabel">Selecciona el periodo del que 
-                                                            deseas generar el reporte</h5>      
-
+                                                            deseas generar el reporte</h5> 
                                                     </div>      
                                                     <div class="modal-body">     
-
-
                                                         <%                                                            PeriodoDAO obj_Read_Values2 = new PeriodoDAO();
                                                             List<Periodo> list2 = obj_Read_Values2.listarPeriodos();
                                                             Iterator<Periodo> it_list2 = list2.iterator();
 
                                                         %>
-
                                                         <div class = "form-group">
-                                                            <label>Periodos</label>	    
-
+                                                            <label>Periodos</label>	
                                                             <select class="form-control " id="IdPeriodo" name="IdPeriodo">
 
                                                                 <%                                                                    while (it_list2.hasNext()) {
@@ -266,48 +227,30 @@
                                                                 %>   
                                                             </select>
                                                         </div>
-
-
                                                     </div>     
                                                     <div class="modal-footer"> 
-
-
                                                         <button type="submit" class="btn btn-primary">Aceptar</button> 
-
-
-
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>   
-
-
-
                                                     </div>   
                                                 </div>   
                                             </div>
                                         </div> 
-
                                     </form>
-
                                 </li>
-
                                 <li class="active">
                                     <button type="button"  class=" fa fa-file-o btn btn-link" data-toggle="modal"  data-target="#ModalConAsig">Consentrado de asignaciones</button>
-
-
                                     <form id="formulario" action="../ControllerConcentradoAsignaciones" method="post">
                                         <input type="hidden" name = "action" value="reporte">
-                                        <!-- Modal --> <div class="modal" id="ModalConAsig" tabindex="-1" role="dialog"
+                                          <div class="modal" id="ModalConAsig" tabindex="-1" role="dialog"
                                                             arialabelledby="exampleModalLabel" aria-hidden="true">   
                                             <div class="modal-dialog" role="document">     
                                                 <div class="modal-content">      
                                                     <div class="modal-header">     
-                                                        <h5 class="modal-title" id="exampleModalLabel">Selecciona el periodo del que 
-                                                            deseas generar el reporte</h5>      
-
+                                                        <h5 class="modal-title" id="exampleModalLabel">Selecciona el periodo del que deseas generar el reporte</h5> 
                                                     </div>      
                                                     <div class="modal-body">     
-
-
-                                                        <%                                                            PeriodoDAO obj_Read_Values3 = new PeriodoDAO();
+                                                        <%                                                           
+                                                            PeriodoDAO obj_Read_Values3 = new PeriodoDAO();
                                                             List<Periodo> list3 = obj_Read_Values3.listarPeriodos();
                                                             Iterator<Periodo> it_list3 = list3.iterator();
 
@@ -333,46 +276,26 @@
 
                                                     </div>     
                                                     <div class="modal-footer"> 
-
-
                                                         <button type="submit" class="btn btn-primary">Aceptar</button> 
-
-
-
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>   
-
-
-
                                                     </div>   
                                                 </div>   
                                             </div>
                                         </div> 
-
                                     </form>
-
                                 </li>
-
                             </ul>
                         </nav>
-
                     </div>
-                    
                   <jsp:include page="verArchivos.jsp" flush="true" />
-                  
                     <div class="clearfix"> </div>
                 </div>
                 <div class="copy">
                     <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
                 </div>
-
-
-                <!---->
-                <!--scrolling js-->
                 <script src="js/jquery.nicescroll.js"></script>
                 <script src="js/scripts.js"></script>
-                <!--//scrolling js-->
-
-
+              
                 </body>
                 </html>
 

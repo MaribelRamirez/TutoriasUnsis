@@ -113,8 +113,6 @@
         <jsp:include page="headAdminUpdate.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
-
-                <!--banner-->	
                 <div class="banner">
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
@@ -125,7 +123,6 @@
                 <form id="formulario" action="ControllerGrupo" method="post">
                     <input type="hidden" name = "action" value="edit">
                     <input type="hidden" name = "id"  value="<c:out value="${grp.getIdGrupo()}"/>"/> 
-
                     <div class="blank">
 
                         <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -137,9 +134,6 @@
 
                                     <input  required class="form-control" id="grupo" name="grupo"  value="<c:out value="${grp.getGrupo()}"/>"/>
                                 </div>
-
-
-
 
                                 <%
                                     PeriodoDAO obj_Read_Values = new PeriodoDAO();
@@ -153,27 +147,23 @@
                                         <%                                        while (it_list.hasNext()) {
                                                 Periodo ob = new Periodo();
                                                 ob = it_list.next();
-                                        %>
-                                       
-                                     
+                                        %>                                      
+
                                         <c:set var="id" value="<%=ob.getIdPeriodo()%>"/>
-                                         <c:choose >
-                                             <c:when test="${ grp.getIdPeriodo()==id}">
+                                        <c:choose >
+                                            <c:when test="${ grp.getIdPeriodo()==id}">
                                                 <option  selected="selected"  value="<%=ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
 
                                             </c:when>
                                             <c:otherwise>
                                                 <option value="<%=ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
-                                             </c:otherwise>
+                                            </c:otherwise>
                                         </c:choose>
                                         <% }
 
                                         %>   
                                     </select>
                                 </div>
-
-
-
                                 <%                                    LicenciaturaDAO obj_Read_ValuesL = new LicenciaturaDAO();
                                     List<Licenciatura> listL = obj_Read_ValuesL.listarLicenciaturas();
                                     Iterator<Licenciatura> it_listL = listL.iterator();
@@ -185,29 +175,24 @@
                                         <%                                        while (it_listL.hasNext()) {
                                                 Licenciatura ob = new Licenciatura();
                                                 ob = it_listL.next();
-                                        %>
-                                        
-                                     
-                                        <c:set var="id" value="<%=ob.getIdLicenciatura()%>"/>
-                                         <c:choose >
-                                             <c:when test="${ grp.getIdLicenciatura()==id}">
-                                                <option  selected="selected"  value="<%= ob.getIdLicenciatura() %>"> <%=ob.getNombre()%></option>
+                                        %>                                        
 
+                                        <c:set var="id" value="<%=ob.getIdLicenciatura()%>"/>
+                                        <c:choose >
+                                            <c:when test="${ grp.getIdLicenciatura()==id}">
+                                                <option  selected="selected"  value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>
                                             </c:when>
                                             <c:otherwise>
-                                                <option value="<%=ob.getIdLicenciatura()%>"> <%=ob.getNombre() %></option>
-                                             </c:otherwise>
+                                                <option value="<%=ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>
+                                            </c:otherwise>
                                         </c:choose>
                                         <% }
 
                                         %>   
                                     </select>
                                 </div>
-
-
                             </div>
                             <button type="submit" class="bl btn btn-danger pull-right">Guardar</button>
-
                         </div>
                     </div>
                 </form>
@@ -220,11 +205,8 @@
 <div class="copy">
     <p><img src="resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
 </div>
-<!---->
-<!--scrolling js-->
 <script src="js/jquery.nicescroll.js"></script>
 <script src="js/scripts.js"></script>
-<!--//scrolling js-->
 </body>
 </html>
 
