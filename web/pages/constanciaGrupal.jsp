@@ -147,7 +147,7 @@
                             int cont = list.size();
 
                         %>
-                        <form id="formulario" action="../ControllerConstancias" method="post" target="blank">
+                        <form id="formulario" action="../ControllerConstancias" method="post" >
                             <div class="container">
                                 <br />
                                 <div class="row">
