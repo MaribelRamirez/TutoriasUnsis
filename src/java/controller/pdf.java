@@ -57,6 +57,7 @@ public class pdf extends HttpServlet {
             int tamanoInput = bos.available();
             byte[] datosPDF = new byte[tamanoInput];
             bos.read(datosPDF, 0, tamanoInput);
+            
 
             response.getOutputStream().write(datosPDF);
             bos.close();

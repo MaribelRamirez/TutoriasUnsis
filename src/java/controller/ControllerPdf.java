@@ -2,8 +2,11 @@ package controller;
 
 import dao.PdfDAO;
 import VO.PdfVO;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -40,26 +43,22 @@ public class ControllerPdf extends HttpServlet {
 
         String forward = "";
         String action = request.getParameter("action");
+        String nombreArchivo = request.getParameter("nombre");
         if (action.equalsIgnoreCase("delete")) {
-            int studentId = Integer.parseInt(request.getParameter("id"));
-            pdfdao.Eliminar_PdfVO(studentId);
+           try {
+                String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Archivos");
+                System.err.println(rutRel + "/" + nombreArchivo);
+
+                File archivo = new File(rutRel + "/" + nombreArchivo);
+                archivo.delete();
+            } catch (Exception e) {
+                System.err.println("Error" + e);
+            }
             
             response.sendRedirect("pages/cargarArchivos.jsp");
         }
         if (action.equalsIgnoreCase("edit")) {
-            forward = INSERT_OR_EDIT;
-            int studentIdM = Integer.parseInt(request.getParameter("id"));
-            id_pdf = studentIdM;
-            PdfVO pdfvo = pdfdao.getPdfVOById(studentIdM);
-            request.setAttribute("row", pdfvo);
-            boolean boo = false;
-            if (pdfvo.getArchivopdf2() != null) {
-                boo = true;
-            }
-            request.setAttribute("row2", boo);
-            estado = "edit";
-            RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
+            
             
         } else if (action.equalsIgnoreCase("insert")) {
             forward = INSERT_OR_EDIT;
@@ -74,49 +73,42 @@ public class ControllerPdf extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        PdfVO pdfvo = new PdfVO();
-        sql auto = new sql();
-        int nuevoid = auto.auto_increm("SELECT MAX(idArchivo) FROM archivos;");
         try {
-            String name = request.getParameter("txtname");
-            String tipo = request.getParameter("tipo");
-            pdfvo.setNombrepdf(name);
-            pdfvo.setCategoria(tipo);
-        } catch (Exception ex) {
-            System.out.println("nombre: " + ex.getMessage());
-        }
+            String name = request.getParameter("f1t1");
+                        System.err.println("Este es el nombre"+name);
         InputStream inputStream = null;
-        try {
+       
+        
+         try {
             Part filePart = request.getPart("fichero");
+            
             if (filePart.getSize() > 0) {
                 inputStream = filePart.getInputStream();
             }
         } catch (Exception ex) {
             System.out.println("fichero: " + ex.getMessage());
         }
-        try {
-
-            if (estado.equalsIgnoreCase("insert")) {
-
-                pdfvo.setCodigopdf(nuevoid);
-
-                if (inputStream != null) {
-
-                    pdfvo.setArchivopdf(inputStream);
-                }
-                pdfdao.Agregar_PdfVO(pdfvo);
-            } else {
-                pdfvo.setCodigopdf(id_pdf);
-                if (inputStream != null) {
-                    pdfvo.setArchivopdf(inputStream);
-                    pdfdao.Modificar_PdfVO(pdfvo);
-                } else {
-                    pdfdao.Modificar_PdfVO2(pdfvo);
-                }
+          File destino = new File(getServletContext().getRealPath("/resources/Archivos")+"/" +name);//ubicacion en el servidor
+        OutputStream outFile = new FileOutputStream(destino);
+         try {
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = inputStream.read(buf)) > 0) {
+                outFile.write(buf, 0, len);
             }
-        } catch (Exception ex) {
-            System.out.println("textos: " + ex.getMessage());
+
+            inputStream.close();
+            outFile.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
         }
+         
+        } catch (Exception ex) {
+            System.out.println("nombre: " + ex.getMessage());
+        }
+        
+     
+        
         response.sendRedirect("pages/cargarArchivos.jsp");
     }
 

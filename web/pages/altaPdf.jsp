@@ -64,31 +64,12 @@
 
 
 
-            $(document).on('change', 'input[type="file"]', function () {
-                var fileName = this.files[0].name;
-                var fileSize = this.files[0].size;
 
-                if (fileSize > 3000000) {
-                    alert('El archivo no debe superar los 3MB');
-                    this.value = '';
-                    this.files[0].name = '';
-                } else {
-                    // recuperamos la extensión del archivo
-                    var ext = fileName.split('.').pop();
+            function nombre(fic) {
+                fic = fic.split('\\');
+                document.f1.f1t1.value = fic[fic.length - 1];
 
-                    // console.log(ext);
-                    switch (ext) {
-                        case 'docx':
-                        case 'xlsx':
-                        case 'pdf':
-                            break;
-                        default:
-                            alert('El archivo no tiene la extensión adecuada');
-                            this.value = ''; // reset del valor
-                            this.files[0].name = '';
-                    }
-                }
-            });
+            }
         </script>
 
         <style>
@@ -146,49 +127,19 @@
                     </h2>
                 </div>
                 <div class="blank">
-                    <%
-                        Integer dato = 0;
-                        try {
-                            PdfVO pdf = (PdfVO) request.getAttribute("row");
-                            dato = pdf.getCodigopdf();
-                        } catch (Exception ex) {
-                            System.out.println(ex.getMessage());
-                        }
-                        boolean icono = false;
-                        try {
-                            icono = (Boolean) request.getAttribute("row2");
-                        } catch (Exception ex) {
-                            System.out.println(ex.getMessage());
-                        }
-                    %>
+                   
                     <div class="grid-form1">
-                        <form name="formpdf" action="ControllerPdf" method="post" enctype="multipart/form-data" onsubmit="return confirm('Realmente desea guardar los datos')">
-                            <div class="form-group">
-                                <label for="nomGrup">Nombre del archivo:</label>
-                                <input  required class="form-control" id="grupo" name="txtname" placeholder="Introduce el nombre del archivo" value="<c:out value="${row.nombrepdf}" />">
-                            </div>
-                            <div class="form-group">
-                                <label for="nomGrup">Tipo de archivo:</label>
-                                <select class="form-control " id="tipo" name="tipo">
-                                    <option value="1"> Reportes</option>
-                                    <option value="2">Material de apooyo</option>
-                                </select>
-                            </div>
+                        <form name="f1" id="f1" action="ControllerPdf" method="post" enctype="multipart/form-data" onsubmit="return confirm('Realmente desea guardar los datos')">
 
+
+                            <input hidden="false"  id="f1t1" name="f1t1"  />
                             <div class="form-group">
-                                <label for="id">Seleccionar PDF: *</label>
-                                <%
-                                    if (icono) {
-                                %>
-                                <a href="pdf?id=<%out.print(dato); %>" target="_blank"> Ver Pdf</a>
-                                <%
-                                    } else {
-                                        out.print("No hay Pdf");
-                                    }
-                                %>
+                                <label for="id">Seleccionar archivo: *</label>
+
                             </div>
                             <div class="form-group">
-                                <input type="file" name="fichero" value="" class="btn"/>
+                                <input type="file" name="fichero" value="" class="btn" onchange="nombre(this.value)" />
+
                             </div>
                             <div class="form-group">           
                                 <input type="submit" value="Enviar Archivo" name="submit" id="btn" class="btn"  />

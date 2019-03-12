@@ -3,6 +3,7 @@
     Created on : 09-ago-2018, 21:23:41
     Author     : Marifer
 --%>
+<%@page import="java.io.File"%>
 <%@page import="VO.PdfVO"%>
 <%@page import="dao.PdfDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -94,35 +95,30 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Codigo</th>
-                                        <th>Nombre</th>
+                                        
                                         <th>Archivo</th>
+                                        <th>Abrir</th>
                                     </tr>
                                 </thead>
                               
                                 <tbody>
-                                    <%if (listar.size() > 0) {
-                                            for (PdfVO listar2 : listar) {
-                                                pdfvo = listar2;
+                                    <%
+                                        String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Archivos");
+                                        String path = rutRel + "/";
+                                        File directorio = new File(path);
+                                        String[] ficheros = directorio.list();
+                                        for (int i = 0; i < ficheros.length; i++) {
                                     %>
                                     <tr>
-                                        <td><%=pdfvo.getCodigopdf()%></td>
-                                        <td><%=pdfvo.getNombrepdf()%></td>
+                                        <td><%=ficheros[i]%></td>
                                         <td>
-                                            <%
-                                                if (pdfvo.getArchivopdf2() != null) {
-                                            %>
-                                            <a href="../pdf?id=<%=pdfvo.getCodigopdf()%>" target="_blank"><img src="../resources/images/documento.png" title="pdf" width="30" height="30"/></a>
-                                                <%
-                                                    } else {
-                                                        out.print("Vacio");
-                                                    }
-                                                %>
+                                            <a href="../resources/Archivos/<%=ficheros[i]%>" target="_blank" type="application/vnd.ms-excel"><img src="../resources/images/excel.png" title="Eliminar" height="50" class="center-block"/> </a>
                                         </td>
-
+                                        
                                     </tr>
-                                    <%}
-                                        }%>
+                                    <%
+                                        }
+                                    %>
                                 </tbody>
                             </table>
                         </div>

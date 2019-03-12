@@ -37,9 +37,7 @@
                     <li>
                         <a href="indexProfesor.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Tutorados</a>
                     </li>
-                    <li>
-                        <a href="reportes.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Reportes</a>
-                    </li>
+                   
                     <li>
                         <a href="materialApoyo.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Material de apoyo</a>
                     </li>
