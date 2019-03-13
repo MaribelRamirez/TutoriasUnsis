@@ -218,12 +218,12 @@ public class ControllerConstancias extends HttpServlet {
                     ProfesorDAO obprof = new ProfesorDAO();
                     Profesor prof = obprof.obtenerProfesorBycurp(profCurp);
    if (action.equalsIgnoreCase("individual")) {
-                    destino = new File(getServletContext().getRealPath("/resources/Documentos") + "/Constancia-Individual-"+pdo.getPeriodo()+"-" + prof.getNombre() + ".pdf");//ubicacion en el servidor
+                    destino = new File(getServletContext().getRealPath("/resources/Documentos") + "/Constancia Individual-"+pdo.getPeriodo()+"-" + prof.getNombre() + ".pdf");//ubicacion en el servidor
                    
    }
    else
    {
-    destino = new File(getServletContext().getRealPath("/resources/Documentos") + "/Constancia-Grupal-"+pdo.getPeriodo()+"-" + prof.getNombre() + ".pdf");//ubicacion en el servidor
+    destino = new File(getServletContext().getRealPath("/resources/Documentos") + "/Constancia Grupal-"+pdo.getPeriodo()+"-" + prof.getNombre() + ".pdf");//ubicacion en el servidor
                    
    }
    OutputStream outFile = new FileOutputStream(destino);

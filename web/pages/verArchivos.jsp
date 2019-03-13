@@ -1,3 +1,4 @@
+<%@page import="org.apache.xmlbeans.impl.xb.ltgfmt.TestCase.Files"%>
 <%@page import="java.io.File"%>
 <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
@@ -22,11 +23,13 @@
                     File directorio = new File(path);
                     String[] ficheros = directorio.list();
                     for (int i = 0; i < ficheros.length; i++) {
+                     
+           
                 %>
                 <tr>
                     <td><%=ficheros[i]%></td>
                     <td>
-                        <a href="../resources/Documentos/<%=ficheros[i]%>" target="_blank" type="application/vnd.ms-excel"><img src="../resources/images/excel.png" title="Eliminar" height="50" class="center-block"/> </a>
+                        <a href="../resources/Documentos/<%=ficheros[i]%>" target="_blank" type="application/vnd.ms-excel"><img src="../resources/images/doc.png" title="Abrir" height="50" class="center-block"/> </a>
                     </td>
                     <td >
                         <form id="formularioElim" name="formularioElim" action="../ControllerArchivos" method="post" onsubmit="return confirm('¿Realmente desea eliminar el documento?')" >

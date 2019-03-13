@@ -141,7 +141,7 @@
                                             <%
                                                 if (pdfvo.getArchivopdf2() != null) {
                                             %>
-                                            <a href="../pdf?id=<%=pdfvo.getCodigopdf()%>" target="_blank"><img src="../resources/images/mpdf.png" title="pdf" class="center-block"l/></a>
+                                            <a href="../pdf?id=<%=pdfvo.getCodigopdf()%>" target="_blank"><img src="../resources/images/doc.png.png" title="pdf" class="center-block"l/></a>
                                                 <%
                                                     } else {
                                                         out.print("Vacio");
