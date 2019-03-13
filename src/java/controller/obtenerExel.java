@@ -94,8 +94,8 @@ public class obtenerExel extends HttpServlet {
         InputStream inFile = null;
 
         //Crea el archivo de destino
-        System.err.println("esta es la ruta ...." + getServletContext().getRealPath("/Documentos"));
-        File destino = new File(getServletContext().getRealPath("/Documentos") + "/alumnos.xlsx");//ubicacion en el servidor
+        System.err.println("esta es la ruta ...." + getServletContext().getRealPath("/resourses/Documentos"));
+        File destino = new File(getServletContext().getRealPath("/resourses/Documentos") + "/alumnos.xlsx");//ubicacion en el servidor
         OutputStream outFile = new FileOutputStream(destino);
         // probando obtener ruta absoluta
 

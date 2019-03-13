@@ -1,11 +1,7 @@
-<%-- 
-    Document   : reportes
-    Created on : 09-ago-2018, 21:23:41
-    Author     : Marifer
---%>
 <%@page import="VO.PdfVO"%>
 <%@page import="dao.PdfDAO"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.io.File"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <!DOCTYPE HTML>
@@ -112,52 +108,49 @@
                 </div>
                 <div class="blank">
                     <div class="blank-page">
-                        <%
-                            PdfDAO emp = new PdfDAO();
-                            PdfVO pdfvo = new PdfVO();
-                            ArrayList<PdfVO> listar = emp.Listar_PdfVO();
-                        %>
+
 
                         <a id="mostrar" href="../ControllerPdf?action=insert&id=">Agregar archivo<img src="../resources/images/nuevo.png" title="Nuevo registro"/></a><br>
-                        <div class="datagrid">
-                            <table>
+                        <nav class="nav-sidebar">
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Codigo</th>
-                                        <th>Nombre</th>
-                                        <th>Pdf</th>
-                                        <th></th>
+                                        <th>Archivo</th>
+                                        <th>Abrir</th>
+                                        <th>Eliminar</th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
-                                    <%if (listar.size() > 0) {
-                                            for (PdfVO listar2 : listar) {
-                                                pdfvo = listar2;
+                                    <%
+                                        String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Archivos");
+                                        String path = rutRel + "/";
+                                        File directorio = new File(path);
+                                        String[] ficheros = directorio.list();
+                                        for (int i = 0; i < ficheros.length; i++) {
                                     %>
                                     <tr>
-                                        <td><%=pdfvo.getCodigopdf()%></td>
-                                        <td><%=pdfvo.getNombrepdf()%></td>
+                                        <td><%=ficheros[i]%></td>
                                         <td>
-                                            <%
-                                                if (pdfvo.getArchivopdf2() != null) {
-                                            %>
-                                            <a href="../pdf?id=<%=pdfvo.getCodigopdf()%>" target="_blank"><img src="../resources/images/doc.png.png" title="pdf" class="center-block"l/></a>
-                                                <%
-                                                    } else {
-                                                        out.print("Vacio");
-                                                    }
-                                                %>
+                                          
+                                            <a href="../resources/Archivos/<%=ficheros[i]%>" target="_blank"><img src="../resources/images/doc.png.png" title="pdf" class="center-block"l/></a>
+                                                
                                         </td>
-                                        <td>
-                                            <a id="mostrar" href="../ControllerPdf?action=insert&id=<%=pdfvo.getCodigopdf()%>"> <img src="../resources/images/nuevo.png" title="Nuevo registro" class="center-block"/></a>
-                                            <a href="../ControllerPdf?action=delete&id=<%=pdfvo.getCodigopdf()%>"> <img src="../resources/images/delete.jpeg" title="Eliminar" height="40" class="center-block"/></a>
+                                        <td >
+                                            <form id="formularioElim" name="formularioElim" action="../ControllerPdf" method="get" onsubmit="return confirm('¿Realmente desea eliminar el documento?')" >
+                                                <input type="hidden" name = "nombre" id="id" value="<%=ficheros[i]%>">
+                                                <input type="hidden" name = "action" id="action" value="delete">
+                                                <button type="submit"  class="btn btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40" /></button>
+                                            </form>
                                         </td>
                                     </tr>
-                                    <%}
-                                        }%>
+                                    <%
+                                        }
+                                    %>
                                 </tbody>
                             </table>
-                        </div>
+
+                        </nav>
                         <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                     </div>
                 </div>
