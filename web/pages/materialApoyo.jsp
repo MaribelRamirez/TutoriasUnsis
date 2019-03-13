@@ -112,7 +112,15 @@
                                     <tr>
                                         <td><%=ficheros[i]%></td>
                                         <td>
-                                            <a href="../resources/Archivos/<%=ficheros[i]%>" target="_blank" type="application/vnd.ms-excel"><img src="../resources/images/excel.png" title="Eliminar" height="50" class="center-block"/> </a>
+                                            <%
+                                                if (pdfvo.getArchivopdf2() != null) {
+                                            %>
+                                            <a href="../pdf?id=<%=pdfvo.getCodigopdf()%>" target="_blank"><img src="../resources/images/doc.png" title="pdf"/></a>
+                                                <%
+                                                    } else {
+                                                        out.print("Vacio");
+                                                    }
+                                                %>
                                         </td>
                                         
                                     </tr>

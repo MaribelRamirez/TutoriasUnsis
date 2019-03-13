@@ -84,6 +84,7 @@ public class ControllerArchivos extends HttpServlet {
             String[] ficheros = directorio.list();
             for (int i = 0; i < ficheros.length; i++) {
                 File archivo = new File(rutRel + "/" + ficheros[i]);
+               
                 archivo.delete();
             }
 
