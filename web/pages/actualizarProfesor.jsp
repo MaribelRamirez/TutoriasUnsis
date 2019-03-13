@@ -164,62 +164,35 @@
                                 </div>
 
                                 <div class = "form-group">
-                                    <label>Grado academico</label>	      
-                                    <select class="form-control " id="grado" name="grado">
-
-                                        <c:if test="${prf.getGrado()=='Licenciatura'}">
-                                            <option selected="selected" value="Licenciatura"> Licenciatura</option>
-                                            <option value="Maestria">Maestria</option>
-                                            <option value="Doctorado">Doctorado</option>
-                                            <option value="Pos Doctorado">Pos doctorado</option>
-                                        </c:if>
-                                        <c:if test="${prf.getGrado()=='Maestria'}">
-                                            <option selected="selected" value="Maestria"> Maestria</option>
-                                            <option value="Licenciatura"> Licenciatura</option>
-                                            <option value="Doctorado">Doctorado</option>
-                                            <option value="Pos Doctorado">Pos doctorado</option>
-                                        </c:if>
-                                        <c:if test="${prf.getGrado()=='Doctorado'}">
-                                            <option selected="selected" value="Doctorado"> Doctorado</option>
-                                            <option value="Licenciatura"> Licenciatura</option>
-                                            <option value="Maestria">Maestria</option>
-                                            <option value="Pos Doctorado">Pos doctorado</option>
-                                        </c:if>
-                                        <c:if test="${prf.getGrado()=='Pos doctorado'}">
-                                            <option selected="selected" value="Pos doctorado"> Pos doctorado</option>
-                                            <option value="Licenciatura"> Licenciatura</option>
-                                            <option value="Maestria">Maestria</option>
-                                            <option value="Doctorado">Doctorado</option>
-                                        </c:if>
-
-                                    </select>
+                                    <label>Grado academico</label>
+                                    <input  required class="form-control" id="grado" name="grado"  value="<c:out value="${prf.getGrado()}"/>"/>
                                 </div>
                                 <div class = "form-group">
                                     <label>Status</label>	      
                                     <select  class="form-control " id="estatus" name="estatus">
-                                        <c:if test="${prf.getEstatus()=='Activo'}">
-                                            <option selected="selected" value="Activo"> Activo</option>
-                                            <option value="Inactivo">Inactivo</option>
-                                            <option value="Licencia">Licencia</option>
-                                            <option value="Sabatico">Sabatico</option>
+                                        <c:if test="${prf.getEstatus()=='ACTIVO'}">
+                                            <option selected="selected" value="ACTIVO">ACTIVO</option>
+                                            <option value="INACTIVO">INACTIVO</option>
+                                            <option value="LICENCIA">LICENCIA</option>
+                                            <option value="SABATICO">SABATICO</option>
                                         </c:if>
-                                        <c:if test="${prf.getEstatus()=='Inactivo'}">
-                                            <option selected="selected" value="Inactivo"> Inactivo</option>
-                                            <option value="Activo">Activo</option>
-                                            <option value="Licencia">Licencia</option>
-                                            <option value="Sabatico">Sabatico</option>
+                                        <c:if test="${prf.getEstatus()=='INACTIVO'}">
+                                            <option selected="selected" value="INACTIVO">Inactivo</option>
+                                            <option value="ACTIVO">ACTIVO</option>
+                                            <option value="LICENCIA">LICENCIA</option>
+                                            <option value="SABATICO">SABATICO</option>
                                         </c:if>
-                                        <c:if test="${prf.getEstatus()=='Licencia'}">
-                                            <option selected="selected" value="Licencia"> Licencia</option>
-                                            <option value="Activo">Activo</option>
-                                            <option value="Inactivo">Inactivo</option>
-                                            <option value="Sabatico">Sabatico</option>
+                                        <c:if test="${prf.getEstatus()=='LICENCIA'}">
+                                            <option selected="selected" value="LICENCIA">Licencia</option>
+                                            <option value="ACTIVO">ACTIVO</option>
+                                            <option value="INACTIVO">INACTIVO</option>
+                                            <option value="SABATICO">SABATICO</option>
                                         </c:if>
-                                        <c:if test="${prf.getEstatus()=='Sabatico'}">
-                                            <option selected="selected" value="Sabatico"> Sabatico</option>
-                                            <option value="Activo">Activo</option>
-                                            <option value="Inactivo">Inactivo</option>
-                                            <option value="Licencia">Licencia</option>
+                                        <c:if test="${prf.getEstatus()=='SABATICO'}">
+                                            <option selected="selected" value="SABATICO">Sabatico</option>
+                                            <option value="ACTIVO">ACTIVO</option>
+                                            <option value="INACTIVO">INACTIVO</option>
+                                            <option value="LICENCIA">LICENCIA</option>
                                         </c:if>
 
                                     </select>
