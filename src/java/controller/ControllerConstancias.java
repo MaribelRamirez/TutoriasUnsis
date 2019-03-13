@@ -24,6 +24,8 @@ import dao.AlumnoDAO;
 import dao.GrupoDAO;
 import dao.PeriodoDAO;
 import dao.ProfesorDAO;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import static java.lang.System.out;
@@ -203,42 +205,11 @@ public class ControllerConstancias extends HttpServlet {
         int sizeList = Integer.parseInt(request.getParameter("sizeList"));
 
         response.setContentType("application/pdf");
-        OutputStream outt = response.getOutputStream();
-        Document documento = new Document(PageSize.A4, 60, 60, 40, 40);
-        try {
-            PdfWriter.getInstance(documento, outt);
-        } catch (DocumentException ex) {
-            out.print("<html>"
-                    + "<head>"
-                    + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
-                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
-                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
-                    + "</head>"
-                    + "<body >"
-                    + "<script>\n"
-                    + "function EventoAlert(){\n"
-                    + "  swal({\n"
-                    + "title: \"Aviso!!\",\n"
-                    + "text: \"Error al crear el documento \",\n"
-                    + "type: \"warning\",    \n"
-                    + "confirmButtonColor: \"#DD6B55\",\n"
-                    + "confirmButtonText: \"Aceptar\",\n"
-                    + "closeOnConfirm: false,\n"
-                    + "},\n"
-                    + "\n"
-                    + "function(isConfirm){\n"
-                    + "if (isConfirm) {\n"
-                    + "window.location='pages/generarReportes.jsp'   \n"
-                    + "} \n"
-                    + "});\n"
-                    + "}\n"
-                    + "EventoAlert();\n"
-                    + "</script>"
-                    + "</body>\n"
-                    + "</html>");
-        }
-        documento.open();
+
+        Document documento = null;
+        File destino=null;
         for (i = 1; i <= sizeList; i++) {
+
             String profCurp = request.getParameter("prof".concat(Integer.toString(i)));
 
             if (profCurp != null) {
@@ -246,6 +217,25 @@ public class ControllerConstancias extends HttpServlet {
                 try {
                     ProfesorDAO obprof = new ProfesorDAO();
                     Profesor prof = obprof.obtenerProfesorBycurp(profCurp);
+   if (action.equalsIgnoreCase("individual")) {
+                    destino = new File(getServletContext().getRealPath("/resources/Documentos") + "/Constancia-Individual-"+pdo.getPeriodo()+"-" + prof.getNombre() + ".pdf");//ubicacion en el servidor
+                   
+   }
+   else
+   {
+    destino = new File(getServletContext().getRealPath("/resources/Documentos") + "/Constancia-Grupal-"+pdo.getPeriodo()+"-" + prof.getNombre() + ".pdf");//ubicacion en el servidor
+                   
+   }
+   OutputStream outFile = new FileOutputStream(destino);
+                    documento = new Document(PageSize.A4, 60, 60, 40, 40);
+
+                    try {
+                        PdfWriter.getInstance(documento, outFile);
+                    } catch (DocumentException ex) {
+                        Logger.getLogger(ControllerConstancias.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    documento.open();
 
                     GrupoDAO ob_grupo = new GrupoDAO();
                     Grupo grupo = ob_grupo.obtenerGrupobyProf(profCurp, IdPeriodo);
@@ -432,6 +422,8 @@ public class ControllerConstancias extends HttpServlet {
                     par4.setAlignment(Element.ALIGN_CENTER);
                     documento.add(par4);
                     documento.newPage();
+                     documento.close();
+                     
                 } catch (SQLException ex) {
                     out.print("<html>"
                             + "<head>"
@@ -470,11 +462,11 @@ public class ControllerConstancias extends HttpServlet {
                 }
 
             }
-
+            
         }
 
-        documento.close();
-
+       
+response.sendRedirect("pages/generarReportes.jsp");
     }
 
     /**

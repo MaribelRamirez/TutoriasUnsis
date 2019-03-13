@@ -238,7 +238,7 @@
                                     </form>
                                 </li>
                                 <li class="active">
-                                    <button type="button"  class=" fa fa-file-o btn btn-link" data-toggle="modal"  data-target="#ModalConAsig">Consentrado de asignaciones</button>
+                                    <button type="button"  class=" fa fa-file-o btn btn-link" data-toggle="modal"  data-target="#ModalConAsig">Concentrado de asignaciones</button>
                                     <form id="formulario" action="../ControllerConcentradoAsignaciones" method="post">
                                         <input type="hidden" name = "action" value="reporte">
                                           <div class="modal" id="ModalConAsig" tabindex="-1" role="dialog"

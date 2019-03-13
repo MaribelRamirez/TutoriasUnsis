@@ -139,12 +139,12 @@
                         <%
                             PeriodoDAO obj_Read_periodo = new PeriodoDAO();
                             ProfesorDAO obj_Read_Values = new ProfesorDAO();
-                            List<Profesor> list = obj_Read_Values.tutorIndividual(obj_Read_periodo.obtenerPeriodoActual().getIdPeriodo());
+                            List<Profesor> list = obj_Read_Values.tutorIndividual();
                             Iterator<Profesor> it_list = list.iterator();
                             int cont = list.size();
 
                         %>
-                        <form id="formulario" action="../ControllerConstancias" method="post" target="_blank">
+                        <form id="formulario" action="../ControllerConstancias" method="post" >
                             <div class="container">
                                 <br />
                                 <div class="row">
