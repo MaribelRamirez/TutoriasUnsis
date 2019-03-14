@@ -176,7 +176,7 @@
                             <thead>
                                 <tr>
                                     <th>Nombre</th></th> 
-                                    <th>Perfil academico</th>
+                                    <!--<th>Perfil academico</th> -->
                                     <th>Status</th>
                                     <th>Licenciatura</th>
                                     <th>Editar</th>
@@ -190,8 +190,8 @@
                                         ob = it_list.next();
                                 %>  
                                 <tr>
-                                    <td ><%=ob.getNombre()%></td>
-                                    <td><%=ob.getGrado()%></td>
+                                    <td ><%=ob.getGrado()%>  <%=ob.getNombre()%></td>
+                                    
                                     <td><%=ob.getEstatus()%></td>
                                     <td><%=ob.getLicenciatura()%></td>
                                     <td>                                        
