@@ -45,7 +45,7 @@
                     <img src="resources/images/escudo.jpg" width="90" height="90"> <br><br>
                     <ul class="nav" id="side-menu">
                         <a href="pages/indexAdmin.jsp" class=" hvr-bounce-to-right">
-                            <i class="fa fa-file-o nav_icon"></i>Maestros
+                            <i class="fa fa-file-o nav_icon"></i>Profesores
                         </a>
                         </li>
                         <li>

@@ -160,7 +160,7 @@
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
                         <i class="fa fa-angle-right"></i>
-                        <span>Maestros</span><br>
+                        <span>Profesores</span><br>
                     </h2>
                 </div>
                 <div class="blank">
@@ -172,7 +172,7 @@
                         %>
                         <table id="example" class="table table-striped table-bordered " style="width:100%">
                             <a href="agregarProfesor.jsp">
-                                <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo maestro</a>
+                                <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo profesor</a>
                             <thead>
                                 <tr>
                                     <th>Nombre</th></th> 

@@ -140,10 +140,10 @@
                                     <label>Status</label>	      
                                     <select class="form-control " id="status" name="status">
 
-                                        <option value="Activo">Activo</option>
-                                        <option value="Inactivo">Inactivo</option>
-                                        <option value="Licencia">Licencia</option>
-                                        <option value="Sabatico">Sabatico</option>
+                                        <option value="Activo">ACTIVO</option>
+                                        <option value="Inactivo">INACTIVO</option>
+                                        <option value="Licencia">LICENCIA</option>
+                                        <option value="Sabatico">SABATICO</option>
                                     </select>
                                 </div>
                                 <%

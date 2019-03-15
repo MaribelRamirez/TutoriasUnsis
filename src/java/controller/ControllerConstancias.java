@@ -99,10 +99,16 @@ public class ControllerConstancias extends HttpServlet {
 
         processRequest(request, response);
         String action = request.getParameter("action");
+        String calendario=null;
+         calendario = request.getParameter("datepicker");
+if(calendario.isEmpty()){
+      if (action.equalsIgnoreCase("individual")) {
+ response.sendRedirect("pages/constanciaIndividual.jsp");}
+      else{response.sendRedirect("pages/constanciaGrupal.jsp");}
+}
 
-        String calendario = request.getParameter("datepicker");
-
-        String[] bar = calendario.split("-");
+else{
+ String[] bar = calendario.split("-");
         int j = 1;
         String dia = null;
         String mes = null;
@@ -112,38 +118,13 @@ public class ControllerConstancias extends HttpServlet {
         PeriodoDAO per = new PeriodoDAO();
         Periodo pdo = null;
 
-        try {
-            pdo = per.obtenerPeriodoById(IdPeriodo);
-        } catch (SQLException ex) {
-            out.print("<html>"
-                    + "<head>"
-                    + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
-                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/sweetalert.css\">\n"
-                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"resources/alert/google.css\">"
-                    + "</head>"
-                    + "<body >"
-                    + "<script>\n"
-                    + "function EventoAlert(){\n"
-                    + "  swal({\n"
-                    + "title: \"Aviso!!\",\n"
-                    + "text: \"Error al obtener el periodo \",\n"
-                    + "type: \"warning\",    \n"
-                    + "confirmButtonColor: \"#DD6B55\",\n"
-                    + "confirmButtonText: \"Aceptar\",\n"
-                    + "closeOnConfirm: false,\n"
-                    + "},\n"
-                    + "\n"
-                    + "function(isConfirm){\n"
-                    + "if (isConfirm) {\n"
-                    + "window.location='pages/generarReportes.jsp'   \n"
-                    + "} \n"
-                    + "});\n"
-                    + "}\n"
-                    + "EventoAlert();\n"
-                    + "</script>"
-                    + "</body>\n"
-                    + "</html>");
-        }
+        
+            try {
+                pdo = per.obtenerPeriodoById(IdPeriodo);
+            } catch (SQLException ex) {
+                Logger.getLogger(ControllerConstancias.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
 
         for (String fechas : bar) {
 
@@ -290,7 +271,7 @@ public class ControllerConstancias extends HttpServlet {
                         Paragraph par2 = new Paragraph();
 
                         par2.add(new Phrase("Que la Profesor (a) de Tiempo Completo ", text1));
-                        par2.add(new Phrase("" + prof.getGrado() + " " + prof.getNombre(), text3));
+                        par2.add(new Phrase("" + prof.getGrado() + " " + prof.getNombre().toUpperCase(), text3));
 
                         if (action.equalsIgnoreCase("individual")) {
 
@@ -471,6 +452,8 @@ public class ControllerConstancias extends HttpServlet {
 
         response.sendRedirect("pages/generarReportes.jsp");
 
+}
+       
     }
 
     /**
