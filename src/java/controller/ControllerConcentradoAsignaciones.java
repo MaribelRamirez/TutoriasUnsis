@@ -286,7 +286,7 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                         l++;
 
                         cellT4 = rowT4.createCell(l);
-                        cellT4.setCellValue(Obt.getNombre() + " " + Obt.getNombre());
+                        cellT4.setCellValue(Obt.getGrado()+ " " + Obt.getNombre());
                         cellT4.setCellStyle(style2);
 
                         l++;

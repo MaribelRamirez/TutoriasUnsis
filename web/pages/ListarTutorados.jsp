@@ -119,7 +119,7 @@
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
                         <i class="fa fa-angle-right"></i>
-                        <span>Tutores</span><br>
+                        <span>Tutorados</span><br>
                     </h2>
                 </div>
                 <div class="blank">

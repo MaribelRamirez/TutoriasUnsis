@@ -234,7 +234,9 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                     List<Alumno> list2 = objALum.listarAlumnosTutoradosByCarrera(obG.getCurp(), ob_lic.getNombre(), idPeriodo);
                     Iterator<Alumno> it_list2 = list2.iterator();
 
-                    List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_lic.getNombre(), idPeriodo);
+                    //List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_lic.getNombre(), idPeriodo);
+                    List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(),idPeriodo);
+                    
                     Iterator<Grupo> it_grupos = list_grupos.iterator();
 
                     if (list2.size() > 0) {
@@ -512,6 +514,7 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                     + "</script>"
                     + "</body>\n"
                     + "</html>");
+            System.err.println(ex);
         }
 
     }

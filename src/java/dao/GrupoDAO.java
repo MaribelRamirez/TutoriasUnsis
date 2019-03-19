@@ -144,17 +144,19 @@ public class GrupoDAO {
     }
     //regresa los grupos de determinada carrera a los que tutora determinado profesor 
 
-    public List<Grupo> listarGruposTutorados(String curp, String carrera, int periodo) throws SQLException {
+    public List<Grupo> listarGruposTutorados(String curp, int periodo) throws SQLException {
 
         List<Grupo> listaGrupos = new ArrayList<Grupo>();
-        String sql = "select distinct grupos.grupo  from tutores ,  grupos ,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura where tutores.matricula=alumnos.matricula  and tutores.curp='" + curp + "' and tutores.tipo=2 and licenciaturas.nombre='" + carrera + "' group by(grupos.grupo) and tutores.idPeriodo='" + periodo + "';";
+        //String sql = "select distinct grupos.grupo  from tutores ,  grupos ,alumnos inner
+        //join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura where tutores.matricula=alumnos.matricula  and tutores.curp='" + curp + "' and tutores.tipo=2 and licenciaturas.nombre='" + carrera + "' group by(grupos.grupo) and tutores.idPeriodo='" + periodo + "';";
+String sql = " select distinct grupo from tutores where curp='" + curp + "' and idPeriodo='" + periodo + "';" ;
 
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
 
         while (resulSet.next()) {
-            String nombre = resulSet.getString("grupos.grupo");
+            String nombre = resulSet.getString("grupo");
 
             Grupo grupo;
             grupo = new Grupo(0, nombre, 0, 0, "", "");

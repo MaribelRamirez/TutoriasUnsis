@@ -43,7 +43,7 @@
 
                         <li>
                             <a href="indexAdmin.jsp" class=" hvr-bounce-to-right">
-                                <i class="fa fa-file-o nav_icon"></i>Maestros
+                                <i class="fa fa-file-o nav_icon"></i>Profesores
                             </a>
                         </li>
                         <li>
