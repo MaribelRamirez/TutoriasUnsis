@@ -122,7 +122,7 @@
                 <form id="formulario" action="ControllerTutores" method="post">
                     <input type="hidden" name = "action" value="add">
                     <input type="hidden" name = "tipo" value="individual">
-
+                    <input type="hidden" name = "ruta" id="ruta" value="<c:out value="${ruta}"/>">
                     <input type="hidden" name = "matricula"  value="<c:out value="${alm.getMatricula()}"/>"/> 
 
                     <div class="blank">

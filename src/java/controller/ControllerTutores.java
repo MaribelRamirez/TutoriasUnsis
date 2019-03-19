@@ -105,8 +105,10 @@ public class ControllerTutores extends HttpServlet {
 
             try {
                 forward = edit2;
+                String ruta = request.getParameter("ruta");
                 Alumno alm = alumnodao.obtenerAlumnoByMatricula(request.getParameter("id"));
                 request.setAttribute("alm", alm);
+                request.setAttribute("ruta", ruta);
                 RequestDispatcher view = request.getRequestDispatcher(forward);
                 view.forward(request, response);
             } catch (NumberFormatException | SQLException e) {
@@ -149,6 +151,8 @@ public class ControllerTutores extends HttpServlet {
                 }
 
             } else if ("individual".equals(tipo)) {
+                
+                String ruta = request.getParameter("ruta");
                 String matricula = request.getParameter("matricula");
                 String curp = request.getParameter("profesor");
                 sql auto = new sql();
@@ -169,7 +173,11 @@ public class ControllerTutores extends HttpServlet {
                 } catch (SQLException ex) {
                     Logger.getLogger(ControllerTutores.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                response.sendRedirect("pages/ListarTutorados.jsp");
+                if("listTu".equals(ruta)){
+                    response.sendRedirect("pages/ListarTutorados.jsp");
+                }else{
+                    response.sendRedirect("pages/ListarAlumnos.jsp");
+                }
             }
 
         }
