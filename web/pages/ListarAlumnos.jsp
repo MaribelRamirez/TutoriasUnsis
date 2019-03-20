@@ -225,6 +225,7 @@
                                     <form id="formulario" action="../ControllerTutores" method="post">
                                         <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
                                         <input type="hidden" name = "action" id="action" value="addTI">
+                                        <input type="hidden" name = "ruta" id="ruta" value="listAl">
                                         <button type="submit"  class="btn btn-link center-block">Agregar tutor</button>
                                     </form>
 

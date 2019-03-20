@@ -185,6 +185,7 @@
                                         <form id="formulario" action="../ControllerTutores" method="post" onsubmit="return confirm('¿Realmente desea agregar tutor?')">
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
                                             <input type="hidden" name = "action" id="action" value="addTI">
+                                            <input type="hidden" name = "ruta" id="ruta" value="listTu">
                                             <button type="submit"  class="btn btn-link">Agregar tutor</button>
                                         </form>
                                     </td>
