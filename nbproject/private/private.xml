@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/src/java/controller/ControllerProfesor.java</file>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/src/java/model/ConnectionClass.java</file>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/src/java/controller/ControllerConstancias.java</file>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/web/pages/ListarTutorados.jsp</file>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/src/java/controller/ControllerTutores.java</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/web/pages/ListarPeriodos.jsp</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/web/pages/ListarLicenciaturas.jsp</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/web/pages/ListarAlumnos.jsp</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/web/pages/ListarReportes.jsp</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/servicioSocial/TutoriasUnsis/web/pages/ListarGrupos.jsp</file>
         </group>
     </open-files>
 </project-private>

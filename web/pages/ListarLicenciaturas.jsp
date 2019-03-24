@@ -195,7 +195,7 @@
                                 <tr>
                                     <td><%=ob.getNombre()%></td>
                                     <td>
-                                        <form id="formularioAct" name="formularioAct" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')" >
+                                        <form id="formularioAct" name="formularioAct" action="../ControllerLicenciatura" method="post" >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
                                             <button type="submitu"  class="btn btn-link center-block">Actualizar</button>

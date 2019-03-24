@@ -204,7 +204,7 @@
                                     <td><%=ob.getPeriodo()%></td>
                                     <td><%=ob.getLicenciatura()%></td>
                                     <td>
-                                        <form id="formularioAct" name="formularioAct" action="../ControllerGrupo" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')" >
+                                        <form id="formularioAct" name="formularioAct" action="../ControllerGrupo" method="post">
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
                                             <button type="submit"  class="btn btn-link center-block">Actualizar</button>

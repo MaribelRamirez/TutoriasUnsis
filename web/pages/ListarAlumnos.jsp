@@ -204,7 +204,7 @@
                                 <td ><%=ob.getGrupo()%></td>
                                 <td><%=ob.getLicenciatura()%></td>
                                 <td>
-                                    <form id="formularioAct" id="formularioAct"  action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')"  >
+                                    <form id="formularioAct" id="formularioAct"  action="../ControllerAlumno" method="post">
                                         <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
                                         <input type="hidden" name = "action" id="action" value="update">
                                         <button type="submit" class="btn btn-link center-block">Actualizar</button>
