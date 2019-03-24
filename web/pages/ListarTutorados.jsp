@@ -139,7 +139,6 @@
                                     <th>Alumno</th>
                                     <th>Grupo</th>
                                     <th>Licenciatura</th>
-                                    <th>Curp</th>
                                     <th>Tutor</th>
                                     <th>Tipo de tutoria</th>
                                 </tr>
@@ -156,7 +155,6 @@
                                     <td><%=ob.getAlumno()%></td>
                                     <td><%=ob.getGrupo()%></td>
                                     <td><%=ob.getLic()%></td>
-                                    <td><%=ob.getCurp()%></td>
                                     <td><%=ob.getProfesor()%></td>
                                     <% if (ob.getTipo() == 1) { %>
                                     <td>Individual</td>
