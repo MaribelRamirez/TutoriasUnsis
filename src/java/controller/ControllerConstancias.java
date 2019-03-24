@@ -281,7 +281,7 @@ public class ControllerConstancias extends HttpServlet {
                             Paragraph par2 = new Paragraph();
 
                             par2.add(new Phrase("Que la Profesor (a) de Tiempo Completo ", text1));
-                            par2.add(new Phrase("" + prof.getGrado() + " " + prof.getNombre().toUpperCase(), text3));
+                            par2.add(new Phrase(prof.getNombre().toUpperCase(), text3));
 
                             if (action.equalsIgnoreCase("individual")) {
 
