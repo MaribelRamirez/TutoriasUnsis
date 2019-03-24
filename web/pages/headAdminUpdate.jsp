@@ -41,8 +41,8 @@
             </div>
 
             <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <img src="resources/images/escudo.jpg" width="90" height="90"> <br><br>
+                <div class="sidebar-nav navbar-collapse"><br>
+                    <img src="resources/images/escudo.jpg" width="90" height="90" class="center-block">
                     <ul class="nav" id="side-menu">
                         <a href="pages/indexAdmin.jsp" class=" hvr-bounce-to-right">
                             <i class="fa fa-file-o nav_icon"></i>Profesores
