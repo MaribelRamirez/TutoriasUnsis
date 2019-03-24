@@ -30,6 +30,13 @@
         <link href="../resources/css/custom.css" rel="stylesheet">
         <script src="../resources/js/custom.js"></script>
         <script src="../resources/js/screenfull.js"></script>
+            <script src="../resources/tablas/js/jquery-3.3.1.js"></script>  
+        <script src="../resources/tablas/js/jquery.dataTables.min.js"></script>
+        <script src="../resources/tablas/js/dataTables.bootstrap.min.js"></script> 
+        <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
+ <script src="../resources/alert/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../resources/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="../resources/alert/google.css">
 
         <script>
             $(function () {
@@ -132,15 +139,14 @@
                                     <tr>
                                         <td><%=ficheros[i]%></td>
                                         <td>
-                                          
-                                            <a href="../resources/Archivos/<%=ficheros[i]%>" target="_blank"><img src="../resources/images/doc.png" title="pdf" class="center-block"l/></a>
-                                                
-                                        </td>
+                                        
+                                            <a href="../resources/Archivos/<%=ficheros[i]%>" target="_blank">  <img src="../resources/images/doc.png" title="Abrir" height="50" class="center-block"/></a>
+                                                </td>
                                         <td >
                                             <form id="formularioElim" name="formularioElim" action="../ControllerPdf" method="get" onsubmit="return confirm('¿Realmente desea eliminar el documento?')" >
                                                 <input type="hidden" name = "nombre" id="id" value="<%=ficheros[i]%>">
                                                 <input type="hidden" name = "action" id="action" value="delete">
-                                                <button type="submit"  class="btn btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40" /></button>
+                                                   <button type="submit"  class="btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
                                             </form>
                                         </td>
                                     </tr>
