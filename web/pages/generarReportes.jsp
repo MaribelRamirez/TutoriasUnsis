@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="model.Licenciatura"%>
+<%@page import="dao.LicenciaturaDAO"%>
 <%@page import="java.io.FileReader"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.BufferedReader"%>
@@ -156,20 +158,27 @@
                                             <div class="modal-dialog" role="document">     
                                                 <div class="modal-content">      
                                                     <div class="modal-header">     
-                                                        <h5 class="modal-title" id="exampleModalLabel">Selecciona el periodo del que 
+                                                        <h5 class="modal-title" id="exampleModalLabel">Selecciona la carrera y el periodo del que 
                                                             deseas generar el reporte</h5> 
                                                     </div>      
                                                     <div class="modal-body">     
-                                                        <%                                                            PeriodoDAO obj_Read_Values2 = new PeriodoDAO();
+                                                        <%                                                            
+                                                            PeriodoDAO obj_Read_Values2 = new PeriodoDAO();
                                                             List<Periodo> list2 = obj_Read_Values2.listarPeriodos();
                                                             Iterator<Periodo> it_list2 = list2.iterator();
+                                                          
+                                                            LicenciaturaDAO obj_Read_lic = new LicenciaturaDAO();
+                                                            List<Licenciatura> list_lic = obj_Read_lic.listarLicenciaturas();
+                                                            Iterator<Licenciatura> it_list_lic = list_lic.iterator();
 
                                                         %>
-                                                        <div class = "form-group">
-                                                            <label>Periodos</label>	
+                                                           <div class = "form-group">
+                                                            <label>Periodos</label>	    
+
                                                             <select class="form-control " id="IdPeriodo" name="IdPeriodo">
 
-                                                                <%                                                                    while (it_list2.hasNext()) {
+                                                                <%                                                             
+                                                                    while (it_list2.hasNext()) {
                                                                         Periodo ob = new Periodo();
                                                                         ob = it_list2.next();
                                                                 %>
@@ -178,6 +187,24 @@
                                                                 <% }
 
                                                                 %>   
+                                                            </select>
+                                                        </div>
+                                                        <div class = "form-group">
+                                                            <label>Licenciaturas</label>	
+                                                            <select class="form-control " id="lic" name="lic">
+
+                                                                <%                                                                   
+                                                                    while (it_list_lic.hasNext())
+                                                                    {
+                                                                        Licenciatura ob_lic = new Licenciatura();
+                                                                        ob_lic = it_list_lic.next();
+                                                                %>
+                                                                <option value="<%= ob_lic.getNombre() %>"> <%=ob_lic.getNombre()%></option>
+
+                                                                <% }
+
+                                                                %>   
+                                                                <option value="todas"> Todas</option>
                                                             </select>
                                                         </div>
                                                     </div>     

@@ -94,7 +94,8 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
 
         try {
             int idPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
-            //creando el libro de excel
+String carrera=request.getParameter("lic");
+//creando el libro de excel
             PeriodoDAO per = new PeriodoDAO();
             Periodo pdo;
             pdo = per.obtenerPeriodoById(idPeriodo);
@@ -110,8 +111,9 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
             int cont2 = 0;
             int i = 0;
             int j = 0;
-
-            while (it_list_lic.hasNext()) {
+if(carrera.equals("todas")){
+            
+      while (it_list_lic.hasNext()) {//lectura de las carreras
 
                 j = 0;
                 Workbook book = new XSSFWorkbook();
@@ -157,306 +159,1313 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
                 styleTitle.setFont(font);
 
                 ProfesorDAO obj_Read_Values = new ProfesorDAO();
-                List<Profesor> tutor = obj_Read_Values.listarProfesoresActivos();
-                Iterator<Profesor> it_tutor = tutor.iterator();
+                
+                if (ob_lic.getNombre().equals("LM") || ob_lic.getNombre().equals("LN") || ob_lic.getNombre().equals("LE") || ob_lic.getNombre().equals("LO")) {
+                    GrupoDAO obj_grupos = new GrupoDAO();
 
-                GrupoDAO obj_grupos = new GrupoDAO();
+                    //creando es estilo de los encabezados de la tabla
+                    Row titulo1 = sheet.createRow(j);
 
-                //creando es estilo de los encabezados de la tabla
-                Row titulo1 = sheet.createRow(j);
+                    Cell cell = titulo1.createCell(0);
+                    cell.setCellStyle(styleTitle);
 
-                Cell cell = titulo1.createCell(0);
-                cell.setCellStyle(styleTitle);
+                    cell.setCellValue("REGISTRO DE REPORTES DE TUTORÍAS SEMESTRE " + pdo.getPeriodo());
 
-                cell.setCellValue("REGISTRO DE REPORTES DE TUTORÍAS SEMESTRE " + pdo.getPeriodo());
+                    j++;
+                    Row titulo2 = sheet.createRow(j);
 
-                j++;
-                Row titulo2 = sheet.createRow(j);
+                    cell = titulo2.createCell(0);
+                    cell.setCellStyle(styleTitle);
+                    cell.setCellValue("UNIVERSIDAD DE LA SIERRA SUR");
+                    j++;
 
-                cell = titulo2.createCell(0);
-                cell.setCellStyle(styleTitle);
-                cell.setCellValue("UNIVERSIDAD DE LA SIERRA SUR");
-                j++;
+                    Row titulo3 = sheet.createRow(j);
 
-                Row titulo3 = sheet.createRow(j);
+                    cell = titulo3.createCell(0);
+                    cell.setCellValue("");
+                    j++;
 
-                cell = titulo3.createCell(0);
-                cell.setCellValue("");
-                j++;
+                    sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 2));
+                    sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 2));
+                    Row titulo4 = sheet.createRow(j);
 
-                sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 3));
-                sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 3));
-                Row titulo4 = sheet.createRow(j);
+                    sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
 
-                sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
+                    cell = titulo4.createCell(0);
+                    cell.setCellValue("TUTORIAS GRUPALES");
+                    cell.setCellStyle(styleColumn);
+                    cell = titulo4.createCell(1);
+                    cell.setCellStyle(styleColumn);
+                    cell = titulo4.createCell(2);
+                    cell.setCellStyle(styleColumn);
 
-                cell = titulo4.createCell(0);
-                cell.setCellValue("TUTORIAS GRUPALES");
-                cell.setCellStyle(styleColumn);
-                cell = titulo4.createCell(1);
-                cell.setCellStyle(styleColumn);
-                cell = titulo4.createCell(2);
-                cell.setCellStyle(styleColumn);
+                    j++;
 
-                j++;
+                    List<Profesor> listG = obj_Read_Values.tutorGrupalbyPeriodo(idPeriodo);
+                    Iterator<Profesor> it_listG = listG.iterator();
 
-                List<Profesor> listG = obj_Read_Values.tutorGrupalbyPeriodo(idPeriodo);
-                Iterator<Profesor> it_listG = listG.iterator();
+                    List<Profesor> listI = obj_Read_Values.tutorIndividualbyPeriodo(idPeriodo);
+                    Iterator<Profesor> it_listI = listI.iterator();
 
-                List<Profesor> listI = obj_Read_Values.tutorIndividualbyPeriodo(idPeriodo);
-                Iterator<Profesor> it_listI = listI.iterator();
+                    rowGeneral = sheet.createRow(j);
+                    //poner encabezados de la tabla
+                    cell = rowGeneral.createCell(0);
 
-                rowGeneral = sheet.createRow(j);
-                //poner encabezados de la tabla
-                cell = rowGeneral.createCell(0);
+                    cell.setCellStyle(styleHead);
+                    cell.setCellValue("N°");
 
-                cell.setCellStyle(styleHead);
-                cell.setCellValue("N°");
+                    cell = rowGeneral.createCell(1);
 
-                cell = rowGeneral.createCell(1);
+                    cell.setCellStyle(styleHead);
+                    cell.setCellValue("GRUPO");
 
-                cell.setCellStyle(styleHead);
-                cell.setCellValue("GRUPO");
+                    cell = rowGeneral.createCell(2);
 
-                cell = rowGeneral.createCell(2);
+                    cell.setCellStyle(styleHead);
+                    cell.setCellValue("TUTOR");
+                    j++;
 
-                cell.setCellStyle(styleHead);
-                cell.setCellValue("TUTOR");
-                j++;
+                    while (it_listG.hasNext()) {
 
-                while (it_listG.hasNext()) {
+                        i = 0;
+                        Profesor obG = new Profesor();
+                        obG = it_listG.next();
 
-                    i = 0;
-                    Profesor obG = new Profesor();
-                    obG = it_listG.next();
+                        AlumnoDAO objALum = new AlumnoDAO();
+                        List<Alumno> list2 = objALum.listarAlumnosTutoradosByCarrera(obG.getCurp(), ob_lic.getNombre(), idPeriodo);
+                        Iterator<Alumno> it_list2 = list2.iterator();
 
-                    AlumnoDAO objALum = new AlumnoDAO();
-                    List<Alumno> list2 = objALum.listarAlumnosTutoradosByCarrera(obG.getCurp(), ob_lic.getNombre(), idPeriodo);
-                    Iterator<Alumno> it_list2 = list2.iterator();
+                        //List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_lic.getNombre(), idPeriodo);
+                        List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), idPeriodo);
 
-                    //List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_lic.getNombre(), idPeriodo);
-                    List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(),idPeriodo);
-                    
-                    Iterator<Grupo> it_grupos = list_grupos.iterator();
+                        Iterator<Grupo> it_grupos = list_grupos.iterator();
 
-                    if (list2.size() > 0) {
+                        if (list2.size() > 0) {
 
-                        //creando y asignando nombre a la hoja de excel
-                        sheetx = book.createSheet(obG.getGrado() + " " + obG.getNombre());
-                        //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
-                        sheetx.getPrintSetup().setLandscape(false);
-                        //indicando el tamaño de la hoja
-                        sheetx.getPrintSetup().setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);
+                            //creando y asignando nombre a la hoja de excel
+                            sheetx = book.createSheet(obG.getGrado() + " " + obG.getNombre());
+                            //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
+                            sheetx.getPrintSetup().setLandscape(false);
+                            //indicando el tamaño de la hoja
+                            sheetx.getPrintSetup().setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);
 
-                        Row row1 = sheetx.createRow(i);
-                        cell = row1.createCell(0);
-                        cell.setCellValue("");
-                        i++;
-                        row1 = sheetx.createRow(i);
-                        //poner nombre del profesor
-
-                        sheetx.addMergedRegion(new CellRangeAddress(i, i, 0, 4));
-
-                        cell = row1.createCell(0);
-                        cell.setCellValue(obG.getGrado() + " " + obG.getNombre());
-                        cell.setCellStyle(styleColumn);
-
-                        cell = row1.createCell(1);
-                        cell.setCellStyle(styleColumn);
-
-                        cell = row1.createCell(2);
-                        cell.setCellStyle(styleColumn);
-
-                        cell = row1.createCell(3);
-                        cell.setCellStyle(styleColumn);
-                        cell = row1.createCell(4);
-                        cell.setCellStyle(styleColumn);
-
-                        i++;
-                        Row row2 = sheetx.createRow(i);
-                        //poner encabezados de la tabla
-                        cell = row2.createCell(0);
-                        cell.setCellStyle(styleHead);
-                        cell.setCellValue("N°");
-
-                        cell = row2.createCell(1);
-                        cell.setCellStyle(styleHead);
-                        cell.setCellValue("MATRICULA");
-
-                        cell = row2.createCell(2);
-                        cell.setCellStyle(styleHead);
-                        cell.setCellValue("NOMBRE");
-
-                        cell = row2.createCell(3);
-                        cell.setCellStyle(styleHead);
-                        cell.setCellValue("LICENCIATURA");
-
-                        cell = row2.createCell(4);
-                        cell.setCellStyle(styleHead);
-                        cell.setCellValue("GRUPO");
-
-                        cont = 0;
-
-                        while (it_list2.hasNext()) {
-                            cont++;
+                            Row row1 = sheetx.createRow(i);
+                            cell = row1.createCell(0);
+                            cell.setCellValue("");
                             i++;
-                            Alumno obA = new Alumno();
+                            row1 = sheetx.createRow(i);
+                            //poner nombre del profesor
 
-                            obA = it_list2.next();
-                            Row row3 = sheetx.createRow(i);
-                            //poner datos
-                            cell = row3.createCell(0);
-                            cell.setCellStyle(styleColumn);
-                            cell.setCellValue("" + cont);
+                            sheetx.addMergedRegion(new CellRangeAddress(i, i, 0, 3));
 
-                            cell = row3.createCell(1);
+                            cell = row1.createCell(0);
+                            cell.setCellValue(obG.getGrado() + " " + obG.getNombre());
                             cell.setCellStyle(styleColumn);
-                            cell.setCellValue(obA.getMatricula());
 
-                            cell = row3.createCell(2);
+                            cell = row1.createCell(1);
                             cell.setCellStyle(styleColumn);
-                            cell.setCellValue(obA.getNombre());
 
-                            cell = row3.createCell(3);
+                            cell = row1.createCell(2);
                             cell.setCellStyle(styleColumn);
-                            cell.setCellValue(obA.getLicenciatura());
 
-                            cell = row3.createCell(4);
+                            cell = row1.createCell(3);
                             cell.setCellStyle(styleColumn);
-                            cell.setCellValue(obA.getGrupo());
+                            
+                            cell = row1.createCell(4);
+                            cell.setCellStyle(styleColumn);
+
+                            i++;
+                            Row row2 = sheetx.createRow(i);
+                            //poner encabezados de la tabla
+                            cell = row2.createCell(0);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("N°");
+
+                            cell = row2.createCell(1);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("MATRICULA");
+
+                            cell = row2.createCell(2);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("NOMBRE");
+
+                            cell = row2.createCell(3);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("LICENCIATURA");
+
+                            cell = row2.createCell(4);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("GRUPO");
+
+                            cont = 0;
+
+                            while (it_list2.hasNext()) {
+                                cont++;
+                                i++;
+                                Alumno obA = new Alumno();
+
+                                obA = it_list2.next();
+                                Row row3 = sheetx.createRow(i);
+                                //poner datos
+                                cell = row3.createCell(0);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue("" + cont);
+
+                                cell = row3.createCell(1);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getMatricula());
+
+                                cell = row3.createCell(2);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getNombre());
+
+                                cell = row3.createCell(3);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getLicenciatura());
+
+                                cell = row3.createCell(4);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getGrupo());
+
+                            }
+                            for (int k = 0; k < i; k++) {
+                                sheetx.autoSizeColumn((short) k);
+
+                            }
+                            cont = 0;
+
+                            while (it_grupos.hasNext()) {
+                                cont2++;
+                                Grupo ob_grupo = new Grupo();
+                                ob_grupo = it_grupos.next();
+
+                                rowGeneral1 = sheet.createRow(j);
+                                ////********
+                                cell = rowGeneral1.createCell(0);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue("" + cont2);
+
+                                cell = rowGeneral1.createCell(1);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(ob_grupo.getGrupo());
+
+                                cell = rowGeneral1.createCell(2);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obG.getGrado() + " " + obG.getNombre());
+                                j++;
+
+                            }
+
+                            i = i + 3;
 
                         }
-                        for (int k = 0; k < i; k++) {
+                        /**/
+                    }
+
+                    j = j + 3;
+                    
+                    while (it_listI.hasNext()) {
+ 
+                        Profesor obI = new Profesor();
+                        obI = it_listI.next();
+
+                        AlumnoDAO objALum = new AlumnoDAO();
+                        List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(), ob_lic.getNombre(), idPeriodo);
+                        Iterator<Alumno> it_list2 = list2.iterator();
+
+                        if (list2.size() > 0) {
+
+                            sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 3));
+                            rowGeneral1 = sheet.createRow(j);
+                          
+
+                            j++;
+                            i++;
+
+                            rowGeneral1 = sheet.createRow(j);
+                            cell = rowGeneral1.createCell(0);
+                            cell.setCellValue("");
+                            j++;
+
+                            rowGeneral1 = sheet.createRow(j);
+
+                            sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
+                            cell = rowGeneral1.createCell(0);
+                            cell.setCellValue(obI.getGrado() + " " + obI.getNombre());
+                            cell.setCellStyle(styleColumn);
+                            cell = rowGeneral1.createCell(1);
+                            cell.setCellStyle(styleColumn);
+                            cell = rowGeneral1.createCell(2);
+                            cell.setCellStyle(styleColumn);
+
+                            j++;
+
+                            rowGeneral1 = sheet.createRow(j);
+
+                            cell = rowGeneral1.createCell(0);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("N°");
+
+                            cell = rowGeneral1.createCell(1);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("NOMBRE");
+
+                            cell = rowGeneral1.createCell(2);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("GRUPO");
+                            j++;
+
+                            cont = 0;
+                            while (it_list2.hasNext()) {
+                                cont++;
+                                i++;
+                                Alumno obA = new Alumno();
+
+                                obA = it_list2.next();
+                                rowGeneral1 = sheet.createRow(j);
+
+                                cell = rowGeneral1.createCell(0);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue("" + cont);
+
+                                cell = rowGeneral1.createCell(1);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getNombre());
+
+                                cell = rowGeneral1.createCell(2);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getGrupo());
+                                j++;
+                            }
+
+                            i = i + 3;
+
+                            /**
+                             * ***
+                             *
+                             */
+                            //creando y asignando nombre a la hoja de excel
+                            sheetx = book.createSheet(obI.getGrado() + " " + obI.getNombre());
+                            //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
+                            sheetx.getPrintSetup().setLandscape(false);
+                            //indicando el tamaño de la hoja
+                            sheetx.getPrintSetup().setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);
+                            i = 0;
+                            Row row1 = sheetx.createRow(i);
+                            cell = row1.createCell(0);
+                            cell.setCellValue("");
+                            i++;
+                            row1 = sheetx.createRow(i);
+                            //poner nombre del profesor
+
+                            sheetx.addMergedRegion(new CellRangeAddress(i, i, 0, 3));
+
+                            cell = row1.createCell(0);
+                            cell.setCellValue(obI.getGrado() + " " + obI.getNombre());
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(1);
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(2);
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(3);
+                            cell.setCellStyle(styleColumn);
+                            cell = row1.createCell(4);
+                            cell.setCellStyle(styleColumn);
+
+                            i++;
+                            Row row2 = sheetx.createRow(i);
+                            //poner encabezados de la tabla
+                            cell = row2.createCell(0);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("N°");
+
+                            cell = row2.createCell(1);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("MATRICULA");
+
+                            cell = row2.createCell(2);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("NOMBRE");
+
+                            cell = row2.createCell(3);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("LICENCIATURA");
+
+                            cell = row2.createCell(4);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("GRUPO");
+
+                            cont = 0;
+                            it_list2 = list2.iterator();
+
+                            while (it_list2.hasNext()) {
+                                cont++;
+                                i++;
+                                Alumno obA = new Alumno();
+
+                                obA = it_list2.next();
+                                Row row3 = sheetx.createRow(i);
+                                //poner datos
+                                cell = row3.createCell(0);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue("" + cont);
+
+                                cell = row3.createCell(1);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getMatricula());
+
+                                cell = row3.createCell(2);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getNombre());
+
+                                cell = row3.createCell(3);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getLicenciatura());
+
+                                cell = row3.createCell(4);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getGrupo());
+
+                            }
+                        }
+
+                        for (int k = 0; k < j; k++) {
+                            sheet.autoSizeColumn((short) k);
+
+                        }
+                        for (int k = 0; k < j; k++) {
                             sheetx.autoSizeColumn((short) k);
 
                         }
-                        cont = 0;
+                        try {
+                            String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
+                            try (FileOutputStream elFichero
+                                    = new FileOutputStream(rutRel + "/Asignacion_Tutorias " + ob_lic.getNombre() + "-" + pdo.getPeriodo() + ".xlsx")) {
+                                book.write(elFichero);
+                                elFichero.close();
+                            }
+                        } catch (IOException e) {
+                        }
+                    }
+                } else {
+                    /*********************************************************************************************************/
+                            GrupoDAO obj_grupos = new GrupoDAO();
 
-                        while (it_grupos.hasNext()) {
-                            cont2++;
-                            Grupo ob_grupo = new Grupo();
-                            ob_grupo = it_grupos.next();
+                    //creando es estilo de los encabezados de la tabla
+                    Row titulo1 = sheet.createRow(j);
 
+                    Cell cell = titulo1.createCell(0);
+                    cell.setCellStyle(styleTitle);
+
+                    cell.setCellValue("REGISTRO DE REPORTES DE TUTORÍAS SEMESTRE " + pdo.getPeriodo());
+
+                    j++;
+                    Row titulo2 = sheet.createRow(j);
+
+                    cell = titulo2.createCell(0);
+                    cell.setCellStyle(styleTitle);
+                    cell.setCellValue("UNIVERSIDAD DE LA SIERRA SUR");
+                    j++;
+
+                    Row titulo3 = sheet.createRow(j);
+
+                    cell = titulo3.createCell(0);
+                    cell.setCellValue("");
+                    j++;
+
+                    sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 4));
+                    sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 4));
+                    Row titulo4 = sheet.createRow(j);
+
+                    sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 4));
+
+                    cell = titulo4.createCell(0);
+                    cell.setCellValue("TUTORIAS INDIVIDUALES");
+                    cell.setCellStyle(styleColumn);
+                    cell = titulo4.createCell(1);
+                    cell.setCellStyle(styleColumn);
+                    cell = titulo4.createCell(2);
+                    cell.setCellStyle(styleColumn);
+  cell = titulo4.createCell(3);
+                    cell.setCellStyle(styleColumn);
+                      cell = titulo4.createCell(4);
+                    cell.setCellStyle(styleColumn);
+                    j++;
+
+                    List<Profesor> listG = obj_Read_Values.tutorGrupalbyPeriodo(idPeriodo);
+                    Iterator<Profesor> it_listG = listG.iterator();
+
+                    List<Profesor> listI = obj_Read_Values.tutorIndividualbyPeriodo(idPeriodo);
+                    Iterator<Profesor> it_listI = listI.iterator();
+
+                    rowGeneral = sheet.createRow(j);
+                    //poner encabezados de la tabla
+                  
+                    
+                    
                             rowGeneral1 = sheet.createRow(j);
-                            ////********
+
                             cell = rowGeneral1.createCell(0);
-                            cell.setCellStyle(styleColumn);
-                            cell.setCellValue("" + cont2);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("N°");
 
                             cell = rowGeneral1.createCell(1);
-                            cell.setCellStyle(styleColumn);
-                            cell.setCellValue(ob_grupo.getGrupo());
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("NOMBRE");
 
-                            cell = rowGeneral1.createCell(2);
-                            cell.setCellStyle(styleColumn);
-                            cell.setCellValue(obG.getGrado() + " " + obG.getNombre());
+                             cell = rowGeneral1.createCell(2);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("MATRICULA");
+                            
+                            cell = rowGeneral1.createCell(3);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("GRUPO");
+                            
+                            cell = rowGeneral1.createCell(4);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("TUTOR");
                             j++;
+                            int list=0;
+                    while (it_listI.hasNext()) {
 
-                        }
+                        Profesor obI = new Profesor();
+                        obI = it_listI.next();
 
-                        i = i + 3;
+                        AlumnoDAO objALum = new AlumnoDAO();
+                        List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(), ob_lic.getNombre(), idPeriodo);
+                        Iterator<Alumno> it_list2 = list2.iterator();
 
-                    }
-                    /**/
-                }
+                        if (list2.size() > 0) {
+                           // cont = 0;
+                            while (it_list2.hasNext()) {
+                                cont++;
+                                 list++;
+                               // i++;
+                                Alumno obA = new Alumno();
 
-                j = j + 3;
+                                obA = it_list2.next();
+                                rowGeneral1 = sheet.createRow(j);
 
-                while (it_listI.hasNext()) {
+                                cell = rowGeneral1.createCell(0);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue("" + list);
 
-                    Profesor obI = new Profesor();
-                    obI = it_listI.next();
+                                cell = rowGeneral1.createCell(1);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getNombre());
 
-                    AlumnoDAO objALum = new AlumnoDAO();
-                    List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(), ob_lic.getNombre(), idPeriodo);
-                    Iterator<Alumno> it_list2 = list2.iterator();
+                                cell = rowGeneral1.createCell(2);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getMatricula());
+                                
+                                cell = rowGeneral1.createCell(3);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getGrupo());
+                                
+                                cell = rowGeneral1.createCell(4);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obI.getGrado() + " " + obI.getNombre());
+                                j++;
+                            }
 
-                    if (list2.size() > 0) {
+                         ///   i ++;
 
-                        sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
-                        rowGeneral1 = sheet.createRow(j);
-
-                        rowGeneral1.createCell(0).setCellValue("TUTORIAS INDIVIDUALES");
-                        j++;
-                        i++;
-
-                        rowGeneral1 = sheet.createRow(j);
-                        cell = rowGeneral1.createCell(0);
-                        cell.setCellValue("");
-                        j++;
-
-                        rowGeneral1 = sheet.createRow(j);
-
-                        sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
-                        cell = rowGeneral1.createCell(0);
-                        cell.setCellValue(obI.getGrado() + " " + obI.getNombre());
-                        cell.setCellStyle(styleColumn);
-                        cell = rowGeneral1.createCell(1);
-                        cell.setCellStyle(styleColumn);
-                        cell = rowGeneral1.createCell(2);
-                        cell.setCellStyle(styleColumn);
-
-                        j++;
-
-                        rowGeneral1 = sheet.createRow(j);
-
-                        cell = rowGeneral1.createCell(0);
-                        cell.setCellStyle(styleHead);
-                        cell.setCellValue("N°");
-
-                        cell = rowGeneral1.createCell(1);
-                        cell.setCellStyle(styleHead);
-                        cell.setCellValue("NOMBRE");
-
-                        cell = rowGeneral1.createCell(2);
-                        cell.setCellStyle(styleHead);
-                        cell.setCellValue("GRUPO");
-                        j++;
-
-                        cont = 0;
-                        while (it_list2.hasNext()) {
-                            cont++;
+                            /**
+                             * ***
+                             *
+                             */
+                            //creando y asignando nombre a la hoja de excel
+                            sheetx = book.createSheet(obI.getGrado() + " " + obI.getNombre());
+                            //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
+                            sheetx.getPrintSetup().setLandscape(false);
+                            //indicando el tamaño de la hoja
+                            sheetx.getPrintSetup().setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);
+                            i = 0;
+                            Row row1 = sheetx.createRow(i);
+                            cell = row1.createCell(0);
+                            cell.setCellValue("");
                             i++;
-                            Alumno obA = new Alumno();
+                            row1 = sheetx.createRow(i);
+                            //poner nombre del profesor
 
-                            obA = it_list2.next();
+                            sheetx.addMergedRegion(new CellRangeAddress(i, i, 0, 4));
+
+                            cell = row1.createCell(0);
+                            cell.setCellValue(obI.getGrado() + " " + obI.getNombre());
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(1);
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(2);
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(3);
+                            cell.setCellStyle(styleColumn);
+                            cell = row1.createCell(4);
+                            cell.setCellStyle(styleColumn);
+
+                            i++;
+                            Row row2 = sheetx.createRow(i);
+                            //poner encabezados de la tabla
+                            cell = row2.createCell(0);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("N°");
+
+                            cell = row2.createCell(1);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("MATRICULA");
+
+                            cell = row2.createCell(2);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("NOMBRE");
+
+                            cell = row2.createCell(3);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("LICENCIATURA");
+
+                            cell = row2.createCell(4);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("GRUPO");
+
+                            cont = 0;
+                            it_list2 = list2.iterator();
+
+                            while (it_list2.hasNext()) {
+                                cont++;
+                                i++;
+                                Alumno obA = new Alumno();
+
+                                obA = it_list2.next();
+                                Row row3 = sheetx.createRow(i);
+                                //poner datos
+                                cell = row3.createCell(0);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue("" + cont);
+
+                                cell = row3.createCell(1);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getMatricula());
+
+                                cell = row3.createCell(2);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getNombre());
+
+                                cell = row3.createCell(3);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getLicenciatura());
+
+                                cell = row3.createCell(4);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getGrupo());
+
+                            }
+                            for (int k = 0; k < j; k++) {
+                            sheetx.autoSizeColumn((short) k);
+
+                        }
+                        }
+
+                        for (int k = 0; k < j; k++) {
+                            sheet.autoSizeColumn((short) k);
+
+                        }
+                        
+                        try {
+                            String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
+                            try (FileOutputStream elFichero
+                                    = new FileOutputStream(rutRel + "/Asignacion_Tutorias " + ob_lic.getNombre() + "-" + pdo.getPeriodo() + ".xlsx")) {
+                                book.write(elFichero);
+                                elFichero.close();
+                            }
+                        } catch (IOException e) {
+                        }
+                    }
+                
+                    
+                    
+                }
+            }///cierre de ciclo de la lectura de carreras
+
+}else{
+   j = 0;
+                Workbook book = new XSSFWorkbook();
+              
+                //creando y asignando nombre a la hoja de excel
+                sheet = book.createSheet("" + carrera);
+                cont2 = 0;
+                //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
+                sheet.getPrintSetup().setLandscape(false);
+                //indicando el tamaño de la hoja
+                sheet.getPrintSetup().setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);
+                Font font = book.createFont();
+                font.setBold(true);
+
+                CellStyle styleHead = book.createCellStyle();
+                styleHead.setBorderBottom(BorderStyle.MEDIUM);
+                styleHead.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+                styleHead.setBorderLeft(BorderStyle.MEDIUM);
+                styleHead.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+                styleHead.setBorderRight(BorderStyle.MEDIUM);
+                styleHead.setRightBorderColor(IndexedColors.BLACK.getIndex());
+                styleHead.setBorderTop(BorderStyle.MEDIUM);
+                styleHead.setTopBorderColor(IndexedColors.BLACK.getIndex());
+                styleHead.setAlignment(HorizontalAlignment.CENTER);
+                styleHead.setFillForegroundColor(IndexedColors.AQUA.getIndex());
+                styleHead.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+                styleHead.setFont(font);
+
+                CellStyle styleColumn = book.createCellStyle();
+                styleColumn.setBorderBottom(BorderStyle.MEDIUM);
+                styleColumn.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+                styleColumn.setBorderLeft(BorderStyle.MEDIUM);
+                styleColumn.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+                styleColumn.setBorderRight(BorderStyle.MEDIUM);
+                styleColumn.setRightBorderColor(IndexedColors.BLACK.getIndex());
+                styleColumn.setBorderTop(BorderStyle.MEDIUM);
+                styleColumn.setTopBorderColor(IndexedColors.BLACK.getIndex());
+                styleColumn.setAlignment(HorizontalAlignment.CENTER);
+
+                CellStyle styleTitle = book.createCellStyle();
+                styleTitle.setAlignment(HorizontalAlignment.CENTER);
+                styleTitle.setFont(font);
+
+                ProfesorDAO obj_Read_Values = new ProfesorDAO();
+                
+                if (carrera.equals("LM") || carrera.equals("LN") || carrera.equals("LE") || carrera.equals("LO")) {
+                    GrupoDAO obj_grupos = new GrupoDAO();
+
+                    //creando es estilo de los encabezados de la tabla
+                    Row titulo1 = sheet.createRow(j);
+
+                    Cell cell = titulo1.createCell(0);
+                    cell.setCellStyle(styleTitle);
+
+                    cell.setCellValue("REGISTRO DE REPORTES DE TUTORÍAS SEMESTRE " + pdo.getPeriodo());
+
+                    j++;
+                    Row titulo2 = sheet.createRow(j);
+
+                    cell = titulo2.createCell(0);
+                    cell.setCellStyle(styleTitle);
+                    cell.setCellValue("UNIVERSIDAD DE LA SIERRA SUR");
+                    j++;
+
+                    Row titulo3 = sheet.createRow(j);
+
+                    cell = titulo3.createCell(0);
+                    cell.setCellValue("");
+                    j++;
+
+                    sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 2));
+                    sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 2));
+                    Row titulo4 = sheet.createRow(j);
+
+                    sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
+
+                    cell = titulo4.createCell(0);
+                    cell.setCellValue("TUTORIAS GRUPALES");
+                    cell.setCellStyle(styleColumn);
+                    cell = titulo4.createCell(1);
+                    cell.setCellStyle(styleColumn);
+                    cell = titulo4.createCell(2);
+                    cell.setCellStyle(styleColumn);
+
+                    j++;
+
+                    List<Profesor> listG = obj_Read_Values.tutorGrupalbyPeriodo(idPeriodo);
+                    Iterator<Profesor> it_listG = listG.iterator();
+
+                    List<Profesor> listI = obj_Read_Values.tutorIndividualbyPeriodo(idPeriodo);
+                    Iterator<Profesor> it_listI = listI.iterator();
+
+                    rowGeneral = sheet.createRow(j);
+                    //poner encabezados de la tabla
+                    cell = rowGeneral.createCell(0);
+
+                    cell.setCellStyle(styleHead);
+                    cell.setCellValue("N°");
+
+                    cell = rowGeneral.createCell(1);
+
+                    cell.setCellStyle(styleHead);
+                    cell.setCellValue("GRUPO");
+
+                    cell = rowGeneral.createCell(2);
+
+                    cell.setCellStyle(styleHead);
+                    cell.setCellValue("TUTOR");
+                    j++;
+
+                    while (it_listG.hasNext()) {
+
+                        i = 0;
+                        Profesor obG = new Profesor();
+                        obG = it_listG.next();
+
+                        AlumnoDAO objALum = new AlumnoDAO();
+                        List<Alumno> list2 = objALum.listarAlumnosTutoradosByCarrera(obG.getCurp(),carrera, idPeriodo);
+                        Iterator<Alumno> it_list2 = list2.iterator();
+
+                        //List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_lic.getNombre(), idPeriodo);
+                        List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), idPeriodo);
+
+                        Iterator<Grupo> it_grupos = list_grupos.iterator();
+
+                        if (list2.size() > 0) {
+
+                            //creando y asignando nombre a la hoja de excel
+                            sheetx = book.createSheet(obG.getGrado() + " " + obG.getNombre());
+                            //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
+                            sheetx.getPrintSetup().setLandscape(false);
+                            //indicando el tamaño de la hoja
+                            sheetx.getPrintSetup().setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);
+
+                            Row row1 = sheetx.createRow(i);
+                            cell = row1.createCell(0);
+                            cell.setCellValue("");
+                            i++;
+                            row1 = sheetx.createRow(i);
+                            //poner nombre del profesor
+
+                            sheetx.addMergedRegion(new CellRangeAddress(i, i, 0, 4));
+
+                            cell = row1.createCell(0);
+                            cell.setCellValue(obG.getGrado() + " " + obG.getNombre());
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(1);
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(2);
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(3);
+                            cell.setCellStyle(styleColumn);
+                            cell = row1.createCell(4);
+                            cell.setCellStyle(styleColumn);
+
+                            i++;
+                            Row row2 = sheetx.createRow(i);
+                            //poner encabezados de la tabla
+                            cell = row2.createCell(0);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("N°");
+
+                            cell = row2.createCell(1);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("MATRICULA");
+
+                            cell = row2.createCell(2);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("NOMBRE");
+
+                            cell = row2.createCell(3);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("LICENCIATURA");
+
+                            cell = row2.createCell(4);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("GRUPO");
+
+                            cont = 0;
+
+                            while (it_list2.hasNext()) {
+                                cont++;
+                                i++;
+                                Alumno obA = new Alumno();
+
+                                obA = it_list2.next();
+                                Row row3 = sheetx.createRow(i);
+                                //poner datos
+                                cell = row3.createCell(0);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue("" + cont);
+
+                                cell = row3.createCell(1);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getMatricula());
+
+                                cell = row3.createCell(2);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getNombre());
+
+                                cell = row3.createCell(3);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getLicenciatura());
+
+                                cell = row3.createCell(4);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getGrupo());
+
+                            }
+                            for (int k = 0; k < i; k++) {
+                                sheetx.autoSizeColumn((short) k);
+
+                            }
+                            cont = 0;
+
+                            while (it_grupos.hasNext()) {
+                                cont2++;
+                                Grupo ob_grupo = new Grupo();
+                                ob_grupo = it_grupos.next();
+
+                                rowGeneral1 = sheet.createRow(j);
+                                ////********
+                                cell = rowGeneral1.createCell(0);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue("" + cont2);
+
+                                cell = rowGeneral1.createCell(1);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(ob_grupo.getGrupo());
+
+                                cell = rowGeneral1.createCell(2);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obG.getGrado() + " " + obG.getNombre());
+                                j++;
+
+                            }
+
+                            i = i + 3;
+
+                        }
+                        /**/
+                    }
+
+                    j = j + 3;
+                   
+                    while (it_listI.hasNext()) {
+
+                        Profesor obI = new Profesor();
+                        obI = it_listI.next();
+
+                        AlumnoDAO objALum = new AlumnoDAO();
+                        List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(),carrera, idPeriodo);
+                        Iterator<Alumno> it_list2 = list2.iterator();
+
+                        if (list2.size() > 0) {
+
+                            sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 4));
+                            
+                            rowGeneral1 = sheet.createRow(j);
+                         
+
+                            j++;
+                            i++;
+
+                            rowGeneral1 = sheet.createRow(j);
+                            cell = rowGeneral1.createCell(0);
+                            cell.setCellValue("");
+                            j++;
+
+                            rowGeneral1 = sheet.createRow(j);
+
+                            sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
+                            cell = rowGeneral1.createCell(0);
+                            cell.setCellValue(obI.getGrado() + " " + obI.getNombre());
+                            cell.setCellStyle(styleColumn);
+                            cell = rowGeneral1.createCell(1);
+                            cell.setCellStyle(styleColumn);
+                            cell = rowGeneral1.createCell(2);
+                            cell.setCellStyle(styleColumn);
+
+                            j++;
+
                             rowGeneral1 = sheet.createRow(j);
 
                             cell = rowGeneral1.createCell(0);
-                            cell.setCellStyle(styleColumn);
-                            cell.setCellValue("" + cont);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("N°");
 
                             cell = rowGeneral1.createCell(1);
-                            cell.setCellStyle(styleColumn);
-                            cell.setCellValue(obA.getNombre());
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("NOMBRE");
 
                             cell = rowGeneral1.createCell(2);
-                            cell.setCellStyle(styleColumn);
-                            cell.setCellValue(obA.getGrupo());
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("GRUPO");
                             j++;
+
+                            cont = 0;
+                            while (it_list2.hasNext()) {
+                                cont++;
+                                i++;
+                                Alumno obA = new Alumno();
+
+                                obA = it_list2.next();
+                                rowGeneral1 = sheet.createRow(j);
+
+                                cell = rowGeneral1.createCell(0);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue("" + cont);
+
+                                cell = rowGeneral1.createCell(1);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getNombre());
+
+                                cell = rowGeneral1.createCell(2);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getGrupo());
+                                j++;
+                            }
+
+                            i = i + 3;
+
+                            /**
+                             * ***
+                             *
+                             */
+                            //creando y asignando nombre a la hoja de excel
+                            sheetx = book.createSheet(obI.getGrado() + " " + obI.getNombre());
+                            //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
+                            sheetx.getPrintSetup().setLandscape(false);
+                            //indicando el tamaño de la hoja
+                            sheetx.getPrintSetup().setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);
+                            i = 0;
+                            Row row1 = sheetx.createRow(i);
+                            cell = row1.createCell(0);
+                            cell.setCellValue("");
+                            i++;
+                            row1 = sheetx.createRow(i);
+                            //poner nombre del profesor
+
+                            sheetx.addMergedRegion(new CellRangeAddress(i, i, 0, 4));
+
+                            cell = row1.createCell(0);
+                            cell.setCellValue(obI.getGrado() + " " + obI.getNombre());
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(1);
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(2);
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(3);
+                            cell.setCellStyle(styleColumn);
+                            cell = row1.createCell(4);
+                            cell.setCellStyle(styleColumn);
+
+                            i++;
+                            Row row2 = sheetx.createRow(i);
+                            //poner encabezados de la tabla
+                            cell = row2.createCell(0);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("N°");
+
+                            cell = row2.createCell(1);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("MATRICULA");
+
+                            cell = row2.createCell(2);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("NOMBRE");
+
+                            cell = row2.createCell(3);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("LICENCIATURA");
+
+                            cell = row2.createCell(4);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("GRUPO");
+
+                            cont = 0;
+                            it_list2 = list2.iterator();
+
+                            while (it_list2.hasNext()) {
+                                cont++;
+                                i++;
+                                Alumno obA = new Alumno();
+
+                                obA = it_list2.next();
+                                Row row3 = sheetx.createRow(i);
+                                //poner datos
+                                cell = row3.createCell(0);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue("" + cont);
+
+                                cell = row3.createCell(1);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getMatricula());
+
+                                cell = row3.createCell(2);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getNombre());
+
+                                cell = row3.createCell(3);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getLicenciatura());
+
+                                cell = row3.createCell(4);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getGrupo());
+
+                            }
                         }
 
-                        i = i + 3;
+                        for (int k = 0; k < j; k++) {
+                            sheet.autoSizeColumn((short) k);
 
+                        }
+                        for (int k = 0; k < j; k++) {
+                            sheetx.autoSizeColumn((short) k);
+
+                        }
+                        try {
+                            String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
+                            try (FileOutputStream elFichero
+                                    = new FileOutputStream(rutRel + "/Asignacion_Tutorias " + carrera + "-" + pdo.getPeriodo() + ".xlsx")) {
+                                book.write(elFichero);
+                                elFichero.close();
+                            }
+                        } catch (IOException e) {
+                        }
                     }
-                }
+                } else {
+                    /*********************************************************************************************************/
+                            GrupoDAO obj_grupos = new GrupoDAO();
 
-                for (int k = 0; k < j; k++) {
-                    sheet.autoSizeColumn((short) k);
+                    //creando es estilo de los encabezados de la tabla
+                    Row titulo1 = sheet.createRow(j);
 
-                }
+                    Cell cell = titulo1.createCell(0);
+                    cell.setCellStyle(styleTitle);
 
-                try {
-                    String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
-                    try (FileOutputStream elFichero
-                            = new FileOutputStream(rutRel + "/Asignacion_Tutorias " + ob_lic.getNombre() + "-" + pdo.getPeriodo() + ".xlsx")) {
-                        book.write(elFichero);
-                        elFichero.close();
+                    cell.setCellValue("REGISTRO DE REPORTES DE TUTORÍAS SEMESTRE " + pdo.getPeriodo());
+
+                    j++;
+                    Row titulo2 = sheet.createRow(j);
+
+                    cell = titulo2.createCell(0);
+                    cell.setCellStyle(styleTitle);
+                    cell.setCellValue("UNIVERSIDAD DE LA SIERRA SUR");
+                    j++;
+
+                    Row titulo3 = sheet.createRow(j);
+
+                    cell = titulo3.createCell(0);
+                    cell.setCellValue("");
+                    j++;
+
+                    sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 4));
+                    sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 4));
+                    Row titulo4 = sheet.createRow(j);
+
+                    sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 4));
+
+                    cell = titulo4.createCell(0);
+                    cell.setCellValue("TUTORIAS INDIVIDUALES");
+                    cell.setCellStyle(styleColumn);
+                    cell = titulo4.createCell(1);
+                    cell.setCellStyle(styleColumn);
+                    cell = titulo4.createCell(2);
+                    cell.setCellStyle(styleColumn);
+cell = titulo4.createCell(3);
+                    cell.setCellStyle(styleColumn);
+                    cell = titulo4.createCell(4);
+                    cell.setCellStyle(styleColumn);
+                    j++;
+
+                    List<Profesor> listG = obj_Read_Values.tutorGrupalbyPeriodo(idPeriodo);
+                    Iterator<Profesor> it_listG = listG.iterator();
+
+                    List<Profesor> listI = obj_Read_Values.tutorIndividualbyPeriodo(idPeriodo);
+                    Iterator<Profesor> it_listI = listI.iterator();
+
+                    rowGeneral = sheet.createRow(j);
+                    //poner encabezados de la tabla
+                  
+                    
+                    
+                            rowGeneral1 = sheet.createRow(j);
+
+                            cell = rowGeneral1.createCell(0);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("N°");
+
+                            cell = rowGeneral1.createCell(1);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("NOMBRE");
+
+                             cell = rowGeneral1.createCell(2);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("MATRICULA");
+                            
+                            cell = rowGeneral1.createCell(3);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("GRUPO");
+                            
+                            cell = rowGeneral1.createCell(4);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("TUTOR");
+                            j++;
+                            int list=0;
+                    while (it_listI.hasNext()) {
+
+                        Profesor obI = new Profesor();
+                        obI = it_listI.next();
+
+                        AlumnoDAO objALum = new AlumnoDAO();
+                        List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(), carrera, idPeriodo);
+                        Iterator<Alumno> it_list2 = list2.iterator();
+
+                        if (list2.size() > 0) {
+                           // cont = 0;
+                            while (it_list2.hasNext()) {
+                                cont++;
+                                 list++;
+                               // i++;
+                                Alumno obA = new Alumno();
+
+                                obA = it_list2.next();
+                                rowGeneral1 = sheet.createRow(j);
+
+                                cell = rowGeneral1.createCell(0);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue("" + list);
+
+                                cell = rowGeneral1.createCell(1);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getNombre());
+
+                                cell = rowGeneral1.createCell(2);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getMatricula());
+                                
+                                cell = rowGeneral1.createCell(3);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getGrupo());
+                                
+                                cell = rowGeneral1.createCell(4);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obI.getGrado() + " " + obI.getNombre());
+                                j++;
+                            }
+
+                         ///   i ++;
+
+                            /**
+                             * ***
+                             *
+                             */
+                            //creando y asignando nombre a la hoja de excel
+                            sheetx = book.createSheet(obI.getGrado() + " " + obI.getNombre());
+                            //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
+                            sheetx.getPrintSetup().setLandscape(false);
+                            //indicando el tamaño de la hoja
+                            sheetx.getPrintSetup().setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);
+                            i = 0;
+                            Row row1 = sheetx.createRow(i);
+                            cell = row1.createCell(0);
+                            cell.setCellValue("");
+                            i++;
+                            row1 = sheetx.createRow(i);
+                            //poner nombre del profesor
+
+                            sheetx.addMergedRegion(new CellRangeAddress(i, i, 0, 4));
+
+                            cell = row1.createCell(0);
+                            cell.setCellValue(obI.getGrado() + " " + obI.getNombre());
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(1);
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(2);
+                            cell.setCellStyle(styleColumn);
+
+                            cell = row1.createCell(3);
+                            cell.setCellStyle(styleColumn);
+                            cell = row1.createCell(4);
+                            cell.setCellStyle(styleColumn);
+
+                            i++;
+                            Row row2 = sheetx.createRow(i);
+                            //poner encabezados de la tabla
+                            cell = row2.createCell(0);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("N°");
+
+                            cell = row2.createCell(1);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("MATRICULA");
+
+                            cell = row2.createCell(2);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("NOMBRE");
+
+                            cell = row2.createCell(3);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("LICENCIATURA");
+
+                            cell = row2.createCell(4);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("GRUPO");
+
+                            cont = 0;
+                            it_list2 = list2.iterator();
+
+                            while (it_list2.hasNext()) {
+                                cont++;
+                                i++;
+                                Alumno obA = new Alumno();
+
+                                obA = it_list2.next();
+                                Row row3 = sheetx.createRow(i);
+                                //poner datos
+                                cell = row3.createCell(0);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue("" + cont);
+
+                                cell = row3.createCell(1);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getMatricula());
+
+                                cell = row3.createCell(2);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getNombre());
+
+                                cell = row3.createCell(3);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getLicenciatura());
+
+                                cell = row3.createCell(4);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getGrupo());
+
+                            }
+                            for (int k = 0; k < j; k++) {
+                            sheetx.autoSizeColumn((short) k);
+
+                        }
+                        }
+
+                        for (int k = 0; k < j; k++) {
+                            sheet.autoSizeColumn((short) k);
+
+                        }
+                        
+                        try {
+                            String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
+                            try (FileOutputStream elFichero
+                                    = new FileOutputStream(rutRel + "/Asignacion_Tutorias " + carrera + "-" + pdo.getPeriodo() + ".xlsx")) {
+                                book.write(elFichero);
+                                elFichero.close();
+                            }
+                        } catch (IOException e) {
+                        }
                     }
-                } catch (IOException e) {
+                
+                    
+                    
                 }
 
-            }
+}
+          
             out.print("<html>"
                     + "<head>"
                     + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
