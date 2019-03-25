@@ -89,7 +89,7 @@
 
 
                         <li>
-                            <a href="ListarReportes.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Reportes tutorias</a>
+                            <a href="ListarReportes.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon "></i>Entrega de reportes tutorias</a>
                         </li>
                     </ul>
                 </div>

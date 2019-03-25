@@ -437,7 +437,23 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                 cellT4 = rowT.createCell(l);
                 cellT4.setCellValue(alum_read.countEstadistica3(idPeriodo));
                 cellT4.setCellStyle(style2);
-                sheet.addMergedRegion(new CellRangeAddress(j, j, l - 4, l - 1));
+                
+                l=1;
+               it_list_lic = list_lic.iterator();
+
+                while (it_list_lic.hasNext()) {
+
+                    Licenciatura ob = new Licenciatura();
+                    ob = it_list_lic.next();
+                    
+               
+                cellT4 = rowT.createCell(l);
+                 cellT4.setCellValue(alum_read.countEstadistica4(idPeriodo,ob.getIdLicenciatura()));
+                cellT4.setCellStyle(style2);
+                l++;
+                }
+                
+              //  sheet.addMergedRegion(new CellRangeAddress(j, j, l - 4, l - 1));
                 for (int k = 0; k < j; k++) {
                     sheet.autoSizeColumn((short) k);
 

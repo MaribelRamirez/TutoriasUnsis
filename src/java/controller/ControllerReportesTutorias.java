@@ -470,7 +470,7 @@ public class ControllerReportesTutorias extends HttpServlet {
 
                 }
                 String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
-                try (FileOutputStream elFichero = new FileOutputStream(rutRel + "/Registro_de_Reportes_de_Tutorias-" + pdo.getPeriodo() + ".xlsx")) {
+                try (FileOutputStream elFichero = new FileOutputStream(rutRel + "/Reportes_de_Tutorias_Entregados-" + pdo.getPeriodo() + ".xlsx")) {
                     book.write(elFichero);
                     elFichero.close();
                 }

@@ -24,7 +24,28 @@ public class AlumnoDAO {
         this.con = con;
         this.connection = connection;
     }
+ public int countEstadistica4(int periodo,int carrera) {
 
+        int count = 0;
+        try {
+            String sql = "select *"
+                    + "from tutores ,profesores,alumnos inner join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura \n"
+                    + "where tutores.matricula=alumnos.matricula "
+                    + "and tutores.curp=profesores.curp and tutores.idPeriodo='" + periodo + "' and alumnos.idLicenciatura='"+carrera+"' ;";
+            connection = con.conectar();
+            Statement statement = connection.createStatement();
+            ResultSet resulSet = statement.executeQuery(sql);
+
+            while (resulSet.next()) {
+                count++;
+            }
+            con.desconectar();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
     public int countEstadistica3(int periodo) {
 
         int count = 0;
