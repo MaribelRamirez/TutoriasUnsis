@@ -7,20 +7,20 @@ public class Grupo {
     private int idGrupo;
     private String grupo;
     private int idPeriodo;
-    private int idLicenciatura;
+    private int idPrograma;
     private String periodo;
-    private String licenciatura;
+    private String programa;
 
     public Grupo() {
     }
 
-    public Grupo(int idGrupo, String grupo, int idPeriodo, int idLicenciatura, String periodo, String licenciatura) {
+    public Grupo(int idGrupo, String grupo, int idPeriodo, int idPrograma, String periodo, String programa) {
         this.idGrupo = idGrupo;
         this.grupo = grupo;
         this.idPeriodo = idPeriodo;
-        this.idLicenciatura = idLicenciatura;
+        this.idPrograma = idPrograma;
         this.periodo = periodo;
-        this.licenciatura = licenciatura;
+        this.programa = programa;
     }
 
     public String getPeriodo() {
@@ -31,13 +31,7 @@ public class Grupo {
         this.periodo = periodo;
     }
 
-    public String getLicenciatura() {
-        return licenciatura;
-    }
-
-    public void setLicenciatura(String licenciatura) {
-        this.licenciatura = licenciatura;
-    }
+    
 
     public int getIdGrupo() {
         return idGrupo;
@@ -63,12 +57,22 @@ public class Grupo {
         this.idPeriodo = idPeriodo;
     }
 
-    public int getIdLicenciatura() {
-        return idLicenciatura;
+    public int getIdPrograma() {
+        return idPrograma;
     }
 
-    public void setIdLicenciatura(int idLicenciatura) {
-        this.idLicenciatura = idLicenciatura;
+    public void setIdPrograma(int idPrograma) {
+        this.idPrograma = idPrograma;
     }
+
+    public String getPrograma() {
+        return programa;
+    }
+
+    public void setPrograma(String programa) {
+        this.programa = programa;
+    }
+
+    
 
 }

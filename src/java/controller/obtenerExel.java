@@ -155,7 +155,7 @@ public class obtenerExel extends HttpServlet {
             //obtener todas las filas de la hoja excel
 
             Iterator<Row> rowIterator = sheet.iterator();
-            //Obtener licenciatura
+            //Obtener programa
 
             Row row;
             //Quitamos la cabecera
@@ -183,9 +183,9 @@ public class obtenerExel extends HttpServlet {
                         alumno.setIdGrupo(grupo.getIdGrupo());
                         System.out.print(grupo.getIdGrupo() + " grupo ");
 
-                        //IdLicenciatura
-                        alumno.setIdLicenciatura(grupo.getIdLicenciatura());
-                        System.out.print(grupo.getIdLicenciatura() + "  ");
+                        //IdPrograma
+                        alumno.setIdPrograma(grupo.getIdPrograma());
+                        System.out.print(grupo.getIdPrograma() + "  ");
                         System.err.println("esta es la matricula " + alumno.getMatricula());
                         if (alumnoDAO.obtenerAlumnoByMatricula(alumno.getMatricula()) == null) {
                             alumnoDAO.insertar(alumno);

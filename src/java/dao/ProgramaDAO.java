@@ -10,27 +10,27 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.ConnectionClass;
-import model.Licenciatura;
+import model.Programa;
 
-public class LicenciaturaDAO {
+public class ProgramaDAO {
 
     ConnectionClass con = new ConnectionClass();
     private Connection connection;
 
-    public LicenciaturaDAO() {
+    public ProgramaDAO() {
     }
 
-    public LicenciaturaDAO(ConnectionClass con, Connection connection) {
+    public ProgramaDAO(ConnectionClass con, Connection connection) {
         this.con = con;
         this.connection = connection;
     }
 
-    public int verificar(String lic) {
+    public int verificar(String Prg) {
 
         int count = 0;
         try {
 
-            String sql = "select *from licenciaturas where nombre='" + lic + "';";
+            String sql = "select *from programas where nombre='" + Prg + "';";
 
             connection = con.conectar();
             Statement statement = connection.createStatement();
@@ -47,11 +47,11 @@ public class LicenciaturaDAO {
         return count;
     }
 
-    public int countLicenciaturas() {
+    public int countProgramas() {
 
         int count = 0;
         try {
-            String sql = "select *from licenciaturas;";
+            String sql = "select *from programas;";
             connection = con.conectar();
             Statement statement = connection.createStatement();
             ResultSet resulSet = statement.executeQuery(sql);
@@ -68,30 +68,30 @@ public class LicenciaturaDAO {
     }
 
     // listar todos los productos
-    public List<Licenciatura> listarLicenciaturas() throws SQLException {
+    public List<Programa> listarProgramas() throws SQLException {
 
-        List<Licenciatura> listaLicenciaturas = new ArrayList<Licenciatura>();
-        String sql = "SELECT *FROM licenciaturas ";
+        List<Programa> listaProgramas = new ArrayList<Programa>();
+        String sql = "SELECT *FROM programas ";
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
 
         while (resulSet.next()) {
-            int id = resulSet.getInt("idLicenciatura");
+            int id = resulSet.getInt("idPrograma");
             String nombre = resulSet.getString("nombre");
             String des = resulSet.getString("des");
 
-            Licenciatura licenciatura;
-            licenciatura = new Licenciatura(id, nombre,des);
-            listaLicenciaturas.add(licenciatura);
+            Programa programa;
+            programa = new Programa(id, nombre,des);
+            listaProgramas.add(programa);
         }
         con.desconectar();
-        return listaLicenciaturas;
+        return listaProgramas;
     }
 
     public void eliminar(int id) throws SQLException {
 
-        String sql = "DELETE FROM licenciaturas WHERE idLicenciatura=?";
+        String sql = "DELETE FROM programas WHERE idPrograma=?";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -100,18 +100,18 @@ public class LicenciaturaDAO {
 
     }
 
-    public boolean insertar(Licenciatura licenciatura) throws SQLException {
+    public boolean insertar(Programa programa) throws SQLException {
 
         try {
-            String sql = "INSERT INTO licenciaturas (idLicenciatura,nombre,des)"
+            String sql = "INSERT INTO programas (idPrograma,nombre,des)"
                     + " VALUES (?,?)";
             con.conectar();
             connection = con.getJdbcConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, null);
 
-            statement.setString(2, licenciatura.getNombre());
-            statement.setString(3, licenciatura.getDes());
+            statement.setString(2, programa.getNombre());
+            statement.setString(3, programa.getDes());
             statement.executeUpdate();
             statement.close();
             con.desconectar();
@@ -123,35 +123,35 @@ public class LicenciaturaDAO {
 
     }
 
-    public Licenciatura obtenerLicenciaturaById(int idLic) throws SQLException {
-        Licenciatura licenciatura = null;
+    public Programa obtenerProgramaById(int idLic) throws SQLException {
+        Programa programa = null;
 
-        String sql = "SELECT * FROM licenciaturas WHERE idLicenciatura= ? ";
+        String sql = "SELECT * FROM programas WHERE idPrograma= ? ";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, idLic);
         ResultSet res = statement.executeQuery();
         if (res.next()) {
-            licenciatura = new Licenciatura(res.getInt("idLicenciatura"), res.getString("nombre"), res.getString("des"));
+            programa = new Programa(res.getInt("idPrograma"), res.getString("nombre"), res.getString("des"));
 
         }
         res.close();
         con.desconectar();
-        return licenciatura;
+        return programa;
     }
 
-    public boolean updateLic(Licenciatura licenciatura) {
+    public boolean updatePrg(Programa programa) {
         try {
-            String sql = "update licenciaturas set idLicenciatura=?, nombre=?, des=?"
-                    + "where idLicenciatura=?";
+            String sql = "update programas set idPrograma=?, nombre=?, des=?"
+                    + "where idPrograma=?";
             con.conectar();
             connection = con.getJdbcConnection();
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, licenciatura.getIdLicenciatura());
-                statement.setString(2, licenciatura.getNombre());
-                 statement.setString(3, licenciatura.getDes());
-                statement.setInt(4, licenciatura.getIdLicenciatura());
+                statement.setInt(1, programa.getIdPrograma());
+                statement.setString(2, programa.getNombre());
+                 statement.setString(3, programa.getDes());
+                statement.setInt(4, programa.getIdPrograma());
                 statement.executeUpdate();
             }
             con.desconectar();

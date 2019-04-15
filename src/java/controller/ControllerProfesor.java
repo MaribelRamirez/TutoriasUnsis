@@ -137,12 +137,12 @@ public class ControllerProfesor extends HttpServlet {
             String nombre = request.getParameter("nombre");
             String grado_acad = request.getParameter("grado_acad");
             String status = request.getParameter("status");
-            int lic = Integer.parseInt(request.getParameter("lic"));
+            int prg = Integer.parseInt(request.getParameter("prg"));
             pro.setCurp(curp);
             pro.setNombre(nombre);
             pro.setGrado(grado_acad);
             pro.setEstatus(status);
-            pro.setIdLicenciatura(lic);
+            pro.setIdPrograma(prg);
 
             try {
                 profesordao.insertar(pro);
@@ -175,7 +175,7 @@ public class ControllerProfesor extends HttpServlet {
                         + "</body>\n"
                         + "</html>");
             } catch (SQLException ex) {
-                Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerPrograma.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (action.equalsIgnoreCase("edit")) {
             try {
@@ -184,13 +184,13 @@ public class ControllerProfesor extends HttpServlet {
                 String nombre = request.getParameter("nombre");
                 String grado = request.getParameter("grado");
                 String estatus = request.getParameter("estatus");
-                int lic = Integer.parseInt(request.getParameter("lic"));
+                int prg = Integer.parseInt(request.getParameter("prg"));
                 pro.setIdProfesor(idprf);
                 pro.setCurp(curp);
                 pro.setNombre(nombre);
                 pro.setGrado(grado);
                 pro.setEstatus(estatus);
-                pro.setIdLicenciatura(lic);
+                pro.setIdPrograma(prg);
                 profesordao.updateProfesor(pro);
                 out.print("<html>"
                         + "<head>"

@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>ControllerLicenciatura</servlet-name>
-        <servlet-class>controller.ControllerLicenciatura</servlet-class>
+        <servlet-class>controller.ControllerPrograma</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ControllerConstancias</servlet-name>

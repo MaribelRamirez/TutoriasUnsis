@@ -7,7 +7,7 @@ package controller;
 
 import dao.AlumnoDAO;
 import dao.GrupoDAO;
-import dao.LicenciaturaDAO;
+import dao.ProgramaDAO;
 import dao.PeriodoDAO;
 import dao.ProfesorDAO;
 import java.io.FileOutputStream;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Alumno;
 import model.Grupo;
-import model.Licenciatura;
+import model.Programa;
 import model.Periodo;
 import model.Profesor;
 import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
@@ -94,15 +94,15 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
 
         try {
             int idPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
-            String carrera=request.getParameter("lic");
+            String carrera=request.getParameter("Prg");
             //creando el libro de excel
             PeriodoDAO per = new PeriodoDAO();
             Periodo pdo;
             pdo = per.obtenerPeriodoById(idPeriodo);
 
-            LicenciaturaDAO obj_Read_Values_lic = new LicenciaturaDAO();
-            List<Licenciatura> list_lic = obj_Read_Values_lic.listarLicenciaturas();
-            Iterator<Licenciatura> it_list_lic = list_lic.iterator();
+            ProgramaDAO obj_Read_Values_Prg = new ProgramaDAO();
+            List<Programa> list_Prg = obj_Read_Values_Prg.listarProgramas();
+            Iterator<Programa> it_list_Prg = list_Prg.iterator();
             Sheet sheetx = null;
             Sheet sheet = null;
             Row rowGeneral = null;
@@ -113,14 +113,14 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
             int j = 0;
 if(carrera.equals("todas")){
             
-      while (it_list_lic.hasNext()) {//lectura de las carreras
+      while (it_list_Prg.hasNext()) {//lectura de las carreras
 
                 j = 0;
                 Workbook book = new XSSFWorkbook();
-                Licenciatura ob_lic = new Licenciatura();
-                ob_lic = it_list_lic.next();
+                Programa ob_Prg = new Programa();
+                ob_Prg = it_list_Prg.next();
                 //creando y asignando nombre a la hoja de excel
-                sheet = book.createSheet("" + ob_lic.getNombre());
+                sheet = book.createSheet("" + ob_Prg.getNombre());
                 cont2 = 0;
                 //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
                 sheet.getPrintSetup().setLandscape(false);
@@ -160,7 +160,7 @@ if(carrera.equals("todas")){
 
                 ProfesorDAO obj_Read_Values = new ProfesorDAO();
                 
-                if (ob_lic.getNombre().equals("LM") || ob_lic.getNombre().equals("LN") || ob_lic.getNombre().equals("LE") || ob_lic.getNombre().equals("LO")) {
+                if (ob_Prg.getNombre().equals("LM") || ob_Prg.getNombre().equals("LN") || ob_Prg.getNombre().equals("LE") || ob_Prg.getNombre().equals("LO")) {
                     GrupoDAO obj_grupos = new GrupoDAO();
 
                     //creando es estilo de los encabezados de la tabla
@@ -232,10 +232,10 @@ if(carrera.equals("todas")){
                         obG = it_listG.next();
 
                         AlumnoDAO objALum = new AlumnoDAO();
-                        List<Alumno> list2 = objALum.listarAlumnosTutoradosByCarrera(obG.getCurp(), ob_lic.getNombre(), idPeriodo);
+                        List<Alumno> list2 = objALum.listarAlumnosTutoradosByPrograma(obG.getCurp(), ob_Prg.getNombre(), idPeriodo);
                         Iterator<Alumno> it_list2 = list2.iterator();
 
-                        //List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_lic.getNombre(), idPeriodo);
+                        //List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_Prg.getNombre(), idPeriodo);
                         List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), idPeriodo);
 
                         Iterator<Grupo> it_grupos = list_grupos.iterator();
@@ -321,7 +321,7 @@ if(carrera.equals("todas")){
 
                                 cell = row3.createCell(3);
                                 cell.setCellStyle(styleColumn);
-                                cell.setCellValue(obA.getLicenciatura());
+                                cell.setCellValue(obA.getPrograma());
 
                                 cell = row3.createCell(4);
                                 cell.setCellStyle(styleColumn);
@@ -370,7 +370,7 @@ if(carrera.equals("todas")){
                         obI = it_listI.next();
 
                         AlumnoDAO objALum = new AlumnoDAO();
-                        List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(), ob_lic.getNombre(), idPeriodo);
+                        List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByPrograma(obI.getCurp(), ob_Prg.getNombre(), idPeriodo);
                         Iterator<Alumno> it_list2 = list2.iterator();
 
                         if (list2.size() > 0) {
@@ -523,7 +523,7 @@ if(carrera.equals("todas")){
 
                                 cell = row3.createCell(3);
                                 cell.setCellStyle(styleColumn);
-                                cell.setCellValue(obA.getLicenciatura());
+                                cell.setCellValue(obA.getPrograma());
 
                                 cell = row3.createCell(4);
                                 cell.setCellStyle(styleColumn);
@@ -543,7 +543,7 @@ if(carrera.equals("todas")){
                         try {
                             String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
                             try (FileOutputStream elFichero
-                                    = new FileOutputStream(rutRel + "/Asignacion_Tutorias " + ob_lic.getNombre() + "-" + pdo.getPeriodo() + ".xlsx")) {
+                                    = new FileOutputStream(rutRel + "/Asignacion_Tutorias " + ob_Prg.getNombre() + "-" + pdo.getPeriodo() + ".xlsx")) {
                                 book.write(elFichero);
                                 elFichero.close();
                             }
@@ -635,7 +635,7 @@ if(carrera.equals("todas")){
                         obI = it_listI.next();
 
                         AlumnoDAO objALum = new AlumnoDAO();
-                        List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(), ob_lic.getNombre(), idPeriodo);
+                        List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByPrograma(obI.getCurp(), ob_Prg.getNombre(), idPeriodo);
                         Iterator<Alumno> it_list2 = list2.iterator();
 
                         if (list2.size() > 0) {
@@ -756,7 +756,7 @@ if(carrera.equals("todas")){
 
                                 cell = row3.createCell(3);
                                 cell.setCellStyle(styleColumn);
-                                cell.setCellValue(obA.getLicenciatura());
+                                cell.setCellValue(obA.getPrograma());
 
                                 cell = row3.createCell(4);
                                 cell.setCellStyle(styleColumn);
@@ -777,7 +777,7 @@ if(carrera.equals("todas")){
                         try {
                             String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
                             try (FileOutputStream elFichero
-                                    = new FileOutputStream(rutRel + "/Asignacion_Tutorias " + ob_lic.getNombre() + "-" + pdo.getPeriodo() + ".xlsx")) {
+                                    = new FileOutputStream(rutRel + "/Asignacion_Tutorias " + ob_Prg.getNombre() + "-" + pdo.getPeriodo() + ".xlsx")) {
                                 book.write(elFichero);
                                 elFichero.close();
                             }
@@ -907,10 +907,10 @@ if(carrera.equals("todas")){
                         obG = it_listG.next();
 
                         AlumnoDAO objALum = new AlumnoDAO();
-                        List<Alumno> list2 = objALum.listarAlumnosTutoradosByCarrera(obG.getCurp(),carrera, idPeriodo);
+                        List<Alumno> list2 = objALum.listarAlumnosTutoradosByPrograma(obG.getCurp(),carrera, idPeriodo);
                         Iterator<Alumno> it_list2 = list2.iterator();
 
-                        //List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_lic.getNombre(), idPeriodo);
+                        //List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), ob_Prg.getNombre(), idPeriodo);
                         List<Grupo> list_grupos = obj_grupos.listarGruposTutorados(obG.getCurp(), idPeriodo);
 
                         Iterator<Grupo> it_grupos = list_grupos.iterator();
@@ -995,7 +995,7 @@ if(carrera.equals("todas")){
 
                                 cell = row3.createCell(3);
                                 cell.setCellStyle(styleColumn);
-                                cell.setCellValue(obA.getLicenciatura());
+                                cell.setCellValue(obA.getPrograma());
 
                                 cell = row3.createCell(4);
                                 cell.setCellStyle(styleColumn);
@@ -1044,7 +1044,7 @@ if(carrera.equals("todas")){
                         obI = it_listI.next();
 
                         AlumnoDAO objALum = new AlumnoDAO();
-                        List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(),carrera, idPeriodo);
+                        List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByPrograma(obI.getCurp(),carrera, idPeriodo);
                         Iterator<Alumno> it_list2 = list2.iterator();
 
                         if (list2.size() > 0) {
@@ -1198,7 +1198,7 @@ if(carrera.equals("todas")){
 
                                 cell = row3.createCell(3);
                                 cell.setCellStyle(styleColumn);
-                                cell.setCellValue(obA.getLicenciatura());
+                                cell.setCellValue(obA.getPrograma());
 
                                 cell = row3.createCell(4);
                                 cell.setCellStyle(styleColumn);
@@ -1310,7 +1310,7 @@ cell = titulo4.createCell(3);
                         obI = it_listI.next();
 
                         AlumnoDAO objALum = new AlumnoDAO();
-                        List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByCarrera(obI.getCurp(), carrera, idPeriodo);
+                        List<Alumno> list2 = objALum.listarAlumnosTutoradosIndividualByPrograma(obI.getCurp(), carrera, idPeriodo);
                         Iterator<Alumno> it_list2 = list2.iterator();
 
                         if (list2.size() > 0) {
@@ -1431,7 +1431,7 @@ cell = titulo4.createCell(3);
 
                                 cell = row3.createCell(3);
                                 cell.setCellStyle(styleColumn);
-                                cell.setCellValue(obA.getLicenciatura());
+                                cell.setCellValue(obA.getPrograma());
 
                                 cell = row3.createCell(4);
                                 cell.setCellStyle(styleColumn);

@@ -127,8 +127,8 @@ public class ControllerGrupo extends HttpServlet {
             grupo.setGrupo(nomGrup);
             int periodo = Integer.parseInt(request.getParameter("per"));
             grupo.setIdPeriodo(periodo);
-            int lic = Integer.parseInt(request.getParameter("lic"));
-            grupo.setIdLicenciatura(lic);
+            int prg = Integer.parseInt(request.getParameter("prg"));
+            grupo.setIdPrograma(prg);
             if (grupodao.verificar(nomGrup) == 0) {
                 try {
 
@@ -193,7 +193,7 @@ public class ControllerGrupo extends HttpServlet {
                                 + "</html>");
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ControllerPrograma.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
 
@@ -232,10 +232,10 @@ public class ControllerGrupo extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("id"));
                 String grup = request.getParameter("grupo");
                 int periodo = Integer.parseInt(request.getParameter("per"));
-                int lic = Integer.parseInt(request.getParameter("lic"));
+                int prg = Integer.parseInt(request.getParameter("prg"));
                 grupo.setIdGrupo(id);
                 grupo.setGrupo(grup);
-                grupo.setIdLicenciatura(lic);
+                grupo.setIdPrograma(prg);
                 grupo.setIdPeriodo(periodo);
                 grupodao.updateGrp(grupo);
 

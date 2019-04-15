@@ -133,11 +133,11 @@ public class ControllerAlumno extends HttpServlet {
             String matricula = request.getParameter("matricula");
             String nombre = request.getParameter("nombre");
             int grupo = Integer.parseInt(request.getParameter("grupo"));
-            int lic = Integer.parseInt(request.getParameter("lic"));
+            int prg = Integer.parseInt(request.getParameter("prg"));
             alum.setMatricula(matricula);
             alum.setNombre(nombre);
             alum.setIdGrupo(grupo);
-            alum.setIdLicenciatura(lic);
+            alum.setIdPrograma(prg);
 
             try {
                 alumnodao.insertar(alum);
@@ -171,7 +171,7 @@ public class ControllerAlumno extends HttpServlet {
                         + "</body>\n"
                         + "</html>");
             } catch (SQLException ex) {
-                Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerPrograma.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (action.equalsIgnoreCase("edit")) {
 
@@ -179,11 +179,11 @@ public class ControllerAlumno extends HttpServlet {
                 String matricula = request.getParameter("matricula");
                 String nombreGrp = request.getParameter("nombreAlum");
                 int grupo = Integer.parseInt(request.getParameter("grupo"));
-                int lic = Integer.parseInt(request.getParameter("lic"));
+                int prg = Integer.parseInt(request.getParameter("prg"));
                 alum.setMatricula(matricula);
                 alum.setNombre(nombreGrp);
                 alum.setIdGrupo(grupo);
-                alum.setIdLicenciatura(lic);
+                alum.setIdPrograma(prg);
                 alumnodao.updateAlumno(alum);
 
                 out.print("<html>"

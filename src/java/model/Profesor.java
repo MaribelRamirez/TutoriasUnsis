@@ -6,21 +6,21 @@ public class Profesor {
     private String nombre;
     private String estatus;
     private String grado;
-    private String licenciatura;
-    private int idLicenciatura;
+    private String programa;
+    private int idPrograma;
     private String curp;
     private int tipoTutoria;
 
     public Profesor() {
     }
 
-    public Profesor(int idProfesor, String nombre, String estatus, String grado, int idLicenciatura, String licenciatura, String curp, int tipoTutoria) {
+    public Profesor(int idProfesor, String nombre, String estatus, String grado, int idPrograma, String programa, String curp, int tipoTutoria) {
         this.idProfesor = idProfesor;
         this.nombre = nombre;
-        this.idLicenciatura = idLicenciatura;
+        this.idPrograma = idPrograma;
         this.grado = grado;
         this.estatus = estatus;
-        this.licenciatura = licenciatura;
+        this.programa = programa;
         this.curp = curp;
         this.tipoTutoria = tipoTutoria;
     }
@@ -57,21 +57,23 @@ public class Profesor {
         this.grado = grado;
     }
 
-    public String getLicenciatura() {
-        return licenciatura;
+    public String getPrograma() {
+        return programa;
     }
 
-    public void setLicenciatura(String licenciatura) {
-        this.licenciatura = licenciatura;
+    public void setPrograma(String programa) {
+        this.programa = programa;
     }
 
-    public int getIdLicenciatura() {
-        return idLicenciatura;
+    public int getIdPrograma() {
+        return idPrograma;
     }
 
-    public void setIdLicenciatura(int idLicenciatura) {
-        this.idLicenciatura = idLicenciatura;
+    public void setIdPrograma(int idPrograma) {
+        this.idPrograma = idPrograma;
     }
+
+ 
 
     public String getCurp() {
         return curp;

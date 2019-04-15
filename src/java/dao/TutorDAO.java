@@ -28,10 +28,10 @@ public class TutorDAO {
     public List<Tutor> listarTutorados(int idPer) throws SQLException {
 
         List<Tutor> listaTutores = new ArrayList<Tutor>();
-        String sql = "select idtutorado, tutores.matricula, tutores.curp, tutores.idperiodo, tipo, alumnos.nombre, profesores.nombre, grupo, licenciaturas.nombre  "
-                + "from tutores , alumnos , profesores, licenciaturas "
+        String sql = "select idtutorado, tutores.matricula, tutores.curp, tutores.idperiodo, tipo, alumnos.nombre, profesores.nombre, grupo, programas.nombre  "
+                + "from tutores , alumnos , profesores, programas "
                 + "where tutores.curp=profesores.curp and tutores.matricula=alumnos.matricula "
-                + "and  tutores.idperiodo=" + idPer + " and alumnos.idLicenciatura=licenciaturas.idLicenciatura;";
+                + "and  tutores.idperiodo=" + idPer + " and alumnos.idPrograma=programas.idPrograma;";
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
@@ -45,9 +45,9 @@ public class TutorDAO {
             String nombreA = resulSet.getString("alumnos.nombre");
             String nombreP = resulSet.getString("profesores.nombre");
             String grupo = resulSet.getString("grupo");
-            String lic = resulSet.getString("licenciaturas.nombre");
+            String prg = resulSet.getString("programas.nombre");
             Tutor tutor;
-            tutor = new Tutor(id, matricula, curp, idPerido, tipo, nombreA, nombreP, grupo, lic);
+            tutor = new Tutor(id, matricula, curp, idPerido, tipo, nombreA, nombreP, grupo, prg);
             listaTutores.add(tutor);
         }
         con.desconectar();
@@ -57,10 +57,10 @@ public class TutorDAO {
     public List<Tutor> listarAlumnosSinTutor(int idPer) throws SQLException {
 
         List<Tutor> listaAlumnos = new ArrayList<Tutor>();
-        String sql = "select matricula , alumnos.nombre, grupo, licenciaturas.nombre  "
-                + "from alumnos , grupos, licenciaturas where alumnos.matricula  "
+        String sql = "select matricula , alumnos.nombre, grupo, programas.nombre  "
+                + "from alumnos , grupos, programas where alumnos.matricula  "
                 + "not in (select matricula from tutores where idperiodo=" + idPer + ")  "
-                + "and  alumnos.idLicenciatura=licenciaturas.idLicenciatura "
+                + "and  alumnos.idPrograma=programas.idPrograma "
                 + "and alumnos.idgrupo = grupos.idgrupo and grupos.idperiodo=" + idPer + ";";
         connection = con.conectar();
         Statement statement = connection.createStatement();
@@ -75,9 +75,9 @@ public class TutorDAO {
             String nombreA = resulSet.getString("alumnos.nombre");
             String nombreP = "";
             String grupo = resulSet.getString("grupo");
-            String lic = resulSet.getString("licenciaturas.nombre");
+            String prg = resulSet.getString("programas.nombre");
             Tutor tutor;
-            tutor = new Tutor(0, matricula, curp, idPerido, tipo, nombreA, nombreP, grupo, lic);
+            tutor = new Tutor(0, matricula, curp, idPerido, tipo, nombreA, nombreP, grupo, prg);
             listaAlumnos.add(tutor);
         }
         con.desconectar();

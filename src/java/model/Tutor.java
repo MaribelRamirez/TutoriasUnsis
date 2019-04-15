@@ -12,12 +12,12 @@ public class Tutor {
     private String alumno;
     private String profesor;
     private String grupo;
-    private String lic;
+    private String prg;
 
     public Tutor() {
     }
 
-    public Tutor(int idTutorado, String matricula, String curp, int periodo, int tipo, String alumno, String profesor, String grupo, String lic) {
+    public Tutor(int idTutorado, String matricula, String curp, int periodo, int tipo, String alumno, String profesor, String grupo, String prg) {
         this.idTutorado = idTutorado;
         this.matricula = matricula;
         this.curp = curp;
@@ -26,7 +26,7 @@ public class Tutor {
         this.alumno = alumno;
         this.profesor = profesor;
         this.grupo = grupo;
-        this.lic = lic;
+        this.prg = prg;
     }
 
     public String getGrupo() {
@@ -37,13 +37,15 @@ public class Tutor {
         this.grupo = grupo;
     }
 
-    public String getLic() {
-        return lic;
+    public String getPrg() {
+        return prg;
     }
 
-    public void setLic(String lic) {
-        this.lic = lic;
+    public void setPrg(String prg) {
+        this.prg = prg;
     }
+
+   
 
     public String getAlumno() {
         return alumno;

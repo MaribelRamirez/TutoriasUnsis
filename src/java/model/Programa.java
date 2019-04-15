@@ -1,27 +1,27 @@
 package model;
 
-public class Licenciatura {
+public class Programa {
 
-    private int idLicenciatura;
+    private int idPrograma;
     private String nombre;
     private String des;
 
-    public Licenciatura() {
+    public Programa() {
     }
 
-    public Licenciatura(int idLicenciatura, String nombre, String des) {
+    public Programa(int idPrograma, String nombre, String des) {
 
-        this.idLicenciatura = idLicenciatura;
+        this.idPrograma = idPrograma;
         this.nombre = nombre;
          this.des = des;
     }
 
-    public int getIdLicenciatura() {
-        return idLicenciatura;
+    public int getIdPrograma() {
+        return idPrograma;
     }
 
-    public void setIdLicenciatura(int idLicenciatura) {
-        this.idLicenciatura = idLicenciatura;
+    public void setIdPrograma(int idPrograma) {
+        this.idPrograma = idPrograma;
     }
 
     public String getNombre() {
