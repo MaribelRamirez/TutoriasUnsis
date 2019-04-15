@@ -179,8 +179,9 @@
 
                                 <tr >
                                     <th>Name</th>
-                                    <th>Editar</th>
-                                    <th>Eliminar</th>
+                                     <th>Actualizar</th>
+                                    <th>DES</th>
+                                    
 
                                 </tr>
                             </thead>
@@ -194,6 +195,7 @@
                                 %>  
                                 <tr>
                                     <td><%=ob.getNombre()%></td>
+                                     
                                     <td>
                                         <form id="formularioAct" name="formularioAct" action="../ControllerLicenciatura" method="post" >
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
@@ -202,18 +204,19 @@
                                         </form>                                         
 
                                     </td>
-                                    <td >
+                                    <td><%=ob.getDes() %></td>
+<!--           <td >
                                         <form id="formularioElim" name="formularioElim" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')">
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
                                             <input type="hidden" name = "action" id="action" value="delete">
                                             <button type="submit"  class="btn btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
-                                        </form>                                          
-
-                                    </td>
-                                </tr>
+                                        </form>
+                                    </td>-->
+</tr>
+                                
                                 <%
                                     }
-                                %>     
+%>     
                             </tbody>
                         </table>
                     </div>

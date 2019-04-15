@@ -71,7 +71,7 @@ public class LicenciaturaDAO {
     public List<Licenciatura> listarLicenciaturas() throws SQLException {
 
         List<Licenciatura> listaLicenciaturas = new ArrayList<Licenciatura>();
-        String sql = "SELECT *FROM licenciaturas";
+        String sql = "SELECT *FROM licenciaturas ";
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
@@ -79,9 +79,10 @@ public class LicenciaturaDAO {
         while (resulSet.next()) {
             int id = resulSet.getInt("idLicenciatura");
             String nombre = resulSet.getString("nombre");
+            String des = resulSet.getString("des");
 
             Licenciatura licenciatura;
-            licenciatura = new Licenciatura(id, nombre);
+            licenciatura = new Licenciatura(id, nombre,des);
             listaLicenciaturas.add(licenciatura);
         }
         con.desconectar();
@@ -102,7 +103,7 @@ public class LicenciaturaDAO {
     public boolean insertar(Licenciatura licenciatura) throws SQLException {
 
         try {
-            String sql = "INSERT INTO licenciaturas (idLicenciatura,nombre)"
+            String sql = "INSERT INTO licenciaturas (idLicenciatura,nombre,des)"
                     + " VALUES (?,?)";
             con.conectar();
             connection = con.getJdbcConnection();
@@ -110,7 +111,7 @@ public class LicenciaturaDAO {
             statement.setString(1, null);
 
             statement.setString(2, licenciatura.getNombre());
-
+            statement.setString(3, licenciatura.getDes());
             statement.executeUpdate();
             statement.close();
             con.desconectar();
@@ -132,7 +133,7 @@ public class LicenciaturaDAO {
         statement.setInt(1, idLic);
         ResultSet res = statement.executeQuery();
         if (res.next()) {
-            licenciatura = new Licenciatura(res.getInt("idLicenciatura"), res.getString("nombre"));
+            licenciatura = new Licenciatura(res.getInt("idLicenciatura"), res.getString("nombre"), res.getString("des"));
 
         }
         res.close();
@@ -142,14 +143,15 @@ public class LicenciaturaDAO {
 
     public boolean updateLic(Licenciatura licenciatura) {
         try {
-            String sql = "update licenciaturas set idLicenciatura=?, nombre=?"
+            String sql = "update licenciaturas set idLicenciatura=?, nombre=?, des=?"
                     + "where idLicenciatura=?";
             con.conectar();
             connection = con.getJdbcConnection();
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, licenciatura.getIdLicenciatura());
                 statement.setString(2, licenciatura.getNombre());
-                statement.setInt(3, licenciatura.getIdLicenciatura());
+                 statement.setString(3, licenciatura.getDes());
+                statement.setInt(4, licenciatura.getIdLicenciatura());
                 statement.executeUpdate();
             }
             con.desconectar();

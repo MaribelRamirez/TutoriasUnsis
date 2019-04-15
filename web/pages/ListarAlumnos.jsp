@@ -188,7 +188,7 @@
                                 <th>Grupo</th>
                                 <th>Licenciatura</th>
                                 <th>Editar</th>
-                                <th>Eliminar</th>
+<!--                                <th>Eliminar</th>-->
                                 <th>Listar tutores</th>
                             </tr>
                         </thead>
@@ -212,7 +212,7 @@
 
 
                                 </td>
-                                <td >
+<!--                                <td >
                                     <form id="formularioElim" name="formularioElim" action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')" >
                                         <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
                                         <input type="hidden" name = "action" id="action" value="delete">
@@ -220,7 +220,7 @@
                                     </form>
 
 
-                                </td>
+                                </td>-->
                                 <td>
                                     <form id="formulario" action="../ControllerTutores" method="post">
                                         <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">

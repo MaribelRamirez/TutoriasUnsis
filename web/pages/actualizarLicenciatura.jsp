@@ -149,6 +149,10 @@
                                     <label for="nomLicc">Nombre de la licenciatura</label>
                                     <input  required class="form-control" id="nombreLic" name="nombreLic"  value="<c:out value="${lic.getNombre()}"/>"/>
                                 </div>  
+                                 <div class="form-group">
+                                    <label for="nomLicc">DES de la licenciatura</label>
+                                    <input  required class="form-control" id="nombreLic" name="nombreLic"  value="<c:out value="${lic.getNombre()}"/>"/>
+                                </div>
                             </form>
                             <button type="button" onclick="Guardar()" class="bl btn btn-danger pull-right">Guardar</button>
                         </div> </div> </div>                   
