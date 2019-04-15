@@ -94,8 +94,8 @@ public class ControllerReporteAsignacionTutorias extends HttpServlet {
 
         try {
             int idPeriodo = Integer.parseInt(request.getParameter("IdPeriodo"));
-String carrera=request.getParameter("lic");
-//creando el libro de excel
+            String carrera=request.getParameter("lic");
+            //creando el libro de excel
             PeriodoDAO per = new PeriodoDAO();
             Periodo pdo;
             pdo = per.obtenerPeriodoById(idPeriodo);
