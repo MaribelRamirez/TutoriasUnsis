@@ -133,7 +133,7 @@
                                         <td><%=ficheros[i]%></td>
                                         <td>
                                           
-                                            <a href="../resources/Archivos/<%=ficheros[i]%>" target="_blank"><img src="../resources/images/doc.png" title="pdf" class="center-block"l/></a>
+                                            <a href="../resources/Archivos/<%=ficheros[i]%>" target="_blank"><img src="../resources/images/doc.png" title="Abrir" height="50" class="center-block"/></a>
                                                 
                                         </td>
                                         <td >

@@ -112,15 +112,11 @@
                                     <tr>
                                         <td><%=ficheros[i]%></td>
                                         <td>
-                                            <%
-                                                if (pdfvo.getArchivopdf2() != null) {
-                                            %>
-                                            <a href="../pdf?id=<%=pdfvo.getCodigopdf()%>" target="_blank"><img src="../resources/images/doc.png" title="pdf"/></a>
-                                                <%
-                                                    } else {
-                                                        out.print("Vacio");
-                                                    }
-                                                %>
+                                          
+                                          
+                                            <a href="../resources/Archivos/<%=ficheros[i]%>" target="_blank"><img src="../resources/images/doc.png" title="Abrir" height="50" class="center-block"/></a>
+                                                
+                                        
                                         </td>
                                         
                                     </tr>
