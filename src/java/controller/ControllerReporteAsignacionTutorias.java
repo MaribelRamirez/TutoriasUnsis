@@ -612,13 +612,17 @@ if(carrera.equals("todas")){
                             cell.setCellStyle(styleHead);
                             cell.setCellValue("N°");
 
-                            cell = rowGeneral1.createCell(1);
+                            
+                                cell = rowGeneral1.createCell(1);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("MATRICULA");
+                            
+                            
+                            cell = rowGeneral1.createCell(2);
                             cell.setCellStyle(styleHead);
                             cell.setCellValue("NOMBRE");
 
-                             cell = rowGeneral1.createCell(2);
-                            cell.setCellStyle(styleHead);
-                            cell.setCellValue("MATRICULA");
+                         
                             
                             cell = rowGeneral1.createCell(3);
                             cell.setCellStyle(styleHead);
@@ -653,13 +657,15 @@ if(carrera.equals("todas")){
                                 cell.setCellStyle(styleColumn);
                                 cell.setCellValue("" + list);
 
-                                cell = rowGeneral1.createCell(1);
+                                 cell = rowGeneral1.createCell(1);
+                                cell.setCellStyle(styleColumn);
+                                cell.setCellValue(obA.getMatricula());
+                                
+                                cell = rowGeneral1.createCell(2);
                                 cell.setCellStyle(styleColumn);
                                 cell.setCellValue(obA.getNombre());
 
-                                cell = rowGeneral1.createCell(2);
-                                cell.setCellStyle(styleColumn);
-                                cell.setCellValue(obA.getMatricula());
+                               
                                 
                                 cell = rowGeneral1.createCell(3);
                                 cell.setCellStyle(styleColumn);
@@ -1287,13 +1293,15 @@ cell = titulo4.createCell(3);
                             cell.setCellStyle(styleHead);
                             cell.setCellValue("N°");
 
-                            cell = rowGeneral1.createCell(1);
+                              cell = rowGeneral1.createCell(1);
+                            cell.setCellStyle(styleHead);
+                            cell.setCellValue("MATRICULA");
+                            
+                            cell = rowGeneral1.createCell(2);
                             cell.setCellStyle(styleHead);
                             cell.setCellValue("NOMBRE");
 
-                             cell = rowGeneral1.createCell(2);
-                            cell.setCellStyle(styleHead);
-                            cell.setCellValue("MATRICULA");
+                           
                             
                             cell = rowGeneral1.createCell(3);
                             cell.setCellStyle(styleHead);
@@ -1330,11 +1338,13 @@ cell = titulo4.createCell(3);
 
                                 cell = rowGeneral1.createCell(1);
                                 cell.setCellStyle(styleColumn);
-                                cell.setCellValue(obA.getNombre());
-
+                                cell.setCellValue(obA.getMatricula());
+                                
+                                
                                 cell = rowGeneral1.createCell(2);
                                 cell.setCellStyle(styleColumn);
-                                cell.setCellValue(obA.getMatricula());
+                                cell.setCellValue(obA.getNombre());
+
                                 
                                 cell = rowGeneral1.createCell(3);
                                 cell.setCellStyle(styleColumn);

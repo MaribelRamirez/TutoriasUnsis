@@ -74,7 +74,7 @@
                             if (isConfirm) {
                                 document.getElementById('formularioG').submit();
                             } else {
-                                window.location = 'pages/ListarLicenciaturas.jsp';
+                                window.location = 'pages/ListarProgramas.jsp';
                             }
                         });
             };
@@ -130,7 +130,7 @@
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
                         <i class="fa fa-angle-right"></i>
-                        <span>Agregar licenciatura</span><br>
+                        <span>Agregar programa</span><br>
                     </h2>
                 </div>
 
@@ -139,19 +139,30 @@
                     <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                            <form id="formularioG" name="formularioG" action="ControllerLicenciatura" method="post" >
+                            <form id="formularioG" name="formularioG" action="ControllerPrograma" method="post" >
                                 <input type="hidden" name = "action" value="edit">
-                                <input type="hidden" name = "id"  value="<c:out value="${lic.getIdLicenciatura()}"/>"/> 
+                                <input type="hidden" name = "id"  value="<c:out value="${prg.getIdPrograma()}"/>"/> 
 
-                                <h3 id="forms-example" class="">Datos de la licenciatura</h3>
+                                <h3 id="forms-example" class="">Datos del programa</h3>
 
                                 <div class="form-group">
-                                    <label for="nomLicc">Nombre de la licenciatura</label>
-                                    <input  required class="form-control" id="nombreLic" name="nombreLic"  value="<c:out value="${lic.getNombre()}"/>"/>
+                                    <label for="nomLicc">Nombrel programa</label>
+                                    <input  required class="form-control" id="nombrePrg" name="nombrePrg"  value="<c:out value="${prg.getNombre()}"/>"/>
                                 </div>  
-                                 <div class="form-group">
-                                    <label for="nomLicc">DES de la licenciatura</label>
-                                    <input  required class="form-control" id="nombreLic" name="nombreLic"  value="<c:out value="${lic.getNombre()}"/>"/>
+                                 
+                                <div class = "form-group">
+                                    <label>Des</label>	      
+                                    <select  class="form-control " id="desR" name="desR">
+                                        <c:if test="${prg.getDes()=='SALUD'}">
+                                            <option selected="selected" value="SALUD">SALUD</option>
+                                            <option value="SOCIALES">SOCIALES</option>
+                                        </c:if>
+                                         <c:if test="${prg.getDes()=='SOCIALES'}">
+                                            <option selected="selected" value="SOCIALES">SOCIALES</option>
+                                            <option value="SALUD">SALUD</option>
+                                        </c:if>
+
+                                    </select>
                                 </div>
                             </form>
                             <button type="button" onclick="Guardar()" class="bl btn btn-danger pull-right">Guardar</button>
@@ -165,7 +176,7 @@
  <div class="copy">
        <img src="../resources/images/escudo.jpg" width="70" height="70"> <p> Universidad de la Sierra Sur  </p>          
     </div>
-<script src="js/jquery.nicescroll.js"></script>
+<script src="js/jquery.nicescroll.js"></script>     
 <script src="js/scripts.js"></script>
 </body>
 </html>

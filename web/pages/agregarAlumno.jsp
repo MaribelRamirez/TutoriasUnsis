@@ -8,9 +8,9 @@
 <%@page import="model.Grupo"%>
 <%@page import="dao.GrupoDAO"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="model.Licenciatura"%>
+<%@page import="model.Programa"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.LicenciaturaDAO"%>
+<%@page import="dao.ProgramaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 
@@ -156,19 +156,19 @@
                                         %>   
                                     </select>
                                 </div>
-                                <%                         LicenciaturaDAO obj_Read_Lic = new LicenciaturaDAO();
-                                    List<Licenciatura> listLic = obj_Read_Lic.listarLicenciaturas();
-                                    Iterator<Licenciatura> list_Lic = listLic.iterator();
+                                <%                         ProgramaDAO obj_Read_Lic = new ProgramaDAO();
+                                    List<Programa> listLic = obj_Read_Lic.listarProgramas();
+                                    Iterator<Programa> list_Lic = listLic.iterator();
 
                                 %>
                                 <div class = "form-group">
-                                    <label>Licenciatura</label>	      
-                                    <select class="form-control " id="lic" name="lic" >
+                                    <label>Programa educativo</label>	      
+                                    <select class="form-control " id="prg" name="prg" >
                                         <%                                        while (list_Lic.hasNext()) {
-                                                Licenciatura ob = new Licenciatura();
+                                                Programa ob = new Programa();
                                                 ob = list_Lic.next();
                                         %>
-                                        <option value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>\n\
+                                        <option value="<%= ob.getIdPrograma()%>"> <%=ob.getNombre()%></option>\n\
                                         <% }
 
                                         %>   

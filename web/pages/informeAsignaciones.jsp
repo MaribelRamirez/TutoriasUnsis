@@ -4,11 +4,12 @@
     Author     : Marifer
 --%>
 
-
+<%@page import="model.Periodo"%>
+<%@page import="dao.PeriodoDAO"%>
+<%@page import="model.Profesor"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="model.Licenciatura"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.LicenciaturaDAO"%>
+<%@page import="dao.ProfesorDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 
@@ -44,6 +45,20 @@
 
 
         <script>
+            window.onload = function () {
+                var fecha = new Date(); //Fecha actual
+                var mes = fecha.getMonth() + 1; //obteniendo mes
+                var dia = fecha.getDate(); //obteniendo dia
+                var ano = fecha.getFullYear(); //obteniendo año
+                if (dia < 10)
+                    dia = '0' + dia; //agrega cero si el menor de 10
+                if (mes < 10)
+                    mes = '0' + mes //agrega cero si el menor de 10
+                document.getElementById('datepicker').value = ano + "-" + mes + "-" + dia;
+
+            }
+
+
             $(function () {
                 $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
 
@@ -63,6 +78,8 @@
             $(document).ready(function () {
                 $('#example').DataTable();
             });
+
+
         </script>
 
         <style>
@@ -93,6 +110,9 @@
 
     </head>
     <body>
+
+
+
         <%
             HttpSession sesion = request.getSession();
             String usuario;
@@ -106,7 +126,6 @@
                 out.print("<script>location.replace('/TutoriasUnsis');</script>");
             }
         %>
-
         <jsp:include page="headAdmin.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main">
@@ -114,35 +133,65 @@
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
                         <i class="fa fa-angle-right"></i>
-                        <span>Agregar licenciatura</span><br>
+                        <span>Informe de asignaciones</span><br>
                     </h2>
                 </div>
-                <form id="formulario" action="../ControllerLicenciatura" method="post" >
-                    <input type="hidden" name = "action" value="add">
-                    <div class="blank">
+                <div class="blank">
+                    <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <%
+                            PeriodoDAO obj_Read_periodo = new PeriodoDAO();
+                            ////int periodo = Integer.parseInt();
+                            List<Periodo> list = obj_Read_periodo.listarPeriodos();
+                            Iterator<Periodo> it_list = list.iterator();
+                            int cont = list.size();
 
-                        <div class="blank-page col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="grid-form1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <h3 id="forms-example" class="">Datos de la licenciatura</h3>
-                                <div class="form-group">
-                                    <label for="nomLicc">Nombre de la licenciatura</label>
-                                    <input  required class="form-control" id="nombreLic" name="nombreLic" placeholder="Introduce el nombre de la licenciatura">
-                                </div>
-                            </div>
-                            <button type="submit" class="bl btn btn-danger pull-right">Guardar</button>
-                        </div>
+                        %>
+                        <form id="formulario" action="../ControllerInformeAsignaciones" method="post" >
+                          
+                            <input type="hidden" name = "action" value="grupal">
+                            <input type="hidden" name = "sizeList" value="<%=cont%>">
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                            
+                                        <th>Periodo</th></th> 
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% int i = 0;
+                                        while (it_list.hasNext()) {
+                                            i++;
+                                            Periodo ob = new Periodo();
+                                            ob = it_list.next();
+
+                                    %>  
+                                 
+                               
+                                    <tr>
+                                        <td><input type="checkbox" id="pr<%=i%>" name="pr<%=i%>" value="<%=ob.getIdPeriodo() %>"/> </td>
+                                        <td><%=ob.getPeriodo() %></td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>  
+
+                                </tbody>
+                            </table><br>
+                            <button type="submit" class="bl btn btn-danger pull-right">Generar Informe</button>
+                        </form> 
                     </div>
-                </form>
+                </div>
             </div>
+            <div class="clearfix"> </div>
         </div>
-    </div>
-    <div class="clearfix"> </div>
-</div>
- <div class="copy">
+        <div class="copy">
        <img src="../resources/images/escudo.jpg" width="70" height="70"> <p> Universidad de la Sierra Sur  </p>          
     </div>
-<script src="js/jquery.nicescroll.js"></script>
-<script src="js/scripts.js"></script>
-</body>
+        <script src="js/jquery.nicescroll.js"></script>
+        <script src="js/scripts.js"></script>
+    </body>
 </html>
 

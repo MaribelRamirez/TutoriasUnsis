@@ -178,7 +178,7 @@
                                     <th>Nombre</th></th> 
                                     <!--<th>Perfil academico</th> -->
                                     <th>Status</th>
-                                    <th>Licenciatura</th>
+                                    <th>Programa educativo</th>
                                     <th>Editar</th>
 <!--                                    <th>Eliminar</th >-->
                                 </tr>
@@ -193,7 +193,7 @@
                                     <td ><%=ob.getGrado()%>  <%=ob.getNombre()%></td>
                                     
                                     <td><%=ob.getEstatus()%></td>
-                                    <td><%=ob.getLicenciatura()%></td>
+                                    <td><%=ob.getPrograma()%></td>
                                     <td>                                        
                                         <form id="formularioAct" name="formularioAct" action="../ControllerProfesor" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')">
                                             <input type="hidden" name = "idprf" id="idprf" value="<%=ob.getIdProfesor()%>">

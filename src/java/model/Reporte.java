@@ -8,8 +8,8 @@ public class Reporte {
     private String curp;
     private String profesor;
     private String grado;
-    private String licenciatura;
-    private int idLicenciatura;
+    private String programa;
+    private int idPrograma;
     private int idPeriodo;
     private String periodo;
     private String entrego;
@@ -27,14 +27,14 @@ public class Reporte {
     public Reporte() {
     }
 
-    public Reporte(int idReporte, String curp, String profesor, String grado, String licenciatura, int idLicenciatura, int idPeriodo, String periodo, String entrego, String aTiempo, Date fecha, String tipoTutoria, int noSesiones, int noCanalizaciones, int alumnosAsignados, int alumnosReportados, int alumnosAsistencia, String observaciones, String faltantes) {
+    public Reporte(int idReporte, String curp, String profesor, String grado, String programa, int idPrograma, int idPeriodo, String periodo, String entrego, String aTiempo, Date fecha, String tipoTutoria, int noSesiones, int noCanalizaciones, int alumnosAsignados, int alumnosReportados, int alumnosAsistencia, String observaciones, String faltantes) {
 
         this.idReporte = idReporte;
         this.curp = curp;
         this.profesor = profesor;
         this.grado = grado;
-        this.licenciatura = licenciatura;
-        this.idLicenciatura = idLicenciatura;
+        this.programa = programa;
+        this.idPrograma = idPrograma;
         this.idPeriodo = idPeriodo;
         this.periodo = periodo;
         this.entrego = entrego;
@@ -67,21 +67,23 @@ public class Reporte {
         this.curp = curp;
     }
 
-    public String getLicenciatura() {
-        return licenciatura;
+    public String getPrograma() {
+        return programa;
     }
 
-    public void setLicenciatura(String licenciatura) {
-        this.licenciatura = licenciatura;
+    public void setPrograma(String programa) {
+        this.programa = programa;
     }
 
-    public int getIdLicenciatura() {
-        return idLicenciatura;
+    public int getIdPrograma() {
+        return idPrograma;
     }
 
-    public void setIdLicenciatura(int idLicenciatura) {
-        this.idLicenciatura = idLicenciatura;
+    public void setIdPrograma(int idPrograma) {
+        this.idPrograma = idPrograma;
     }
+
+  
 
     public String getEntrego() {
         return entrego;

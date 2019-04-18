@@ -59,8 +59,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="pages/ListarLicenciaturas.jsp" class=" hvr-bounce-to-right">
-                                <i class="fa fa-file-o nav_icon"></i>Licenciaturas</a>
+                            <a href="pages/ListarProgramas.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-file-o nav_icon"></i>Programas educativos</a>
                         </li>
 
                         <li>

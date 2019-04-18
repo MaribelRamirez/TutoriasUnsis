@@ -52,6 +52,10 @@
         <servlet-name>ControllerConstanciaGrupal</servlet-name>
         <servlet-class>controller.ControllerConstanciaGrupal</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControllerInformeAsignaciones</servlet-name>
+        <servlet-class>controller.ControllerInformeAsignaciones</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllerAlumno</servlet-name>
         <url-pattern>/ControllerAlumno</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>ControllerConstanciaGrupal</servlet-name>
         <url-pattern>/ControllerConstanciaGrupal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerInformeAsignaciones</servlet-name>
+        <url-pattern>/ControllerInformeAsignaciones</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

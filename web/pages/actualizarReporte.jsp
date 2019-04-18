@@ -9,8 +9,8 @@
 <%@page import="dao.PeriodoDAO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.LicenciaturaDAO"%>
-<%@page import="model.Licenciatura"%>
+<%@page import="dao.ProgramaDAO"%>
+<%@page import="model.Programa"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -192,9 +192,9 @@
                                     <input type="text" disabled="true" required class="form-control"  value="<c:out value="${rep.getCurp()}"/>"/>
                                 </div>
                                 <div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                    <label for="nombre">Licenciatura</label>
-                                    <input type="hidden" name = "idLic" id="idLic" value="<c:out value="${rep.getIdLicenciatura()}"/>"/>
-                                    <input type="text" disabled="true" required class="form-control"  value="<c:out value="${rep.getLicenciatura()}"/>"/>
+                                    <label for="nombre">Programa</label>
+                                    <input type="hidden" name = "idLic" id="idLic" value="<c:out value="${rep.getIdPrograma()}"/>"/>
+                                    <input type="text" disabled="true" required class="form-control"  value="<c:out value="${rep.getPrograma()}"/>"/>
                                 </div>
 
                                 <%

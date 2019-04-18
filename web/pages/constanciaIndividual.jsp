@@ -192,7 +192,7 @@
                                         <th>Nombre</th></th> 
                                         <th>Perfil</th>
                                         <th>Status</th>
-                                        <th>Licenciatura</th>
+                                        <th>Programa educativo</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -208,7 +208,7 @@
                                         <td><%=ob.getNombre()%></td>
                                         <td><%=ob.getGrado()%></td>
                                         <td><%=ob.getEstatus()%></td>
-                                        <td><%=ob.getLicenciatura()%></td>
+                                        <td><%=ob.getPrograma() %></td>
 
                                     </tr>
                                     <%

@@ -186,7 +186,7 @@
                                 <th>Matricula</th>
                                 <th>Nombre</th>
                                 <th>Grupo</th>
-                                <th>Licenciatura</th>
+                                <th>Programa</th>
                                 <th>Editar</th>
 <!--                                <th>Eliminar</th>-->
                                 <th>Listar tutores</th>
@@ -202,7 +202,7 @@
                                 <td><%=ob.getMatricula()%></td>
                                 <td><%=ob.getNombre()%></td>
                                 <td ><%=ob.getGrupo()%></td>
-                                <td><%=ob.getLicenciatura()%></td>
+                                <td><%=ob.getPrograma() %></td>
                                 <td>
                                     <form id="formularioAct" id="formularioAct"  action="../ControllerAlumno" method="post">
                                         <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">

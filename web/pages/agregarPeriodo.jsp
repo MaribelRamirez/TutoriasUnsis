@@ -6,9 +6,7 @@
 
 
 <%@page import="java.util.Iterator"%>
-<%@page import="model.Licenciatura"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.LicenciaturaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 

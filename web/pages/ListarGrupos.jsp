@@ -185,7 +185,7 @@
 
                                     <th>Grupo</th>
                                     <th>Periodo</th>
-                                    <th>Licenciatura</th>
+                                    <th>Programa</th>
                                     <th>Editar</th>
                                     <th>Eliminar</th>
                                     <th>Agregar Tutor</th>
@@ -202,7 +202,7 @@
                                 <tr>
                                     <td><%=ob.getGrupo()%></td>
                                     <td><%=ob.getPeriodo()%></td>
-                                    <td><%=ob.getLicenciatura()%></td>
+                                    <td><%=ob.getPrograma() %></td>
                                     <td>
                                         <form id="formularioAct" name="formularioAct" action="../ControllerGrupo" method="post">
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">

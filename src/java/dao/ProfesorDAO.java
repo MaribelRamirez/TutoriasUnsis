@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.ConnectionClass;
 import model.Profesor;
 
@@ -282,7 +284,54 @@ public class ProfesorDAO {
         con.desconectar();
         return listaProfesores;
     }
+ public List<Profesor> listarProfesoresSociales() throws SQLException {
 
+        List<Profesor> listaProfesores = new ArrayList<Profesor>();
+        String sql = "SELECT idProfesor,curp, profesores.nombre ,grado,estatus,profesores.programa,programas.nombre FROM profesores inner join programas on profesores.programa=programas.idPrograma and programas.des='SOCIALES' order by(programas.nombre)";
+
+        connection = con.conectar();
+        Statement statement = connection.createStatement();
+        ResultSet resulSet = statement.executeQuery(sql);
+
+        while (resulSet.next()) {
+            int idProfesor = resulSet.getInt("idProfesor");
+            String estatus = resulSet.getString("estatus");
+            String nombre = resulSet.getString("nombre");
+            String grado = resulSet.getString("grado");
+            String programa = resulSet.getString("programas.nombre");
+            String curp = resulSet.getString("curp");
+            int idPrograma = 0;
+            int tipoTutoria = 0;
+            Profesor profesor = new Profesor(idProfesor, nombre, estatus, grado, idPrograma, programa, curp, tipoTutoria);
+            listaProfesores.add(profesor);
+        }
+        con.desconectar();
+        return listaProfesores;
+    }
+  public List<Profesor> listarProfesoresSalud() throws SQLException {
+
+        List<Profesor> listaProfesores = new ArrayList<Profesor>();
+        String sql = "SELECT idProfesor,curp, profesores.nombre ,grado,estatus,profesores.programa,programas.nombre FROM profesores inner join programas on profesores.programa=programas.idPrograma and programas.des='SALUD' order by(programas.nombre)";
+
+        connection = con.conectar();
+        Statement statement = connection.createStatement();
+        ResultSet resulSet = statement.executeQuery(sql);
+
+        while (resulSet.next()) {
+            int idProfesor = resulSet.getInt("idProfesor");
+            String estatus = resulSet.getString("estatus");
+            String nombre = resulSet.getString("nombre");
+            String grado = resulSet.getString("grado");
+            String programa = resulSet.getString("programas.nombre");
+            String curp = resulSet.getString("curp");
+            int idPrograma = 0;
+            int tipoTutoria = 0;
+            Profesor profesor = new Profesor(idProfesor, nombre, estatus, grado, idPrograma, programa, curp, tipoTutoria);
+            listaProfesores.add(profesor);
+        }
+        con.desconectar();
+        return listaProfesores;
+    }
     public List<Profesor> listarProfesoresActivos() throws SQLException {
 
         List<Profesor> listaProfesores = new ArrayList<Profesor>();
@@ -372,6 +421,26 @@ public class ProfesorDAO {
         preparedStatement.setInt(1, idprf);
         preparedStatement.executeUpdate();
         con.desconectar();
+    }
+     public int countTutoradosByPeriodo(int periodo,String curp) {
+
+        int count = 0;
+        try {
+            String sql="select *from tutores where curp='" + curp + "' and idPeriodo='"+periodo+"' ;";
+            
+            connection = con.conectar();
+            Statement statement = connection.createStatement();
+            ResultSet resulSet = statement.executeQuery(sql);
+
+            while (resulSet.next()) {
+                count++;
+            }
+            con.desconectar();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
     }
 
 }

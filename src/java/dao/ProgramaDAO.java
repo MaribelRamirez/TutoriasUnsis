@@ -33,7 +33,7 @@ public class ProgramaDAO {
             String sql = "select *from programas where nombre='" + Prg + "';";
 
             connection = con.conectar();
-            Statement statement = connection.createStatement();
+                Statement statement = connection.createStatement();
             ResultSet resulSet = statement.executeQuery(sql);
 
             while (resulSet.next()) {
@@ -104,7 +104,7 @@ public class ProgramaDAO {
 
         try {
             String sql = "INSERT INTO programas (idPrograma,nombre,des)"
-                    + " VALUES (?,?)";
+                    + " VALUES (?,?,?)";
             con.conectar();
             connection = con.getJdbcConnection();
             PreparedStatement statement = connection.prepareStatement(sql);

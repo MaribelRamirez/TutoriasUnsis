@@ -31,13 +31,13 @@ public class ReporteDAO {
         int count = 0;
         try {
 
-            String sql = "SELECT profesores.nombre, periodo.idPeriodo, periodo.periodo, licenciaturas.idLicenciatura,\n"
-                    + "	licenciaturas.nombre,reportes.idReporte,reportes.curp, reportes.entrego,reportes.aTiempo,\n"
+            String sql = "SELECT profesores.nombre, periodo.idPeriodo, periodo.periodo, programas.idPrograma,\n"
+                    + "	programas.nombre,reportes.idReporte,reportes.curp, reportes.entrego,reportes.aTiempo,\n"
                     + "	reportes.fecha,reportes.tipoTutoria,reportes.noSesiones,reportes.noCanalizaciones,\n"
                     + "	reportes.alumnosAsignados,reportes.alumnosReportados,reportes.alumnosAsistencia,\n"
                     + "	reportes.observaciones,reportes.faltantes FROM profesores inner join reportes inner join\n"
-                    + "	licenciaturas inner join periodo on profesores.curp=reportes.curp and \n"
-                    + "	reportes.idPeriodo=periodo.idPeriodo and reportes.licenciatura=licenciaturas.idLicenciatura\n"
+                    + "	programas inner join periodo on profesores.curp=reportes.curp and \n"
+                    + "	reportes.idPeriodo=periodo.idPeriodo and reportes.programa=programas.idPrograma\n"
                     + "    where profesores.curp='" + curp + "' and periodo.idPeriodo='" + idPeriodo + "' ; ";
 
             connection = con.conectar();
@@ -58,13 +58,13 @@ public class ReporteDAO {
     public List<Reporte> listarReportes() throws SQLException {
 
         List<Reporte> listaReportes = new ArrayList<Reporte>();
-        String sql = "SELECT profesores.nombre,profesores.grado, periodo.idPeriodo, periodo.periodo, licenciaturas.idLicenciatura,"
-                + "licenciaturas.nombre,reportes.idReporte,reportes.curp, reportes.entrego,reportes.aTiempo,"
+        String sql = "SELECT profesores.nombre,profesores.grado, periodo.idPeriodo, periodo.periodo, programas.idPrograma,"
+                + "programas.nombre,reportes.idReporte,reportes.curp, reportes.entrego,reportes.aTiempo,"
                 + "reportes.fecha,reportes.tipoTutoria,reportes.noSesiones,reportes.noCanalizaciones,"
                 + "reportes.alumnosAsignados,reportes.alumnosReportados,reportes.alumnosAsistencia,"
                 + "reportes.observaciones,reportes.faltantes  FROM profesores "
-                + "inner join reportes inner join licenciaturas inner join periodo on profesores.curp=reportes.curp "
-                + "and reportes.idPeriodo=periodo.idPeriodo and reportes.licenciatura=licenciaturas.idLicenciatura";
+                + "inner join reportes inner join programas inner join periodo on profesores.curp=reportes.curp "
+                + "and reportes.idPeriodo=periodo.idPeriodo and reportes.programa=programas.idPrograma";
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
@@ -75,8 +75,8 @@ public class ReporteDAO {
             String curp = resulSet.getString("reportes.curp");
             String profesor = resulSet.getString("profesores.nombre");
             String grado = resulSet.getString("profesores.grado");
-            String licenciatura = resulSet.getString("licenciaturas.nombre");
-            int idLicenciatura = resulSet.getInt("licenciaturas.idLicenciatura");
+            String programa = resulSet.getString("programas.nombre");
+            int idPrograma = resulSet.getInt("programas.idPrograma");
             int idPeriodo = resulSet.getInt("periodo.idPeriodo");
             String periodo = resulSet.getString("periodo.periodo");
             String entrego = resulSet.getString("reportes.entrego");
@@ -90,7 +90,7 @@ public class ReporteDAO {
             int alumnosAsistencia = resulSet.getInt("reportes.alumnosAsistencia");
             String observaciones = resulSet.getString("reportes.observaciones");
             String faltantes = resulSet.getString("reportes.faltantes");
-            Reporte reporte = new Reporte(idReporte, curp, profesor, grado, licenciatura, idLicenciatura, idPeriodo, periodo, entrego, aTiempo, fecha, tipoTutoria, noSesiones, noCanalizaciones, alumnosAsignados, alumnosReportados, alumnosAsistencia, observaciones, faltantes);
+            Reporte reporte = new Reporte(idReporte, curp, profesor, grado, programa, idPrograma, idPeriodo, periodo, entrego, aTiempo, fecha, tipoTutoria, noSesiones, noCanalizaciones, alumnosAsignados, alumnosReportados, alumnosAsistencia, observaciones, faltantes);
             listaReportes.add(reporte);
         }
         con.desconectar();
@@ -110,13 +110,13 @@ public class ReporteDAO {
     public Reporte obtenerReporteById(int id) throws SQLException {
         Reporte reporte = null;
 
-        String sql = "SELECT profesores.nombre,profesores.grado, periodo.idPeriodo, periodo.periodo, licenciaturas.idLicenciatura,"
-                + "licenciaturas.nombre,reportes.idReporte,reportes.curp, reportes.entrego,reportes.aTiempo,"
+        String sql = "SELECT profesores.nombre,profesores.grado, periodo.idPeriodo, periodo.periodo, programas.idPrograma,"
+                + "programas.nombre,reportes.idReporte,reportes.curp, reportes.entrego,reportes.aTiempo,"
                 + "reportes.fecha,reportes.tipoTutoria,reportes.noSesiones,reportes.noCanalizaciones,"
                 + "reportes.alumnosAsignados,reportes.alumnosReportados,reportes.alumnosAsistencia,"
                 + "reportes.observaciones,reportes.faltantes FROM profesores inner join reportes inner join"
-                + " licenciaturas inner join periodo on profesores.curp=reportes.curp and "
-                + "reportes.idPeriodo=periodo.idPeriodo and reportes.licenciatura=licenciaturas.idLicenciatura WHERE"
+                + " programas inner join periodo on profesores.curp=reportes.curp and "
+                + "reportes.idPeriodo=periodo.idPeriodo and reportes.programa=programas.idPrograma WHERE"
                 + " reportes.idReporte =? ; ";
         con.conectar();
         connection = con.getJdbcConnection();
@@ -130,8 +130,8 @@ public class ReporteDAO {
                     res.getString("reportes.curp"),
                     res.getString("profesores.nombre"),
                     res.getString("profesores.grado"),
-                    res.getString("licenciaturas.nombre"),
-                    res.getInt("licenciaturas.idLicenciatura"),
+                    res.getString("programas.nombre"),
+                    res.getInt("programas.idPrograma"),
                     res.getInt("periodo.idPeriodo"),
                     res.getString("periodo.periodo"),
                     res.getString("reportes.entrego"),
@@ -155,7 +155,7 @@ public class ReporteDAO {
 
     public boolean insertar(Reporte reporte) throws SQLException {
         try {
-            String sql = "INSERT INTO reportes (idReporte,idPeriodo,curp,licenciatura,entrego,aTiempo,fecha,tipoTutoria,noSesiones,noCanalizaciones,"
+            String sql = "INSERT INTO reportes (idReporte,idPeriodo,curp,programa,entrego,aTiempo,fecha,tipoTutoria,noSesiones,noCanalizaciones,"
                     + "alumnosAsignados ,alumnosReportados,alumnosAsistencia,observaciones,faltantes) VALUES (?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             con.conectar();
             connection = con.getJdbcConnection();
@@ -163,7 +163,7 @@ public class ReporteDAO {
             statement.setString(1, null);
             statement.setInt(2, reporte.getIdPeriodo());
             statement.setString(3, reporte.getCurp());
-            statement.setInt(4, reporte.getIdLicenciatura());
+            statement.setInt(4, reporte.getIdPrograma());
             statement.setString(5, reporte.getEntrego());
             statement.setString(6, reporte.getaTiempo());
             statement.setDate(7, reporte.getFecha());
@@ -188,7 +188,7 @@ public class ReporteDAO {
 
     public boolean update(Reporte reporte) {
         try {
-            String sql = "update reportes set idReporte=?,idPeriodo=?,curp=?,licenciatura=?,entrego=?,aTiempo=?,fecha=?,"
+            String sql = "update reportes set idReporte=?,idPeriodo=?,curp=?,programa=?,entrego=?,aTiempo=?,fecha=?,"
                     + "tipoTutoria=?,noSesiones=?,noCanalizaciones=?,alumnosAsignados=?,alumnosReportados=?,"
                     + "alumnosAsistencia=?,observaciones=?,faltantes=? where idReporte=?";
             con.conectar();
@@ -197,7 +197,7 @@ public class ReporteDAO {
                 statement.setInt(1, reporte.getIdReporte());
                 statement.setInt(2, reporte.getIdPeriodo());
                 statement.setString(3, reporte.getCurp());
-                statement.setInt(4, reporte.getIdLicenciatura());
+                statement.setInt(4, reporte.getIdPrograma());
                 statement.setString(5, reporte.getEntrego());
                 statement.setString(6, reporte.getaTiempo());
                 statement.setDate(7, reporte.getFecha());
@@ -224,13 +224,13 @@ public class ReporteDAO {
     public List<Reporte> obtenerReportesByPeriodo(int Periodo) throws SQLException {
 
         List<Reporte> listaReportes = new ArrayList<Reporte>();
-        String sql = "SELECT profesores.nombre,profesores.grado, periodo.idPeriodo, periodo.periodo, licenciaturas.idLicenciatura,"
-                + "licenciaturas.nombre, reportes.entrego,reportes.aTiempo,"
+        String sql = "SELECT profesores.nombre,profesores.grado, periodo.idPeriodo, periodo.periodo, programas.idPrograma,"
+                + "programas.nombre, reportes.entrego,reportes.aTiempo,"
                 + "reportes.fecha,reportes.tipoTutoria,reportes.noSesiones,reportes.noCanalizaciones,"
                 + "reportes.alumnosAsignados,reportes.alumnosReportados,reportes.alumnosAsistencia,"
                 + "reportes.observaciones,reportes.faltantes FROM profesores inner join reportes inner join"
-                + " licenciaturas inner join periodo on profesores.curp=reportes.curp and "
-                + "reportes.idPeriodo=periodo.idPeriodo and reportes.licenciatura=licenciaturas.idLicenciatura "
+                + " programas inner join periodo on profesores.curp=reportes.curp and "
+                + "reportes.idPeriodo=periodo.idPeriodo and reportes.programa=programas.idPrograma "
                 + "where periodo.idPeriodo='" + Periodo + "';";
         connection = con.conectar();
         Statement statement = connection.createStatement();
@@ -239,7 +239,7 @@ public class ReporteDAO {
         while (resulSet.next()) {
             String nombre = resulSet.getString("profesores.nombre");
             String grado = resulSet.getString("profesores.grado");
-            String Licenciatura = resulSet.getString("licenciaturas.nombre");
+            String programa = resulSet.getString("programas.nombre");
             String entrego = resulSet.getString("reportes.entrego");
             String aTiempo = resulSet.getString("reportes.aTiempo");
             String periodo = resulSet.getString("periodo.periodo");
@@ -253,7 +253,7 @@ public class ReporteDAO {
             int alumnosAsistencia = resulSet.getInt("reportes.alumnosAsistencia");
             String observaciones = resulSet.getString("reportes.observaciones");
 
-            Reporte reporte = new Reporte(0, null, nombre, grado, Licenciatura, 0, 0, periodo, entrego, aTiempo, fecha, tipoTutoria,
+            Reporte reporte = new Reporte(0, null, nombre, grado, programa, 0, 0, periodo, entrego, aTiempo, fecha, tipoTutoria,
                     noSesiones, noCanalizaciones, alumnosAsignados, alumnosReportados, alumnosAsistencia, observaciones, faltantes);
             listaReportes.add(reporte);
         }

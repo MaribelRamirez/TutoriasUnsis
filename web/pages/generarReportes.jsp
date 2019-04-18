@@ -5,8 +5,8 @@
 --%>
 
 
-<%@page import="model.Licenciatura"%>
-<%@page import="dao.LicenciaturaDAO"%>
+<%@page import="model.Programa"%>
+<%@page import="dao.ProgramaDAO"%>
 <%@page import="java.io.FileReader"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.BufferedReader"%>
@@ -158,7 +158,7 @@
                                             <div class="modal-dialog" role="document">     
                                                 <div class="modal-content">      
                                                     <div class="modal-header">     
-                                                        <h5 class="modal-title" id="exampleModalLabel">Selecciona la carrera y el periodo del que 
+                                                        <h5 class="modal-title" id="exampleModalLabel">Selecciona el programa educativo y el periodo del que 
                                                             deseas generar el reporte</h5> 
                                                     </div>      
                                                     <div class="modal-body">     
@@ -166,10 +166,9 @@
                                                             PeriodoDAO obj_Read_Values2 = new PeriodoDAO();
                                                             List<Periodo> list2 = obj_Read_Values2.listarPeriodos();
                                                             Iterator<Periodo> it_list2 = list2.iterator();
-                                                          
-                                                            LicenciaturaDAO obj_Read_lic = new LicenciaturaDAO();
-                                                            List<Licenciatura> list_lic = obj_Read_lic.listarLicenciaturas();
-                                                            Iterator<Licenciatura> it_list_lic = list_lic.iterator();
+                                                          ProgramaDAO obj_Read_lic = new ProgramaDAO();
+                                                            List<Programa> list_prg = obj_Read_lic.listarProgramas();
+                                                            Iterator<Programa> it_list_lic = list_prg.iterator();
 
                                                         %>
                                                            <div class = "form-group">
@@ -190,13 +189,13 @@
                                                             </select>
                                                         </div>
                                                         <div class = "form-group">
-                                                            <label>Licenciaturas</label>	
-                                                            <select class="form-control " id="lic" name="lic">
+                                                            <label>Programa educativo</label>	
+                                                            <select class="form-control " id="Prg" name="Prg">
 
                                                                 <%                                                                   
                                                                     while (it_list_lic.hasNext())
                                                                     {
-                                                                        Licenciatura ob_lic = new Licenciatura();
+                                                                        Programa ob_lic = new Programa();
                                                                         ob_lic = it_list_lic.next();
                                                                 %>
                                                                 <option value="<%= ob_lic.getNombre() %>"> <%=ob_lic.getNombre()%></option>
@@ -207,6 +206,58 @@
                                                                 <option value="todas"> Todas</option>
                                                             </select>
                                                         </div>
+                                                    </div>     
+                                                    <div class="modal-footer"> 
+                                                        <button type="submit" class="btn btn-primary">Aceptar</button> 
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>   
+                                                    </div>   
+                                                </div>   
+                                            </div>
+                                        </div> 
+                                    </form>
+                                </li>
+                                <li class="active">
+                                    <form id="formulario" action="informeAsignaciones.jsp" method="post">
+                                        <button type="submit"  class=" fa fa-file-o btn btn-link">Informe de asignaciones</button>
+                                    </form>
+                                </li>
+                                 <li class="active">
+                                    <button type="button"  class=" fa fa-file-o btn btn-link" data-toggle="modal"  data-target="#ModalConAsig">Concentrado de asignaciones</button>
+                                    <form id="formulario" action="../ControllerConcentradoAsignaciones" method="post">
+                                        <input type="hidden" name = "action" value="reporte">
+                                          <div class="modal" id="ModalConAsig" tabindex="-1" role="dialog"
+                                                            arialabelledby="exampleModalLabel" aria-hidden="true">   
+                                            <div class="modal-dialog" role="document">     
+                                                <div class="modal-content">      
+                                                    <div class="modal-header">     
+                                                        <h5 class="modal-title" id="exampleModalLabel">Selecciona el periodo del que deseas generar el reporte</h5> 
+                                                    </div>      
+                                                    <div class="modal-body">     
+                                                        <%                                                           
+                                                            PeriodoDAO obj_Read_Values3 = new PeriodoDAO();
+                                                            List<Periodo> list3 = obj_Read_Values3.listarPeriodos();
+                                                            Iterator<Periodo> it_list3 = list3.iterator();
+
+                                                        %>
+
+                                                        <div class = "form-group">
+                                                            <label>Periodos</label>	    
+
+                                                            <select class="form-control " id="IdPeriodo" name="IdPeriodo">
+
+                                                                <%                                                                    while (it_list3.hasNext()) {
+                                                                        Periodo ob = new Periodo();
+                                                                        ob = it_list3.next();
+                                                                %>
+                                                                <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
+
+                                                                <% }
+
+                                                                %>   
+                                                            </select>
+                                                        </div>
+
+
                                                     </div>     
                                                     <div class="modal-footer"> 
                                                         <button type="submit" class="btn btn-primary">Aceptar</button> 
@@ -264,54 +315,7 @@
                                         </div>
                                     </form>
                                 </li>
-                         
-                                <li class="active">
-                                    <button type="button"  class=" fa fa-file-o btn btn-link" data-toggle="modal"  data-target="#ModalConAsig">Concentrado de asignaciones</button>
-                                    <form id="formulario" action="../ControllerConcentradoAsignaciones" method="post">
-                                        <input type="hidden" name = "action" value="reporte">
-                                          <div class="modal" id="ModalConAsig" tabindex="-1" role="dialog"
-                                                            arialabelledby="exampleModalLabel" aria-hidden="true">   
-                                            <div class="modal-dialog" role="document">     
-                                                <div class="modal-content">      
-                                                    <div class="modal-header">     
-                                                        <h5 class="modal-title" id="exampleModalLabel">Selecciona el periodo del que deseas generar el reporte</h5> 
-                                                    </div>      
-                                                    <div class="modal-body">     
-                                                        <%                                                           
-                                                            PeriodoDAO obj_Read_Values3 = new PeriodoDAO();
-                                                            List<Periodo> list3 = obj_Read_Values3.listarPeriodos();
-                                                            Iterator<Periodo> it_list3 = list3.iterator();
-
-                                                        %>
-
-                                                        <div class = "form-group">
-                                                            <label>Periodos</label>	    
-
-                                                            <select class="form-control " id="IdPeriodo" name="IdPeriodo">
-
-                                                                <%                                                                    while (it_list3.hasNext()) {
-                                                                        Periodo ob = new Periodo();
-                                                                        ob = it_list3.next();
-                                                                %>
-                                                                <option value="<%= ob.getIdPeriodo()%>"> <%=ob.getPeriodo()%></option>
-
-                                                                <% }
-
-                                                                %>   
-                                                            </select>
-                                                        </div>
-
-
-                                                    </div>     
-                                                    <div class="modal-footer"> 
-                                                        <button type="submit" class="btn btn-primary">Aceptar</button> 
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>   
-                                                    </div>   
-                                                </div>   
-                                            </div>
-                                        </div> 
-                                    </form>
-                                </li>
+                          
                             </ul>
                         </nav>
                     </div>

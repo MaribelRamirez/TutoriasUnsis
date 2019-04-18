@@ -8,9 +8,9 @@
 <%@page import="model.Periodo"%>
 <%@page import="dao.PeriodoDAO"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="model.Licenciatura"%>
+<%@page import="model.Programa"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.LicenciaturaDAO"%>
+<%@page import="dao.ProgramaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 
@@ -137,19 +137,19 @@
                                 </div>
 
                                 <%
-                                    LicenciaturaDAO obj_Read_Values = new LicenciaturaDAO();
-                                    List<Licenciatura> list = obj_Read_Values.listarLicenciaturas();
-                                    Iterator<Licenciatura> it_list = list.iterator();
+                                    ProgramaDAO obj_Read_Values = new ProgramaDAO();
+                                    List<Programa> list = obj_Read_Values.listarProgramas();
+                                    Iterator<Programa> it_list = list.iterator();
 
                                 %>
                                 <div class = "form-group">
                                     <label>Licenciatura</label>	      
-                                    <select class="form-control " id="lic" name="lic">
+                                    <select class="form-control " id="prg" name="prg">
                                         <%                                        while (it_list.hasNext()) {
-                                                Licenciatura ob = new Licenciatura();
+                                                Programa ob = new Programa();
                                                 ob = it_list.next();
                                         %>
-                                        <option value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>\n\
+                                        <option value="<%= ob.getIdPrograma()%>"> <%=ob.getNombre()%></option>\n\
                                         <% }
 
                                         %>   

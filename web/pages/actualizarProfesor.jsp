@@ -6,9 +6,9 @@
 
 
 <%@page import="java.util.Iterator"%>
-<%@page import="model.Licenciatura"%>
+<%@page import="model.Programa"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.LicenciaturaDAO"%>
+<%@page import="dao.ProgramaDAO"%>
 <%@page import="dao.ProfesorDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -198,27 +198,27 @@
                                     </select>
                                 </div>
                                 <%
-                                    LicenciaturaDAO obj_Read_Values = new LicenciaturaDAO();
-                                    List<Licenciatura> list = obj_Read_Values.listarLicenciaturas();
-                                    Iterator<Licenciatura> it_list = list.iterator();
+                                    ProgramaDAO obj_Read_Values = new ProgramaDAO();
+                                    List<Programa> list = obj_Read_Values.listarProgramas();
+                                    Iterator<Programa> it_list = list.iterator();
 
                                 %>
                                 <div class = "form-group">
-                                    <label>Licenciatura</label>	      
-                                    <select class="form-control " id="lic" name="lic">
+                                    <label>Programa educativo</label>	      
+                                    <select class="form-control " id="prg" name="prg">
 
                                         <%                                            while (it_list.hasNext()) {
-                                                Licenciatura ob = new Licenciatura();
+                                                Programa ob = new Programa();
                                                 ob = it_list.next();
                                         %>
-                                        <c:set var="id" value="<%=ob.getIdLicenciatura()%>"/>
+                                        <c:set var="id" value="<%=ob.getIdPrograma()%>"/>
                                         <c:choose >
-                                            <c:when test="${ prf.getIdLicenciatura()==id}">
-                                                <option  selected="selected"  value="<%= ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>
+                                            <c:when test="${ prf.getIdPrograma()==id}">
+                                                <option  selected="selected"  value="<%= ob.getIdPrograma()%>"> <%=ob.getNombre()%></option>
 
                                             </c:when>
                                             <c:otherwise>
-                                                <option value="<%=ob.getIdLicenciatura()%>"> <%=ob.getNombre()%></option>
+                                                <option value="<%=ob.getIdPrograma()%>"> <%=ob.getNombre()%></option>
                                             </c:otherwise>
                                         </c:choose>
 

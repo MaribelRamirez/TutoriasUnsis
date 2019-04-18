@@ -135,7 +135,9 @@ public class ControllerPrograma extends HttpServlet {
         } else if (action.equalsIgnoreCase("add")) {
 
             String nomPrg = request.getParameter("nombrePrg");
+             String des = request.getParameter("des");
             Prg.setNombre(nomPrg);
+            Prg.setDes(des);
             if (programadao.verificar(nomPrg) == 0) {
                 try {
                     if (programadao.insertar(Prg) == true) {
@@ -237,9 +239,10 @@ public class ControllerPrograma extends HttpServlet {
             try {
                 int id = Integer.parseInt(request.getParameter("id"));
                 String nomPrg = request.getParameter("nombrePrg");
+                   String desR = request.getParameter("desR");
                 Prg.setIdPrograma(id);
                 Prg.setNombre(nomPrg);
-
+                Prg.setDes(desR);
                 if (programadao.updatePrg(Prg) == true) {
                     out.print("<html>"
                             + "<head>"

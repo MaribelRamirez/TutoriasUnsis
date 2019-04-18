@@ -14,7 +14,6 @@
               Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <link href="../resources/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-
         <!-- tabla de pdf -->
         <link href="../resources/css/stylePDF.css" rel='stylesheet' type='text/css' />
         <!-- Custom Theme files -->
@@ -22,7 +21,6 @@
         <link href="../resources/css/font-awesome.css" rel="stylesheet"> 
         <script src="../resources/js/jquery.min.js"></script>
         <script src="../resources/js/bootstrap.min.js"></script>
-
         <!-- Mainly scripts -->
         <script src="../resources/js/jquery.metisMenu.js"></script>
         <script src="../resources/js/jquery.slimscroll.min.js"></script>

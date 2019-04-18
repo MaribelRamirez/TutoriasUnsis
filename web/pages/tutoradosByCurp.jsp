@@ -107,7 +107,7 @@
                                     <th>Matricula</th>
                                     <th>Nombre</th>
                                     <th>Grupo</th>
-                                    <th>Licenciatura</th>
+                                    <th>Programa educativo</th>
                                     <th>Tutoria</th>
                                 </tr>
                             </thead>
@@ -122,7 +122,7 @@
                                     <td><%=ob.getMatricula()%></td>  
                                     <td><%=ob.getNombre()%></td>  
                                     <td><%=ob.getGrupo()%></td>  
-                                    <td><%=ob.getLicenciatura()%></td>  
+                                    <td><%=ob.getPrograma()%></td>  
                                     <%
                                         if (ob.getTipo() == 1) {
                                             tipo = "Individual";
