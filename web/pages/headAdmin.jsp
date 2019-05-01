@@ -37,8 +37,8 @@
             </div>
 
             <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <img src="../resources/images/escudo.jpg" width="90" height="90"> <br><br>
+                <div class="sidebar-nav navbar-collapse"><br>
+                    <img src="../resources/images/escudo.jpg" width="90" height="90" class="center-block">
                     <ul class="nav" id="side-menu">
 
                         <li>
@@ -57,8 +57,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="ListarLicenciaturas.jsp" class=" hvr-bounce-to-right">
-                                <i class="fa fa-file-o nav_icon"></i>Licenciaturas</a>
+                            <a href="ListarProgramas.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-file-o nav_icon"></i>Programas educativos</a>
                         </li>
 
                         <li>
@@ -89,7 +89,7 @@
 
 
                         <li>
-                            <a href="ListarReportes.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Reportes tutorias</a>
+                            <a href="ListarReportes.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon "></i>Entrega de reportes tutorias</a>
                         </li>
                     </ul>
                 </div>

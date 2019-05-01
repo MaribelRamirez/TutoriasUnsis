@@ -185,7 +185,7 @@
 
                                     <th>Grupo</th>
                                     <th>Periodo</th>
-                                    <th>Licenciatura</th>
+                                    <th>Programa</th>
                                     <th>Editar</th>
                                     <th>Eliminar</th>
                                     <th>Agregar Tutor</th>
@@ -202,9 +202,9 @@
                                 <tr>
                                     <td><%=ob.getGrupo()%></td>
                                     <td><%=ob.getPeriodo()%></td>
-                                    <td><%=ob.getLicenciatura()%></td>
+                                    <td><%=ob.getPrograma() %></td>
                                     <td>
-                                        <form id="formularioAct" name="formularioAct" action="../ControllerGrupo" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')" >
+                                        <form id="formularioAct" name="formularioAct" action="../ControllerGrupo" method="post">
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdGrupo()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
                                             <button type="submit"  class="btn btn-link center-block">Actualizar</button>
@@ -245,9 +245,9 @@
             </div>
             <div class="clearfix"> </div>
         </div>
-        <div class="copy">
-            <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-        </div>
+         <div class="copy">
+       <img src="../resources/images/escudo.jpg" width="70" height="70"> <p> Universidad de la Sierra Sur  </p>          
+    </div>
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
     </body>

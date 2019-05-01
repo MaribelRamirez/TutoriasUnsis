@@ -7,7 +7,7 @@ package controller;
 
 import dao.AlumnoDAO;
 import dao.GrupoDAO;
-import dao.LicenciaturaDAO;
+import dao.ProgramaDAO;
 import dao.PeriodoDAO;
 import dao.ProfesorDAO;
 import java.io.FileOutputStream;
@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Grupo;
-import model.Licenciatura;
+import model.Programa;
 import model.Periodo;
 import model.Profesor;
 import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
@@ -161,14 +161,14 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
             int carreras = 0;
             try {
 
-                LicenciaturaDAO obj_Read_lic = new LicenciaturaDAO();
-                List<Licenciatura> list_lic = obj_Read_lic.listarLicenciaturas();
-                Iterator<Licenciatura> it_list_lic = list_lic.iterator();
+                ProgramaDAO obj_Read_prg = new ProgramaDAO();
+                List<Programa> list_prg = obj_Read_prg.listarProgramas();
+                Iterator<Programa> it_list_prg = list_prg.iterator();
 
-                while (it_list_lic.hasNext()) {
+                while (it_list_prg.hasNext()) {
 
-                    Licenciatura ob = new Licenciatura();
-                    ob = it_list_lic.next();
+                    Programa ob = new Programa();
+                    ob = it_list_prg.next();
 
                     sheet = book.createSheet(ob.getNombre());
                     //indicando si es horizintal o vertical de la hoja (false-vertical, true-horizontal)
@@ -213,8 +213,8 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                     cellT3.setCellStyle(style4);
 
                     ///Contar cuantas carreras existen registradas
-                    LicenciaturaDAO obj_lic = new LicenciaturaDAO();
-                    carreras = obj_lic.countLicenciaturas();
+                    ProgramaDAO obj_lic = new ProgramaDAO();
+                    carreras = obj_lic.countProgramas();
 
                     carreras = carreras + 2;
 
@@ -222,9 +222,9 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                     cellT1.setCellValue("CONCENTRADO DE ASIGNACIONES-" + pdo.getPeriodo());
                     cellT1.setCellStyle(style2);
 
-                    LicenciaturaDAO obj_Read_Values = new LicenciaturaDAO();
-                    List<Licenciatura> list = obj_Read_Values.listarLicenciaturas();
-                    Iterator<Licenciatura> it_list = list.iterator();
+                    ProgramaDAO obj_Read_Values = new ProgramaDAO();
+                    List<Programa> list = obj_Read_Values.listarProgramas();
+                    Iterator<Programa> it_list = list.iterator();
 
                     int l = 3;
 
@@ -239,7 +239,7 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
 
                     while (it_list.hasNext()) {
 
-                        Licenciatura obj = new Licenciatura();
+                        Programa obj = new Programa();
                         obj = it_list.next();
 
                         cellT3 = rowT3.createCell(l);
@@ -317,15 +317,15 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
 
                         AlumnoDAO alum_read = new AlumnoDAO();
 
-                        List<Licenciatura> list2 = obj_Read_Values.listarLicenciaturas();
-                        Iterator<Licenciatura> it_list2 = list2.iterator();
+                        List<Programa> list2 = obj_Read_Values.listarProgramas();
+                        Iterator<Programa> it_list2 = list2.iterator();
 
                         while (it_list2.hasNext()) {
 
-                            Licenciatura obj = new Licenciatura();
+                            Programa obj = new Programa();
                             obj = it_list2.next();
 
-                            if (alum_read.countAlumnosTutoradosByCarrera(Obt.getCurp(), obj.getNombre(), idPeriodo) == 0) {
+                            if (alum_read.countAlumnosTutoradosByPrograma(Obt.getCurp(), obj.getNombre(), idPeriodo) == 0) {
 
                                 if (Obt.getEstatus() == "Inactivo" || Obt.getEstatus() == "Licencia" || Obt.getEstatus() == "Sabatico") {
                                     cellT4 = rowT4.createCell(l);
@@ -341,7 +341,7 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
 
                             } else {
                                 cellT4 = rowT4.createCell(l);
-                                cellT4.setCellValue(alum_read.countAlumnosTutoradosByCarrera(Obt.getCurp(), obj.getNombre(), idPeriodo));
+                                cellT4.setCellValue(alum_read.countAlumnosTutoradosByPrograma(Obt.getCurp(), obj.getNombre(), idPeriodo));
                                 cellT4.setCellStyle(style2);
                                 l++;
                             }
@@ -373,8 +373,8 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                 //indicando el tamaño de la hoja
                 sheet.getPrintSetup().setPaperSize(HSSFPrintSetup.A4_PAPERSIZE);
 
-                List<Licenciatura> list_lic2 = obj_Read_lic.listarLicenciaturas();
-                Iterator<Licenciatura> it_list_lic2 = list_lic2.iterator();
+                List<Programa> list_prg2 = obj_Read_prg.listarProgramas();
+                Iterator<Programa> it_list_prg2 = list_prg2.iterator();
                 int j = 0;
                 int l = 0;
                 Row rowT = sheet.createRow(j);
@@ -382,10 +382,10 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                 cellT4.setCellValue("LIC");
                 cellT4.setCellStyle(style3);
                 l++;
-                while (it_list_lic2.hasNext()) {
+                while (it_list_prg2.hasNext()) {
 
-                    Licenciatura obj = new Licenciatura();
-                    obj = it_list_lic2.next();
+                    Programa obj = new Programa();
+                    obj = it_list_prg2.next();
 
                     cellT4 = rowT.createCell(l);
                     cellT4.setCellValue(obj.getNombre());
@@ -396,37 +396,37 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                 cellT4.setCellValue("TOTAL");
                 cellT4.setCellStyle(style3);
 
-                List<Licenciatura> list_licTut = obj_Read_lic.listarLicenciaturas();
-                Iterator<Licenciatura> it_list_licTut = list_licTut.iterator();
+                List<Programa> list_prgTut = obj_Read_prg.listarProgramas();
+                Iterator<Programa> it_list_prgTut = list_prgTut.iterator();
                 AlumnoDAO alum_read = new AlumnoDAO();
-                while (it_list_licTut.hasNext()) {
+                while (it_list_prgTut.hasNext()) {
                     j++;
                     l = 0;
-                    Licenciatura objTut = new Licenciatura();
-                    objTut = it_list_licTut.next();
+                    Programa objTut = new Programa();
+                    objTut = it_list_prgTut.next();
                     rowT = sheet.createRow(j);
                     cellT4 = rowT.createCell(l);
                     cellT4.setCellValue(objTut.getNombre());
                     cellT4.setCellStyle(style3);
                     l++;
-                    List<Licenciatura> list_licAlum = obj_Read_lic.listarLicenciaturas();
-                    Iterator<Licenciatura> it_list_licAlumno = list_licAlum.iterator();
-                    while (it_list_licAlumno.hasNext()) {
+                    List<Programa> list_prgAlum = obj_Read_prg.listarProgramas();
+                    Iterator<Programa> it_list_prgAlumno = list_prgAlum.iterator();
+                    while (it_list_prgAlumno.hasNext()) {
 
-                        Licenciatura objAlm = new Licenciatura();
-                        objAlm = it_list_licAlumno.next();
+                        Programa objAlm = new Programa();
+                        objAlm = it_list_prgAlumno.next();
 
                         System.out.println(objAlm.getNombre());
                         System.out.println(objTut.getNombre());
 
                         cellT4 = rowT.createCell(l);
-                        cellT4.setCellValue(alum_read.countEstadistica(objTut.getIdLicenciatura(), objAlm.getIdLicenciatura(), idPeriodo));
+                        cellT4.setCellValue(alum_read.countEstadistica(objTut.getIdPrograma(), objAlm.getIdPrograma(), idPeriodo));
                         cellT4.setCellStyle(style2);
                         l++;
                     }
 
                     cellT4 = rowT.createCell(l);
-                    cellT4.setCellValue(alum_read.countEstadistica2(objTut.getIdLicenciatura(), idPeriodo));
+                    cellT4.setCellValue(alum_read.countEstadistica2(objTut.getIdPrograma(), idPeriodo));
                     cellT4.setCellStyle(style2);
 
                 }
@@ -437,7 +437,23 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                 cellT4 = rowT.createCell(l);
                 cellT4.setCellValue(alum_read.countEstadistica3(idPeriodo));
                 cellT4.setCellStyle(style2);
-                sheet.addMergedRegion(new CellRangeAddress(j, j, l - 4, l - 1));
+                
+                l=1;
+               it_list_prg = list_prg.iterator();
+
+                while (it_list_prg.hasNext()) {
+
+                    Programa ob = new Programa();
+                    ob = it_list_prg.next();
+                    
+               
+                cellT4 = rowT.createCell(l);
+                 cellT4.setCellValue(alum_read.countEstadistica4(idPeriodo,ob.getIdPrograma()));
+                cellT4.setCellStyle(style2);
+                l++;
+                }
+                
+              //  sheet.addMergedRegion(new CellRangeAddress(j, j, l - 4, l - 1));
                 for (int k = 0; k < j; k++) {
                     sheet.autoSizeColumn((short) k);
 

@@ -10,8 +10,8 @@
 <%@page import="dao.PeriodoDAO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.LicenciaturaDAO"%>
-<%@page import="model.Licenciatura"%>
+<%@page import="dao.ProgramaDAO"%>
+<%@page import="model.Programa"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -141,8 +141,8 @@
                                     <input  required class="form-control" id="periodo" name="periodo"  value="<c:out value="${grp. getPeriodo()}"/>"/>       
                                 </div>
                                 <div class = "form-group">
-                                    <label>Licenciatura</label>	
-                                    <input  required class="form-control" id="lic" name="lic"  value="<c:out value="${grp. getLicenciatura()}"/>"/>       
+                                    <label>Programa educativo</label>	
+                                    <input  required class="form-control" id="lic" name="lic"  value="<c:out value="${grp. getPrograma()}"/>"/>       
                                 </div>
                                 <%
                                     ProfesorDAO obj_Read_Pro = new ProfesorDAO();
@@ -174,9 +174,9 @@
     </div>
     <div class="clearfix"> </div>
 </div>
-<div class="copy">
-    <p><img src="resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-</div>
+ <div class="copy">
+       <img src="../resources/images/escudo.jpg" width="70" height="70"> <p> Universidad de la Sierra Sur  </p>          
+    </div>
 <script src="js/jquery.nicescroll.js"></script>
 <script src="js/scripts.js"></script>
 </body>

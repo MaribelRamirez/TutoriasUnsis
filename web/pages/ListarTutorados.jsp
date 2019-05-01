@@ -138,8 +138,7 @@
                                     <th>Matricula</th>
                                     <th>Alumno</th>
                                     <th>Grupo</th>
-                                    <th>Licenciatura</th>
-                                    <th>Curp</th>
+                                    <th>Programa</th>
                                     <th>Tutor</th>
                                     <th>Tipo de tutoria</th>
                                 </tr>
@@ -155,8 +154,7 @@
                                     <td><%=ob.getMatricula()%></td>
                                     <td><%=ob.getAlumno()%></td>
                                     <td><%=ob.getGrupo()%></td>
-                                    <td><%=ob.getLic()%></td>
-                                    <td><%=ob.getCurp()%></td>
+                                    <td><%=ob.getPrg() %></td>
                                     <td><%=ob.getProfesor()%></td>
                                     <% if (ob.getTipo() == 1) { %>
                                     <td>Individual</td>
@@ -179,7 +177,7 @@
                                     <td><%=ob.getMatricula()%></td>
                                     <td><%=ob.getAlumno()%></td>
                                     <td><%=ob.getGrupo()%></td>
-                                    <td><%=ob.getLic()%></td>
+                                    <td><%=ob.getPrg() %></td>
                                     <td></td>
                                     <td>
                                         <form id="formulario" action="../ControllerTutores" method="post" onsubmit="return confirm('¿Realmente desea agregar tutor?')">
@@ -201,8 +199,8 @@
             <div class="clearfix"> </div>
         </div>
         <div class="copy">
-            <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-        </div>
+       <img src="../resources/images/escudo.jpg" width="70" height="70"> <p> Universidad de la Sierra Sur  </p>          
+    </div>
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
     </body>

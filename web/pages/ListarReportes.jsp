@@ -3,6 +3,7 @@
     Created on : 17-nov-2018, 21:52:54
     Author     : Marifer
 --%>
+
 <%@page import="model.Profesor"%>
 <%@page import="dao.ProfesorDAO"%>
 <%@page import="model.Reporte"%>
@@ -246,7 +247,7 @@
                                     <td><%=ob.getProfesor()%></td>
                                     <td><%=ob.getPeriodo()%></td>
                                     <td>
-                                        <form id="formularioAct" name="formularioAct" action="../ControllerReportesTutorias" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')">
+                                        <form id="formularioAct" name="formularioAct" action="../ControllerReportesTutorias" method="post">
                                             <input type="hidden" name = "id" id="id" value="<%=ob.getIdReporte()%>">
                                             <input type="hidden" name = "action" id="action" value="update">
                                             <button type="submit"  class="btn btn-link center-block">Actualizar</button>
@@ -276,9 +277,9 @@
             </div>
             <div class="clearfix"> </div>
         </div>
-        <div class="copy">
-            <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-        </div>
+       <div class="copy">
+       <img src="../resources/images/escudo.jpg" width="70" height="70"> <p> Universidad de la Sierra Sur  </p>          
+    </div>
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
     </body>

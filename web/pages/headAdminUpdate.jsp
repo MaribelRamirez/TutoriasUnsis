@@ -41,8 +41,8 @@
             </div>
 
             <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <img src="resources/images/escudo.jpg" width="90" height="90"> <br><br>
+                <div class="sidebar-nav navbar-collapse"><br>
+                    <img src="resources/images/escudo.jpg" width="90" height="90" class="center-block">
                     <ul class="nav" id="side-menu">
                         <a href="pages/indexAdmin.jsp" class=" hvr-bounce-to-right">
                             <i class="fa fa-file-o nav_icon"></i>Profesores
@@ -59,8 +59,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="pages/ListarLicenciaturas.jsp" class=" hvr-bounce-to-right">
-                                <i class="fa fa-file-o nav_icon"></i>Licenciaturas</a>
+                            <a href="pages/ListarProgramas.jsp" class=" hvr-bounce-to-right">
+                                <i class="fa fa-file-o nav_icon"></i>Programas educativos</a>
                         </li>
 
                         <li>
@@ -89,7 +89,7 @@
                             <a href="pages/ListarPeriodos.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Periodos</a>
                         </li>
                         <li>
-                            <a href="pages/ListarReportes.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Reportes tutorias</a>
+                            <a href="pages/ListarReportes.jsp" class=" hvr-bounce-to-right"><i class="fa fa-file-o nav_icon"></i>Entrega de reportes tutorias</a>
                         </li>
                     </ul>
                 </div>

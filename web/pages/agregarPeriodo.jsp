@@ -6,9 +6,7 @@
 
 
 <%@page import="java.util.Iterator"%>
-<%@page import="model.Licenciatura"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.LicenciaturaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 
@@ -148,9 +146,9 @@
     </div>
     <div class="clearfix"> </div>
 </div>
-<div class="copy">
-    <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-</div>
+ <div class="copy">
+       <img src="../resources/images/escudo.jpg" width="70" height="70"> <p> Universidad de la Sierra Sur  </p>          
+    </div>
 <script src="js/jquery.nicescroll.js"></script>
 <script src="js/scripts.js"></script>
 </body>

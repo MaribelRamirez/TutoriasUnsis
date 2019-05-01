@@ -107,7 +107,7 @@
                                     <th>Matricula</th>
                                     <th>Nombre</th>
                                     <th>Grupo</th>
-                                    <th>Licenciatura</th>
+                                    <th>Programa educativo</th>
                                     <th>Tutoria</th>
                                 </tr>
                             </thead>
@@ -122,7 +122,7 @@
                                     <td><%=ob.getMatricula()%></td>  
                                     <td><%=ob.getNombre()%></td>  
                                     <td><%=ob.getGrupo()%></td>  
-                                    <td><%=ob.getLicenciatura()%></td>  
+                                    <td><%=ob.getPrograma()%></td>  
                                     <%
                                         if (ob.getTipo() == 1) {
                                             tipo = "Individual";
@@ -144,9 +144,9 @@
             </div>
             <div class="clearfix"> </div>
         </div>
-        <div class="copy">
-            <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-        </div>
+         <div class="copy">
+       <img src="../resources/images/escudo.jpg" width="70" height="70"> <p> Universidad de la Sierra Sur  </p>          
+    </div>
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
     </body>

@@ -346,7 +346,7 @@ public class ControllerReportesTutorias extends HttpServlet {
 
                         cell = row2.createCell(2);
                         cell.setCellStyle(style2);
-                        cell.setCellValue("" + ob_lic_rep2.getLicenciatura());
+                        cell.setCellValue("" + ob_lic_rep2.getPrograma() );
 
                         cell = row2.createCell(3);
                         cell.setCellStyle(style2);
@@ -414,7 +414,7 @@ public class ControllerReportesTutorias extends HttpServlet {
 
                         cell = row2.createCell(2);
                         cell.setCellStyle(style2);
-                        cell.setCellValue("" + ob_lic_rep.getLicenciatura());
+                        cell.setCellValue("" + ob_lic_rep.getPrograma() );
 
                         cell = row2.createCell(3);
                         cell.setCellStyle(style2);
@@ -470,7 +470,7 @@ public class ControllerReportesTutorias extends HttpServlet {
 
                 }
                 String rutRel = getServletConfig().getServletContext().getRealPath("/resources/Documentos");
-                try (FileOutputStream elFichero = new FileOutputStream(rutRel + "/Registro_de_Reportes_de_Tutorias-" + pdo.getPeriodo() + ".xlsx")) {
+                try (FileOutputStream elFichero = new FileOutputStream(rutRel + "/Reportes_de_Tutorias_Entregados-" + pdo.getPeriodo() + ".xlsx")) {
                     book.write(elFichero);
                     elFichero.close();
                 }
@@ -495,7 +495,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                         + "\n"
                         + "function(isConfirm){\n"
                         + "if (isConfirm) {\n"
-                        + "window.location='pages/ListarReportes.jsp'   \n"
+                        + "window.location='pages/generarReportes.jsp'   \n"
                         + "} \n"
                         + "});\n"
                         + "}\n"
@@ -526,7 +526,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                         + "\n"
                         + "function(isConfirm){\n"
                         + "if (isConfirm) {\n"
-                        + "window.location='pages/ListarReportes.jsp'   \n"
+                        + "window.location='pages/generarReportes.jsp'   \n"
                         + "} \n"
                         + "});\n"
                         + "}\n"
@@ -572,7 +572,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                         + "\n"
                         + "function(isConfirm){\n"
                         + "if (isConfirm) {\n"
-                        + "window.location='pages/ListarReportes.jsp'   \n"
+                        + "window.location='pages/generarReportes.jsp'   \n"
                         + "} \n"
                         + "});\n"
                         + "}\n"
@@ -619,7 +619,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                             + "\n"
                             + "function(isConfirm){\n"
                             + "if (isConfirm) {\n"
-                            + "window.location='pages/ListarReportes.jsp'   \n"
+                            + "window.location='pages/generarReportes.jsp'   \n"
                             + "} \n"
                             + "});\n"
                             + "}\n"
@@ -656,7 +656,7 @@ public class ControllerReportesTutorias extends HttpServlet {
 
                 int idRep = Integer.parseInt(request.getParameter("idRep"));
                 String curp = request.getParameter("curp");
-                int idLicenciatura = Integer.parseInt(request.getParameter("idLic"));
+                int idPrograma = Integer.parseInt(request.getParameter("idLic"));
                 int idPeriodo = Integer.parseInt(request.getParameter("idPeriodo"));
                 String entrego = request.getParameter("EntRp");
                 String aTiempo = request.getParameter("EntT");
@@ -674,7 +674,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                 java.sql.Date sqlFec = new java.sql.Date(fechaRep.getTime());
                 rep.setIdReporte(idRep);
                 rep.setCurp(curp);
-                rep.setIdLicenciatura(idLicenciatura);
+                rep.setIdPrograma(idPrograma);
                 rep.setIdPeriodo(idPeriodo);
                 rep.setEntrego(entrego);
                 rep.setaTiempo(aTiempo);
@@ -709,7 +709,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                             + "\n"
                             + "function(isConfirm){\n"
                             + "if (isConfirm) {\n"
-                            + "window.location='pages/ListarReportes.jsp'   \n"
+                            + "window.location='pages/generarReportes.jsp'   \n"
                             + "} \n"
                             + "});\n"
                             + "}\n"
@@ -739,7 +739,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                             + "\n"
                             + "function(isConfirm){\n"
                             + "if (isConfirm) {\n"
-                            + "window.location='pages/ListarReportes.jsp'   \n"
+                            + "window.location='pages/generarReportes.jsp'   \n"
                             + "} \n"
                             + "});\n"
                             + "}\n"
@@ -757,7 +757,7 @@ public class ControllerReportesTutorias extends HttpServlet {
             try {
 
                 String curp = request.getParameter("curp");
-                int idLicenciatura = Integer.parseInt(request.getParameter("idLic"));
+                int idPrograma= Integer.parseInt(request.getParameter("idLic"));
 
                 int idPeriodo = Integer.parseInt(request.getParameter("idPeriodo"));
                 String entrego = request.getParameter("EntRp");
@@ -775,7 +775,7 @@ public class ControllerReportesTutorias extends HttpServlet {
 
                 java.sql.Date sqlFec = new java.sql.Date(fechaRep.getTime());
                 rep.setCurp(curp);
-                rep.setIdLicenciatura(idLicenciatura);
+                rep.setIdPrograma(idPrograma);
                 rep.setIdPeriodo(idPeriodo);
                 rep.setEntrego(entrego);
                 rep.setaTiempo(aTiempo);
@@ -810,7 +810,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                                 + "\n"
                                 + "function(isConfirm){\n"
                                 + "if (isConfirm) {\n"
-                                + "window.location='pages/ListarReportes.jsp'   \n"
+                                + "window.location='pages/generarReportes.jsp'   \n"
                                 + "} \n"
                                 + "});\n"
                                 + "}\n"
@@ -840,7 +840,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                                 + "\n"
                                 + "function(isConfirm){\n"
                                 + "if (isConfirm) {\n"
-                                + "window.location='pages/ListarReportes.jsp'   \n"
+                                + "window.location='pages/generarReportes.jsp'   \n"
                                 + "} \n"
                                 + "});\n"
                                 + "}\n"
@@ -873,7 +873,7 @@ public class ControllerReportesTutorias extends HttpServlet {
                             + "\n"
                             + "function(isConfirm){\n"
                             + "if (isConfirm) {\n"
-                            + "window.location='pages/ListarReportes.jsp'   \n"
+                            + "window.location='pages/generarReportes.jsp'   \n"
                             + "} \n"
                             + "});\n"
                             + "}\n"

@@ -6,22 +6,21 @@ public class Alumno {
     private String nombre;
     private int idGrupo;
     private String Grupo;
-    private int idLicenciatura;
-    private String Licenciatura;
+    private int idPrograma;
+    private String Programa;
     private int tipo;
 
     public Alumno() {
     }
 
-    public Alumno(String matricula, String nombre, int idGrupo, String Grupo, int idLicenciatura, String Licenciatura, int tipo) {
+    public Alumno(String matricula, String nombre, int idGrupo, String Grupo, int idPrograma, String Programa, int tipo) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.idGrupo = idGrupo;
         this.Grupo = Grupo;
-        this.idLicenciatura = idLicenciatura;
-        this.Licenciatura = Licenciatura;
+        this.idPrograma = idPrograma;
+        this.Programa = Programa;
         this.tipo = tipo;
-        this.Licenciatura = Licenciatura;
 
     }
 
@@ -41,14 +40,23 @@ public class Alumno {
         this.Grupo = Grupo;
     }
 
-    public String getLicenciatura() {
-        return Licenciatura;
+    public int getIdPrograma() {
+        return idPrograma;
     }
 
-    public void setLicenciatura(String Licenciatura) {
-        this.Licenciatura = Licenciatura;
+    public void setIdPrograma(int idPrograma) {
+        this.idPrograma = idPrograma;
     }
 
+    public String getPrograma() {
+        return Programa;
+    }
+
+    public void setPrograma(String Programa) {
+        this.Programa = Programa;
+    }
+
+   
     public String getMatricula() {
         return matricula;
     }
@@ -65,13 +73,7 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    public int getIdLicenciatura() {
-        return idLicenciatura;
-    }
-
-    public void setIdLicenciatura(int idLicenciatura) {
-        this.idLicenciatura = idLicenciatura;
-    }
+   
 
     public int getTipo() {
         return tipo;

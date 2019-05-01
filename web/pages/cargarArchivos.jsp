@@ -14,7 +14,6 @@
               Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <link href="../resources/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-
         <!-- tabla de pdf -->
         <link href="../resources/css/stylePDF.css" rel='stylesheet' type='text/css' />
         <!-- Custom Theme files -->
@@ -22,7 +21,6 @@
         <link href="../resources/css/font-awesome.css" rel="stylesheet"> 
         <script src="../resources/js/jquery.min.js"></script>
         <script src="../resources/js/bootstrap.min.js"></script>
-
         <!-- Mainly scripts -->
         <script src="../resources/js/jquery.metisMenu.js"></script>
         <script src="../resources/js/jquery.slimscroll.min.js"></script>
@@ -30,6 +28,13 @@
         <link href="../resources/css/custom.css" rel="stylesheet">
         <script src="../resources/js/custom.js"></script>
         <script src="../resources/js/screenfull.js"></script>
+            <script src="../resources/tablas/js/jquery-3.3.1.js"></script>  
+        <script src="../resources/tablas/js/jquery.dataTables.min.js"></script>
+        <script src="../resources/tablas/js/dataTables.bootstrap.min.js"></script> 
+        <link href="../resources/tablas/css/dataTables.bootstrap.min.css" rel='stylesheet' type='text/css' />
+ <script src="../resources/alert/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../resources/alert/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="../resources/alert/google.css">
 
         <script>
             $(function () {
@@ -140,7 +145,7 @@
                                             <form id="formularioElim" name="formularioElim" action="../ControllerPdf" method="get" onsubmit="return confirm('¿Realmente desea eliminar el documento?')" >
                                                 <input type="hidden" name = "nombre" id="id" value="<%=ficheros[i]%>">
                                                 <input type="hidden" name = "action" id="action" value="delete">
-                                                <button type="submit"  class="btn btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40" /></button>
+                                                   <button type="submit"  class="btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -159,8 +164,8 @@
             <div class="clearfix"> </div>
         </div>
         <div class="copy">
-            <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-        </div>
+       <img src="../resources/images/escudo.jpg" width="70" height="70"> <p> Universidad de la Sierra Sur  </p>          
+    </div>
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
     </body>

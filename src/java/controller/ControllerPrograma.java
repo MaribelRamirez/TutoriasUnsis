@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.LicenciaturaDAO;
+import dao.ProgramaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -17,16 +17,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Licenciatura;
+import model.Programa;
 
 /**
  *
  * @author Marifer
  */
-@WebServlet(name = "ControllerLicenciatura", urlPatterns = {"/ControllerLicenciatura"})
-public class ControllerLicenciatura extends HttpServlet {
+@WebServlet(name = "ControllerPrograma", urlPatterns = {"/ControllerPrograma"})
+public class ControllerPrograma extends HttpServlet {
 
-    private static final String edit = "pages/actualizarLicenciatura.jsp";
+    private static final String edit = "pages/actualizarPrograma.jsp";
     String forward = "";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,11 +37,11 @@ public class ControllerLicenciatura extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public LicenciaturaDAO licenciaturadao;
+    public ProgramaDAO programadao;
 
-    public ControllerLicenciatura() {
+    public ControllerPrograma() {
         super();
-        licenciaturadao = new LicenciaturaDAO();
+        programadao = new ProgramaDAO();
 
     }
 
@@ -81,15 +81,15 @@ public class ControllerLicenciatura extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
 
-        Licenciatura Lic = new Licenciatura();
+        Programa Prg = new Programa();
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("update")) {
             try {
                 forward = edit;
-                Licenciatura lic = licenciaturadao.obtenerLicenciaturaById(Integer.parseInt(request.getParameter("id")));
+                Programa prg = programadao.obtenerProgramaById(Integer.parseInt(request.getParameter("id")));
 
-                request.setAttribute("lic", lic);
+                request.setAttribute("prg", prg);
                 RequestDispatcher view = request.getRequestDispatcher(forward);
                 view.forward(request, response);
             } catch (NumberFormatException | SQLException e) {
@@ -100,7 +100,7 @@ public class ControllerLicenciatura extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
 
             try {
-                licenciaturadao.eliminar(id);
+                programadao.eliminar(id);
                 out.print("<html>"
                         + "<head>"
                         + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
@@ -112,7 +112,7 @@ public class ControllerLicenciatura extends HttpServlet {
                         + "function EventoAlert(){\n"
                         + "  swal({\n"
                         + "title: \"Aviso!!\",\n"
-                        + "text: \"Licenciatura eliminada de forma correcta...\",\n"
+                        + "text: \"Programa eliminado de forma correcta...\",\n"
                         + "type: \"success\",    \n"
                         + "confirmButtonColor: \"#DD6B55\",\n"
                         + "confirmButtonText: \"Aceptar\",\n"
@@ -121,7 +121,7 @@ public class ControllerLicenciatura extends HttpServlet {
                         + "\n"
                         + "function(isConfirm){\n"
                         + "if (isConfirm) {\n"
-                        + "window.location='pages/ListarLicenciaturas.jsp'   \n"
+                        + "window.location='pages/ListarProgramas.jsp'   \n"
                         + "} \n"
                         + "});\n"
                         + "}\n"
@@ -130,15 +130,17 @@ public class ControllerLicenciatura extends HttpServlet {
                         + "</body>\n"
                         + "</html>");
             } catch (SQLException ex) {
-                Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerPrograma.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (action.equalsIgnoreCase("add")) {
 
-            String nomLic = request.getParameter("nombreLic");
-            Lic.setNombre(nomLic);
-            if (licenciaturadao.verificar(nomLic) == 0) {
+            String nomPrg = request.getParameter("nombrePrg");
+             String des = request.getParameter("des");
+            Prg.setNombre(nomPrg);
+            Prg.setDes(des);
+            if (programadao.verificar(nomPrg) == 0) {
                 try {
-                    if (licenciaturadao.insertar(Lic) == true) {
+                    if (programadao.insertar(Prg) == true) {
 
                         out.print("<html>"
                                 + "<head>"
@@ -151,7 +153,7 @@ public class ControllerLicenciatura extends HttpServlet {
                                 + "function EventoAlert(){\n"
                                 + "  swal({\n"
                                 + "title: \"Aviso!!\",\n"
-                                + "text: \"Licenciatura agregada de forma correcta...\",\n"
+                                + "text: \"Programa agregado de forma correcta...\",\n"
                                 + "type: \"success\",    \n"
                                 + "confirmButtonColor: \"#DD6B55\",\n"
                                 + "confirmButtonText: \"Aceptar\",\n"
@@ -160,7 +162,7 @@ public class ControllerLicenciatura extends HttpServlet {
                                 + "\n"
                                 + "function(isConfirm){\n"
                                 + "if (isConfirm) {\n"
-                                + "window.location='pages/ListarLicenciaturas.jsp'   \n"
+                                + "window.location='pages/ListarProgramas.jsp'   \n"
                                 + "} \n"
                                 + "});\n"
                                 + "}\n"
@@ -180,7 +182,7 @@ public class ControllerLicenciatura extends HttpServlet {
                                 + "function EventoAlert(){\n"
                                 + "  swal({\n"
                                 + "title: \"Aviso!!\",\n"
-                                + "text: \"Error al guardar la licenciatura\",\n"
+                                + "text: \"Error al guardar el programa\",\n"
                                 + "type: \"warning\",    \n"
                                 + "confirmButtonColor: \"#DD6B55\",\n"
                                 + "confirmButtonText: \"Aceptar\",\n"
@@ -189,7 +191,7 @@ public class ControllerLicenciatura extends HttpServlet {
                                 + "\n"
                                 + "function(isConfirm){\n"
                                 + "if (isConfirm) {\n"
-                                + "window.location='pages/ListarLicenciaturas.jsp'   \n"
+                                + "window.location='pages/ListarProgramas.jsp'   \n"
                                 + "} \n"
                                 + "});\n"
                                 + "}\n"
@@ -199,7 +201,7 @@ public class ControllerLicenciatura extends HttpServlet {
                                 + "</html>");
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ControllerPrograma.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             } else {
@@ -214,7 +216,7 @@ public class ControllerLicenciatura extends HttpServlet {
                         + "function EventoAlert(){\n"
                         + "  swal({\n"
                         + "title: \"Aviso!!\",\n"
-                        + "text: \"Error al guardar la licenciatura, verifica tus datos, es posible que la licenciatura ya exista\",\n"
+                        + "text: \"Error al guardar el programa, verifica tus datos, es posible que el programa ya exista\",\n"
                         + "type: \"warning\",    \n"
                         + "confirmButtonColor: \"#DD6B55\",\n"
                         + "confirmButtonText: \"Aceptar\",\n"
@@ -223,7 +225,7 @@ public class ControllerLicenciatura extends HttpServlet {
                         + "\n"
                         + "function(isConfirm){\n"
                         + "if (isConfirm) {\n"
-                        + "window.location='pages/ListarLicenciaturas.jsp'   \n"
+                        + "window.location='pages/ListarProgramas.jsp'   \n"
                         + "} \n"
                         + "});\n"
                         + "}\n"
@@ -236,11 +238,12 @@ public class ControllerLicenciatura extends HttpServlet {
         } else if (action.equalsIgnoreCase("edit")) {
             try {
                 int id = Integer.parseInt(request.getParameter("id"));
-                String nomLic = request.getParameter("nombreLic");
-                Lic.setIdLicenciatura(id);
-                Lic.setNombre(nomLic);
-
-                if (licenciaturadao.updateLic(Lic) == true) {
+                String nomPrg = request.getParameter("nombrePrg");
+                   String desR = request.getParameter("desR");
+                Prg.setIdPrograma(id);
+                Prg.setNombre(nomPrg);
+                Prg.setDes(desR);
+                if (programadao.updatePrg(Prg) == true) {
                     out.print("<html>"
                             + "<head>"
                             + "<script src=\"resources/alert/sweetalert.min.js\"></script>\n"
@@ -252,7 +255,7 @@ public class ControllerLicenciatura extends HttpServlet {
                             + "function EventoAlert(){\n"
                             + "  swal({\n"
                             + "title: \"Aviso!!\",\n"
-                            + "text: \"Licenciatura actualizada de forma correcta...\",\n"
+                            + "text: \"Programas actualizado de forma correcta...\",\n"
                             + "type: \"success\",    \n"
                             + "confirmButtonColor: \"#DD6B55\",\n"
                             + "confirmButtonText: \"Aceptar\",\n"
@@ -261,7 +264,7 @@ public class ControllerLicenciatura extends HttpServlet {
                             + "\n"
                             + "function(isConfirm){\n"
                             + "if (isConfirm) {\n"
-                            + "window.location='pages/ListarLicenciaturas.jsp'   \n"
+                            + "window.location='pages/ListarProgramas.jsp'   \n"
                             + "} \n"
                             + "});\n"
                             + "}\n"
@@ -281,7 +284,7 @@ public class ControllerLicenciatura extends HttpServlet {
                             + "function EventoAlert(){\n"
                             + "  swal({\n"
                             + "title: \"Aviso!!\",\n"
-                            + "text: \"Error al actualizar la licenciatura\",\n"
+                            + "text: \"Error al actualizar el programa\",\n"
                             + "type: \"warning\",    \n"
                             + "confirmButtonColor: \"#DD6B55\",\n"
                             + "confirmButtonText: \"Aceptar\",\n"
@@ -290,7 +293,7 @@ public class ControllerLicenciatura extends HttpServlet {
                             + "\n"
                             + "function(isConfirm){\n"
                             + "if (isConfirm) {\n"
-                            + "window.location='pages/ListarLicenciaturas.jsp'   \n"
+                            + "window.location='pages/ListarProgramas.jsp'   \n"
                             + "} \n"
                             + "});\n"
                             + "}\n"

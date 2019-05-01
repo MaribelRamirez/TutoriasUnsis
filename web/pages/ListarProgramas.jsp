@@ -5,8 +5,8 @@
 --%>
 
 
-<%@page import="model.Licenciatura"%>
-<%@page import="dao.LicenciaturaDAO"%>
+<%@page import="model.Programa"%>
+<%@page import="dao.ProgramaDAO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,7 +16,6 @@
 <html>
     <head>
         <title>Tutorias universitarias</title>
-
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="Minimal Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -70,7 +69,7 @@
             function Actualizar() {
                 swal({
                     title: "aviso!!",
-                    text: "¿En verdad deseas actualizar la licenciatura?",
+                    text: "¿En verdad deseas actualizar el programa educativo?",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -82,7 +81,7 @@
                             if (isConfirm) {
                                 document.getElementById('formularioAct').submit();
                             } else {
-                                window.location = 'ListarLicenciaturas.jsp';
+                                window.location = 'ListarProgramas.jsp';
                             }
                         });
             }
@@ -92,7 +91,7 @@
             function Eliminar() {
                 swal({
                     title: "aviso!!",
-                    text: "¿En verdad deseas eliminar la licenciatura?",
+                    text: "¿En verdad deseas eliminar la programa?",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -104,7 +103,7 @@
                             if (isConfirm) {
                                 document.getElementById('formularioElim').submit();
                             } else {
-                                window.location = 'ListarLicenciaturas.jsp';
+                                window.location = 'ListarProgramas.jsp';
                             }
                         });
             }
@@ -161,26 +160,26 @@
                     <h2>
                         <a href="indexAdmin.jsp">Home</a>
                         <i class="fa fa-angle-right"></i>
-                        <span>Licenciaturas</span><br>
+                        <span>Programas educativos</span><br>
                     </h2>
                 </div>
                 <div class="blank">
 
                     <div class="blank-page">
                         <%
-                            LicenciaturaDAO obj_Read_Values = new LicenciaturaDAO();
-                            List<Licenciatura> list = obj_Read_Values.listarLicenciaturas();
-                            Iterator<Licenciatura> it_list = list.iterator();
+                            ProgramaDAO obj_Read_Values = new ProgramaDAO();
+                            List<Programa> list = obj_Read_Values.listarProgramas() ;
+                            Iterator<Programa> it_list = list.iterator();
                         %>
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
-                            <a href="agregarLicenciatura.jsp">
-                                <img src="../resources/images/add.png" title="Agregar"/> Agregar nueva licenciatura</a>
+                            <a href="agregarPrograma.jsp">
+                                <img src="../resources/images/add.png" title="Agregar"/> Agregar nuevo programa educativo</a>
                             <thead>
 
                                 <tr >
                                     <th>Name</th>
-                                    <th>Editar</th>
-                                    <th>Eliminar</th>
+                                    <th>DES</th>
+                                     <th>Actualizar</th>
 
                                 </tr>
                             </thead>
@@ -188,32 +187,34 @@
                             <tbody>
                                 <%
                                     while (it_list.hasNext()) {
-                                        Licenciatura ob = new Licenciatura();
+                                        Programa ob = new Programa();
                                         ob = it_list.next();
 
                                 %>  
                                 <tr>
                                     <td><%=ob.getNombre()%></td>
+                                      <td><%=ob.getDes() %></td>
                                     <td>
-                                        <form id="formularioAct" name="formularioAct" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')" >
-                                            <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
+                                        <form id="formularioAct" name="formularioAct" action="../ControllerPrograma" method="post" >
+                                            <input type="hidden" name = "id" id="id" value="<%=ob.getIdPrograma() %>">
                                             <input type="hidden" name = "action" id="action" value="update">
                                             <button type="submitu"  class="btn btn-link center-block">Actualizar</button>
                                         </form>                                         
 
                                     </td>
-                                    <td >
-                                        <form id="formularioElim" name="formularioElim" action="../ControllerLicenciatura" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')">
-                                            <input type="hidden" name = "id" id="id" value="<%=ob.getIdLicenciatura()%>">
+                                   
+<!--           <td >
+                                        <form id="formularioElim" name="formularioElim" action="../ControllerPrograma" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')">
+                                            <input type="hidden" name = "id" id="id" value="<%=ob.getIdPrograma()%>">
                                             <input type="hidden" name = "action" id="action" value="delete">
                                             <button type="submit"  class="btn btn-link center-block"><img src="../resources/images/delete.jpeg" title="Eliminar" height="40"></button>
-                                        </form>                                          
-
-                                    </td>
-                                </tr>
+                                        </form>
+                                    </td>-->
+</tr>
+                                
                                 <%
                                     }
-                                %>     
+%>     
                             </tbody>
                         </table>
                     </div>
@@ -222,9 +223,9 @@
             </div>
             <div class="clearfix"> </div>
         </div>
-        <div class="copy">
-            <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-        </div>
+         <div class="copy">
+       <img src="../resources/images/escudo.jpg" width="70" height="70"> <p> Universidad de la Sierra Sur  </p>          
+    </div>
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
     </body>

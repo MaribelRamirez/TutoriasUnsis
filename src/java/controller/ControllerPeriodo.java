@@ -150,7 +150,7 @@ public class ControllerPeriodo extends HttpServlet {
                         + "</html>");
 
             } catch (SQLException ex) {
-                Logger.getLogger(ControllerLicenciatura.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerPrograma.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (action.equalsIgnoreCase("edit")) {
 

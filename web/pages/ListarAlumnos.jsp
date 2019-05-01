@@ -186,9 +186,9 @@
                                 <th>Matricula</th>
                                 <th>Nombre</th>
                                 <th>Grupo</th>
-                                <th>Licenciatura</th>
+                                <th>Programa</th>
                                 <th>Editar</th>
-                                <th>Eliminar</th>
+<!--                                <th>Eliminar</th>-->
                                 <th>Listar tutores</th>
                             </tr>
                         </thead>
@@ -202,9 +202,9 @@
                                 <td><%=ob.getMatricula()%></td>
                                 <td><%=ob.getNombre()%></td>
                                 <td ><%=ob.getGrupo()%></td>
-                                <td><%=ob.getLicenciatura()%></td>
+                                <td><%=ob.getPrograma() %></td>
                                 <td>
-                                    <form id="formularioAct" id="formularioAct"  action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea actualizar los datos?')"  >
+                                    <form id="formularioAct" id="formularioAct"  action="../ControllerAlumno" method="post">
                                         <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
                                         <input type="hidden" name = "action" id="action" value="update">
                                         <button type="submit" class="btn btn-link center-block">Actualizar</button>
@@ -212,7 +212,7 @@
 
 
                                 </td>
-                                <td >
+<!--                                <td >
                                     <form id="formularioElim" name="formularioElim" action="../ControllerAlumno" method="post" onsubmit="return confirm('¿Realmente desea eliminar los datos?')" >
                                         <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
                                         <input type="hidden" name = "action" id="action" value="delete">
@@ -220,7 +220,7 @@
                                     </form>
 
 
-                                </td>
+                                </td>-->
                                 <td>
                                     <form id="formulario" action="../ControllerTutores" method="post">
                                         <input type="hidden" name = "id" id="id" value="<%=ob.getMatricula()%>">
@@ -247,7 +247,7 @@
         <div class="clearfix"> </div>
     </div>
     <div class="copy">
-        <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
+       <img src="../resources/images/escudo.jpg" width="70" height="70"> <p> Universidad de la Sierra Sur  </p>          
     </div>
     <script src="js/jquery.nicescroll.js"></script>
     <script src="js/scripts.js"></script>

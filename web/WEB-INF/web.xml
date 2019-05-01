@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>ControllerLicenciatura</servlet-name>
-        <servlet-class>controller.ControllerLicenciatura</servlet-class>
+        <servlet-class>controller.ControllerPrograma</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ControllerConstancias</servlet-name>
@@ -47,6 +47,14 @@
     <servlet>
         <servlet-name>ControllerArchivos</servlet-name>
         <servlet-class>controller.ControllerArchivos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControllerConstanciaGrupal</servlet-name>
+        <servlet-class>controller.ControllerConstanciaGrupal</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControllerInformeAsignaciones</servlet-name>
+        <servlet-class>controller.ControllerInformeAsignaciones</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ControllerAlumno</servlet-name>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>ControllerArchivos</servlet-name>
         <url-pattern>/ControllerArchivos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerConstanciaGrupal</servlet-name>
+        <url-pattern>/ControllerConstanciaGrupal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerInformeAsignaciones</servlet-name>
+        <url-pattern>/ControllerInformeAsignaciones</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

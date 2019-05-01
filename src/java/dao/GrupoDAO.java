@@ -73,9 +73,9 @@ public class GrupoDAO {
     public List<Grupo> listarGrupos() throws SQLException {
 
         List<Grupo> listaGrupos = new ArrayList<Grupo>();
-        String sql = "select idGrupo, grupo, grupos.idPeriodo , grupos.idLicenciatura, periodo.periodo, nombre "
-                + "from grupos , periodo, licenciaturas "
-                + "where grupos.idPeriodo= periodo.idPeriodo and grupos.idLicenciatura=licenciaturas.idLicenciatura;";
+        String sql = "select idGrupo, grupo, grupos.idPeriodo , grupos.idPrograma, periodo.periodo, nombre "
+                + "from grupos , periodo, programas "
+                + "where grupos.idPeriodo= periodo.idPeriodo and grupos.idPrograma=programas.idPrograma;";
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
@@ -84,11 +84,11 @@ public class GrupoDAO {
             int id = resulSet.getInt("idGrupo");
             String gru = resulSet.getString("grupo");
             int idPerido = resulSet.getInt("grupos.idPeriodo");
-            int idLicenciatura = resulSet.getInt("grupos.idLicenciatura");
+            int idPrograma = resulSet.getInt("grupos.idPrograma");
             String periodo = resulSet.getString("periodo.periodo");
             String lic = resulSet.getString("nombre");
             Grupo grupo;
-            grupo = new Grupo(id, gru, idPerido, idLicenciatura, periodo, lic);
+            grupo = new Grupo(id, gru, idPerido, idPrograma, periodo, lic);
             listaGrupos.add(grupo);
         }
         con.desconectar();
@@ -98,9 +98,9 @@ public class GrupoDAO {
     public List<Grupo> listarGruposByLic(int lic, int per) throws SQLException {
 
         List<Grupo> listaGrupos = new ArrayList<Grupo>();
-        String sql = "select idGrupo, grupo, grupos.idPeriodo , grupos.idLicenciatura, periodo.periodo, nombre "
-                + "from grupos , periodo, licenciaturas where grupos.idPeriodo= periodo.idPeriodo "
-                + "and grupos.idLicenciatura=licenciaturas.idLicenciatura and grupos.idLicenciatura=" + lic + " and grupos.idPeriodo=" + per + ";";
+        String sql = "select idGrupo, grupo, grupos.idPeriodo , grupos.idPrograma, periodo.periodo, nombre "
+                + "from grupos , periodo, programas where grupos.idPeriodo= periodo.idPeriodo "
+                + "and grupos.idPrograma=programas.idPrograma and grupos.idPrograma=" + lic + " and grupos.idPeriodo=" + per + ";";
         connection = con.conectar();
         Statement statement = connection.createStatement();
         ResultSet resulSet = statement.executeQuery(sql);
@@ -109,11 +109,11 @@ public class GrupoDAO {
             int id = resulSet.getInt("idGrupo");
             String gru = resulSet.getString("grupo");
             int idPerido = resulSet.getInt("grupos.idPeriodo");
-            int idLicenciatura = resulSet.getInt("grupos.idLicenciatura");
+            int idPrograma = resulSet.getInt("grupos.idPrograma");
             String periodo = resulSet.getString("periodo.periodo");
             String li = resulSet.getString("nombre");
             Grupo grupo;
-            grupo = new Grupo(id, gru, idPerido, idLicenciatura, periodo, li);
+            grupo = new Grupo(id, gru, idPerido, idPrograma, periodo, li);
             listaGrupos.add(grupo);
         }
         con.desconectar();
@@ -132,11 +132,11 @@ public class GrupoDAO {
             int id = resulSet.getInt("idGrupo");
             String gru = resulSet.getString("grupo");
             int idPerido = resulSet.getInt("idPeriodo");
-            int idLicenciatura = resulSet.getInt("idLicenciatura");
+            int idPrograma = resulSet.getInt("idPrograma");
             String periodo = "";
             String li = "";
             Grupo grupo;
-            grupo = new Grupo(id, gru, idPerido, idLicenciatura, periodo, li);
+            grupo = new Grupo(id, gru, idPerido, idPrograma, periodo, li);
             listaGrupos.add(grupo);
         }
         con.desconectar();
@@ -148,7 +148,7 @@ public class GrupoDAO {
 
         List<Grupo> listaGrupos = new ArrayList<Grupo>();
         //String sql = "select distinct grupos.grupo  from tutores ,  grupos ,alumnos inner
-        //join licenciaturas  on alumnos.idLicenciatura=licenciaturas.idLicenciatura where tutores.matricula=alumnos.matricula  and tutores.curp='" + curp + "' and tutores.tipo=2 and licenciaturas.nombre='" + carrera + "' group by(grupos.grupo) and tutores.idPeriodo='" + periodo + "';";
+        //join programas  on alumnos.idPrograma=programas.idPrograma where tutores.matricula=alumnos.matricula  and tutores.curp='" + curp + "' and tutores.tipo=2 and programas.nombre='" + carrera + "' group by(grupos.grupo) and tutores.idPeriodo='" + periodo + "';";
 String sql = " select distinct grupo from tutores where curp='" + curp + "' and idPeriodo='" + periodo + "';" ;
 
         connection = con.conectar();
@@ -180,7 +180,7 @@ String sql = " select distinct grupo from tutores where curp='" + curp + "' and 
     public boolean insertar(Grupo grupo) throws SQLException {
 
         try {
-            String sql = "INSERT INTO grupos (idGrupo,grupo, idPeriodo, idLicenciatura)"
+            String sql = "INSERT INTO grupos (idGrupo,grupo, idPeriodo, idPrograma)"
                     + " VALUES (?,?,?,?)";
             con.conectar();
             connection = con.getJdbcConnection();
@@ -188,7 +188,7 @@ String sql = " select distinct grupo from tutores where curp='" + curp + "' and 
             statement.setString(1, null);
             statement.setString(2, grupo.getGrupo());
             statement.setInt(3, grupo.getIdPeriodo());
-            statement.setInt(4, grupo.getIdLicenciatura());
+            statement.setInt(4, grupo.getIdPrograma());
 
             statement.executeUpdate();
             statement.close();
@@ -203,9 +203,9 @@ String sql = " select distinct grupo from tutores where curp='" + curp + "' and 
 
     public Grupo obtenerGrupoById(int idGrp) throws SQLException {
         Grupo grupo = null;
-        String sql = "select idGrupo, grupo, grupos.idPeriodo , grupos.idLicenciatura, periodo.periodo, nombre "
-                + "from grupos , periodo, licenciaturas "
-                + "where grupos.idPeriodo= periodo.idPeriodo and grupos.idLicenciatura=licenciaturas.idLicenciatura and idGrupo= ? ";
+        String sql = "select idGrupo, grupo, grupos.idPeriodo , grupos.idPrograma, periodo.periodo, nombre "
+                + "from grupos , periodo, programas "
+                + "where grupos.idPeriodo= periodo.idPeriodo and grupos.idPrograma=programas.idPrograma and idGrupo= ? ";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -213,7 +213,7 @@ String sql = " select distinct grupo from tutores where curp='" + curp + "' and 
         try (ResultSet res = statement.executeQuery()) {
             if (res.next()) {
                 grupo = new Grupo(res.getInt("idGrupo"), res.getString("grupo"),
-                        res.getInt("grupos.idPeriodo"), res.getInt("grupos.idLicenciatura"),
+                        res.getInt("grupos.idPeriodo"), res.getInt("grupos.idPrograma"),
                         res.getString("periodo.periodo"), res.getString("nombre"));
 
             }
@@ -224,7 +224,7 @@ String sql = " select distinct grupo from tutores where curp='" + curp + "' and 
 
     public void updateGrp(Grupo grupo) {
         try {
-            String sql = "update grupos set idGrupo=?, grupo=?, idPeriodo=?, idLicenciatura=? "
+            String sql = "update grupos set idGrupo=?, grupo=?, idPeriodo=?, idPrograma=? "
                     + "where idGrupo=?";
             con.conectar();
             connection = con.getJdbcConnection();
@@ -232,7 +232,7 @@ String sql = " select distinct grupo from tutores where curp='" + curp + "' and 
                 statement.setInt(1, grupo.getIdGrupo());
                 statement.setString(2, grupo.getGrupo());
                 statement.setInt(3, grupo.getIdPeriodo());
-                statement.setInt(4, grupo.getIdLicenciatura());
+                statement.setInt(4, grupo.getIdPrograma());
                 statement.setInt(5, grupo.getIdGrupo());
                 statement.executeUpdate();
             }

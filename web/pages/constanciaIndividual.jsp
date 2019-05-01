@@ -192,7 +192,7 @@
                                         <th>Nombre</th></th> 
                                         <th>Perfil</th>
                                         <th>Status</th>
-                                        <th>Licenciatura</th>
+                                        <th>Programa educativo</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -208,7 +208,7 @@
                                         <td><%=ob.getNombre()%></td>
                                         <td><%=ob.getGrado()%></td>
                                         <td><%=ob.getEstatus()%></td>
-                                        <td><%=ob.getLicenciatura()%></td>
+                                        <td><%=ob.getPrograma() %></td>
 
                                     </tr>
                                     <%
@@ -227,8 +227,8 @@
             <div class="clearfix"> </div>
         </div>
         <div class="copy">
-            <p><img src="../resources/images/escudo.jpg" width="70" height="70"> Universidad de la Sierra Sur  </p>          
-        </div>
+       <img src="../resources/images/escudo.jpg" width="70" height="70"> <p> Universidad de la Sierra Sur  </p>          
+    </div>
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
         <!--//scrolling js-->
