@@ -94,8 +94,8 @@ public class obtenerExel extends HttpServlet {
         InputStream inFile = null;
 
         //Crea el archivo de destino
-        System.err.println("esta es la ruta ...." + getServletContext().getRealPath("/resourses/Documentos"));
-        File destino = new File(getServletContext().getRealPath("/resourses/Documentos") + "/alumnos.xlsx");//ubicacion en el servidor
+        System.err.println("esta es la ruta ...." + getServletContext().getRealPath("/resources/Documentos"));
+        File destino = new File(getServletContext().getRealPath("/resources/Documentos") + "/alumnos.xlsx");//ubicacion en el servidor
         OutputStream outFile = new FileOutputStream(destino);
         // probando obtener ruta absoluta
 
@@ -131,11 +131,10 @@ public class obtenerExel extends HttpServlet {
 
         int grup = Integer.parseInt(request.getParameter("grupo"));
 
-        String rutaArchivo = getServletContext().getRealPath("/Documentos") + "/alumnos.xlsx";
+        String rutaArchivo = getServletContext().getRealPath("/resources/Documentos") + "/alumnos.xlsx";
         String hoja = "Hoja1";
 
         Alumno alumno = new Alumno();
-        Alumno alumno2 = new Alumno();
         Tutor tutor = new Tutor();
         AlumnoDAO alumnoDAO = new AlumnoDAO();
         Grupo grupo = new Grupo();
@@ -194,14 +193,23 @@ public class obtenerExel extends HttpServlet {
                             //Obtenemos el periodo actual
                             sql auto = new sql();
                             int idPeriodo = auto.auto_increm("SELECT MAX(idPeriodo) FROM tutoriasunsis.periodo") - 1;
+                            
                             // Codigo para mantener el tutorado de los alumnos
-                            if (0 == tutordao.comprobarRegistro(idPeriodo, alumno.getMatricula())) {
-//                                tutordao.update(tutor);
-                            } else {
-                                tutor = tutordao.tuturadoByMatricula(idPeriodo - 1, alumno.getMatricula());
+                            if (1 == tutordao.comprobarRegistro(idPeriodo, alumno.getMatricula())) {
+                                tutor = tutordao.tuturadoByMatricula(idPeriodo, alumno.getMatricula());
                                 tutor.setGrupo(grupo.getGrupo());
-                                tutor.setPeriodo(idPeriodo);
-                                tutordao.insertar(tutor);
+                                tutordao.update(tutor);
+                            } else {
+                                int idTUtorado = auto.auto_increm("SELECT MAX(idTutorado) FROM tutoriasunsis.tutores where matricula="+alumno.getMatricula()+";")-1;
+                                if (idTUtorado==0){
+                                    
+                                }else{
+                                    System.err.println("esto regresa juuuu"+ idTUtorado);
+                                    tutor = tutordao.tuturadoById(idTUtorado);
+                                    tutor.setGrupo(grupo.getGrupo());
+                                    tutor.setPeriodo(idPeriodo);
+                                    tutordao.insertar(tutor);
+                                }
                             }
                         }
 

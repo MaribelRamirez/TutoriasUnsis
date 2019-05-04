@@ -113,14 +113,15 @@ public class TutorDAO {
     public boolean update(Tutor tutor) throws SQLException {
 
         try {
-            String sql = "UPDATE tutores SET curp=?, tipo=?  WHERE matricula=? AND idPeriodo =? ;";
+            String sql = "UPDATE tutores SET curp=?, tipo=?, grupo=?  WHERE matricula=? AND idPeriodo =? ;";
             con.conectar();
             connection = con.getJdbcConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, tutor.getCurp());
             statement.setInt(2, tutor.getTipo());
-            statement.setString(3, tutor.getMatricula());
-            statement.setInt(4, tutor.getPeriodo());
+            statement.setString(3, tutor.getGrupo());
+            statement.setString(4, tutor.getMatricula());
+            statement.setInt(5, tutor.getPeriodo());
 
             statement.executeUpdate();
             statement.close();
@@ -179,6 +180,40 @@ public class TutorDAO {
                     "",
                     res.getString("grupo"),
                     "");
+            System.err.println("Si entre en el if de sql");
+            
+
+        }
+        res.close();
+        con.desconectar();
+
+        return tutor;
+
+    }
+    
+      public Tutor tuturadoById(int id) throws SQLException {
+        // regresa el tutor para el tutoraado de de esa matricula en ese periodo
+
+        String sql = "select * from tutores where  idTutorado=?;";
+        Tutor tutor = null;
+
+        con.conectar();
+        connection = con.getJdbcConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+        ResultSet res = statement.executeQuery();
+        if (res.next()) {
+
+            tutor = new Tutor(res.getInt("idTutorado"),
+                    res.getString("matricula"),
+                    res.getString("curp"),
+                    res.getInt("idPeriodo"),
+                    res.getInt("tipo"),
+                    "",
+                    "",
+                    res.getString("grupo"),
+                    "");
+            
 
         }
         res.close();
