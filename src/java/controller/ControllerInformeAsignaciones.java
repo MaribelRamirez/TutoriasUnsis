@@ -11,7 +11,6 @@ import dao.ProfesorDAO;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
@@ -147,7 +146,7 @@ public class ControllerInformeAsignaciones extends HttpServlet {
         Row titulo3 = sheet.createRow(j);
 
         cell = titulo3.createCell(0);
-        cell.setCellStyle(styleHead);
+        cell.setCellStyle(styleTitle);
         cell.setCellValue("SOCIALES");
         sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 3));
         j++;
@@ -186,134 +185,131 @@ public class ControllerInformeAsignaciones extends HttpServlet {
 
         Document documento = null;
         File destino = null;
-        int cont = 0;
-        
-        
-        if(sizeList>=1){
-        for (i = 1; i <= sizeList; i++) {
+        int cont = 1;
 
-            String pr = request.getParameter("pr".concat(Integer.toString(i)));
-            int pr2;
-            String periodoAct;
-            
-            
-            if (pr != null) {
-                try {
-                    pr2 = Integer.parseInt(pr);//ID de periodos seleccionados
-                    PeriodoDAO ppr = new PeriodoDAO();
-                    Periodo pdo;
-                    pdo = ppr.obtenerPeriodoById(pr2);
+        if (sizeList >= 1) {
+            for (i = 1; i <= sizeList; i++) {
 
-                    ProfesorDAO obprof = new ProfesorDAO();
+                String pr = request.getParameter("pr".concat(Integer.toString(i)));
+                int pr2;
+                String periodoAct;
 
-                    List<Profesor> list = null;
-                    list = obprof.listarProfesoresSociales();
-                    Iterator<Profesor> it_list = list.iterator();
+                if (pr != null) {
+                    try {
+                        pr2 = Integer.parseInt(pr);//ID de periodos seleccionados
+                        PeriodoDAO ppr = new PeriodoDAO();
+                        Periodo pdo;
+                        pdo = ppr.obtenerPeriodoById(pr2);
 
-                    cell = rowGeneral.createCell(j+1);
+                        ProfesorDAO obprof = new ProfesorDAO();
 
-                    cell.setCellStyle(styleHead);
-                    cell.setCellValue(pdo.getPeriodo());
-                   
-                    while (it_list.hasNext()) {
+                        List<Profesor> list = null;
+                        list = obprof.listarProfesoresSociales();
+                        Iterator<Profesor> it_list = list.iterator();
 
-                        Profesor ob = new Profesor();
-                        ob = it_list.next();
+                        cell = rowGeneral.createCell(j + 1);
+                        // sheet.addMergedRegion(new CellRangeAddress(j, j, 4, 5));
+                        j++;
+                        cell.setCellStyle(styleHead);
+                        cell.setCellValue(pdo.getPeriodo());
 
-                        cont++;
+//j2++;
+                        while (it_list.hasNext()) {
+                            System.out.println(cont);
+                            Profesor ob = new Profesor();
+                            ob = it_list.next();
 
-                        Profesor prf;
-int numero=obprof.countTutoradosByPeriodo(pr2,ob.getCurp());
+                            Profesor prf;
+                            int numero = obprof.countTutoradosByPeriodo(pr2, ob.getCurp());
 
-                        rowGeneral = sheet.createRow(j2+1);
-                        //poner encabezados de la tabla
-                        cell = rowGeneral.createCell(0);
+                            rowGeneral = sheet.createRow(j2 + 1);
+                            //poner encabezados de la tabla
+                            cell = rowGeneral.createCell(0);
 
-                        cell.setCellStyle(styleColumn);
-                        cell.setCellValue(cont);
+                            cell.setCellStyle(styleColumn);
+                            cell.setCellValue(cont);
 
-                        cell = rowGeneral.createCell(1);
+                            cell = rowGeneral.createCell(1);
 
-                        cell.setCellStyle(styleColumn);
-                        cell.setCellValue(ob.getEstatus());
+                            cell.setCellStyle(styleColumn);
+                            cell.setCellValue(ob.getEstatus());
 
-                        cell = rowGeneral.createCell(2);
+                            cell = rowGeneral.createCell(2);
 
-                        cell.setCellStyle(styleColumn);
-                        cell.setCellValue(ob.getGrado()+" "+ob.getNombre());
+                            cell.setCellStyle(styleColumn);
+                            cell.setCellValue(ob.getGrado() + " " + ob.getNombre());
 
-                        cell = rowGeneral.createCell(3);
+                            cell = rowGeneral.createCell(3);
 
-                        cell.setCellStyle(styleColumn);
-                        cell.setCellValue(ob.getPrograma());
+                            cell.setCellStyle(styleColumn);
+                            cell.setCellValue(ob.getPrograma());
 
-                         cell = rowGeneral.createCell(4);
-
-                        cell.setCellStyle(styleColumn);
-                        cell.setCellValue(numero);
-                        j2++;
-
-                    }
-                    Row titulo5 = sheet.createRow(j2);
-
-                    cell = titulo5.createCell(0);
-                    cell.setCellStyle(styleHead);
-                    cell.setCellValue("SALUD");
-                    sheet.addMergedRegion(new CellRangeAddress(j2, j2, 0, 3));
-                    j2++;
-
-                    list = null;
-                    list = obprof.listarProfesoresSalud();
-                    it_list = list.iterator();
-
-                    while (it_list.hasNext()) {
-
-                        Profesor ob = new Profesor();
-                        ob = it_list.next();
-
-                        cont++;
-
-                        Profesor prf;
-int numero=obprof.countTutoradosByPeriodo(pr2,ob.getCurp());
-
-                        rowGeneral = sheet.createRow(j2+1);
-                        //poner encabezados de la tabla
-                        cell = rowGeneral.createCell(0);
-
-                        cell.setCellStyle(styleColumn);
-                        cell.setCellValue(cont);
-
-                        cell = rowGeneral.createCell(1);
-
-                        cell.setCellStyle(styleColumn);
-                        cell.setCellValue(ob.getEstatus());
-
-                        cell = rowGeneral.createCell(2);
-
-                        cell.setCellStyle(styleColumn);
-                        cell.setCellValue(ob.getGrado()+" "+ob.getNombre());
-
-                        cell = rowGeneral.createCell(3);
-
-                        cell.setCellStyle(styleColumn);
-                        cell.setCellValue(ob.getPrograma());
-                        
                             cell = rowGeneral.createCell(4);
 
-                        cell.setCellStyle(styleColumn);
-                        cell.setCellValue(numero);
+                            cell.setCellStyle(styleColumn);
+                            cell.setCellValue(numero);
+                            j2++;
+                            cont++;
+                        }
+                        Row titulo5 = sheet.createRow(j2);
+
+                        cell = titulo5.createCell(0);
+                        cell.setCellStyle(styleTitle);
+                        cell.setCellValue("SALUD");
+                        sheet.addMergedRegion(new CellRangeAddress(j2, j2, 0, 3));
                         j2++;
 
+                        list = null;
+                        list = obprof.listarProfesoresSalud();
+                        it_list = list.iterator();
+
+                        while (it_list.hasNext()) {
+                            System.out.println(cont);
+
+                            Profesor ob = new Profesor();
+                            ob = it_list.next();
+
+                            Profesor prf;
+                            int numero = obprof.countTutoradosByPeriodo(pr2, ob.getCurp());
+
+                            rowGeneral = sheet.createRow(j2);
+                            //poner encabezados de la tabla
+                            cell = rowGeneral.createCell(0);
+
+                            cell.setCellStyle(styleColumn);
+                            cell.setCellValue(cont);
+
+                            cell = rowGeneral.createCell(1);
+
+                            cell.setCellStyle(styleColumn);
+                            cell.setCellValue(ob.getEstatus());
+
+                            cell = rowGeneral.createCell(2);
+
+                            cell.setCellStyle(styleColumn);
+                            cell.setCellValue(ob.getGrado() + " " + ob.getNombre());
+
+                            cell = rowGeneral.createCell(3);
+
+                            cell.setCellStyle(styleColumn);
+                            cell.setCellValue(ob.getPrograma());
+
+                            cell = rowGeneral.createCell(4);
+
+                            cell.setCellStyle(styleColumn);
+                            cell.setCellValue(numero);
+                            j2++;
+                            cont++;
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ControllerInformeAsignaciones.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(ControllerInformeAsignaciones.class.getName()).log(Level.SEVERE, null, ex);
+
                 }
 
             }
 
         }
-        }
-        
 
         for (int k = 0; k < j; k++) {
             sheet.autoSizeColumn((short) k);
@@ -325,7 +321,9 @@ int numero=obprof.countTutoradosByPeriodo(pr2,ob.getCurp());
                     = new FileOutputStream(rutRel + "/Informe_Asignaciones " + ".xlsx")) {
                 book.write(elFichero);
                 elFichero.close();
+                response.sendRedirect("pages/generarReportes.jsp");
             }
+
         } catch (IOException e) {
         }
     }
