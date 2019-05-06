@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/ProyectosUnsis/TutoriasUnsis/web/pages/informeAsignaciones.jsp</file>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/ProyectosUnsis/TutoriasUnsis/src/java/dao/AlumnoDAO.java</file>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/ProyectosUnsis/TutoriasUnsis/src/java/controller/ControllerInformeAsignaciones.java</file>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/ProyectosUnsis/TutoriasUnsis/web/pages/constanciaGrupal.jsp</file>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/ProyectosUnsis/TutoriasUnsis/src/java/controller/ControllerReporteAsignacionTutorias.java</file>
-            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/ProyectosUnsis/TutoriasUnsis/src/java/dao/ProfesorDAO.java</file>
+            <file>file:/C:/Users/Mine/Documents/TutoriasSS/TutoriasUnsis/src/java/controller/obtenerExel.java</file>
+            <file>file:/C:/Users/Mine/Documents/TutoriasSS/TutoriasUnsis/src/java/model/Tutor.java</file>
+            <file>file:/C:/Users/Mine/Documents/TutoriasSS/TutoriasUnsis/src/java/controller/ControllerTutores.java</file>
+            <file>file:/C:/Users/Mine/Documents/TutoriasSS/TutoriasUnsis/src/java/dao/TutorDAO.java</file>
         </group>
     </open-files>
 </project-private>

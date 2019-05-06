@@ -151,7 +151,7 @@
 
                                 <div class="box__input">
                                     <input type="file" name="archivosubido" id="file" class="box__file" data-multiple-caption="{count} files selected" multiple />
-                                    <label for="file"><strong>Seleccione un archivo</strong><span class="box__dragndrop"> o arrastre y suelte aqu&iacute;</span>.</label>
+                                    
                                     <button type="submit" >Subir</button>
                                 </div>
 

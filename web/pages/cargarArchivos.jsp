@@ -137,9 +137,10 @@
                                     <tr>
                                         <td><%=ficheros[i]%></td>
                                         <td>
-                                        
-                                            <a href="../resources/Archivos/<%=ficheros[i]%>" target="_blank">  <img src="../resources/images/doc.png" title="Abrir" height="50" class="center-block"/></a>
-                                                </td>
+                                          
+                                            <a href="../resources/Archivos/<%=ficheros[i]%>" target="_blank"><img src="../resources/images/doc.png" title="Abrir" height="50" class="center-block"/></a>
+                                                
+                                        </td>
                                         <td >
                                             <form id="formularioElim" name="formularioElim" action="../ControllerPdf" method="get" onsubmit="return confirm('¿Realmente desea eliminar el documento?')" >
                                                 <input type="hidden" name = "nombre" id="id" value="<%=ficheros[i]%>">
