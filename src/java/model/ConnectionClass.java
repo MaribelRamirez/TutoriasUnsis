@@ -18,7 +18,8 @@ public class ConnectionClass {
         driver = "com.mysql.jdbc.Driver";
         url = "jdbc:mysql://localhost:3306/tutoriasunsis?autoReconnect=true&useSSL=false";
         user = "root";
-       pass = "Kingston12.";
+     //  pass = "Kingston12.";
+       pass = "root";
      }
 
 
