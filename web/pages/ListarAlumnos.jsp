@@ -189,7 +189,7 @@
                                 <th>Programa</th>
                                 <th>Editar</th>
 <!--                                <th>Eliminar</th>-->
-                                <th>Listar tutores</th>
+                                <th>Agregar tutor</th>
                             </tr>
                         </thead>
 

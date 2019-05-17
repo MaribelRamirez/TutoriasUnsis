@@ -453,7 +453,7 @@ public class ControllerConcentradoAsignaciones extends HttpServlet {
                 l++;
                 }
                 
-              //  sheet.addMergedRegion(new CellRangeAddress(j, j, l - 4, l - 1));
+          
                 for (int k = 0; k < j; k++) {
                     sheet.autoSizeColumn((short) k);
 

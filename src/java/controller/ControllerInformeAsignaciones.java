@@ -151,8 +151,7 @@ public class ControllerInformeAsignaciones extends HttpServlet {
         sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 3));
         j++;
 
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 3));
-        sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 3));
+        
         Row titulo4 = sheet.createRow(j);
 
         ////sheet.addMergedRegion(new CellRangeAddress(j, j, 0, 2));
@@ -195,6 +194,7 @@ public class ControllerInformeAsignaciones extends HttpServlet {
                 String periodoAct;
 
                 if (pr != null) {
+                    
                     try {
                         pr2 = Integer.parseInt(pr);//ID de periodos seleccionados
                         PeriodoDAO ppr = new PeriodoDAO();
@@ -209,13 +209,13 @@ public class ControllerInformeAsignaciones extends HttpServlet {
 
                         cell = rowGeneral.createCell(j + 1);
                         // sheet.addMergedRegion(new CellRangeAddress(j, j, 4, 5));
-                        j++;
+                       
                         cell.setCellStyle(styleHead);
                         cell.setCellValue(pdo.getPeriodo());
-
+ j++;
 //j2++;
                         while (it_list.hasNext()) {
-                            System.out.println(cont);
+                           
                             Profesor ob = new Profesor();
                             ob = it_list.next();
 
@@ -228,7 +228,7 @@ public class ControllerInformeAsignaciones extends HttpServlet {
 
                             cell.setCellStyle(styleColumn);
                             cell.setCellValue(cont);
-
+ System.out.println(cont +" "+ob.getNombre()+" "+ob.getPrograma());
                             cell = rowGeneral.createCell(1);
 
                             cell.setCellStyle(styleColumn);
@@ -251,6 +251,7 @@ public class ControllerInformeAsignaciones extends HttpServlet {
                             j2++;
                             cont++;
                         }
+                        j2++;
                         Row titulo5 = sheet.createRow(j2);
 
                         cell = titulo5.createCell(0);
@@ -264,14 +265,13 @@ public class ControllerInformeAsignaciones extends HttpServlet {
                         it_list = list.iterator();
 
                         while (it_list.hasNext()) {
-                            System.out.println(cont);
-
                             Profesor ob = new Profesor();
                             ob = it_list.next();
 
                             Profesor prf;
                             int numero = obprof.countTutoradosByPeriodo(pr2, ob.getCurp());
 
+ System.out.println(cont +" "+ob.getNombre()+" "+ob.getPrograma());
                             rowGeneral = sheet.createRow(j2);
                             //poner encabezados de la tabla
                             cell = rowGeneral.createCell(0);
@@ -311,7 +311,9 @@ public class ControllerInformeAsignaciones extends HttpServlet {
 
         }
 
-        for (int k = 0; k < j; k++) {
+sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, j));
+        sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, j));
+        for (int k = 0; k <= j; k++) {
             sheet.autoSizeColumn((short) k);
 
         }

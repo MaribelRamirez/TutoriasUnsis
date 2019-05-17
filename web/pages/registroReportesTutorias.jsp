@@ -137,7 +137,7 @@ Author     : Marifer
 
     </head>
     <body>
-        <%
+     <%
             HttpSession sesion = request.getSession();
             String usuario;
             String nivel;
@@ -145,13 +145,11 @@ Author     : Marifer
             if (sesion.getAttribute("user") != null && sesion.getAttribute("nivel") != null) {
                 usuario = sesion.getAttribute("user").toString();
                 nivel = sesion.getAttribute("nivel").toString();
-                out.print("<a href='login.jsp?cerrar=true'><h5>cerrar Sesion" + usuario + "</h5>");
 
             } else {
-                out.print("<script>location.replace('login.jsp');</script>");
+                out.print("<script>location.replace('../login.jsp');</script>");
             }
         %>
-
         <jsp:include page="headAdminUpdate.jsp" flush="true" />
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="content-main ">
@@ -288,7 +286,7 @@ Author     : Marifer
     <div class="clearfix"> </div>
 </div>
  <div class="copy">
-       <img src="../resources/images/escudo.jpg" width="70" height="70"> <p> Universidad de la Sierra Sur  </p>          
+       <img src="resources/images/escudo.jpg" width="70" height="70"> <p> Universidad de la Sierra Sur  </p>          
     </div>
 <script src="js/jquery.nicescroll.js"></script>
 <script src="js/scripts.js"></script>

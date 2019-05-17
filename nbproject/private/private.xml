@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Mine/Documents/TutoriasSS/TutoriasUnsis/src/java/controller/obtenerExel.java</file>
-            <file>file:/C:/Users/Mine/Documents/TutoriasSS/TutoriasUnsis/src/java/model/Tutor.java</file>
-            <file>file:/C:/Users/Mine/Documents/TutoriasSS/TutoriasUnsis/src/java/controller/ControllerTutores.java</file>
-            <file>file:/C:/Users/Mine/Documents/TutoriasSS/TutoriasUnsis/src/java/dao/TutorDAO.java</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/ProyectosUnsis/TutoriasUnsis/web/pages/headAdmin.jsp</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/ProyectosUnsis/TutoriasUnsis/src/java/model/ConnectionClass.java</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/ProyectosUnsis/TutoriasUnsis/src/java/controller/ControllerAlumno.java</file>
+            <file>file:/C:/Users/Marifer/Documents/NetBeansProjects/ProyectosUnsis/TutoriasUnsis/nbproject/build-impl.xml</file>
         </group>
     </open-files>
 </project-private>
